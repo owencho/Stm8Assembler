@@ -10,5 +10,10 @@
 #include "CException.h"
 #include "Exception.h"
 
-// Your code here
-// ...
+Tokenizer *initTokenizer(char *stringToTokenize) {
+  return NULL; 
+}
+
+Token *getToken(Tokenizer *tokenizer) {
+  return NULL;
+}
