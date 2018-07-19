@@ -3,6 +3,7 @@
 #include "Token.h"
 #include "Common.h"
 
+
 Token *createNullToken() {
   Token *token = malloc(sizeof(Token));
 
@@ -42,6 +43,17 @@ Token *createIdentifierToken(char *str, char *originalString) {
 
   return (Token *)token;
 }
+
+Token *createOperatorToken(char *symbol, char *originalString) {
+  Token *token = malloc(sizeof(OperatorToken));
+
+  token->type = TOKEN_OPERATOR_TYPE;
+  token->originalStr = originalString;
+  token->str = symbol;
+
+  return token;
+}
+
 
 Token *createInvalidToken(char *originalString, int start, int len) {
   char *endPtr;
