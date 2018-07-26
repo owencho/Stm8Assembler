@@ -683,3 +683,17 @@ void test_getToken_given_r22_colon_dollar_sign_abc123_expect_those_tokens_to_be_
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
   }
 }
+
+void test_error_throwing(void) {
+  Tokenizer *tokenizer;
+  Token *token;
+  Try {
+    tokenizer = createTokenizer(" 45 abu bakar ");
+    token = getToken(tokenizer);
+    throwException(ERR_SYSTEM_ERROR, token, "Do not expect a number here: %s", token->str);    
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
+  }
+}
+
