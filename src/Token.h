@@ -2,7 +2,7 @@
 #define Token_H
 
 #include <stdint.h>
-//#include "Common.h"
+#include "Common.h"
 #include "CException.h"
 #include "Exception.h"
 
@@ -73,13 +73,13 @@ typedef struct {
   Token *token[0];
 } OperatorToken;
 
-
 Token *createNullToken();
 Token *createInvalidToken(char *originalString, int start, int len);
 Token *createIntegerToken(int value, char *originalString);
 Token *createFloatToken(double value, char *originalString);
 Token *createIdentifierToken(char *str, char *originalString);
-Token *createOperatorToken(char *symbol, char *originalString);
+Token *createStringToken(char *str, char *originalString);
+Token *createOperatorToken(char *str, char *originalString);
 void freeToken(void *token);
 void dumpTokenErrorMessage(CEXCEPTION_T ex, int lineNo);
 

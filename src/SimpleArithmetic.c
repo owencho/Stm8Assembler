@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "SimpleArithmetic.h"
 #include "Error.h"
 #include "Exception.h"

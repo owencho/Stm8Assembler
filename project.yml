@@ -45,7 +45,7 @@
     - CEXCEPTION_USE_CONFIG_FILE
     # The following macro is to ensure vsnprintf() returns the length of
     # bytes needed to write when it fails due to buffer being too small
-    - _ISOC99_SOURCE    
+    - _ISOC99_SOURCE
   :test_preprocess:
     - *common_defines
     - TEST
@@ -67,10 +67,31 @@
 :gcov:
     :html_report_type: basic
 
-#:tools:
-# Ceedling defaults to using gcc for compiling, linking, etc.
-# As [:tools] is blank, gcc will be used (so long as it's in your system path)
-# See documentation to configure a given toolchain for use
+:tools:
+  :test_compiler:
+    :executable: gcc                    #exists in system search path
+    :name: 'gcc compiler'
+    :arguments:
+      - -c "${1}"                       #source code input file (Ruby method call param list sub)
+      - -o "${2}"                       #object file output (Ruby method call param list sub)
+      - -I test
+      - -I vendor/ceedling/vendor/unity/src
+      - -I vendor/ceedling/vendor/cmock/src
+      - -I vendor/ceedling/vendor/c_exception/lib
+      - -I build/test/mocks
+      - -I test/support
+      - -I src
+      - -D CEXCEPTION_USE_CONFIG_FILE
+      - -D _ISOC99_SOURCE
+      - -D TEST
+
+  :test_linker:
+    :executable: gcc                    #absolute file path
+    :name: 'gcc linker'
+    :arguments:
+      - -lm                             #link with math header
+      - -o build/obj                    #list of object files to link (Ruby method call param list sub)
+      - -o "${2}"                       #executable file output (Ruby method call param list sub)
 
 # LIBRARIES
 # These libraries are automatically injected into the build process. Those specified as
