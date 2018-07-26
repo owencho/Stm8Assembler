@@ -67,6 +67,10 @@
 :gcov:
     :html_report_type: basic
 
+#:tools:
+# Ceedling defaults to using gcc for compiling, linking, etc.
+# As [:tools] is blank, gcc will be used (so long as it's in your system path)
+# See documentation to configure a given toolchain for use
 :tools:
   :test_compiler:
     :executable: gcc                    #exists in system search path
@@ -89,9 +93,13 @@
     :executable: gcc                    #absolute file path
     :name: 'gcc linker'
     :arguments:
-      - -lm                             #link with math header
-      - -o build/obj                    #list of object files to link (Ruby method call param list sub)
-      - -o "${2}"                       #executable file output (Ruby method call param list sub)
+      - "${1}"                          #Link all the object files. Note that, this must come before
+                                        #link libraries
+      - -Llib/x86                       #Indicate where the user defined libraries reside
+#      - -Llib/x64
+      - -lm                             #Link with math library
+      - -ltokenizer                     #Link with Tokenizer library
+      - -o "${2}"                       #Executable file output (Ruby method call param list sub)
 
 # LIBRARIES
 # These libraries are automatically injected into the build process. Those specified as

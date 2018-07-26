@@ -24,12 +24,12 @@ void test_getToken_with_mock_given_23_plus_47() {
   value2Token = createIntegerToken(47, "47");
   plusToken = createOperatorToken("+", "+");
 
-  initTokenizer_ExpectAndReturn(line, tokenizer);
+  createTokenizer_ExpectAndReturn(line, tokenizer);
   getToken_ExpectAndReturn(tokenizer, value1Token);
   getToken_ExpectAndReturn(tokenizer, plusToken);
   getToken_ExpectAndReturn(tokenizer, value2Token);
 
-  tokenizer = initTokenizer(line);
+  tokenizer = createTokenizer(line);
   intToken = (IntegerToken *)getToken(tokenizer);
 
   TEST_ASSERT_NOT_NULL(intToken);
@@ -64,13 +64,13 @@ void test_operateOn2Numbers_with_getToken_mock_given_987_multiply_161_expect_158
   value2Token = createIntegerToken(161, "161");
   plusToken = createOperatorToken("*", "*");
   // Mock with the fake values
-  initTokenizer_ExpectAndReturn(line, tokenizer);
+  createTokenizer_ExpectAndReturn(line, tokenizer);
   getToken_ExpectAndReturn(tokenizer, value1Token);
   getToken_ExpectAndReturn(tokenizer, plusToken);
   getToken_ExpectAndReturn(tokenizer, value2Token);
   // Run test
   Try {
-    tokenizer = initTokenizer(line);
+    tokenizer = createTokenizer(line);
     result = operateOn2Numbers(tokenizer);
     printf("987 * 161 = %d\n", result);
     TEST_ASSERT_EQUAL(158907, result);
@@ -95,13 +95,13 @@ void test_operateOn2Numbers_with_getToken_mock_given_48_subtract_920_expect_minu
   value2Token = createIntegerToken(920, "920");
   plusToken = createOperatorToken("-", "-");
   // Mock with the fake values
-  initTokenizer_ExpectAndReturn(line, tokenizer);
+  createTokenizer_ExpectAndReturn(line, tokenizer);
   getToken_ExpectAndReturn(tokenizer, value1Token);
   getToken_ExpectAndReturn(tokenizer, plusToken);
   getToken_ExpectAndReturn(tokenizer, value2Token);
   // Run test
   Try {
-    tokenizer = initTokenizer(line);
+    tokenizer = createTokenizer(line);
     result = operateOn2Numbers(tokenizer);
     printf("48 - 920 = %d\n", result);
     TEST_ASSERT_EQUAL(-872, result);
