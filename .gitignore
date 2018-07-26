@@ -1,3 +1,2 @@
 build/*
 !build/Readme.txt
-!build/obj/
