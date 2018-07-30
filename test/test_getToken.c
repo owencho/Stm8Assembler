@@ -685,6 +685,45 @@ void test_getToken_given_r22_colon_dollar_sign_abc123_expect_those_tokens_to_be_
   }
 }
 
+void test_pushBackToken_given_ali_plus_234_and_get_push_get_push_get_get_expect_ali_is_returned_for_the_first_3_gets(void) {
+  Token *token = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ali +234  ");
+
+    token = getToken(tokenizer);
+    TEST_ASSERT_NOT_NULL(token);
+    TEST_ASSERT_EQUAL(TOKEN_IDENTIFIER_TYPE, token->type);
+    TEST_ASSERT_EQUAL_STRING("ali", token->str);
+
+    pushBackToken(tokenizer, token);      // Do not free the ali token, if
+                                          // you pushback
+    token = getToken(tokenizer);          // You get 'ali' instead of '+'
+    TEST_ASSERT_NOT_NULL(token);
+    TEST_ASSERT_EQUAL(TOKEN_IDENTIFIER_TYPE, token->type);
+    TEST_ASSERT_EQUAL_STRING("ali", token->str);
+
+    pushBackToken(tokenizer, token);      // Do not free the ali token, if
+                                          // you pushback
+    token = getToken(tokenizer);          // You get 'ali' instead of '+'
+    TEST_ASSERT_NOT_NULL(token);
+    TEST_ASSERT_EQUAL(TOKEN_IDENTIFIER_TYPE, token->type);
+    TEST_ASSERT_EQUAL_STRING("ali", token->str);
+    freeToken(token);                     // The ali token can be freed here
+
+    token = getToken(tokenizer);          // Now you would get '+' token
+    TEST_ASSERT_NOT_NULL(token);
+    TEST_ASSERT_EQUAL(TOKEN_OPERATOR_TYPE, token->type);
+    TEST_ASSERT_EQUAL_STRING("+", token->str);
+    freeToken(token);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
+  }
+}
+
 void test_error_throwing(void) {
   Tokenizer *tokenizer;
   Token *token;
