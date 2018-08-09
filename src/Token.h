@@ -31,7 +31,8 @@ typedef enum {
 } Associativity;
 
 typedef struct {
-  TokenType type;
+  TokenType type:16;
+	Affix affix:16;
   uint32_t startColumn;
   uint32_t length;
   char *originalStr;         ///
@@ -39,7 +40,8 @@ typedef struct {
 } Token;
 
 typedef struct {
-  TokenType type;
+  TokenType type:16;
+	Affix affix:16;
   uint32_t startColumn;
   uint32_t length;
   char *originalStr;         ///
@@ -48,7 +50,8 @@ typedef struct {
 } IntegerToken;
 
 typedef struct {
-  TokenType type;
+  TokenType type:16;
+	Affix affix:16;
   uint32_t startColumn;
   uint32_t length;
   char *originalStr;         ///
@@ -57,7 +60,8 @@ typedef struct {
 } FloatToken;
 
 typedef struct {
-  TokenType type;
+  TokenType type:16;
+	Affix affix:16;
   uint32_t startColumn;
   uint32_t length;
   char *originalStr;         ///
@@ -65,7 +69,8 @@ typedef struct {
 } IdentifierToken, StringToken, CharConstToken;
 
 typedef struct {
-  TokenType type;
+  TokenType type:16;
+	Affix affix:16;
   uint32_t startColumn;
   uint32_t length;
   char *originalStr;         ///

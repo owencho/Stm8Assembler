@@ -730,6 +730,7 @@ void test_error_throwing(void) {
   Try {
     tokenizer = createTokenizer(" 45 abu bakar ");
     token = getToken(tokenizer);
+		token->affix = INFIX;
     throwException(ERR_SYSTEM_ERROR, token, "Just for fun: Do not expect a number here: %s", token->str);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
