@@ -99,8 +99,8 @@
 #      - -Llib/x86                       #Indicate where the user defined libraries reside
 #      - -Llib/x64_7_3_0
 #      - -Llib/x64_6_3_0
-      - -Llib/x64_5_3_0
-#      - -Llib/x64_TDM_5_1_0
+#      - -Llib/x64_5_3_0
+      - -Llib/x64_TDM_5_1_0
       - -lm                             #Link with math library
       - -ltokenizer                     #Link with Tokenizer library
       - -o "${2}"                       #Executable file output (Ruby method call param list sub)
