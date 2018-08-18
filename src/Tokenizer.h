@@ -5,6 +5,7 @@
 #include "Common.h"
 #include "Token.h"
 
+#define TOKENIZER_MAX_PUSHBACK		5
 #define TOKENIZER_DOLLAR_SIGN_HEX   (1 << 0)
 
 typedef struct {
@@ -14,8 +15,11 @@ typedef struct {
   uint32_t prevStartColumn;
   uint32_t prevLength;
  // Token *previousToken;
-  Token *currentToken;
+  int lineNum;
+  int tokenIndex;
+  Token *token[TOKENIZER_MAX_PUSHBACK];
 } Tokenizer;
+
 
 void reinitTokenizer(Tokenizer *tokenizer, char *str);
 Tokenizer *createTokenizer(char *stringToTokenize);
