@@ -124,7 +124,17 @@ void test_getToken_given_config_set_not_to_recognize_dollar_sign_bad_expect_retu
     TEST_ASSERT_EQUAL_STRING("$", token->str);
     TEST_ASSERT_EQUAL(2, tokenizer->index);
     freeToken(token);
+   // freeTokenizer(tokenizer); dont use freetokenizer at middle of system ,it will fail crashing if freetokenizer at middle
+
+     token = getToken(tokenizer);
+    TEST_ASSERT_NOT_NULL(token);
+    TEST_ASSERT_EQUAL(TOKEN_OPERATOR_TYPE, token->type);
+    TEST_ASSERT_EQUAL_STRING("bad", token->str);
+    TEST_ASSERT_EQUAL(5, tokenizer->index);
+    freeToken(token);
     freeTokenizer(tokenizer);
+
+
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
@@ -620,7 +630,7 @@ void test_getToken_given_r23_comma_r6_expect_those_tokens_to_be_returned() {
     TEST_ASSERT_EQUAL(8, tokenizer->index);
     freeToken(token);
 
-    // Should return NULL token because no more operator
+    // Should return NULL token because no more token
     token = getToken(tokenizer);
     TEST_ASSERT_NOT_NULL(token);
     TEST_ASSERT_EQUAL(TOKEN_NULL_TYPE, token->type);
@@ -787,7 +797,7 @@ void test_pushBackToken_hi_456_1dot3e7_bambi_string_and_bracket_should_able_to_g
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
   }
 }
-
+/*
 void test_error_throwing(void) {
   Tokenizer *tokenizer;
   Token *token;
@@ -800,4 +810,4 @@ void test_error_throwing(void) {
     dumpTokenErrorMessage(ex, 1);
   }
 }
-
+*/
