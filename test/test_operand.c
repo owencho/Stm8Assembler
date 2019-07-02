@@ -84,6 +84,24 @@ void test_getOperand_given_dollarsign_3a_expect_shortmem_OPERAND_register_type_i
   }
 }
 
+void test_getOperand_given_hash_1000_expect_error(void) {
+  CEXCEPTION_T ex;
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  #1000  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer);
+    TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_HASH_TOO_LARGE exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 93);
+    TEST_ASSERT_EQUAL(ERR_INTEGER_HASH_TOO_LARGE, ex->errorCode);
+  }
+  freeTokenizer(tokenizer);
+}
+
+
 void test_getOperand_given_dollarsign_3a7d_expect_shortmem_OPERAND_register_type_is_with_ms_equals_55(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
@@ -150,7 +168,7 @@ void test_getOperand_given_bracketed_Space_X_expect_BracX_Operand(void) {
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
-
+/*
 void test_getOperand_given_bracketed_161_X_expect_Brac_OPERAND_register_type_is_with_ms_equals_161(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;

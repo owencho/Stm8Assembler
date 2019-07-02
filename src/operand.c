@@ -46,17 +46,15 @@ stm8Operand *createOperand( stm8OperandType type,
         freeToken(token);
       }
       else if(strcmp(token->str,"#")==0){
-        IntegerToken * intToken;
         freeToken(token);
-        intToken = (IntegerToken *)getToken(tokenizer);
-        if(intToken-> value <256){
-          operand = createOperand(BYTE_OPERAND,NA,NA,intToken->value,NA,NA);
-          freeToken(intToken);
+        token = (IntegerToken *)getToken(tokenizer);
+        if(token-> value <256){
+          operand = createOperand(BYTE_OPERAND,NA,NA,token->value,NA,NA);
+          freeToken(token);
         }
         else{
-          //throw exception
+          throwException(ERR_INTEGER_HASH_TOO_LARGE,token,"The integer number must be smaller than 255 ($10)");
         }
-
       }
       else if(token->str[0]=='$'){
 
@@ -70,7 +68,7 @@ stm8Operand *createOperand( stm8OperandType type,
 
         }
         else{
-          //throw exception
+          throwException(ERR_INTEGER_TO_LARGE,token,"The integer number must be smaller than 65536 ($10000)");
         }
         freeToken(token);
       }
@@ -118,7 +116,7 @@ stm8Operand *createOperand( stm8OperandType type,
     }Catch(ex) {
         dumpTokenErrorMessage(ex, 1);
         freeToken(ex->data);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown.");
+
       }
       return operand;
     }
