@@ -9,8 +9,6 @@
 #include "CException.h"
 #include "Exception.h"
 #include "operand.h"
-#include "AssignValue.h"
-#include "StringLib.h"
 
 
 CEXCEPTION_T ex;
@@ -33,6 +31,7 @@ void test_getOperand_given_A_expect_A_register_type_is_returned(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    //freeOperand(operand);
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
@@ -75,6 +74,28 @@ void test_getOperand_given_dollarsign_3a_expect_shortmem_OPERAND_register_type_i
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
     TEST_ASSERT_EQUAL_UINT16(0x3a, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_33_expect_shortmem_OPERAND_register_type_is_with_ms_equals_33(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  33  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(SHORT_MEM_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(33, operand->dataSize.ms);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
@@ -190,7 +211,7 @@ void test_getOperand_given_bracketed_161_X_expect_Brac_OPERAND_register_type_is_
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
-
+/*
 void test_getOperand_given_bracketed_dollarsign_517d_X_expect_Brac_OPERAND_register_type_is_with_ms_equals_51_ls_equal_7d(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;

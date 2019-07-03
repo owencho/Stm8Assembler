@@ -12,5 +12,9 @@
 #define ERR_EXPECTING_OPERATOR        52
 #define ERR_INTEGER_DOLLAR_TO_LARGE   60
 #define ERR_INTEGER_HASH_TOO_LARGE    61
+#define ERR_INTEGER_NEGATIVE          70
+#define ERR_INTEGER_TOO_LARGE         71
+#define ERR_INTEGER_TOO_SMALL         72
+#define ERR_INVALID_STM8_OPERAND      73
 
 #endif // Error_H
