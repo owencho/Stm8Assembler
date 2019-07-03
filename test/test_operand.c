@@ -168,7 +168,7 @@ void test_getOperand_given_bracketed_Space_X_expect_BracX_Operand(void) {
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
-/*
+
 void test_getOperand_given_bracketed_161_X_expect_Brac_OPERAND_register_type_is_with_ms_equals_161(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
