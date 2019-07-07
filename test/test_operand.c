@@ -373,7 +373,7 @@ void test_getOperand_given_bracketed_dollarsign_84_dot_w_and_X_expect_shortptrwX
   Tokenizer *tokenizer = NULL;
 
   Try {
-    tokenizer = createTokenizer("  ([$84d.w],X) ");
+    tokenizer = createTokenizer("  ([$84.w],X) ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer);
     TEST_ASSERT_NOT_NULL(operand);
