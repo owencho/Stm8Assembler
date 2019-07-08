@@ -16,5 +16,7 @@
 #define ERR_INTEGER_TOO_LARGE         71
 #define ERR_INTEGER_TOO_SMALL         72
 #define ERR_INVALID_STM8_OPERAND      73
+#define ERR_UNSUPPORTED_OPERAND       74
+#define ERR_INTEGER_NULL              75
 
 #endif // Error_H

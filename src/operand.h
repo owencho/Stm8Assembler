@@ -6,6 +6,7 @@ typedef struct stm8Operand stm8Operand ;
 
 
 #define NA      -1      //used for opcode below
+#define ALL_OPERANDS -1
 
 typedef enum {
   A_OPERAND,
@@ -24,6 +25,9 @@ typedef enum {
   SHORTPTR_DOT_W_BRACKETEDX_OPERAND,
   LONGPTR_DOT_W_BRACKETEDX_OPERAND,
   SHORTPTR_DOT_W_BRACKETEDY_OPERAND,
+  X_OPERAND,
+  Y_OPERAND,
+  SP_OPERAND
 } stm8OperandType ;
 
 
@@ -43,7 +47,12 @@ struct stm8Operand {       //struct for stm8operand
 
 };
 
-stm8Operand *getOperand(Tokenizer *tokenizer); //maincode
+#define isOperandNeeded(flag,op)                          \
+                          ((flag) & (1 << (op)))
+
+
+
+stm8Operand *getOperand(Tokenizer *tokenizer ,  uint32_t flags); //maincode
 int squareBracketCheck(char * str);
 int roundBracketCheck(char * str);
 
