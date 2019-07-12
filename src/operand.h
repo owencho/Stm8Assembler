@@ -53,7 +53,9 @@ struct stm8Operand {       //struct for stm8operand
 
 
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint32_t flags); //maincode
-int squareBracketCheck(char * str);
-int roundBracketCheck(char * str);
+void nullCheck(int errorCode, IntegerToken* token , char *message);
+void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type);
+int operandCheck(IntegerToken* token, int condition);
+int valueCheck(IntegerToken* token);
 
 #endif
