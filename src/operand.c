@@ -15,87 +15,87 @@
 //SubProgram
 
 void nullCheck(int errorCode, IntegerToken* token , char *message){
-  if(token->str == NULL)
-    throwException(errorCode,token,message);
+    if(token->str == NULL)
+      throwException(errorCode,token,message);
 }
 
 void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type  ){
-  if(!isOperandNeeded(flags,type))
-    throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
+    if(!isOperandNeeded(flags,type))
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
 }
 
 
 
 int operandCheck(IntegerToken* token, int condition){
-  nullCheck(ERR_INTEGER_NULL,token,"The input cannot be NULL)");
-  if(strcasecmp(token->str,"X")==0)
-      return 1;
-  else if(strcasecmp(token->str,"Y")==0)
-      return 2;
-  else if (strcasecmp(token->str,"SP")==0 && (condition ==1 || condition ==2))
-      return 3;
-  else if(strcasecmp(token->str,"A")==0 && condition ==2)
-      return 4;
-  else if (condition == 2)
-      throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X ,Y , A and SP");
-  else if (condition ==1 )
-      throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X ,Y , and SP");
-  else if (condition == 0)
-      throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X and Y ");
-  else
-      throwException(ERR_INVALID_STM8_OPERAND,token,"Invalid input ");
+    nullCheck(ERR_INTEGER_NULL,token,"The input cannot be NULL)");
+    if(strcasecmp(token->str,"X")==0)
+        return 1;
+    else if(strcasecmp(token->str,"Y")==0)
+        return 2;
+    else if (strcasecmp(token->str,"SP")==0 && (condition ==1 || condition ==2))
+        return 3;
+    else if(strcasecmp(token->str,"A")==0 && condition ==2)
+        return 4;
+    else if (condition == 2)
+        throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X ,Y , A and SP");
+    else if (condition ==1 )
+        throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X ,Y , and SP");
+    else if (condition == 0)
+        throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only X and Y ");
+    else
+        throwException(ERR_INVALID_STM8_OPERAND,token,"Invalid input ");
 }
 
 
 int valueCheck(IntegerToken* token){
-  nullCheck(ERR_INTEGER_NULL,token,"The integer number must have value eg ($10)");
-  if(token->value <256 && token->value >0 ){
-    return 1;
-  }
-  else if (token->value >256  && token->value < 65536){
-    return 2;
-  }
-  else if (token-> value <0){
-    throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
-  }
-  else if (token-> value ==0){
-    throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
-  }
-  else if (token-> value >65536){
-    throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 ($1000)");
-  }
+    nullCheck(ERR_INTEGER_NULL,token,"The integer number must have value eg ($10)");
+    if(token->value <256 && token->value >0 ){
+      return 1;
+    }
+    else if (token->value >256  && token->value < 65536){
+      return 2;
+    }
+    else if (token-> value <0){
+      throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+    }
+    else if (token-> value ==0){
+      throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
+    }
+    else if (token-> value >65536){
+      throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 ($1000)");
+    }
 }
 
 
 
 stm8Operand *createOperand( stm8OperandType type,
-  uint16_t code,
-  uint16_t ms,
-  uint16_t ls,
-  uint16_t extB){
-    stm8Operand *operand =malloc(sizeof(stm8Operand));
-    if(type==BRACKETED_Y_OPERAND ||type==SHORTOFF_Y_OPERAND || type==LONGOFF_Y_OPERAND ){
-        operand->dataSize.extCode =0x90;
-    }
-    else if(type==SHORTPTR_DOT_W_BRACKETEDX_OPERAND ||type==BRACKETED_SHORTPTR_DOT_W_OPERAND){
-      operand->dataSize.extCode =0x92;
-    }
-    else if(type==LONGPTR_DOT_W_BRACKETEDX_OPERAND ||type==BRACKETED_LONGPTR_DOT_W_OPERAND){
-      operand->dataSize.extCode =0x72;
-    }
-    else if(type==SHORTPTR_DOT_W_BRACKETEDY_OPERAND){
-      operand->dataSize.extCode =0x91;
-    }
-    else{
-      operand->dataSize.extCode =NA;
-    }
-    operand->type = type;
-    operand->dataSize.code =code;
-    operand->dataSize.ms =ms ;
-    operand->dataSize.ls = ls;
-    operand->dataSize.extB =extB;
+    uint16_t code,
+    uint16_t ms,
+    uint16_t ls,
+    uint16_t extB){
+      stm8Operand *operand =malloc(sizeof(stm8Operand));
+      if(type==BRACKETED_Y_OPERAND ||type==SHORTOFF_Y_OPERAND || type==LONGOFF_Y_OPERAND ){
+          operand->dataSize.extCode =0x90;
+      }
+      else if(type==SHORTPTR_DOT_W_BRACKETEDX_OPERAND ||type==BRACKETED_SHORTPTR_DOT_W_OPERAND){
+        operand->dataSize.extCode =0x92;
+      }
+      else if(type==LONGPTR_DOT_W_BRACKETEDX_OPERAND ||type==BRACKETED_LONGPTR_DOT_W_OPERAND){
+        operand->dataSize.extCode =0x72;
+      }
+      else if(type==SHORTPTR_DOT_W_BRACKETEDY_OPERAND){
+        operand->dataSize.extCode =0x91;
+      }
+      else{
+        operand->dataSize.extCode =NA;
+      }
+      operand->type = type;
+      operand->dataSize.code =code;
+      operand->dataSize.ms =ms ;
+      operand->dataSize.ls = ls;
+      operand->dataSize.extB =extB;
 
-    return operand;
+      return operand;
   }
 
 stm8Operand *createLsOperand( stm8OperandType type,
@@ -167,10 +167,9 @@ stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* token,IntegerToke
       operandCounter = operandCheck(token,1);
       token = (IntegerToken *)getToken(tokenizer);
 
-      if(token->str == NULL){
-            throwException(ERR_INVALID_STM8_OPERAND,token,"Expected ')'");
-          }
-          else if(strcmp(token->str,")")==0){
+
+        nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected )");
+        if(strcmp(token->str,")")==0){
              if(squarecount>0){
                if(operandCounter==1){
                  if(valueCount==1){
