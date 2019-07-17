@@ -55,7 +55,7 @@ struct stm8Operand {       //struct for stm8operand
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint32_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type);
-stm8Operand *operandHandleFirstSymbol(IntegerToken *token, Tokenizer* tokenizer ,uint32_t flags);
+stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 
