@@ -9,11 +9,15 @@
 
 
 
-typedef struct CodeInfo InstructionTable;
-typedef struct MachineCode MachineCode;
-typedef struct CodeInfo CodeInfo;
+typedef struct InstructionTable InstructionTable;
+typedef struct MachineCode *MachineCode;
+typedef struct CodeInfo *CodeInfo;
 typedef struct ExtensionCodeAndCode ExtensionCodeAndCode;
 typedef  MachineCode*(*Assembler)(CodeInfo *CodeInfo , Tokenizer *tokenizer);
+
+
+MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+
 
 struct MachineCode{
   uint8_t length;
@@ -34,14 +38,14 @@ struct CodeInfo{
 
 struct InstructionTable{
   char* name;
-  CodeInfo codeInfo;
+  CodeInfo *codeInfo;
 };
 
 #define freeMachineCode(mcode)                                      \
                           do{if(mcode) free(mcode);}while(0)
 
 
-
+167425
 
 
 
