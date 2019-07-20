@@ -206,7 +206,7 @@ InstructionTable instructionTable[]={
   {"bcp",&bcpCodeInfo},
   {"cp",&cpCodeInfo},
   {"exg",&exgCodeInfo},
-  //{"or",&orCodeInfo},
+  {"or",&orCodeInfo},
   //{"sbc",&andCodeInfo},
   //{"xor",&andCodeInfo},
   //{"sub",&bcpCodeInfo},
