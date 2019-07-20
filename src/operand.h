@@ -11,6 +11,7 @@ typedef struct stm8Operand stm8Operand ;
 typedef enum {
   A_OPERAND,
   BYTE_OPERAND,
+  WORD_OPERAND,
   SHORT_MEM_OPERAND,
   LONG_MEM_OPERAND,
   BRACKETED_X_OPERAND,

@@ -37,7 +37,7 @@ void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type 
 
 
 int operandCheck(IntegerToken* token, int condition){
-    nullCheck(ERR_INTEGER_NULL,token,"The input cannot be NULL)");
+    nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
     if(strcasecmp(token->str,"X")==0)
         return 1;
     else if(strcasecmp(token->str,"Y")==0)
@@ -58,22 +58,31 @@ int operandCheck(IntegerToken* token, int condition){
 
 
 int valueCheck(IntegerToken* token){
-    nullCheck(ERR_INTEGER_NULL,token,"The integer number must have value eg ($10)");
-    if(token->value <256 && token->value >0 ){
-      return 1;
+    nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
+    if((token->str[0]=='$' || token->str[0]=='-') || isdigit(token->str[0])){
+      if(strcmp(token->str,"-")==0){
+        throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+      }
+      else if(token->str[1]!='-' && !isalnum(token->str[1]) ){
+        throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
+      }
+      else if(token->value <256 && token->value >0 ){
+        return 1;
+      }
+      else if (token->value >256  && token->value < 65536){
+        return 2;
+      }
+      else if (token-> value <0){
+        throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+      }
+      else if (token-> value >65536){
+        throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 ($1000)");
+      }
     }
-    else if (token->value >256  && token->value < 65536){
-      return 2;
-    }
-    else if (token-> value <0){
-      throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
-    }
-    else if (token-> value ==0){
+    else{
       throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
     }
-    else if (token-> value >65536){
-      throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 ($1000)");
-    }
+
 }
 
 
@@ -363,7 +372,6 @@ stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer , uint32_t flags){
         }
         else if(strcmp(token->str,",")==0){
           if(operandCount == 0){
-            freeToken(token);
             operand = comparingLastOperand(flags,initToken,tokenizer,value,valueCount,squareCount);
           }
           else{
@@ -405,25 +413,27 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
         uint16_t valueMs ;
 
           token =(IntegerToken*)getToken(tokenizer);
+          nullCheck(ERR_SRC_NULL,token,"The must include the source eg (X)");
           initToken = token;
           if(isalpha(token->str[0])){
             pushBackToken(tokenizer, (Token*)token);
             operand = operandHandleFirstSymbol(tokenizer, flags);
-            freeToken(token);
           }
           else if(strcmp(token->str,"[")==0){
             pushBackToken(tokenizer, (Token*)token);
             operand = operandHandleSquareBracket(tokenizer,flags);
-            freeToken(token);
           }
           else if(strcmp(token->str,"#")==0){
-                operandFlagCheck(flags,token,BYTE_OPERAND);
                 freeToken(token);
                 token = (IntegerToken *)getToken(tokenizer);
                 int valueCount = valueCheck(token);
                 if(valueCount == 1){
+                  operandFlagCheck(flags,initToken,BYTE_OPERAND);
                   operand = createOperand(BYTE_OPERAND,NA,NA,token->value,NA,NA);
-                  freeToken(token);
+                }
+                else if(valueCount == 2){
+                  operandFlagCheck(flags,initToken,WORD_OPERAND);
+                  operand = createMsOperand(WORD_OPERAND,token->value,token);
                 }
                 else{
                   throwException(ERR_INTEGER_HASH_TOO_LARGE,token,"Expected only value lesser than 256 (#12)");
@@ -447,7 +457,6 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
           else if(token->str[0]=='('){
               pushBackToken(tokenizer, (Token*)token);
               operand = operandHandleRoundBracket(tokenizer,flags);
-              freeToken(token);
           }
 
           else{

@@ -6,7 +6,7 @@
 #define ALL_OPERANDS -1
 
 #define  ADC_SUPPORTED_OPERANDS                         \
-    (1<<BYTE_OPERAND                               |     \
+    (1<<BYTE_OPERAND                              |     \
     1<<SHORT_MEM_OPERAND                          |     \
     1<<LONG_MEM_OPERAND                           |     \
     1<<BRACKETED_X_OPERAND                        |     \
@@ -21,6 +21,12 @@
     1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
     1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND           |     \
     1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND)
+
+#define  ADDW_SUPPORTED_OPERANDS                        \
+    (1<<BYTE_OPERAND                              |     \
+    1<<LONG_MEM_OPERAND                           |     \
+    1<<WORD_OPERAND                               |     \
+    1<<SHORTOFF_SP_OPERAND)
 
 
 

@@ -24,7 +24,7 @@ ExtensionCodeAndCode adcCodeTable[] = {
 [SHORTOFF_Y_OPERAND] ={0x90,0xe9},
 [LONGOFF_Y_OPERAND] ={0x90,0xd9},
 [SHORTOFF_SP_OPERAND] ={NA,0x19},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x91,0xc9},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc9},
 [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc9},
 [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd9},
 [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd9},
@@ -41,10 +41,135 @@ CodeInfo adcCodeInfo={"adc",assembleAOperandAndComplexOperand,{
   }, adcCodeTable
 };
 
+ExtensionCodeAndCode addCodeTable[] = {
+[BYTE_OPERAND]         ={NA,0xab},
+[SHORT_MEM_OPERAND]    ={NA,0xbb},
+[LONG_MEM_OPERAND]     ={NA,0xcb},
+[BRACKETED_X_OPERAND] ={NA,0xfb},
+[SHORTOFF_X_OPERAND] ={NA,0xeb},
+[LONGOFF_X_OPERAND] ={NA,0xdb},
+[BRACKETED_Y_OPERAND] ={0x90,0xfb},
+[SHORTOFF_Y_OPERAND] ={0x90,0xeb},
+[LONGOFF_Y_OPERAND] ={0x90,0xdb},
+[SHORTOFF_SP_OPERAND] ={NA,0x1b},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xcb},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xcb},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xdb},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xdb},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xdb},
+};
+
+CodeInfo addCodeInfo={"add",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    ADC_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, addCodeTable
+};
+
+ExtensionCodeAndCode andCodeTable[] = {
+[BYTE_OPERAND]         ={NA,0xa4},
+[SHORT_MEM_OPERAND]    ={NA,0xb4},
+[LONG_MEM_OPERAND]     ={NA,0xc4},
+[BRACKETED_X_OPERAND] ={NA,0xf4},
+[SHORTOFF_X_OPERAND] ={NA,0xe4},
+[LONGOFF_X_OPERAND] ={NA,0xd4},
+[BRACKETED_Y_OPERAND] ={0x90,0xf4},
+[SHORTOFF_Y_OPERAND] ={0x90,0xe4},
+[LONGOFF_Y_OPERAND] ={0x90,0xd4},
+[SHORTOFF_SP_OPERAND] ={NA,0x14},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc4},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc4},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd4},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd4},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd4},
+};
+
+CodeInfo andCodeInfo={"and",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    ADC_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, andCodeTable
+};
+
+ExtensionCodeAndCode bcpCodeTable[] = {
+[BYTE_OPERAND]         ={NA,0xa5},
+[SHORT_MEM_OPERAND]    ={NA,0xb5},
+[LONG_MEM_OPERAND]     ={NA,0xc5},
+[BRACKETED_X_OPERAND] ={NA,0xf5},
+[SHORTOFF_X_OPERAND] ={NA,0xe5},
+[LONGOFF_X_OPERAND] ={NA,0xd5},
+[BRACKETED_Y_OPERAND] ={0x90,0xf5},
+[SHORTOFF_Y_OPERAND] ={0x90,0xe5},
+[LONGOFF_Y_OPERAND] ={0x90,0xd5},
+[SHORTOFF_SP_OPERAND] ={NA,0x15},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc5},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc5},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd5},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd5},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd5},
+};
+
+CodeInfo bcpCodeInfo={"bcp",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    ADC_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, bcpCodeTable
+};
+
+ExtensionCodeAndCode cpCodeTable[] = {
+[BYTE_OPERAND]         ={NA,0xa1},
+[SHORT_MEM_OPERAND]    ={NA,0xb1},
+[LONG_MEM_OPERAND]     ={NA,0xc1},
+[BRACKETED_X_OPERAND] ={NA,0xf1},
+[SHORTOFF_X_OPERAND] ={NA,0xe1},
+[LONGOFF_X_OPERAND] ={NA,0xd1},
+[BRACKETED_Y_OPERAND] ={0x90,0xf1},
+[SHORTOFF_Y_OPERAND] ={0x90,0xe1},
+[LONGOFF_Y_OPERAND] ={0x90,0xd1},
+[SHORTOFF_SP_OPERAND] ={NA,0x11},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc1},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc1},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd1},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd1},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd1},
+};
+
+CodeInfo cpCodeInfo={"cp",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    ADC_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, cpCodeTable
+};
+
+
 InstructionTable instructionTable[]={
+  //assembleAOperandAndComplexOperand
   {"adc",&adcCodeInfo},
-  //{"add",addCodeInfo},
-//  {"and",andCodeInfo},
+  {"add",&addCodeInfo},
+  {"and",&andCodeInfo},
+  {"bcp",&bcpCodeInfo},
+  {"cp",&cpCodeInfo},
+  //{"exg",&andCodeInfo},
+  //{"or",&andCodeInfo},
+  //{"sbc",&andCodeInfo},
+  //{"xor",&andCodeInfo},
+  //{"sub",&bcpCodeInfo},
+  //assembleASPOperandAndComplexOperand
+  //{"cp",&andCodeInfo},
+  //assembleNoOperand
+  //.....
   {NULL,NULL}
 };
 
@@ -57,6 +182,9 @@ MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, 
       mcode->code[0] = code.code;
       mcode->code[1] = operand->dataSize.ms;
       mcode->code[2] = operand->dataSize.ls;
+    }
+    else if((operand->dataSize.ls == 65535 && operand->dataSize.ms == 65535 )&& operand->dataSize.extB == 65535){
+      mcode->code[0] = code.code;
     }
     else if((operand->dataSize.ls == 65535 && operand->dataSize.ms != 65535 )&& operand->dataSize.extB == 65535){
       mcode->code[0] = code.code;
@@ -75,6 +203,10 @@ MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, 
         mcode->code[1] = code.code;
         mcode->code[2] = operand->dataSize.ms;
         mcode->code[3] = operand->dataSize.ls;
+      }
+      else if((operand->dataSize.ls == 65535 && operand->dataSize.ms == 65535 )&& operand->dataSize.extB == 65535){
+        mcode->code[0] = code.extCode;
+        mcode->code[1] = code.code;
       }
       else if((operand->dataSize.ls == 65535 && operand->dataSize.ms != 65535 )&& operand->dataSize.extB == 65535){
         mcode->code[0] = code.extCode;
@@ -114,6 +246,63 @@ int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code){
     return i;
 }
 
+MachineCode* machineCodeAllocateOutput(CodeInfo * codeInfo , stm8Operand *operand ){
+  ExtensionCodeAndCode code;
+  MachineCode* mcode;
+  int a =0;
+  code = codeInfo->codeTable[operand->type];
+  a = machineCodeLengthFinder(operand,code);
+  mcode =malloc(sizeof(MachineCode)+1+ a);
+  mcode = outputMachineCode(operand,code,a);
+ return mcode;
+}
+
+MachineCode* assembleXYSPOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    stm8OperandType type;
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected ,");
+    if(strcasecmp(token->str,"X")==0){
+        operandFlagCheck(codeInfo->operandExistenceFlags[0],token,X_OPERAND);
+        type = X_OPERAND;
+    }
+    else if(strcasecmp(token->str,"Y")==0){
+        operandFlagCheck(codeInfo->operandExistenceFlags[0],token,Y_OPERAND);
+        type = Y_OPERAND;
+    }
+    else if(strcasecmp(token->str,"SP")==0){
+        operandFlagCheck(codeInfo->operandExistenceFlags[0],token,SP_OPERAND);
+        type = SP_OPERAND;
+    }
+    else{
+      throwException(ERR_INVALID_STM8_OPERAND,token,"expected X Y SP");
+    }
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_INVALID_SYNTAX,token,"Expected ,");
+    if(strcmp(token->str,",")==0){
+      operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[1]);
+      pushBackToken(tokenizer,(Token*)token);
+    }
+    else
+      throwException(ERR_INVALID_SYNTAX,token,"expected ,");
+
+
+
+    token =(IntegerToken*)getToken(tokenizer);
+    if(token->str==NULL){
+      mcode=machineCodeAllocateOutput(codeInfo , operand );
+    }else{
+      throwException(ERR_INVALID_SYNTAX,token,"expected nothing after that");
+    }
+    return mcode;
+}
+
 
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
@@ -121,7 +310,6 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
-    int a =0;
     token =(IntegerToken*)getToken(tokenizer);
     initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
@@ -133,20 +321,17 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
       throwException(ERR_INVALID_STM8_OPERAND,token,"expected A");
     }
     token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected ,");
+    nullCheck(ERR_INVALID_SYNTAX,token,"Expected ,");
     if(strcmp(token->str,",")==0)
       operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[1]);
     else
-      throwException(ERR_INVALID_STM8_OPERAND,token,"expected ,");
+      throwException(ERR_INVALID_SYNTAX,token,"expected ,");
 
     token =(IntegerToken*)getToken(tokenizer);
     if(token->str==NULL){
-      code = codeInfo->codeTable[operand->type];
-      a = machineCodeLengthFinder(operand,code);
-      mcode =malloc(sizeof(MachineCode)+1+ a);
-      mcode = outputMachineCode(operand,code,a);
+      mcode=machineCodeAllocateOutput(codeInfo , operand );
     }else{
-      //throwException
+      throwException(ERR_INVALID_SYNTAX,token,"expected nothing after that");
     }
     return mcode;
 }
