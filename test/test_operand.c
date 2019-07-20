@@ -396,6 +396,50 @@ void test_getOperand_given_33_expect_shortmem_OPERAND_register_type_is_with_ms_e
   }
 }
 
+void test_getOperand_given_XL_expect_XL_OPERAND_register_type(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  XL  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(XL_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_XL_expect_YL_OPERAND_register_type(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  YL  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(YL_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
 void test_getOperand_given_hash_1000_expect_error(void) {
   CEXCEPTION_T ex;
   stm8Operand *operand = NULL;

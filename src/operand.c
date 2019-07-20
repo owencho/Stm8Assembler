@@ -147,6 +147,16 @@ stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags){
               operandFlagCheck(flags,flagToken,A_OPERAND);
               operand = createOperand(A_OPERAND,NA,NA,NA,NA,NA);
           }
+          else if(strcasecmp(valueToken->str,"XL")==0){
+            flagToken = extendTokenStr(valueToken ,token);
+            operandFlagCheck(flags,flagToken,XL_OPERAND);
+            operand = createOperand(XL_OPERAND,NA,NA,NA,NA,NA);
+          }
+          else if(strcasecmp(valueToken->str,"YL")==0){
+            flagToken = extendTokenStr(valueToken ,token);
+            operandFlagCheck(flags,flagToken,YL_OPERAND);
+            operand = createOperand(YL_OPERAND,NA,NA,NA,NA,NA);
+          }
           else if(strcasecmp(valueToken->str,"X")==0){
             flagToken = extendTokenStr(valueToken ,token);
             operandFlagCheck(flags,flagToken,X_OPERAND);

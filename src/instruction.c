@@ -153,6 +153,50 @@ CodeInfo cpCodeInfo={"cp",assembleAOperandAndComplexOperand,{
   }, cpCodeTable
 };
 
+ExtensionCodeAndCode exgCodeTable[] = {
+[XL_OPERAND]         ={NA,0x41},
+[YL_OPERAND]         ={NA,0x61},
+[LONG_MEM_OPERAND]   ={NA,0x31},
+};
+
+CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    EXG_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, exgCodeTable
+};
+
+ExtensionCodeAndCode orCodeTable[] = {
+[BYTE_OPERAND]         ={NA,0xaa},
+[SHORT_MEM_OPERAND]    ={NA,0xba},
+[LONG_MEM_OPERAND]     ={NA,0xca},
+[BRACKETED_X_OPERAND] ={NA,0xfa},
+[SHORTOFF_X_OPERAND] ={NA,0xea},
+[LONGOFF_X_OPERAND] ={NA,0xda},
+[BRACKETED_Y_OPERAND] ={0x90,0xfa},
+[SHORTOFF_Y_OPERAND] ={0x90,0xea},
+[LONGOFF_Y_OPERAND] ={0x90,0xda},
+[SHORTOFF_SP_OPERAND] ={NA,0x1a},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xca},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xca},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xda},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xda},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xda},
+};
+
+CodeInfo orCodeInfo={"or",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    ADC_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, orCodeTable
+};
+
 
 InstructionTable instructionTable[]={
   //assembleAOperandAndComplexOperand
@@ -161,8 +205,8 @@ InstructionTable instructionTable[]={
   {"and",&andCodeInfo},
   {"bcp",&bcpCodeInfo},
   {"cp",&cpCodeInfo},
-  //{"exg",&andCodeInfo},
-  //{"or",&andCodeInfo},
+  {"exg",&exgCodeInfo},
+  //{"or",&orCodeInfo},
   //{"sbc",&andCodeInfo},
   //{"xor",&andCodeInfo},
   //{"sub",&bcpCodeInfo},
@@ -313,7 +357,7 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
     token =(IntegerToken*)getToken(tokenizer);
     initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected ,");
+    nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected A");
     if(strcasecmp(token->str,"A")==0){
         operandFlagCheck(codeInfo->operandExistenceFlags[0],token,A_OPERAND);
     }

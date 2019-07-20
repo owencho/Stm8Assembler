@@ -28,6 +28,12 @@
     1<<WORD_OPERAND                               |     \
     1<<SHORTOFF_SP_OPERAND)
 
+#define  EXG_SUPPORTED_OPERANDS                       \
+    (1<<XL_OPERAND                              |     \
+    1<<LONG_MEM_OPERAND                         |     \
+    1<<YL_OPERAND)
+
+
 
 
 

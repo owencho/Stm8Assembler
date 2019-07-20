@@ -28,6 +28,8 @@ typedef enum {
   SHORTPTR_DOT_W_BRACKETEDY_OPERAND,
   X_OPERAND,
   Y_OPERAND,
+  XL_OPERAND,
+  YL_OPERAND,
   SP_OPERAND
 } stm8OperandType ;
 
