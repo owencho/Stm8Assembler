@@ -9,6 +9,7 @@ typedef struct stm8Operand stm8Operand ;
 #define ALL_OPERANDS -1
 
 typedef enum {
+  NO_OPERAND,
   A_OPERAND,
   BYTE_OPERAND,
   WORD_OPERAND,
@@ -54,7 +55,12 @@ struct stm8Operand {       //struct for stm8operand
                           ((flag) & (1 << (op)))
 
 
-
+stm8Operand *createOperand( stm8OperandType type,
+                            uint16_t extCode,
+                            uint16_t code,
+                            uint16_t ms,
+                            uint16_t ls,
+                            uint16_t extB);
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint32_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type);

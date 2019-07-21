@@ -424,6 +424,290 @@ void UnityAssertEqualNumber(const _U_SINT expected,
         UNITY_FAIL_AND_BAIL;
     }
 }
+void UnityAssertEqualNumber6(const _U_SINT expected1,
+                            const _U_SINT actual1,
+                            const _U_SINT expected2,
+                            const _U_SINT actual2,
+                            const _U_SINT expected3,
+                            const _U_SINT actual3,
+                            const _U_SINT expected4,
+                            const _U_SINT actual4,
+                            const _U_SINT expected5,
+                            const _U_SINT actual5,
+                            const _U_SINT expected6,
+                            const _U_SINT actual6,
+                            const char* msg,
+                            const UNITY_LINE_TYPE lineNumber,
+                            const UNITY_DISPLAY_STYLE_T style1,
+                            const UNITY_DISPLAY_STYLE_T style2)
+{
+    UNITY_SKIP_EXECUTION;
+
+    if (expected1 != actual1)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected1, style1);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual1, style1);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected2 != actual2)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected2, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual2, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected3 != actual3)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected3, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual3, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected4 != actual4)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected4, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual4, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected5 != actual5)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected5, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual5, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected6 != actual6)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected6, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual6, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+}
+
+void UnityAssertEqualNumber5(const _U_SINT expected1,
+                            const _U_SINT actual1,
+                            const _U_SINT expected2,
+                            const _U_SINT actual2,
+                            const _U_SINT expected3,
+                            const _U_SINT actual3,
+                            const _U_SINT expected4,
+                            const _U_SINT actual4,
+                            const _U_SINT expected5,
+                            const _U_SINT actual5,
+                            const char* msg,
+                            const UNITY_LINE_TYPE lineNumber,
+                            const UNITY_DISPLAY_STYLE_T style1,
+                            const UNITY_DISPLAY_STYLE_T style2)
+{
+    UNITY_SKIP_EXECUTION;
+
+    if (expected1 != actual1)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected1, style1);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual1, style1);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected2 != actual2)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected2, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual2, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected3 != actual3)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected3, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual3, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected4 != actual4)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected4, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual4, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected5 != actual5)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected5, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual5, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+}
+
+void UnityAssertEqualNumber4(const _U_SINT expected1,
+                            const _U_SINT actual1,
+                            const _U_SINT expected2,
+                            const _U_SINT actual2,
+                            const _U_SINT expected3,
+                            const _U_SINT actual3,
+                            const _U_SINT expected4,
+                            const _U_SINT actual4,
+                            const char* msg,
+                            const UNITY_LINE_TYPE lineNumber,
+                            const UNITY_DISPLAY_STYLE_T style1,
+                            const UNITY_DISPLAY_STYLE_T style2)
+{
+    UNITY_SKIP_EXECUTION;
+
+    if (expected1 != actual1)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected1, style1);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual1, style1);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected2 != actual2)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected2, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual2, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected3 != actual3)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected3, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual3, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected4 != actual4)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected4, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual4, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+}
+
+void UnityAssertEqualNumber3(const _U_SINT expected1,
+                            const _U_SINT actual1,
+                            const _U_SINT expected2,
+                            const _U_SINT actual2,
+                            const _U_SINT expected3,
+                            const _U_SINT actual3,
+                            const char* msg,
+                            const UNITY_LINE_TYPE lineNumber,
+                            const UNITY_DISPLAY_STYLE_T style1,
+                            const UNITY_DISPLAY_STYLE_T style2)
+{
+    UNITY_SKIP_EXECUTION;
+
+    if (expected1 != actual1)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected1, style1);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual1, style1);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected2 != actual2)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected2, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual2, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected3 != actual3)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected3, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual3, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+}
+
+void UnityAssertEqualNumber2(const _U_SINT expected1,
+                            const _U_SINT actual1,
+                            const _U_SINT expected2,
+                            const _U_SINT actual2,
+                            const char* msg,
+                            const UNITY_LINE_TYPE lineNumber,
+                            const UNITY_DISPLAY_STYLE_T style1,
+                            const UNITY_DISPLAY_STYLE_T style2)
+{
+    UNITY_SKIP_EXECUTION;
+
+    if (expected1 != actual1)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected1, style1);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual1, style1);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+    if (expected2 != actual2)
+    {
+        UnityTestResultsFailBegin(lineNumber);
+        UnityPrint(UnityStrExpected);
+        UnityPrintNumberByStyle(expected2, style2);
+        UnityPrint(UnityStrWas);
+        UnityPrintNumberByStyle(actual2, style2);
+        UnityAddMsgIfSpecified(msg);
+        UNITY_FAIL_AND_BAIL;
+    }
+}
 
 //-----------------------------------------------
 void UnityAssertEqualIntArray(UNITY_PTR_ATTRIBUTE const void* expected,

@@ -434,7 +434,6 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
             operand = operandHandleSquareBracket(tokenizer,flags);
           }
           else if(strcmp(token->str,"#")==0){
-                freeToken(token);
                 token = (IntegerToken *)getToken(tokenizer);
                 int valueCount = valueCheck(token);
                 if(valueCount == 1){

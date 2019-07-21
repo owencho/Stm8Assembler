@@ -20,5 +20,6 @@
 #define ERR_INTEGER_NULL              75
 #define ERR_SRC_NULL                  76
 #define ERR_INVALID_SYNTAX            77
+#define ERR_DST_NULL                  78
 
 #endif // Error_H
