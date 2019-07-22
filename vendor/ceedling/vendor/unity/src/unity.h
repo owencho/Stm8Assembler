@@ -164,12 +164,6 @@
 #define TEST_ASSERT_DOUBLE_IS_NOT_NAN(actual)                                                      UNITY_TEST_ASSERT_DOUBLE_IS_NOT_NAN(actual, __LINE__, NULL)
 #define TEST_ASSERT_DOUBLE_IS_NOT_DETERMINATE(actual)                                              UNITY_TEST_ASSERT_DOUBLE_IS_NOT_DETERMINATE(actual, __LINE__, NULL)
 
-//Extra for Instruction.c
-#define TEST_ASSERT_INSTRUCTION_EQUAL6(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4,expected5, actual5,expected6, actual6)    UNITY_TEST_ASSERT_INSTRUCTION_EQUAL6(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4 ,expected5, actual5,expected6, actual6,__LINE__, NULL)
-#define TEST_ASSERT_INSTRUCTION_EQUAL5(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4,expected5, actual5)                       UNITY_TEST_ASSERT_INSTRUCTION_EQUAL5(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4 ,expected5, actual5,__LINE__, NULL)
-#define TEST_ASSERT_INSTRUCTION_EQUAL4(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4)                                          UNITY_TEST_ASSERT_INSTRUCTION_EQUAL4(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4 ,__LINE__, NULL)
-#define TEST_ASSERT_INSTRUCTION_EQUAL3(expected1, actual1,expected2, actual2,expected3, actual3)                                                             UNITY_TEST_ASSERT_INSTRUCTION_EQUAL3(expected1, actual1,expected2, actual2,expected3, actual3,__LINE__, NULL)
-#define TEST_ASSERT_INSTRUCTION_EQUAL2(expected1, actual1,expected2, actual2)                                                                                UNITY_TEST_ASSERT_INSTRUCTION_EQUAL2(expected1, actual1,expected2, actual2,__LINE__, NULL)
 
 //-------------------------------------------------------
 // Test Asserts (with additional messages)

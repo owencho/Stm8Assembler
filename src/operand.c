@@ -76,7 +76,7 @@ int valueCheck(IntegerToken* token){
         throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
       }
       else if (token-> value >65536){
-        throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 ($1000)");
+        throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 eg ($1000)");
       }
     }
     else{

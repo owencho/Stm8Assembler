@@ -15,7 +15,7 @@ void setUp(void) {}
 
 void tearDown(void) {}
 
-
+/*
 void test_skipWhiteSpaces_given_empty_string_expect_to_skip_till_end_of_string() {
   char *endPtr = skipWhiteSpaces("               ");
 

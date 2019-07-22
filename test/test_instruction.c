@@ -10,6 +10,7 @@
 #include "Exception.h"
 #include "operand.h"
 #include "instruction.h"
+#include "CustomAssert.h"
 
 CEXCEPTION_T ex;
 
@@ -20,14 +21,13 @@ void tearDown(void) {}
 void test_assembleInstruction_given_adc_SHORTOFF_X_OPERAND_expect_0xe9c1(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
-
+  int expectedMcode[]={0xe9,0xc1,END};
   Try{
     tokenizer = createTokenizer("  AdC a, ($c1,X) ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
 
     mcode = assembleInstruction(tokenizer);
-    TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_INSTRUCTION_EQUAL3(2,mcode->length,0xe9, mcode->code[0],0xc1, mcode->code[1]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -38,14 +38,14 @@ void test_assembleInstruction_given_adc_SHORTOFF_X_OPERAND_expect_0xe9c1(void) {
 void test_assembleInstruction_given_adc_hash33_expect_0xa933(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
-
+  int expectedMcode[]={0xa9,0x33,END};
   Try{
     tokenizer = createTokenizer("  AdC a, #$33 ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
 
     mcode = assembleInstruction(tokenizer);
     TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_INSTRUCTION_EQUAL3(2,mcode->length,0xa9, mcode->code[0],0x33, mcode->code[1]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -116,6 +116,7 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
 void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xfb(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0xfb,END};
 
   Try{
     tokenizer = createTokenizer("  ADd a, (X) ");
@@ -123,7 +124,7 @@ void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xfb(void) {
 
     mcode = assembleInstruction(tokenizer);
     TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_INSTRUCTION_EQUAL2(1, mcode->length,0xfb, mcode->code[0]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -134,6 +135,7 @@ void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xfb(void) {
 void test_assembleInstruction_given_add_LONGOFF7749_Y_OPERAND_expect_0x90db7749(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x90,0xdb,0x77,0x49,END};
 
   Try{
     tokenizer = createTokenizer("  ADd a, ($7749,Y) ");
@@ -141,7 +143,7 @@ void test_assembleInstruction_given_add_LONGOFF7749_Y_OPERAND_expect_0x90db7749(
 
     mcode = assembleInstruction(tokenizer);
     TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_INSTRUCTION_EQUAL5(4, mcode->length,0x90, mcode->code[0],0xdb, mcode->code[1],0x77, mcode->code[2],0x49, mcode->code[3]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");

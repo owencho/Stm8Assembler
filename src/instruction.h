@@ -22,7 +22,7 @@
     1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND           |     \
     1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND)
 
-#define  CPW_SUPPORTED_OPERANDS                         \
+#define  CPW_X_SUPPORTED_OPERANDS                       \
     (1<<WORD_OPERAND                              |     \
     1<<SHORT_MEM_OPERAND                          |     \
     1<<LONG_MEM_OPERAND                           |     \
@@ -32,17 +32,22 @@
     1<<SHORTOFF_SP_OPERAND                        |     \
     1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
     1<<BRACKETED_LONGPTR_DOT_W_OPERAND            |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND          |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
-    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND           |     \
+    1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND)
+
+#define  CPW_Y_SUPPORTED_OPERANDS                       \
+    (1<<WORD_OPERAND                              |     \
+    1<<SHORT_MEM_OPERAND                          |     \
+    1<<LONG_MEM_OPERAND                           |     \
     1<<BRACKETED_X_OPERAND                        |     \
     1<<SHORTOFF_X_OPERAND                         |     \
-    1<<LONGOFF_X_OPERAND)
+    1<<LONGOFF_X_OPERAND                          |     \
+    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
+    1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
+    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND)
 
 
-#define  ADDW_SUPPORTED_OPERANDS                        \
-    (1<<BYTE_OPERAND                              |     \
-    1<<LONG_MEM_OPERAND                           |     \
+#define  ADDW_XY_SUPPORTED_OPERANDS                     \
+    (1<<LONG_MEM_OPERAND                          |     \
     1<<WORD_OPERAND                               |     \
     1<<SHORTOFF_SP_OPERAND)
 
@@ -69,11 +74,14 @@ typedef  MachineCode*(*Assembler)(CodeInfo *CodeInfo , Tokenizer *tokenizer);
 
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleXYSPOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleASPOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleXYOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleSubOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleAddwOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleCPWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleDivOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleSubWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode *assembleInstruction(Tokenizer *tokenizer);
+
 
 struct MachineCode{
   uint8_t length;

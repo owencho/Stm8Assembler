@@ -422,72 +422,6 @@ void UnityAssertEqualNumber(const _U_SINT expected,
                             const UNITY_LINE_TYPE lineNumber,
                             const UNITY_DISPLAY_STYLE_T style);
 
-void UnityAssertEqualNumber2(const _U_SINT expected1,
-                            const _U_SINT actual1,
-                            const _U_SINT expected2,
-                            const _U_SINT actual2,
-                            const char* msg,
-                            const UNITY_LINE_TYPE lineNumber,
-                            const UNITY_DISPLAY_STYLE_T style1,
-                            const UNITY_DISPLAY_STYLE_T style2);
-
-void UnityAssertEqualNumber3(const _U_SINT expected1,
-                            const _U_SINT actual1,
-                            const _U_SINT expected2,
-                            const _U_SINT actual2,
-                            const _U_SINT expected3,
-                            const _U_SINT actual3,
-                            const char* msg,
-                            const UNITY_LINE_TYPE lineNumber,
-                            const UNITY_DISPLAY_STYLE_T style1,
-                            const UNITY_DISPLAY_STYLE_T style2);
-
-void UnityAssertEqualNumber4(const _U_SINT expected1,
-                            const _U_SINT actual1,
-                            const _U_SINT expected2,
-                            const _U_SINT actual2,
-                            const _U_SINT expected3,
-                            const _U_SINT actual3,
-                            const _U_SINT expected4,
-                            const _U_SINT actual4,
-                            const char* msg,
-                            const UNITY_LINE_TYPE lineNumber,
-                            const UNITY_DISPLAY_STYLE_T style1,
-                            const UNITY_DISPLAY_STYLE_T style2);
-
-void UnityAssertEqualNumber5(const _U_SINT expected1,
-                            const _U_SINT actual1,
-                            const _U_SINT expected2,
-                            const _U_SINT actual2,
-                            const _U_SINT expected3,
-                            const _U_SINT actual3,
-                            const _U_SINT expected4,
-                            const _U_SINT actual4,
-                            const _U_SINT expected5,
-                            const _U_SINT actual5,
-                            const char* msg,
-                            const UNITY_LINE_TYPE lineNumber,
-                            const UNITY_DISPLAY_STYLE_T style1,
-                            const UNITY_DISPLAY_STYLE_T style2);
-
-void UnityAssertEqualNumber6(const _U_SINT expected1,
-                            const _U_SINT actual1,
-                            const _U_SINT expected2,
-                            const _U_SINT actual2,
-                            const _U_SINT expected3,
-                            const _U_SINT actual3,
-                            const _U_SINT expected4,
-                            const _U_SINT actual4,
-                            const _U_SINT expected5,
-                            const _U_SINT actual5,
-                            const _U_SINT expected6,
-                            const _U_SINT actual6,
-                            const char* msg,
-                            const UNITY_LINE_TYPE lineNumber,
-                            const UNITY_DISPLAY_STYLE_T style1,
-                            const UNITY_DISPLAY_STYLE_T style2);
-
-
 void UnityAssertEqualIntArray(UNITY_PTR_ATTRIBUTE const void* expected,
                               UNITY_PTR_ATTRIBUTE const void* actual,
                               const _UU32 num_elements,
@@ -679,15 +613,6 @@ extern const char UnityStrErr64[];
 #define UNITY_TEST_ASSERT_EQUAL_PTR_ARRAY(expected, actual, num_elements, line, message)         UnityAssertEqualIntArray((UNITY_PTR_ATTRIBUTE const void*)(_UP*)(expected), (const void*)(_UP*)(actual), (_UU32)(num_elements), (message), (UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_POINTER)
 #define UNITY_TEST_ASSERT_EQUAL_STRING_ARRAY(expected, actual, num_elements, line, message)      UnityAssertEqualStringArray((const char**)(expected), (const char**)(actual), (_UU32)(num_elements), (message), (UNITY_LINE_TYPE)line)
 #define UNITY_TEST_ASSERT_EQUAL_MEMORY_ARRAY(expected, actual, len, num_elements, line, message) UnityAssertEqualMemory((UNITY_PTR_ATTRIBUTE void*)(expected), (UNITY_PTR_ATTRIBUTE void*)(actual), (_UU32)(len), (_UU32)(num_elements), (message), (UNITY_LINE_TYPE)line)
-
-#define UNITY_TEST_ASSERT_INSTRUCTION_EQUAL6(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4,expected5, actual5,expected6, actual6 ,line, message)         UnityAssertEqualNumber6((_U_SINT)(_UU8 )(expected1), (_U_SINT)(_UU8 )(actual1),(_U_SINT)(_US8 )(expected2), (_U_SINT)(_US8 )(actual2),(_U_SINT)(_US8 )(expected3), (_U_SINT)(_US8 )(actual3),(_U_SINT)(_US8 )(expected4), (_U_SINT)(_US8 )(actual4),(_U_SINT)(_US8 )(expected5), (_U_SINT)(_US8 )(actual5),               \
-(_U_SINT)(_US8 )(expected6), (_U_SINT)(_US8 )(actual6),  (message),(UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_UINT8,UNITY_DISPLAY_STYLE_HEX8)
-#define UNITY_TEST_ASSERT_INSTRUCTION_EQUAL5(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4,expected5, actual5,line, message)         UnityAssertEqualNumber5((_U_SINT)(_UU8 )(expected1), (_U_SINT)(_UU8 )(actual1),(_U_SINT)(_US8 )(expected2), (_U_SINT)(_US8 )(actual2),(_U_SINT)(_US8 )(expected3), (_U_SINT)(_US8 )(actual3),(_U_SINT)(_US8 )(expected4), (_U_SINT)(_US8 )(actual4),(_U_SINT)(_US8 )(expected5), (_U_SINT)(_US8 )(actual5), (message), (UNITY_LINE_TYPE)line, \
-UNITY_DISPLAY_STYLE_UINT8,UNITY_DISPLAY_STYLE_HEX8)
-#define UNITY_TEST_ASSERT_INSTRUCTION_EQUAL4(expected1, actual1,expected2, actual2,expected3, actual3,expected4, actual4 ,line, message)         UnityAssertEqualNumber4((_U_SINT)(_UU8 )(expected1), (_U_SINT)(_UU8 )(actual1),(_U_SINT)(_US8 )(expected2), (_U_SINT)(_US8 )(actual2),(_U_SINT)(_US8 )(expected3), (_U_SINT)(_US8 )(actual3),(_U_SINT)(_US8 )(expected4), (_U_SINT)(_US8 )(actual4), (message), (UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_UINT8,UNITY_DISPLAY_STYLE_HEX8)
-#define UNITY_TEST_ASSERT_INSTRUCTION_EQUAL3(expected1, actual1,expected2, actual2,expected3, actual3,line, message)                             UnityAssertEqualNumber3((_U_SINT)(_UU8 )(expected1), (_U_SINT)(_UU8 )(actual1),(_U_SINT)(_US8 )(expected2), (_U_SINT)(_US8 )(actual2),(_U_SINT)(_US8 )(expected3), (_U_SINT)(_US8 )(actual3),(message), (UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_UINT8,UNITY_DISPLAY_STYLE_HEX8)
-#define UNITY_TEST_ASSERT_INSTRUCTION_EQUAL2(expected1, actual1,expected2, actual2,line, message)                                                UnityAssertEqualNumber2((_U_SINT)(_UU8 )(expected1), (_U_SINT)(_UU8 )(actual1),(_U_SINT)(_US8 )(expected2), (_U_SINT)(_US8 )(actual2),(message), (UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_UINT8,UNITY_DISPLAY_STYLE_HEX8)
-
 
 #ifdef UNITY_SUPPORT_64
 #define UNITY_TEST_ASSERT_EQUAL_INT64(expected, actual, line, message)                           UnityAssertEqualNumber((_U_SINT)(expected), (_U_SINT)(actual), (message), (UNITY_LINE_TYPE)line, UNITY_DISPLAY_STYLE_INT64)
