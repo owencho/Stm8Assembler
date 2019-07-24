@@ -10,6 +10,20 @@
 #include "Exception.h"
 #include "operand.h"
 #include "instruction.h"
+#include "arithmeticOperationsInstruction.h"
+#include "bitOperationInstruction.h"
+#include "breakPointInstruction.h"
+#include "compareAndTestsInstruction.h"
+#include "conditionalBitTestBranchInstruction.h"
+#include "conditionalBranchExecutionInstruction.h"
+#include "conditionCodeFlagModificationInstruction.h"
+#include "incrementDecrementInstruction.h"
+#include "interruptManagementInstruction.h"
+#include "loadTransferInstruction.h"
+#include "logicalOperationsInstruction.h"
+#include "shiftRotatesInstruction.h"
+#include "unconditionalJumpCallInstruction.h"
+#include "assembleAllInstruction.h"
 #include "CustomAssert.h"
 
 CEXCEPTION_T ex;
@@ -112,7 +126,7 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
-/*
+
 void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xfb(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -1157,4 +1171,3 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-*/

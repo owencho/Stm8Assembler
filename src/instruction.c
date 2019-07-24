@@ -15,7 +15,7 @@
 InstructionTable instructionTable[]={
   //assembleAOperandAndComplexOperand
   {"adc",&adcCodeInfo},
-/*  {"add",&addCodeInfo},
+  {"add",&addCodeInfo},
   {"and",&andCodeInfo},
   {"bcp",&bcpCodeInfo},
   {"cp",&cpCodeInfo},
@@ -49,7 +49,6 @@ InstructionTable instructionTable[]={
   {"wfi",&wfiCodeInfo},
   //assembleXOperandAndComplexOperand
   //{"divw",&divwCodeInfo},
-*/
   {NULL,NULL}
 };
 

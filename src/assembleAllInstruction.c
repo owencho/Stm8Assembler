@@ -13,6 +13,81 @@
 #include <stdlib.h>
 #include <errno.h>
 
+ExtensionCodeAndCode addwXCodeTable[] = {
+    [WORD_OPERAND]={NA,0x1c},
+    [LONG_MEM_OPERAND] ={72,0xbb},
+    [SHORTOFF_SP_OPERAND]={72,0xfb}
+};
+ExtensionCodeAndCode addwYCodeTable[] = {
+    [WORD_OPERAND] ={72,0xa9},
+    [LONG_MEM_OPERAND] ={72,0xb9},
+    [SHORTOFF_SP_OPERAND] ={72,0xf9}
+};
+ExtensionCodeAndCode addwSPCodeTable[] = {
+    [BYTE_OPERAND] ={NA,0x5b}
+};
+
+ExtensionCodeAndCode subwXCodeTable[] = {
+  [WORD_OPERAND]         ={NA,0x1d},
+  [LONG_MEM_OPERAND]     ={0x72,0xb0},
+  [SHORTOFF_SP_OPERAND] ={0x72,0xf0}
+};
+ExtensionCodeAndCode subwYCodeTable[] = {
+  [WORD_OPERAND]         ={0x72,0xa2},
+  [LONG_MEM_OPERAND]     ={0x72,0xb2},
+  [SHORTOFF_SP_OPERAND] ={0x72,0xf2}
+};
+ExtensionCodeAndCode cpwXCodeTable[] = {
+  [WORD_OPERAND]         ={NA,0xa3},
+  [SHORT_MEM_OPERAND]    ={NA,0xb3},
+  [LONG_MEM_OPERAND]     ={NA,0xc3},
+  [BRACKETED_Y_OPERAND] ={0x90,0xf3},
+  [SHORTOFF_Y_OPERAND] ={0x90,0xe3},
+  [LONGOFF_Y_OPERAND] ={0x90,0xd3},
+  [SHORTOFF_SP_OPERAND] ={NA,0x13},
+  [BRACKETED_SHORTPTR_DOT_W_OPERAND] ={0x92,0xc3},
+  [BRACKETED_LONGPTR_DOT_W_OPERAND] ={0x72,0xc3},
+  [SHORTPTR_DOT_W_BRACKETEDY_OPERAND] ={0x91,0xd3},
+};
+ExtensionCodeAndCode cpwYCodeTable[] ={
+  [WORD_OPERAND]={0x90,0xc0},
+  [SHORT_MEM_OPERAND]={0x90,0xc0},
+  [LONG_MEM_OPERAND]={0x90,0xd0},
+  [BRACKETED_X_OPERAND]={NA,0xd0},
+  [SHORTOFF_X_OPERAND]={NA,0xd0},
+  [LONGOFF_X_OPERAND]={NA,0xc0},
+  [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x91,0xc3},
+  [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd3},
+  [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd3}
+};
+ExtensionCodeAndCode subACodeTable[] = {
+  [BYTE_OPERAND]         ={NA,0xa0},
+  [SHORT_MEM_OPERAND]    ={NA,0xb0},
+  [LONG_MEM_OPERAND]     ={NA,0xc0},
+  [BRACKETED_X_OPERAND] ={NA,0xf0},
+  [SHORTOFF_X_OPERAND] ={NA,0xe0},
+  [LONGOFF_X_OPERAND] ={NA,0xd0},
+  [BRACKETED_Y_OPERAND] ={0x90,0xf0},
+  [SHORTOFF_Y_OPERAND] ={0x90,0xe0},
+  [LONGOFF_Y_OPERAND] ={0x90,0xd0},
+  [SHORTOFF_SP_OPERAND] ={NA,0x10},
+  [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc0},
+  [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc0},
+  [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd0},
+  [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd0},
+  [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd0},
+};
+ExtensionCodeAndCode subSPCodeTable[] = {
+  [BYTE_OPERAND]         ={NA,0x52}
+};
+ExtensionCodeAndCode divXCodeTable[] = {
+  [A_OPERAND]    ={NA,0x62},
+};
+
+ExtensionCodeAndCode divYCodeTable[] = {
+  [A_OPERAND]    ={0x90,0x62}
+};
+
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,CodeInfo * codeInfo){
     IntegerToken *token;
     stm8Operand * operand;
