@@ -1,117 +1,26 @@
 #include "Tokenizer.h"
+#include "operand.h"
+#include "arithmeticOperationsInstruction.h"
+#include "bitOperationInstruction.h"
+#include "breakPointInstruction.h"
+#include "compareAndTestsInstruction.h"
+#include "conditionalBitTestBranchInstruction.h"
+#include "conditionalBranchExecutionInstruction.h"
+#include "conditionCodeFlagModificationInstruction.h"
+#include "incrementDecrementInstruction.h"
+#include "interruptManagementInstruction.h"
+#include "loadTransferInstruction.h"
+#include "logicalOperationsInstruction.h"
+#include "shiftRotatesInstruction.h"
+#include "unconditionalJumpCallInstruction.h"
 #ifndef instruction_H
 #define instruction_H
 
-#define NA      -1
-#define ALL_OPERANDS -1
 
-#define  ADC_SUPPORTED_OPERANDS                         \
-    (1<<BYTE_OPERAND                              |     \
-    1<<SHORT_MEM_OPERAND                          |     \
-    1<<LONG_MEM_OPERAND                           |     \
-    1<<BRACKETED_X_OPERAND                        |     \
-    1<<SHORTOFF_X_OPERAND                         |     \
-    1<<LONGOFF_X_OPERAND                          |     \
-    1<<BRACKETED_Y_OPERAND                        |     \
-    1<<SHORTOFF_Y_OPERAND                         |     \
-    1<<LONGOFF_Y_OPERAND                          |     \
-    1<<SHORTOFF_SP_OPERAND                        |     \
-    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
-    1<<BRACKETED_LONGPTR_DOT_W_OPERAND            |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
-    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND           |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND)
-
-#define  CPW_X_SUPPORTED_OPERANDS                       \
-    (1<<WORD_OPERAND                              |     \
-    1<<SHORT_MEM_OPERAND                          |     \
-    1<<LONG_MEM_OPERAND                           |     \
-    1<<BRACKETED_Y_OPERAND                        |     \
-    1<<SHORTOFF_Y_OPERAND                         |     \
-    1<<LONGOFF_Y_OPERAND                          |     \
-    1<<SHORTOFF_SP_OPERAND                        |     \
-    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
-    1<<BRACKETED_LONGPTR_DOT_W_OPERAND            |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND)
-
-#define  CPW_Y_SUPPORTED_OPERANDS                       \
-    (1<<WORD_OPERAND                              |     \
-    1<<SHORT_MEM_OPERAND                          |     \
-    1<<LONG_MEM_OPERAND                           |     \
-    1<<BRACKETED_X_OPERAND                        |     \
-    1<<SHORTOFF_X_OPERAND                         |     \
-    1<<LONGOFF_X_OPERAND                          |     \
-    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
-    1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
-    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND)
-
-
-#define  ADDW_XY_SUPPORTED_OPERANDS                     \
-    (1<<LONG_MEM_OPERAND                          |     \
-    1<<WORD_OPERAND                               |     \
-    1<<SHORTOFF_SP_OPERAND)
-
-#define  EXG_SUPPORTED_OPERANDS                       \
-    (1<<XL_OPERAND                              |     \
-    1<<LONG_MEM_OPERAND                         |     \
-    1<<YL_OPERAND)
-
-#define  SUBW_SUPPORTED_OPERANDS                        \
-    (1<<WORD_OPERAND                              |     \
-    1<<LONG_MEM_OPERAND                           |     \
-    1<<SHORTOFF_SP_OPERAND)
-
-
-
-
-
-
-typedef struct InstructionTable InstructionTable;
-typedef struct MachineCode MachineCode;
-typedef struct CodeInfo CodeInfo;
-typedef struct ExtensionCodeAndCode ExtensionCodeAndCode;
-typedef  MachineCode*(*Assembler)(CodeInfo *CodeInfo , Tokenizer *tokenizer);
-
-MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleSubOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleAddwOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleCPWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleDivOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleSubWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode *assembleInstruction(Tokenizer *tokenizer);
-
-
-struct MachineCode{
-  uint8_t length;
-  uint8_t code[0];
-};
-
-struct ExtensionCodeAndCode{
-  uint16_t extCode;
-  uint16_t code;
-};
-
-struct CodeInfo{
-  char* name;
-  Assembler assembler;
-  uint32_t operandExistenceFlags[3];
-  ExtensionCodeAndCode *codeTable;
-};
-
-struct InstructionTable{
-  char* name;
-  CodeInfo *codeInfo;
-};
 
 #define freeMachineCode(mcode)                                      \
                           do{if(mcode) free(mcode);}while(0)
-
-
-
-
-
 
 
 

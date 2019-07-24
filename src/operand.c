@@ -34,8 +34,6 @@ void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type 
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
 }
 
-
-
 int operandCheck(IntegerToken* token, int condition){
     nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
     if(strcasecmp(token->str,"X")==0)
@@ -56,7 +54,6 @@ int operandCheck(IntegerToken* token, int condition){
         throwException(ERR_INVALID_STM8_OPERAND,token,"Invalid input ");
 }
 
-
 int valueCheck(IntegerToken* token){
     nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
     if((token->str[0]=='$' || token->str[0]=='-') || isdigit(token->str[0])){
@@ -72,11 +69,14 @@ int valueCheck(IntegerToken* token){
       else if (token->value >256  && token->value < 65536){
         return 2;
       }
+      else if (token->value >65536  && token->value < 16777215){
+        return 3;
+      }
       else if (token-> value <0){
         throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
       }
       else if (token-> value >65536){
-        throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 64436 eg ($1000)");
+        throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 65536 eg ($1000)");
       }
     }
     else{
@@ -84,8 +84,6 @@ int valueCheck(IntegerToken* token){
     }
 
 }
-
-
 
 stm8Operand *createOperand( stm8OperandType type,
     uint16_t extCode,
@@ -127,10 +125,32 @@ stm8Operand *createMsOperand( stm8OperandType type,
           uint16_t valueLs = value & 0xff;  // low
           uint16_t valueMs = value >> 8;    // high
           operand = createOperand(type,NA,NA,valueMs,valueLs,NA);
-        }else if (value > 65536){
+        }
+        else if (value > 65536){
           throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must be smaller than 65536 ($1000)");
-        }else if(value < 256){
+        }
+        else if(value < 256){
           throwException(ERR_INTEGER_TOO_SMALL,token,"The integer number must be larger than 0 (non zero)");
+        }
+        return operand;
+      }
+
+stm8Operand *createExtMemOperand( stm8OperandType type,
+    int value,
+    IntegerToken *token){
+
+    stm8Operand *operand =malloc(sizeof(stm8Operand));
+        if(value > 65536){
+          uint16_t valueLs = value & 0xff;  // low
+          uint16_t valueMs = (value & 0xffff)>> 8;    // high
+          uint16_t valueExtMem = value >> 16;  // ext
+          operand = createOperand(type,NA,NA,valueExtMem,valueMs,valueLs);
+        }
+        else if (value < 65536){
+          throwException(ERR_INTEGER_TOO_SMALL,token,"The integer number must be larger than 0 (non zero)");
+        }
+        else if(value > 16777215){
+          throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must be smaller than 65536 ($1000)");
         }
         return operand;
       }
@@ -215,7 +235,7 @@ stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* tokenValue,Tokeni
                  }
 
                  else{
-                   throwException(ERR_INVALID_STM8_OPERAND,tokenValue,"Expected only value less than 256 and larger than 0");
+                   throwException(ERR_INVALID_STM8_OPERAND,tokenValue,"Expected only value less than 65536 and larger than 0");
                  }
                }
 
@@ -231,6 +251,9 @@ stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* tokenValue,Tokeni
                   operandFlagCheck(flags,flagToken,LONGOFF_X_OPERAND);
                   operand = createMsOperand(LONGOFF_X_OPERAND,value,token);
                 }
+                else{
+                  throwException(ERR_INVALID_STM8_OPERAND,tokenValue,"Expected only value less than 65536 and larger than 0");
+                }
               }
               else if(operandCounter==2){
                 if(valueCount==1){
@@ -242,6 +265,9 @@ stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* tokenValue,Tokeni
                   flagToken = extendTokenStr(tokenValue ,token);
                   operandFlagCheck(flags,flagToken,LONGOFF_Y_OPERAND);
                   operand = createMsOperand(LONGOFF_Y_OPERAND,value,token);
+                }
+                else{
+                  throwException(ERR_INVALID_STM8_OPERAND,tokenValue,"Expected only value less than 65536 and larger than 0");
                 }
               }
               else if(operandCounter==3){
@@ -317,6 +343,19 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint32_t flags){
                 }
                 else{
                     throwException(ERR_INVALID_STM8_OPERAND,token,"Expected w after .");
+                }
+              }
+              else if(strcmp(token->str,"]")==0){
+                if(valueCount==1){
+                  flagToken = extendTokenStr(initToken ,token);
+                  operandFlagCheck(flags,flagToken,BRACKETED_SHORTPTR_DOT_W_OPERAND);
+                  operand = createLsOperand(BRACKETED_SHORTPTR_DOT_W_OPERAND,value,token);
+                }
+
+                else if (valueCount==2){
+                  flagToken = extendTokenStr(initToken,token);
+                  operandFlagCheck(flags,flagToken,BRACKETED_LONGPTR_DOT_W_OPERAND);
+                  operand = createMsOperand(BRACKETED_LONGPTR_DOT_W_OPERAND,value,token);
                 }
               }
               else{
@@ -460,6 +499,10 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
                   operandFlagCheck(flags,token,LONG_MEM_OPERAND);
                   operand = createMsOperand(LONG_MEM_OPERAND,token->value,token);
               }
+              else if(valueCount ==3){
+                    operandFlagCheck(flags,token,EXT_MEM_OPERAND);
+                    operand = createExtMemOperand(EXT_MEM_OPERAND,token->value,token);
+                }
             freeToken(token);
             }
 

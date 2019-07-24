@@ -112,7 +112,7 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
-
+/*
 void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xfb(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -1157,3 +1157,4 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+*/

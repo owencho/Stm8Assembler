@@ -1,0 +1,5 @@
+#ifndef conditionCodeFlagModificationInstruction_H
+#define conditionCodeFlagModificationInstruction_H
+#include "assembleAllInstruction.h"
+
+#endif // conditionCodeFlagModificationInstruction_H
