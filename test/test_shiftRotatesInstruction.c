@@ -31,7 +31,40 @@ void setUp(void){}
 void tearDown(void){}
 
 
-void test_module_generator_needs_to_be_implemented(void)
-{
-	TEST_IGNORE_MESSAGE("Implement me!");
+void test_assembleInstruction_given_sllw_x_OPERAND_expect_0x58(void) {
+	MachineCode *mcode =NULL ;
+	Tokenizer *tokenizer = NULL;
+	int expectedMcode[]={0x58,END};
+
+	Try{
+		tokenizer = createTokenizer("  sllw x ");
+		configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+		mcode = assembleInstruction(tokenizer);
+		TEST_ASSERT_NOT_NULL(mcode);
+		TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_sllw_y_OPERAND_expect_0x9058(void) {
+	MachineCode *mcode =NULL ;
+	Tokenizer *tokenizer = NULL;
+	int expectedMcode[]={0x90,0x58,END};
+
+	Try{
+		tokenizer = createTokenizer("  sllw y ");
+		configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+		mcode = assembleInstruction(tokenizer);
+		TEST_ASSERT_NOT_NULL(mcode);
+		TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
 }

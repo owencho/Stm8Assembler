@@ -51,6 +51,7 @@ InstructionTable instructionTable[]={
   //{"divw",&divwCodeInfo},
   //assembleOneOperand
   {"sllw",&sllwCodeInfo},
+  {"slaw",&slawCodeInfo},
   {NULL,NULL}
 };
 

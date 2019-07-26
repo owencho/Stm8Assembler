@@ -26,7 +26,6 @@ ExtensionCodeAndCode addwYCodeTable[] = {
 ExtensionCodeAndCode addwSPCodeTable[] = {
     [BYTE_OPERAND] ={NA,0x5b}
 };
-
 ExtensionCodeAndCode subwXCodeTable[] = {
   [WORD_OPERAND]         ={NA,0x1d},
   [LONG_MEM_OPERAND]     ={0x72,0xb0},
@@ -83,7 +82,6 @@ ExtensionCodeAndCode subSPCodeTable[] = {
 ExtensionCodeAndCode divXCodeTable[] = {
   [A_OPERAND]    ={NA,0x62},
 };
-
 ExtensionCodeAndCode divYCodeTable[] = {
   [A_OPERAND]    ={0x90,0x62}
 };
@@ -244,9 +242,8 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
     token =(IntegerToken*)getToken(tokenizer);
     initToken = token;
-    token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DST_NULL,token,"Expected not NULL and complex operand eg SUB SP,#$9  ");
-    operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[1]);
+    operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
     mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand );
     return mcode;
 }
