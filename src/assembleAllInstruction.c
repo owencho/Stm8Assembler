@@ -235,6 +235,22 @@ MachineCode* assembleAddwOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 }
 
+MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DST_NULL,token,"Expected not NULL and complex operand eg SUB SP,#$9  ");
+    operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[1]);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand );
+    return mcode;
+}
+
 MachineCode* assembleSubOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     IntegerToken * initToken;

@@ -14,7 +14,7 @@ CEXCEPTION_T ex;
 void setUp(void) {}
 
 void tearDown(void) {}
-/*
+
 void test_getOperand_given_A_expect_A_register_type_is_returned(void) {
   Token *token = NULL;
   IdentifierToken *token = NULL;
@@ -72,4 +72,3 @@ void test_error_throwing(void) {
     dumpTokenErrorMessage(ex, 1);
   }
 }
-*/

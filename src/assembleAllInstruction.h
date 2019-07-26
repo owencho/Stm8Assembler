@@ -63,11 +63,12 @@
     1<<LONG_MEM_OPERAND                           |     \
     1<<SHORTOFF_SP_OPERAND)
 
-stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,CodeInfo * codeInfo);    
+stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,CodeInfo * codeInfo);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
 MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo , stm8Operand *operand);
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleSubOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);

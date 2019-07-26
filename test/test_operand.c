@@ -519,8 +519,6 @@ void test_getOperand_given_hash_negative_1234_expect_error(void) {
   freeTokenizer(tokenizer);
 }
 
-
-
 void test_getOperand_given_dollarsign_3a7d_expect_shortmem_OPERAND_register_type_is_with_ms_equals_55(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
@@ -535,6 +533,28 @@ void test_getOperand_given_dollarsign_3a7d_expect_shortmem_OPERAND_register_type
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
     TEST_ASSERT_EQUAL_UINT16(0x3a, operand->dataSize.ms);
     TEST_ASSERT_EQUAL_UINT16(0x7d, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  }Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_dollarsign_3a_expect_longmem_OPERAND_register_type_when_shortmem_not_available_is_with_ms_equals_00_ls_equals_3a(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  $3a  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORT_MEM_OPERAND));
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(LONG_MEM_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x00, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_HEX16(0x3a, operand->dataSize.ls);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   }Catch(ex) {
@@ -1298,7 +1318,7 @@ void test_getOperand_given_SHORT_MEM_expect_SHORT_MEM_to_fail_on_flags(void) {
   Try {
     tokenizer = createTokenizer("  $13  ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORT_MEM_OPERAND));
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORT_MEM_OPERAND | 1<< LONG_MEM_OPERAND));
 
     freeTokenizer(tokenizer);
   } Catch(ex) {

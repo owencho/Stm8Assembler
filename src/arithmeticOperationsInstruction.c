@@ -1,17 +1,4 @@
 #include "arithmeticOperationsInstruction.h"
-#include "assembleAllInstruction.h"
-#include "unity.h"
-#include "Common.h"
-#include "Token.h"
-#include "Error.h"
-#include "Tokenizer.h"
-#include "CException.h"
-#include "Exception.h"
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <errno.h>
 
 ExtensionCodeAndCode adcCodeTable[] = {
 [BYTE_OPERAND]         ={NA,0xa9},
