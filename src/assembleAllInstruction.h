@@ -63,6 +63,41 @@
     1<<LONG_MEM_OPERAND                           |     \
     1<<SHORTOFF_SP_OPERAND)
 
+#define  LDW_X_SUPPORTED_OPERANDS                        \
+    (1<<WORD_OPERAND                                |     \
+    1<<SHORT_MEM_OPERAND                            |     \
+    1<<LONG_MEM_OPERAND                             |     \
+    1<<BRACKETED_X_OPERAND                          |     \
+    1<<SHORTOFF_X_OPERAND                           |     \
+    1<<LONGOFF_X_OPERAND                            |     \
+    1<<SHORTOFF_SP_OPERAND                          |     \
+    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND             |     \
+    1<<BRACKETED_LONGPTR_DOT_W_OPERAND              |     \
+    1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND            |     \
+    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND             |     \
+    1<<Y_OPERAND                                    |     \
+    1<<SP_OPERAND)
+
+#define  LDW_Y_SUPPORTED_OPERANDS                        \
+    (1<<WORD_OPERAND                                |     \
+    1<<SHORT_MEM_OPERAND                            |     \
+    1<<LONG_MEM_OPERAND                             |     \
+    1<<BRACKETED_Y_OPERAND                          |     \
+    1<<SHORTOFF_Y_OPERAND                           |     \
+    1<<LONGOFF_Y_OPERAND                            |     \
+    1<<SHORTOFF_SP_OPERAND                          |     \
+    1<<BRACKETED_SHORTPTR_DOT_W_OPERAND             |     \
+    1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND            |     \
+    1<<X_OPERAND                                    |     \
+    1<<SP_OPERAND)
+
+#define  LDW_SP_SUPPORTED_OPERANDS                        \
+    (1<<X_OPERAND                                |     \
+    1<<Y_OPERAND)
+
+
+
+
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,CodeInfo * codeInfo);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
@@ -76,5 +111,8 @@ MachineCode* assembleAddwOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleCPWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleDivOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleSubWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 
 #endif // AssembleAllInstruction_H

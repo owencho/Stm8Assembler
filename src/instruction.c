@@ -49,9 +49,13 @@ InstructionTable instructionTable[]={
   {"wfi",&wfiCodeInfo},
   //assembleXOperandAndComplexOperand
   //{"divw",&divwCodeInfo},
-  //assembleOneOperand
+  //////////////////////////////////////
   {"sllw",&sllwCodeInfo},
   {"slaw",&slawCodeInfo},
+  {"call",&callCodeInfo},
+  {"ld",&ldCodeInfo},
+  {"ldf",&ldfCodeInfo},
+  {"ldw",&ldwCodeInfo},
   {NULL,NULL}
 };
 

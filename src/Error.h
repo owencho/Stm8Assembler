@@ -15,11 +15,12 @@
 #define ERR_INTEGER_NEGATIVE          70
 #define ERR_INTEGER_TOO_LARGE         71
 #define ERR_INTEGER_TOO_SMALL         72
+//for STM8 operand
 #define ERR_INVALID_STM8_OPERAND      73
 #define ERR_UNSUPPORTED_OPERAND       74
 #define ERR_INTEGER_NULL              75
-#define ERR_SRC_NULL                  76
-#define ERR_INVALID_SYNTAX            77
-#define ERR_DST_NULL                  78
+#define ERR_INVALID_SYNTAX            76
+#define ERR_DSTSRC_NULL               77
+
 
 #endif // Error_H

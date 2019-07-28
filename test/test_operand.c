@@ -462,6 +462,68 @@ void test_getOperand_given_XL_expect_YL_OPERAND_register_type(void) {
   }
 }
 
+void test_getOperand_given_XH_expect_XH_OPERAND_register_type(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  XH  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(XH_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_XH_expect_YH_OPERAND_register_type(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  YH  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(YH_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_Z_expect_error(void) {
+  CEXCEPTION_T ex;
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  Z  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 154);
+    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+  }
+  freeTokenizer(tokenizer);
+}
+
+
 void test_getOperand_given_hash_1000_expect_error(void) {
   CEXCEPTION_T ex;
   stm8Operand *operand = NULL;
@@ -684,7 +746,7 @@ void test_getOperand_given_bracX_without_opening_bracket_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -784,21 +846,26 @@ void test_getOperand_given_bracX_value_zzzz_expect_error(void) {
   freeTokenizer(tokenizer);
 }
 
-void test_getOperand_given_bracX_value_2a3b4e_expect_error(void) {
-  CEXCEPTION_T ex;
+void test_getOperand_given_bracketed_2a3b4e_X_expect_EXTOFF_X_OPERAND_register_type_is_with_ms_equals_2a_ls_equal_3b_eb_equal_4e(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
 
-  Try{
-    tokenizer = createTokenizer("   ($2a3b4e,X)  ");
+  Try {
+    tokenizer = createTokenizer("  ($2a3b4e,X) ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer,ALL_OPERANDS);
-    TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(EXTOFF_X_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x2a, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x3b, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(0x4e, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
-  freeTokenizer(tokenizer);
 }
 
 void test_getOperand_given_881_bracX_expect_error(void) {
@@ -916,6 +983,28 @@ void test_getOperand_given_bracketed_dollarsign_678d_y_expect_longoffY_OPERAND_r
     TEST_ASSERT_EQUAL_UINT16(0x67, operand->dataSize.ms);
     TEST_ASSERT_EQUAL_UINT16(0x8d, operand->dataSize.ls);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_99678d_y_expect_extoffY_OPERAND_register_type_is_with_ms_equals_99_ls_equal_67_eB_equal_8d(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ($99678d,Y) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(EXTOFF_Y_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x99, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x67, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(0x8d, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 1);
@@ -1202,6 +1291,138 @@ void test_getOperand_given_bracketed_dollarsign_58_dot_w_and_Y_expect_shortptrwY
   }
 }
 
+void test_getOperand_given_bracketed_dollarsign_58_dot_e_expected_BRACKETED_LONGPTR_DOT_E_OPERAND(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  [$58.e] ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(BRACKETED_LONGPTR_DOT_E_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x00, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x58, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_5766_dot_e_expected_BRACKETED_LONGPTR_DOT_E_OPERAND(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  [$5766.e] ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(BRACKETED_LONGPTR_DOT_E_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x57, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x66, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_12_dot_e_and_X_expect_LONGPTR_DOT_E_BRACKETEDX_OPERAND_register_type_is_with_ms_equals_00_ls_equal_12(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$12.e],X) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_E_BRACKETEDX_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x00, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x12, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(LONGPTR_DOT_E_BRACKETEDX_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_3456_dote_and_X_expect_LONGPTR_DOT_E_BRACKETEDX_OPERAND_register_type_is_with_ms_equals_34_ls_equal_56(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$3456.e],X) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_E_BRACKETEDX_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x34, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x56, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_4977_dot_e_and_Y_expect_LONGPTR_DOT_E_BRACKETEDY_OPERAND_register_type_is_with_ms_equals_09_ls_equal_77(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$977.e],Y) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_E_BRACKETEDY_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x09, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x77, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(LONGPTR_DOT_E_BRACKETEDX_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_bracketed_dollarsign_34_and_Y_expect_LONGPTR_DOT_E_BRACKETEDY_OPERAND_register_type_is_with_ms_equals_00_ls_equal_34(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$34.e],Y) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_E_BRACKETEDY_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x00, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(0x34, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
 void test_getOperand_given_7766_longptr_dot_w_bracY_expect_it_to_fail_on_value(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
@@ -1224,6 +1445,38 @@ void test_getOperand_given_734_Square_BracX_without_closing_bracket_expect_to_fa
 
   Try {
     tokenizer = createTokenizer("  [$734.w  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_7564_Square_BracX_without_closing_bracket_expect_to_fail(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  [$7564.e  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_7564_Square_BracXdote_with_extra_stuff_expect_error(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  [$7564.e],S  ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer,ALL_OPERANDS);
 
@@ -1527,6 +1780,54 @@ void test_getOperand_given_SHORTPTR_DOT_W_BRACKETEDY_expect_SHORTPTR_DOT_W_BRACK
     tokenizer = createTokenizer("  ([$66.w],Y) ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORTPTR_DOT_W_BRACKETEDY_OPERAND));
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_LONGPTR_DOT_E_BRACKETEDX_OPERAND_expect_LONGPTR_DOT_E_BRACKETEDX_OPERAND_to_fail_on_flags(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$66.e],X) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<LONGPTR_DOT_E_BRACKETEDX_OPERAND));
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_BRACKETED_LONGPTR_DOT_E_OPERAND_expect_BRACKETED_LONGPTR_DOT_E_OPERAND_to_fail_on_flags(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$5678.e]) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<BRACKETED_LONGPTR_DOT_E_OPERAND));
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_LONGPTR_DOT_E_BRACKETEDY_OPERAND_expect_LONGPTR_DOT_E_BRACKETEDY_OPERAND_to_fail_on_flags(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  ([$345.e],Y) ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<LONGPTR_DOT_E_BRACKETEDY_OPERAND));
 
     freeTokenizer(tokenizer);
   } Catch(ex) {

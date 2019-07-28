@@ -30,7 +30,6 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
-
 void test_assembleInstruction_given_and_LONGOFF5432_Y_OPERAND_expect_0x90d45432(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -106,7 +105,7 @@ void test_assembleInstruction_given_or_expect_exception(void) {
     TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_DST_NULL, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
   }
 	  freeTokenizer(tokenizer);
 }

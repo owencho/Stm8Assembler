@@ -14,3 +14,34 @@ CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
     0
   }, exgCodeTable
 };
+
+
+CodeInfo ldCodeInfo={"ld",assembleLDOperand,{
+    //First operand
+    LD1ST_SUPPORTED_OPERANDS,
+    //Second operand
+    LD2ND_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, NULL
+};
+
+CodeInfo ldfCodeInfo={"ldf",assembleLDFOperand,{
+    //First operand
+    LDF_SUPPORTED_OPERANDS,
+    //Second operand
+    LDF_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, NULL
+};
+
+CodeInfo ldwCodeInfo={"ldw",assembleLDWOperand,{
+    //First operand
+    LDW_1ST_SUPPORTED_OPERANDS,
+    //Second operand
+    0,
+    //Third operand
+    0
+  }, NULL
+};

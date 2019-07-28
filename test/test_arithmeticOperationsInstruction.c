@@ -206,7 +206,7 @@ void test_assembleInstruction_given_adc_z_expect_exception_thrown(void) {
     TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_SRC_NULL, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
   }
 }
 
