@@ -56,6 +56,10 @@ InstructionTable instructionTable[]={
   {"ld",&ldCodeInfo},
   {"ldf",&ldfCodeInfo},
   {"ldw",&ldwCodeInfo},
+  {"bcpl",&bcplCodeInfo},
+  {"bccm",&bccmCodeInfo},
+  {"bset",&bsetCodeInfo},
+  {"bres",&bresCodeInfo},
   {NULL,NULL}
 };
 

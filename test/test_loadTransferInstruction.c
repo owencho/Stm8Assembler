@@ -186,7 +186,7 @@ void test_assembleInstruction_given_ldw_y_word_A_expect_0xEE51(void) {
 void test_assembleInstruction_given_ldw_y_word_A_expect_0x1F(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
-  int expectedMcode[]={0x1F,END};
+  int expectedMcode[]={0x1F,0x50,END};
 
   Try{
     tokenizer = createTokenizer(" LDW ($50,SP),X ");

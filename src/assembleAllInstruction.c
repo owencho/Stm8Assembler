@@ -292,7 +292,7 @@ int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code){
     return i;
 }
 
-MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo , stm8Operand *operand){
+MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo , stm8Operand *operand, int nvalue){
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     int a =0;
@@ -302,6 +302,9 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo 
     token =(IntegerToken*)getToken(tokenizer);
     if(token->str==NULL){
             code = codeInfo->codeTable[operand->type];
+            if(nvalue >= 0 && nvalue <= 15){
+              code.code =code.code + nvalue;
+            }
     }
     else{
         throwException(ERR_INVALID_SYNTAX,token,"expected nothing after that");
@@ -348,7 +351,7 @@ MachineCode* assembleAddwOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y,SP eg ADDW X,($10,SP)");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -365,7 +368,7 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected complex operand eg sllw X  ");
     operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand );
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     token =(IntegerToken*)getToken(tokenizer);
     if(token->str !=NULL){
       throwException(ERR_INVALID_STM8_OPERAND,token,"Expected nothing after ");
@@ -426,7 +429,7 @@ MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
           throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
     }
 
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 
 }
@@ -469,7 +472,7 @@ MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
             codeInfo->codeTable = ldwComYCodeTable;
       }
 
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 
 }
@@ -501,7 +504,41 @@ MachineCode* assembleLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
             throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
       }
 
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
+    return mcode;
+
+}
+
+MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    stm8Operand * operand2nd;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    int cmpType = 0;
+    int nvalue;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    cmpType = (strcasecmp(token->str,"BCCM")==0) || (strcasecmp(token->str,"BRES")==0);
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
+    pushBackToken(tokenizer,(Token*) token);
+    operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
+    operand2nd = complexOperandReturn(tokenizer ,codeInfo);
+    if(!(operand2nd->dataSize.ms >= 0 && operand2nd->dataSize.ms <= 7)){
+      token =(IntegerToken*)getToken(tokenizer);
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected eg BCCM $1000,#n , n less than 7 and larger than 0");
+    }
+
+    else if(cmpType ==1 ){
+      nvalue = 1 + 2*operand2nd->dataSize.ms;
+    }
+    else{
+      nvalue = 2*operand2nd->dataSize.ms;
+    }
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,nvalue);
     return mcode;
 
 }
@@ -531,7 +568,7 @@ MachineCode* assembleSubOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
         throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A ,SP eg SUB SP,#$9 ");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand );
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -560,7 +597,7 @@ MachineCode* assembleCPWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y eg CPW Y,($1000,X)");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -587,7 +624,7 @@ MachineCode* assembleDivOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y eg div X,A");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -614,7 +651,7 @@ MachineCode* assembleSubWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y eg SUBW X,#$5500");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -636,7 +673,7 @@ MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand X eg EXGW X,Y ");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand );
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -658,7 +695,7 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A eg ADD A,($1000,X)");
     }
     operand= complexOperandReturn(tokenizer ,codeInfo);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }
 
@@ -672,6 +709,6 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     token =(IntegerToken*)getToken(tokenizer);
     initToken = token;
     operand = createOperand(NO_OPERAND,NA,NA,NA,NA,NA);
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand);
+    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA);
     return mcode;
 }

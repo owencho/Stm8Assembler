@@ -56,13 +56,30 @@ int operandCheck(IntegerToken* token, int condition){
 
 int valueCheck(IntegerToken* token){
     nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
-    if((token->str[0]=='$' || token->str[0]=='-') || isdigit(token->str[0])){
+    if(token->str[0]=='$'){
+        if(token->str[1]!='-' && !isalnum(token->str[1])){
+          throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
+        }
+        else if(token->value <256 && token->value >0 ){
+          return 1;
+        }
+        else if (token->value >256  && token->value < 65536){
+          return 2;
+        }
+        else if (token->value >65536  && token->value < 16777215){
+          return 3;
+        }
+        else if (token-> value <0){
+          throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+        }
+        else if (token-> value >65536){
+          throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 65536 eg ($1000)");
+        }
+  }
+  else if((token->str[0]=='-') || isdigit(token->str[0])){
       if(strcmp(token->str,"-")==0){
-        throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
-      }
-      else if(token->str[1]!='-' && !isalnum(token->str[1]) ){
-        throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
-      }
+          throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+        }
       else if(token->value <256 && token->value >0 ){
         return 1;
       }
@@ -78,10 +95,10 @@ int valueCheck(IntegerToken* token){
       else if (token-> value >65536){
         throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 65536 eg ($1000)");
       }
-    }
-    else{
+  }
+  else{
       throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
-    }
+  }
 
 }
 
@@ -92,7 +109,7 @@ stm8Operand *createOperand( stm8OperandType type,
     uint16_t ls,
     uint16_t extB){
       stm8Operand *operand =malloc(sizeof(stm8Operand));
-        operand->dataSize.extCode = extCode;
+      operand->dataSize.extCode = extCode;
       operand->type = type;
       operand->dataSize.code =code;
       operand->dataSize.ms =ms ;

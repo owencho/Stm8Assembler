@@ -352,6 +352,43 @@ void test_getOperand_given_hash55_expect_BYTE_OPERAND_register_type_is_with_ms_e
   }
 }
 
+void test_getOperand_given_hash7_expect_BYTE_OPERAND_register_type_is_with_ms_equals_7(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  #7  ");
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(BYTE_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+  TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(7, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+  TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_hash_negative_43_expect_fail(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+  IntegerToken *token ;
+  int a;
+
+  Try{
+    tokenizer = createTokenizer("#-43");
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 93);
+    TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
+  }
+  freeTokenizer(tokenizer);
+}
+
 void test_getOperand_given_dollarsign_3a_expect_shortmem_OPERAND_register_type_is_with_ms_equals_55(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
