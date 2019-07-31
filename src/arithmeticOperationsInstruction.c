@@ -25,7 +25,7 @@ CodeInfo adcCodeInfo={"adc",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, adcCodeTable
+  }, {adcCodeTable ,0,0,0,0}
 };
 
 
@@ -54,7 +54,20 @@ CodeInfo addCodeInfo={"add",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, addCodeTable
+  }, {addCodeTable,0,0,0,0}
+};
+ExtensionCodeAndCode addwXCodeTable[] = {
+    [WORD_OPERAND]={NA,0x1c},
+    [LONG_MEM_OPERAND] ={72,0xbb},
+    [SHORTOFF_SP_OPERAND]={72,0xfb}
+};
+ExtensionCodeAndCode addwYCodeTable[] = {
+    [WORD_OPERAND] ={72,0xa9},
+    [LONG_MEM_OPERAND] ={72,0xb9},
+    [SHORTOFF_SP_OPERAND] ={72,0xf9}
+};
+ExtensionCodeAndCode addwSPCodeTable[] = {
+    [BYTE_OPERAND] ={NA,0x5b}
 };
 
 CodeInfo addwCodeInfo={"addw",assembleAddwOperand,{
@@ -64,10 +77,29 @@ CodeInfo addwCodeInfo={"addw",assembleAddwOperand,{
     0,
     //Third operand
     0
-  }, NULL
+  }, {addwXCodeTable,addwYCodeTable,addwSPCodeTable,0,0}
 };
 
-
+ExtensionCodeAndCode subACodeTable[] = {
+    [BYTE_OPERAND]         ={NA,0xa0},
+    [SHORT_MEM_OPERAND]    ={NA,0xb0},
+    [LONG_MEM_OPERAND]     ={NA,0xc0},
+    [BRACKETED_X_OPERAND] ={NA,0xf0},
+    [SHORTOFF_X_OPERAND] ={NA,0xe0},
+    [LONGOFF_X_OPERAND] ={NA,0xd0},
+    [BRACKETED_Y_OPERAND] ={0x90,0xf0},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xe0},
+    [LONGOFF_Y_OPERAND] ={0x90,0xd0},
+    [SHORTOFF_SP_OPERAND] ={NA,0x10},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc0},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc0},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd0},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd0},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd0},
+};
+ExtensionCodeAndCode subSPCodeTable[] = {
+    [BYTE_OPERAND]         ={NA,0x52}
+};
 CodeInfo subCodeInfo={"sub",assembleSubOperand,{
     //First operand
     1 << A_OPERAND | 1<< SP_OPERAND ,
@@ -75,9 +107,14 @@ CodeInfo subCodeInfo={"sub",assembleSubOperand,{
     0,
     //Third operand
     0
-  }, NULL
+  }, {subACodeTable,subSPCodeTable,0,0,0}
 };
-
+ExtensionCodeAndCode divXCodeTable[] = {
+    [A_OPERAND]    ={NA,0x62}
+};
+ExtensionCodeAndCode divYCodeTable[] = {
+    [A_OPERAND]    ={0x90,0x62}
+};
 CodeInfo divCodeInfo={"div",assembleDivOperand,{
     //First operand
     1 << X_OPERAND | 1<< Y_OPERAND ,
@@ -85,10 +122,19 @@ CodeInfo divCodeInfo={"div",assembleDivOperand,{
     1 << A_OPERAND,
     //Third operand
     0
-  }, NULL
+  }, {divXCodeTable,divYCodeTable,0,0,0}
 };
 
-
+ExtensionCodeAndCode subwXCodeTable[] = {
+    [WORD_OPERAND]         ={NA,0x1d},
+    [LONG_MEM_OPERAND]     ={0x72,0xb0},
+    [SHORTOFF_SP_OPERAND] ={0x72,0xf0}
+};
+ExtensionCodeAndCode subwYCodeTable[] = {
+    [WORD_OPERAND]         ={0x72,0xa2},
+    [LONG_MEM_OPERAND]     ={0x72,0xb2},
+    [SHORTOFF_SP_OPERAND] ={0x72,0xf2}
+};
 CodeInfo subwCodeInfo={"subw",assembleSubWOperand,{
     //First operand
     1 << X_OPERAND | 1<< Y_OPERAND ,
@@ -96,7 +142,7 @@ CodeInfo subwCodeInfo={"subw",assembleSubWOperand,{
     SUBW_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, NULL
+  },{subwXCodeTable,subwYCodeTable,0,0,0}
 };
 
 ExtensionCodeAndCode sbcCodeTable[] = {
@@ -124,5 +170,5 @@ CodeInfo sbcCodeInfo={"sbc",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, sbcCodeTable
+  }, {sbcCodeTable,0,0,0,0}
 };

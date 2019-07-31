@@ -25,7 +25,7 @@ CodeInfo andCodeInfo={"and",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, andCodeTable
+  }, {andCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode orCodeTable[] = {
@@ -53,7 +53,7 @@ CodeInfo orCodeInfo={"or",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, orCodeTable
+  }, {orCodeTable,0,0,0,0}
 };
 
 
@@ -82,5 +82,5 @@ CodeInfo xorCodeInfo={"xor",assembleAOperandAndComplexOperand,{
     ADC_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, xorCodeTable
+  }, {xorCodeTable,0,0,0,0}
 };

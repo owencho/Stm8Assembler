@@ -11,5 +11,5 @@ CodeInfo breakCodeInfo={"break",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, breakCodeTable
+  }, {breakCodeTable,0,0,0,0}
 };

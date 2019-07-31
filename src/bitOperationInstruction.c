@@ -12,7 +12,7 @@ CodeInfo bccmCodeInfo={"bccm",assembleTwowithNOperand,{
     1 <<BYTE_OPERAND,
     //Third operand
     0
-    }, bccmCodeTable
+  }, {bccmCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode bcplCodeTable[] = {
@@ -26,7 +26,7 @@ CodeInfo bcplCodeInfo={"bcpl",assembleTwowithNOperand,{
     1 <<BYTE_OPERAND,
     //Third operand
     0
-    }, bcplCodeTable
+  }, {bcplCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode bresCodeTable[] = {
@@ -40,7 +40,7 @@ CodeInfo bresCodeInfo={"bres",assembleTwowithNOperand,{
     1 <<BYTE_OPERAND,
     //Third operand
     0
-    }, bresCodeTable
+    }, {bresCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode bsetCodeTable[] = {
@@ -54,5 +54,5 @@ CodeInfo bsetCodeInfo={"bset",assembleTwowithNOperand,{
     1 <<BYTE_OPERAND,
     //Third operand
     0
-    }, bsetCodeTable
+    }, {bsetCodeTable,0,0,0,0}
 };

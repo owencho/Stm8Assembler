@@ -12,7 +12,7 @@ CodeInfo sllwCodeInfo={"sllw",assembleOneOperand,{
     0,
     //Third operand
     0
-  }, sllwCodeTable
+  }, {sllwCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode slawCodeTable[] = {
@@ -27,5 +27,5 @@ CodeInfo slawCodeInfo={"slaw",assembleOneOperand,{
     0,
     //Third operand
     0
-  }, slawCodeTable
+  }, {slawCodeTable,0,0,0,0}
 };

@@ -23,7 +23,7 @@ CodeInfo callCodeInfo={"call",assembleOneOperand,{
     0,
     //Third operand
     0
-  }, callCodeTable
+  }, {callCodeTable,0,0,0,0}
 };
 /*
 ExtensionCodeAndCode callrCodeTable[] = {
@@ -39,7 +39,7 @@ CodeInfo callrCodeInfo={"callr",assembleOneOperand,{
     0,
     //Third operand
     0
-  }, callCodeTable
+  }, {callCodeTable,0,0,0,0}
 };
 */
 ExtensionCodeAndCode nopCodeTable[] = {
@@ -53,7 +53,7 @@ CodeInfo nopCodeInfo={"nop",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, nopCodeTable
+  }, {nopCodeTable,0,0,0,0}
 };
 
 
@@ -68,7 +68,7 @@ CodeInfo retCodeInfo={"ret",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, retCodeTable
+  }, {retCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode retfCodeTable[] = {
@@ -82,5 +82,5 @@ CodeInfo retfCodeInfo={"retf",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, retfCodeTable
+  }, {retfCodeTable,0,0,0,0}
 };

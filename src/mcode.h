@@ -16,6 +16,7 @@
 typedef struct InstructionTable InstructionTable;
 typedef struct MachineCode MachineCode;
 typedef struct CodeInfo CodeInfo;
+typedef struct ConversionData ConversionData;
 typedef struct ExtensionCodeAndCode ExtensionCodeAndCode;
 typedef  MachineCode*(*Assembler)(CodeInfo *CodeInfo , Tokenizer *tokenizer);
 
@@ -33,7 +34,12 @@ struct CodeInfo{
   char* name;
   Assembler assembler;
   uint32_t operandExistenceFlags[3];
+  ExtensionCodeAndCode *codeTable[5];  //replace with ConversionData
+};
+
+struct ConversionData{
   ExtensionCodeAndCode *codeTable;
+  uint32_t operandExistenceFlags;
 };
 
 struct InstructionTable{

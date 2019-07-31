@@ -101,7 +101,7 @@
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,CodeInfo * codeInfo);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
-MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo , stm8Operand *operand, int nvalue);
+MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,CodeInfo * codeInfo , stm8Operand *operand, int nvalue,int tableType);
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);

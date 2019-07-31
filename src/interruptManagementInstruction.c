@@ -11,7 +11,7 @@ CodeInfo trapCodeInfo={"trap",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, trapCodeTable
+  }, {trapCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode wfiCodeTable[] = {
@@ -25,7 +25,7 @@ CodeInfo wfiCodeInfo={"wfi",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, wfiCodeTable
+  }, {wfiCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode haltCodeTable[] = {
@@ -39,7 +39,7 @@ CodeInfo haltCodeInfo={"halt",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, haltCodeTable
+  }, {haltCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode iretCodeTable[] = {
@@ -53,5 +53,5 @@ CodeInfo iretCodeInfo={"iret",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, iretCodeTable
+  }, {iretCodeTable,0,0,0,0}
 };

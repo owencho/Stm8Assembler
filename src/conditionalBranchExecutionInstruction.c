@@ -11,5 +11,5 @@ CodeInfo wfeCodeInfo={"wfe",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, wfeCodeTable
+  },  {wfeCodeTable,0,0,0,0}
 };

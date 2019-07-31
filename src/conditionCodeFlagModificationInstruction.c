@@ -11,7 +11,7 @@ CodeInfo ccfCodeInfo={"ccf",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, ccfCodeTable
+  }, {ccfCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode rcfCodeTable[] = {
@@ -25,7 +25,7 @@ CodeInfo rcfCodeInfo={"rcf",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, rcfCodeTable
+  }, {rcfCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode rimCodeTable[] = {
@@ -39,7 +39,7 @@ CodeInfo rimCodeInfo={"rim",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, rimCodeTable
+  }, {rimCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode simCodeTable[] = {
@@ -53,7 +53,7 @@ CodeInfo simCodeInfo={"sim",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, simCodeTable
+  }, {simCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode rvfCodeTable[] = {
@@ -67,7 +67,7 @@ CodeInfo rvfCodeInfo={"rvf",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, rvfCodeTable
+  }, {rvfCodeTable,0,0,0,0}
 };
 
 ExtensionCodeAndCode scfCodeTable[] = {
@@ -81,5 +81,5 @@ CodeInfo scfCodeInfo={"scf",assembleNoOperand,{
     0,
     //Third operand
     0
-  }, scfCodeTable
+  }, {scfCodeTable,0,0,0,0}
 };
