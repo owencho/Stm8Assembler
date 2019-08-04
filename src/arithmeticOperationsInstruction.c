@@ -18,16 +18,13 @@ ExtensionCodeAndCode adcCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd9},
 };
 
-CodeInfo adcCodeInfo={"adc",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {adcCodeTable ,0,0,0,0}
+ConversionData adcFlagTable[]={
+{"A",adcCodeTable,ADC_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
 
+CodeInfo adcCodeInfo={"adc",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,adcFlagTable};
 
 ExtensionCodeAndCode addCodeTable[] = {
 [BYTE_OPERAND]         ={NA,0xab},
@@ -47,15 +44,15 @@ ExtensionCodeAndCode addCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xdb},
 };
 
-CodeInfo addCodeInfo={"add",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {addCodeTable,0,0,0,0}
+ConversionData addFlagTable[]={
+{"A",addCodeTable,ADC_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo addCodeInfo={"add",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,addFlagTable};
+
+
 ExtensionCodeAndCode addwXCodeTable[] = {
     [WORD_OPERAND]={NA,0x1c},
     [LONG_MEM_OPERAND] ={72,0xbb},
@@ -70,15 +67,16 @@ ExtensionCodeAndCode addwSPCodeTable[] = {
     [BYTE_OPERAND] ={NA,0x5b}
 };
 
-CodeInfo addwCodeInfo={"addw",assembleAddwOperand,{
-    //First operand
-    1 << X_OPERAND | 1<< SP_OPERAND | 1 << Y_OPERAND ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {addwXCodeTable,addwYCodeTable,addwSPCodeTable,0,0}
+ConversionData addwFlagTable[]={
+{"X",addwXCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
+{"Y",addwYCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
+{"SP",addwSPCodeTable,(1<<BYTE_OPERAND),0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo addwCodeInfo={"addw",(1 << X_OPERAND | 1<< SP_OPERAND | 1 << Y_OPERAND ),
+                      assembleXYSPComplexOperand,addwFlagTable};
+
 
 ExtensionCodeAndCode subACodeTable[] = {
     [BYTE_OPERAND]         ={NA,0xa0},
@@ -100,31 +98,36 @@ ExtensionCodeAndCode subACodeTable[] = {
 ExtensionCodeAndCode subSPCodeTable[] = {
     [BYTE_OPERAND]         ={NA,0x52}
 };
-CodeInfo subCodeInfo={"sub",assembleSubOperand,{
-    //First operand
-    1 << A_OPERAND | 1<< SP_OPERAND ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {subACodeTable,subSPCodeTable,0,0,0}
+
+ConversionData subFlagTable[]={
+{"A",subACodeTable,ADC_SUPPORTED_OPERANDS,0},
+{"SP",subSPCodeTable,(1<<BYTE_OPERAND),0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo subCodeInfo={"sub",(1 << A_OPERAND | 1<< SP_OPERAND ),
+                      assembleASPComplexOperand,subFlagTable};
+
+
+
 ExtensionCodeAndCode divXCodeTable[] = {
-    [A_OPERAND]    ={NA,0x62}
+    [A_OPERAND]    ={NA,0x62},
+    [Y_OPERAND]    ={NA,0x65}
 };
 ExtensionCodeAndCode divYCodeTable[] = {
     [A_OPERAND]    ={0x90,0x62}
 };
-CodeInfo divCodeInfo={"div",assembleDivOperand,{
-    //First operand
-    1 << X_OPERAND | 1<< Y_OPERAND ,
-    //Second operand
-    1 << A_OPERAND,
-    //Third operand
-    0
-  }, {divXCodeTable,divYCodeTable,0,0,0}
+
+ConversionData divFlagTable[]={
+{"X",divXCodeTable,(1 << A_OPERAND | 1 << Y_OPERAND),0},
+{"Y",divYCodeTable,(1 << A_OPERAND),0},
+{NULL,NULL,0,0},
 };
 
+CodeInfo divCodeInfo={"div",(1 << X_OPERAND | 1<< Y_OPERAND ),
+                      assembleXYOperand,divFlagTable};
+
+/////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode subwXCodeTable[] = {
     [WORD_OPERAND]         ={NA,0x1d},
     [LONG_MEM_OPERAND]     ={0x72,0xb0},
@@ -135,15 +138,16 @@ ExtensionCodeAndCode subwYCodeTable[] = {
     [LONG_MEM_OPERAND]     ={0x72,0xb2},
     [SHORTOFF_SP_OPERAND] ={0x72,0xf2}
 };
-CodeInfo subwCodeInfo={"subw",assembleSubWOperand,{
-    //First operand
-    1 << X_OPERAND | 1<< Y_OPERAND ,
-    //Second operand
-    SUBW_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  },{subwXCodeTable,subwYCodeTable,0,0,0}
+
+ConversionData subwFlagTable[]={
+{"X",subwXCodeTable,SUBW_SUPPORTED_OPERANDS,0},
+{"Y",subwYCodeTable,SUBW_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo subwCodeInfo={"subw",(1 << X_OPERAND | 1<< Y_OPERAND ),
+                      assembleXYOperand,subwFlagTable};
+
 
 ExtensionCodeAndCode sbcCodeTable[] = {
 [BYTE_OPERAND]         ={NA,0xa2},
@@ -163,12 +167,70 @@ ExtensionCodeAndCode sbcCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd2},
 };
 
-CodeInfo sbcCodeInfo={"sbc",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {sbcCodeTable,0,0,0,0}
+ConversionData sbcFlagTable[]={
+{"A",sbcCodeTable,ADC_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo sbcCodeInfo={"sbc",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,sbcFlagTable};
+
+ExtensionCodeAndCode negcodeTable[] = {
+[A_OPERAND]         ={NA,0x40},
+[SHORT_MEM_OPERAND]    ={NA,0x30},
+[LONG_MEM_OPERAND]     ={0x72,0x50},
+[BRACKETED_X_OPERAND] ={NA,0x70},
+[SHORTOFF_X_OPERAND] ={NA,0x60},
+[LONGOFF_X_OPERAND] ={0x72,0x40},
+[BRACKETED_Y_OPERAND] ={0x90,0x70},
+[SHORTOFF_Y_OPERAND] ={0x90,0x60},
+[LONGOFF_Y_OPERAND] ={0x90,0x40},
+[SHORTOFF_SP_OPERAND] ={NA,0x00},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0x30},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0x30},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0x60},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0x60},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0x60},
+};
+
+ConversionData negFlagTable[]={
+{"A",negcodeTable,NA,0},
+{"COMP",negcodeTable,NA,0},
+{NULL,NULL,0,0},
+};
+
+CodeInfo negCodeInfo={"neg",NEG_SUPPORTED_OPERANDS,
+                      assembleOneOperand,negFlagTable};
+
+
+ExtensionCodeAndCode mulXCodeTable[] = {
+[A_OPERAND]         ={NA,0x42},
+};
+
+ExtensionCodeAndCode mulYCodeTable[] = {
+[A_OPERAND]         ={0x90,0x42},
+};
+
+ConversionData mulFlagTable[]={
+{"X",mulXCodeTable,(1<<A_OPERAND),0},
+{"Y",mulYCodeTable,(1<<A_OPERAND),0},
+{NULL,NULL,0,0},
+};
+
+CodeInfo mulCodeInfo={"mul",(1 << X_OPERAND | 1<< Y_OPERAND ),
+                    assembleXYOperand,mulFlagTable};
+
+ExtensionCodeAndCode negwcodeTable[] = {
+[X_OPERAND]    ={NA,0x50},
+[Y_OPERAND]    ={0x90,0x50},
+
+};
+
+ConversionData negwFlagTable[]={
+{"X",negwcodeTable,0,0},
+{"Y",negwcodeTable,0,0},
+{NULL,NULL,0,0},
+};
+
+CodeInfo negwCodeInfo={"negw",(1 << X_OPERAND | 1<< Y_OPERAND ),
+                      assembleOneOperand,negwFlagTable};

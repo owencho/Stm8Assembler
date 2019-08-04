@@ -18,15 +18,15 @@ ExtensionCodeAndCode andCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd4},
 };
 
-CodeInfo andCodeInfo={"and",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {andCodeTable,0,0,0,0}
+
+ConversionData andFlagTable[]={
+{"A",andCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo andCodeInfo={"and",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,andFlagTable};
+
 
 ExtensionCodeAndCode orCodeTable[] = {
 [BYTE_OPERAND]         ={NA,0xaa},
@@ -46,15 +46,13 @@ ExtensionCodeAndCode orCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xda},
 };
 
-CodeInfo orCodeInfo={"or",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {orCodeTable,0,0,0,0}
+ConversionData orFlagTable[]={
+{"A",orCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo orCodeInfo={"or",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,orFlagTable};
 
 
 ExtensionCodeAndCode xorCodeTable[] = {
@@ -75,12 +73,52 @@ ExtensionCodeAndCode xorCodeTable[] = {
 [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd8},
 };
 
-CodeInfo xorCodeInfo={"xor",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    ADC_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {xorCodeTable,0,0,0,0}
+
+ConversionData xorFlagTable[]={
+{"A",xorCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo xorCodeInfo={"xor",(1 << A_OPERAND),
+                      assembleAOperandAndComplexOperand,xorFlagTable};
+
+ExtensionCodeAndCode cplCodeTable[] = {
+[A_OPERAND]                                 ={NA,0x43},
+[SHORT_MEM_OPERAND]                         ={NA,0x33},
+[LONG_MEM_OPERAND]                          ={0x72,0x53},
+[BRACKETED_X_OPERAND]                       ={NA,0x73},
+[SHORTOFF_X_OPERAND]                        ={NA,0x63},
+[LONGOFF_X_OPERAND]                         ={0x72,0x43},
+[BRACKETED_Y_OPERAND]                       ={0x90,0x73},
+[SHORTOFF_Y_OPERAND]                        ={0x90,0x63},
+[LONGOFF_Y_OPERAND]                         ={0x90,0x43},
+[SHORTOFF_SP_OPERAND]                       ={NA,0x03},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]          ={0x92,0x33},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]           ={0x72,0x33},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]         ={0x92,0x63},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]          ={0x72,0x63},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]         ={0x91,0x63},
+};
+
+ConversionData cplFlagTable[]={
+{"A",cplCodeTable,0,0},
+{"COMP",cplCodeTable,0,0},
+{NULL,NULL,0,0},
+};
+
+CodeInfo cplCodeInfo={"cpl",CPL_SUPPORTED_OPERANDS,
+                  assembleOneOperand,cplFlagTable};
+
+ExtensionCodeAndCode cplwCodeTable[] = {
+  [X_OPERAND]         ={NA,0x53},
+  [Y_OPERAND]         ={0x90,0x53},
+};
+
+ConversionData cplwFlagTable[]={
+  {"X",cplwCodeTable,0,0},
+  {"Y",cplwCodeTable,0,0},
+  {NULL,NULL,0,0},
+};
+
+CodeInfo cplwCodeInfo={"cplw",CPLW_SUPPORTED_OPERANDS,
+                     assembleOneOperand,cplwFlagTable};

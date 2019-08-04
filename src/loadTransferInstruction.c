@@ -1,4 +1,5 @@
 #include "loadTransferInstruction.h"
+/*
 ExtensionCodeAndCode exgCodeTable[] = {
 [XL_OPERAND]         ={NA,0x41},
 [YL_OPERAND]         ={NA,0x61},
@@ -166,3 +167,4 @@ CodeInfo ldwCodeInfo={"ldw",assembleLDWOperand,{
     0
   }, {ldwXCodeTable,ldwYCodeTable,ldwSPCodeTable,ldwComXCodeTable,ldwComYCodeTable}
 };
+*/

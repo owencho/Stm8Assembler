@@ -13,6 +13,7 @@
 #include "logicalOperationsInstruction.h"
 #include "shiftRotatesInstruction.h"
 #include "unconditionalJumpCallInstruction.h"
+#include "stackInstruction.h"
 #ifndef instruction_H
 #define instruction_H
 

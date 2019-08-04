@@ -4,12 +4,9 @@ ExtensionCodeAndCode breakCodeTable[] = {
   [NO_OPERAND]         ={NA,0x8b}
 };
 
-CodeInfo breakCodeInfo={"break",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {breakCodeTable,0,0,0,0}
+ConversionData breakFlagTable[]={
+{"break",breakCodeTable,0,0},
+{NULL,NULL,0,0},
 };
+
+CodeInfo breakCodeInfo={"break",0 ,assembleNoOperand,breakFlagTable};

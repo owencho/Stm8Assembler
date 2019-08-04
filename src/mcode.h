@@ -32,14 +32,16 @@ struct ExtensionCodeAndCode{
 
 struct CodeInfo{
   char* name;
+  uint32_t firstFlags;
   Assembler assembler;
-  uint32_t operandExistenceFlags[3];
-  ExtensionCodeAndCode *codeTable[5];  //replace with ConversionData
+  ConversionData * conDataTable ;
 };
 
 struct ConversionData{
+  char* name;
   ExtensionCodeAndCode *codeTable;
-  uint32_t operandExistenceFlags;
+  uint32_t secondFlags;
+  uint32_t thirdFlags;
 };
 
 struct InstructionTable{

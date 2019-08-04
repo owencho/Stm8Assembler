@@ -1,57 +1,46 @@
 #include "interruptManagementInstruction.h"
 
 ExtensionCodeAndCode trapCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x83}
+    [NO_OPERAND]         ={NA,0x83}
 };
 
-CodeInfo trapCodeInfo={"trap",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {trapCodeTable,0,0,0,0}
+ConversionData trapFlagTable[]={
+    {"trap",trapCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo trapCodeInfo={"trap",0,assembleNoOperand,trapFlagTable};
 
 ExtensionCodeAndCode wfiCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x8f}
+    [NO_OPERAND]         ={NA,0x8f}
 };
 
-CodeInfo wfiCodeInfo={"wfi",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {wfiCodeTable,0,0,0,0}
+ConversionData wfiFlagTable[]={
+    {"wfi",wfiCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo wfiCodeInfo={"wfi",0,assembleNoOperand,wfiFlagTable};
+
 
 ExtensionCodeAndCode haltCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x8e}
+    [NO_OPERAND]         ={NA,0x8e}
 };
 
-CodeInfo haltCodeInfo={"halt",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {haltCodeTable,0,0,0,0}
+ConversionData haltFlagTable[]={
+    {"halt",haltCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo haltCodeInfo={"halt",0,assembleNoOperand,haltFlagTable};
 
 ExtensionCodeAndCode iretCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x80}
+    [NO_OPERAND]         ={NA,0x80}
 };
 
-CodeInfo iretCodeInfo={"iret",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {iretCodeTable,0,0,0,0}
+ConversionData iretFlagTable[]={
+    {"iret",iretCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo iretCodeInfo={"iret",0,assembleNoOperand,iretFlagTable};

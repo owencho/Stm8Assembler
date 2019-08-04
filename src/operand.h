@@ -39,6 +39,7 @@ typedef enum {
   YL_OPERAND,
   XH_OPERAND,
   YH_OPERAND,
+  CC_OPERAND,
   SP_OPERAND
 } stm8OperandType ;
 

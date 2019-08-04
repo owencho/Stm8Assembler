@@ -330,6 +330,28 @@ void test_getOperand_given_A_expect_A_register_type_is_returned(void) {
   }
 }
 
+void test_getOperand_given_CC_expect_CC_register_type_is_returned(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  CC  ");
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(CC_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    //freeOperand(operand);
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
 
 void test_getOperand_given_hash55_expect_BYTE_OPERAND_register_type_is_with_ms_equals_55(void) {
   stm8Operand *operand = NULL;
@@ -1577,6 +1599,21 @@ void test_getOperand_given_Y_expect_Y_to_fail_on_flags(void) {
   Try {
     tokenizer = createTokenizer("  Y  ");
     operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<Y_OPERAND));
+
+    freeTokenizer(tokenizer);
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_CC_expect_CC_to_fail_on_flags(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try {
+    tokenizer = createTokenizer("  CC  ");
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<CC_OPERAND));
 
     freeTokenizer(tokenizer);
   } Catch(ex) {

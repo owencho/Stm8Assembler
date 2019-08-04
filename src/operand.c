@@ -60,13 +60,13 @@ int valueCheck(IntegerToken* token){
         if(token->str[1]!='-' && !isalnum(token->str[1])){
           throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
         }
-        else if(token->value <256 && token->value >0 ){
+        else if(token->value <255 && token->value >= 0 ){
           return 1;
         }
-        else if (token->value >256  && token->value < 65536){
+        else if (token->value >=256  && token->value < 65536){
           return 2;
         }
-        else if (token->value >65536  && token->value < 16777215){
+        else if (token->value >= 65536  && token->value <= 16777215){
           return 3;
         }
         else if (token-> value <0){
@@ -202,6 +202,9 @@ stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags){
           }
           else if(strcasecmp(valueToken->str,"XH")==0){
               operandType = XH_OPERAND;
+          }
+          else if(strcasecmp(valueToken->str,"CC")==0){
+              operandType = CC_OPERAND;
           }
           else{
             throwException(ERR_INVALID_STM8_OPERAND,valueToken,"Invalid Operand");

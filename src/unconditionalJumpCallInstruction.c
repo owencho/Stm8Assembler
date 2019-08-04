@@ -1,6 +1,6 @@
 #include "unconditionalJumpCallInstruction.h"
 
-
+/*
 ExtensionCodeAndCode callCodeTable[] = {
 [LONG_MEM_OPERAND]     ={NA,0xcd},
 [BRACKETED_X_OPERAND] ={NA,0xfd},
@@ -25,7 +25,7 @@ CodeInfo callCodeInfo={"call",assembleOneOperand,{
     0
   }, {callCodeTable,0,0,0,0}
 };
-/*
+
 ExtensionCodeAndCode callrCodeTable[] = {
 [EXT_MEM_OPERAND]     ={NA,0xcd},
 [BRACKETED_X_OPERAND] ={NA,0xfd},
@@ -41,7 +41,7 @@ CodeInfo callrCodeInfo={"callr",assembleOneOperand,{
     0
   }, {callCodeTable,0,0,0,0}
 };
-*/
+
 ExtensionCodeAndCode nopCodeTable[] = {
   [NO_OPERAND]         ={NA,0x9d}
 };
@@ -84,3 +84,4 @@ CodeInfo retfCodeInfo={"retf",assembleNoOperand,{
     0
   }, {retfCodeTable,0,0,0,0}
 };
+*/

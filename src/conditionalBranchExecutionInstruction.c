@@ -1,5 +1,5 @@
 #include "conditionalBranchExecutionInstruction.h"
-
+/*
 ExtensionCodeAndCode wfeCodeTable[] = {
   [NO_OPERAND]         ={0x72,0x8f}
 };
@@ -13,3 +13,4 @@ CodeInfo wfeCodeInfo={"wfe",assembleNoOperand,{
     0
   },  {wfeCodeTable,0,0,0,0}
 };
+*/

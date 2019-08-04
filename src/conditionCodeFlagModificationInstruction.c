@@ -4,82 +4,76 @@ ExtensionCodeAndCode ccfCodeTable[] = {
   [NO_OPERAND]         ={NA,0x8c}
 };
 
-CodeInfo ccfCodeInfo={"ccf",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {ccfCodeTable,0,0,0,0}
+ConversionData ccfFlagTable[]={
+    {"CCF",ccfCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
+CodeInfo ccfCodeInfo={"neg",NO_OPERAND,
+                      assembleNoOperand,ccfFlagTable};
+
+///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rcfCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x98}
+    [NO_OPERAND]         ={NA,0x98}
 };
 
-CodeInfo rcfCodeInfo={"rcf",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {rcfCodeTable,0,0,0,0}
+
+ConversionData rcfFlagTable[]={
+    {"RCF",rcfCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
+CodeInfo rcfCodeInfo={"rcf",NO_OPERAND,
+                      assembleNoOperand,rcfFlagTable};
+
+
+///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rimCodeTable[] = {
   [NO_OPERAND]         ={NA,0x9a}
 };
 
-CodeInfo rimCodeInfo={"rim",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {rimCodeTable,0,0,0,0}
+
+ConversionData rimFlagTable[]={
+    {"rim",rimCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
+CodeInfo rimCodeInfo={"rim",NO_OPERAND,
+                      assembleNoOperand,rimFlagTable};
+
+///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode simCodeTable[] = {
   [NO_OPERAND]         ={NA,0x9b}
 };
 
-CodeInfo simCodeInfo={"sim",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {simCodeTable,0,0,0,0}
+ConversionData simFlagTable[]={
+    {"sim",simCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
+CodeInfo simCodeInfo={"sim",NO_OPERAND,
+                      assembleNoOperand,simFlagTable};
+///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rvfCodeTable[] = {
   [NO_OPERAND]         ={NA,0x9c}
 };
 
-CodeInfo rvfCodeInfo={"rvf",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {rvfCodeTable,0,0,0,0}
+ConversionData rvfFlagTable[]={
+    {"rvf",rvfCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
+CodeInfo rvfCodeInfo={"rvf",NO_OPERAND,
+                      assembleNoOperand,rvfFlagTable};
+///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode scfCodeTable[] = {
   [NO_OPERAND]         ={NA,0x99}
 };
 
-CodeInfo scfCodeInfo={"scf",assembleNoOperand,{
-    //First operand
-    0 ,
-    //Second operand
-    0,
-    //Third operand
-    0
-  }, {scfCodeTable,0,0,0,0}
+ConversionData scfFlagTable[]={
+    {"scf",scfCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo scfCodeInfo={"scf",NO_OPERAND,
+                      assembleNoOperand,scfFlagTable};

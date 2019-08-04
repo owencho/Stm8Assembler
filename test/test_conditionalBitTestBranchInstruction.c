@@ -25,6 +25,7 @@
 #include "unconditionalJumpCallInstruction.h"
 #include "assembleAllInstruction.h"
 #include "CustomAssert.h"
+#include "stackInstruction.h"
 CEXCEPTION_T ex;
 
 void setUp(void){}
