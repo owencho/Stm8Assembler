@@ -1,21 +1,5 @@
 #include "loadTransferInstruction.h"
 /*
-ExtensionCodeAndCode exgCodeTable[] = {
-[XL_OPERAND]         ={NA,0x41},
-[YL_OPERAND]         ={NA,0x61},
-[LONG_MEM_OPERAND]   ={NA,0x31},
-};
-
-CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    EXG_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {exgCodeTable,0,0,0,0}
-};
-
 ExtensionCodeAndCode ldACodeTable[] = {
     [BYTE_OPERAND]                             ={NA,0xA6},
     [SHORT_MEM_OPERAND]                        ={NA,0xB6},
@@ -60,15 +44,15 @@ ExtensionCodeAndCode ldComplexCodeTable[] = {
 };
 
 
-CodeInfo ldCodeInfo={"ld",assembleLDOperand,{
-    //First operand
-    LD1ST_SUPPORTED_OPERANDS,
-    //Second operand
-    LD2ND_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {ldACodeTable,ldComplexCodeTable,0,0,0}
+
+ConversionData ldFlagTable[]={
+    {"A",ldACodeTable,LD2ND_SUPPORTED_OPERANDS,0},
+    {"COMP",ldComplexCodeTable,LD2ND_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
+
+CodeInfo ldCodeInfo={"ld",LD1ST_SUPPORTED_OPERANDS,
+                      assembleLDOperand,ldFlagTable};
 
 ExtensionCodeAndCode ldfComplexCodeTable[] = {
     [EXT_MEM_OPERAND]                             ={NA,0xBD},
@@ -98,6 +82,24 @@ CodeInfo ldfCodeInfo={"ldf",assembleLDFOperand,{
     0
   }, {ldfACodeTable,ldfComplexCodeTable,0,0,0}
 };
+
+ExtensionCodeAndCode exgCodeTable[] = {
+[XL_OPERAND]         ={NA,0x41},
+[YL_OPERAND]         ={NA,0x61},
+[LONG_MEM_OPERAND]   ={NA,0x31},
+};
+
+CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
+    //First operand
+    1 << A_OPERAND ,
+    //Second operand
+    EXG_SUPPORTED_OPERANDS,
+    //Third operand
+    0
+  }, {exgCodeTable,0,0,0,0}
+};
+
+
 
 ExtensionCodeAndCode ldwComXCodeTable[] = {
     [SHORT_MEM_OPERAND]                        ={NA,0xBF},

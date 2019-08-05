@@ -2,5 +2,28 @@
 #define conditionalBranchExecutionInstruction_H
 #include "assembleAllInstruction.h"
 CodeInfo wfeCodeInfo;
-
+CodeInfo jrcCodeInfo;
+CodeInfo jreqCodeInfo;
+CodeInfo jrfCodeInfo;
+CodeInfo jrhCodeInfo;
+CodeInfo jrihCodeInfo;
+CodeInfo jrilCodeInfo;
+CodeInfo jrmCodeInfo;
+CodeInfo jrmiCodeInfo;
+CodeInfo jrncCodeInfo;
+CodeInfo jrneCodeInfo;
+CodeInfo jrnhCodeInfo;
+CodeInfo jrnmCodeInfo;
+CodeInfo jrnvCodeInfo;
+CodeInfo jrplCodeInfo;
+CodeInfo jrsgeCodeInfo;
+CodeInfo jrsgtCodeInfo;
+CodeInfo jrsleCodeInfo;
+CodeInfo jrsltCodeInfo;
+CodeInfo jrtCodeInfo;
+CodeInfo jrugeCodeInfo;
+CodeInfo jrugtCodeInfo;
+CodeInfo jrulecodeInfo;
+CodeInfo jrultCodeInfo;
+CodeInfo jrvCodeInfo;
 #endif // conditionalBranchExecutionInstruction_H

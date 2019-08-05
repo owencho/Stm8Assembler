@@ -82,26 +82,59 @@ InstructionTable instructionTable[]={
     {"xor",&xorCodeInfo},
     {"cpl",&cplCodeInfo},
     {"cplw",&cplwCodeInfo},
-
+    //conditionalBranchExecutionInstruction
+    {"jrc",&jrcCodeInfo},
+    {"jreq",&jreqCodeInfo},
+    {"jrf",&jrfCodeInfo},
+    {"jrh",&jrhCodeInfo},
+    {"jrih",&jrihCodeInfo},
+    {"jril",&jrilCodeInfo},
+    {"jrm",&jrmCodeInfo},
+    {"jrmi",&jrmiCodeInfo},
+    {"jrnc",&jrncCodeInfo},
+    {"jrne",&jrneCodeInfo},
+    {"jrnh",&jrnhCodeInfo},
+    {"jrnm",&jrnmCodeInfo},
+    {"jrnv",&jrnvCodeInfo},
+    {"jrpl",&jrplCodeInfo},
+    {"jrsge",&jrsgeCodeInfo},
+    {"jrsgt",&jrsgtCodeInfo},
+    {"jrsle",&jrsleCodeInfo},
+    {"jrslt",&jrsltCodeInfo},
+    {"jrt",&jrtCodeInfo},
+    {"jruge",&jrugeCodeInfo},
+    {"jrugt",&jrugtCodeInfo},
+    {"jrule",&jrulecodeInfo},
+    {"jrult",&jrultCodeInfo},
+    {"jrv",&jrvCodeInfo},
+    {"wfe",&wfeCodeInfo},
+    //loadTransferInstruction
+  /*  {"ld",&ldCodeInfo},
+    {"ldf",&ldfCodeInfo},
+    {"clr",&clrCodeInfo},
+    {"mov",&movCodeInfo},
+    {"exg",&exgCodeInfo},
+    {"ldw",&ldwCodeInfo},
+    {"clr",&clrwCodeInfo},
+    {"exgw",&exgwCodeInfo},
     /////////////////////////////////////
 
 
 
-    //  {"exg",&exgCodeInfo},
+    //
 
 
     /*
 
-    {"wfe",&wfeCodeInfo},
+
     {"nop",&nopCodeInfo},
     {"ret",&retCodeInfo},
     {"retf",&retfCodeInfo},
     //////////////////////////////////////
 
     {"call",&callCodeInfo},
-    {"ld",&ldCodeInfo},
-    {"ldf",&ldfCodeInfo},
-    {"ldw",&ldwCodeInfo},*/
+
+    */
 
     {NULL,NULL}
 };

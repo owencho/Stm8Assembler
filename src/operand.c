@@ -14,6 +14,39 @@
 
 //SubProgram
 
+int signedIntCheck(Tokenizer *tokenizer){
+    int value;
+    IntegerToken *token = (IntegerToken *)getToken(tokenizer);
+    if(token->str[0]=='-'){
+        token = (IntegerToken *)getToken(tokenizer);
+        if(token->value >= 0 && token->value <= 128){
+            if(token->value == 0)
+              value =0;
+            else
+              value = 256-token->value;
+        }
+        else if(token->str[0]!='$'){
+          throwException(ERR_INVALID_SYNTAX,token,"Invalid SYNTAX only expect eg -$AA");
+        }
+        else if(token->value > 127){
+          throwException(ERR_INTEGER_TOO_LARGE,token,"The range only can be from -128 => x <= 127");
+        }
+        else{
+          throwException(ERR_INTEGER_TOO_SMALL,token,"The range only can be from -128 => x <= 127");
+        }
+    }
+    else if(token->value <= 127 && token->value >= 0){
+      value = token->value;
+    }
+    else if(token->value > 127){
+      throwException(ERR_INTEGER_TOO_LARGE,token,"The range only can be from -128 => x <= 127");
+    }
+    else{
+      throwException(ERR_INTEGER_TOO_SMALL,token,"The range only can be from -128 => x <= 127");
+    }
+    return value;
+}
+
 IntegerToken* extendTokenStr(IntegerToken *tokenToExtend , IntegerToken *tokenToCover ){
   if(tokenToExtend->str != NULL){
       free(tokenToExtend->str);
@@ -29,7 +62,7 @@ void nullCheck(int errorCode, IntegerToken* token , char *message){
       throwException(errorCode,token,message);
 }
 
-void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type  ){
+void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type  ){
     if(!isOperandNeeded(flags,type))
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
 }
@@ -58,7 +91,7 @@ int valueCheck(IntegerToken* token){
     nullCheck(ERR_INTEGER_NULL,token,"The integer number cannot be NULL");
     if(token->str[0]=='$'){
         if(token->str[1]!='-' && !isalnum(token->str[1])){
-          throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only numbers ($10)");
+          throwException(ERR_INVALID_STM8_OPERAND,token,"Expected only positive numbers ($10)");
         }
         else if(token->value <255 && token->value >= 0 ){
           return 1;
@@ -78,7 +111,7 @@ int valueCheck(IntegerToken* token){
   }
   else if((token->str[0]=='-') || isdigit(token->str[0])){
       if(strcmp(token->str,"-")==0){
-          throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
+          return 4;
         }
       else if(token->value <256 && token->value >0 ){
         return 1;
@@ -172,7 +205,7 @@ stm8Operand *createExtMemOperand( stm8OperandType type,
         return operand;
       }
 
-stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags){
+stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags){
         stm8Operand *operand =malloc(sizeof(stm8Operand));
         IntegerToken* token = (IntegerToken *)getToken(tokenizer);
         IntegerToken *valueToken = token ;
@@ -220,7 +253,7 @@ stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags){
         return operand;
       }
 
-stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* tokenValue,Tokenizer* tokenizer , int value, int valueCount , int squarecount){
+stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokenizer* tokenizer , int value, int valueCount , int squarecount){
       int operandCounter =0;
       stm8Operand *operand =malloc(sizeof(stm8Operand));
       IntegerToken* token = (IntegerToken *)getToken(tokenizer);
@@ -337,7 +370,7 @@ stm8Operand *comparingLastOperand(uint32_t flags,IntegerToken* tokenValue,Tokeni
     return operand;
   }
 
-stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint32_t flags){
+stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
           stm8Operand *operand =malloc(sizeof(stm8Operand));
           int counterhash =0;
           int commarCount =0;
@@ -434,7 +467,7 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint32_t flags){
 
         }
 
-stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer , uint32_t flags){
+stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer , uint64_t flags){
         stm8Operand *operand =malloc(sizeof(stm8Operand));
         stm8Operand *squareOperand =malloc(sizeof(stm8Operand));
         int counterhash =0;
@@ -521,7 +554,7 @@ stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer , uint32_t flags){
 
 
       //Main Program
-stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
+stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
         CEXCEPTION_T ex;
         stm8Operand *operand =NULL;
         IntegerToken *token;
@@ -530,6 +563,7 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
         int msCount = 0;
         uint16_t valueLs ;
         uint16_t valueMs ;
+        int valueShortMem;
 
           token =(IntegerToken*)getToken(tokenizer);
           nullCheck(ERR_DSTSRC_NULL,token,"The must include the source eg (X)");
@@ -554,15 +588,21 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
                   operand = createMsOperand(WORD_OPERAND,token->value,token);
                 }
                 else{
-                  throwException(ERR_INTEGER_HASH_TOO_LARGE,token,"Expected only value lesser than 256 (#12)");
+                  throwException(ERR_INVALID_HASH_VALUE,token,"Expected only value larger than 0 ,lesser than 65535 (#12)");
                 }
           }
 
-          else if(token->str[0]=='$' || isdigit(token->str[0])){
+          else if(token->str[0]=='-'|| token->str[0]=='$' || isdigit(token->str[0])){
             int valueCount = valueCheck(token);
             if(valueCount ==1 && isOperandNeeded(flags,SHORT_MEM_OPERAND)){
                   operandFlagCheck(flags,token,SHORT_MEM_OPERAND);
                   operand = createLsOperand(SHORT_MEM_OPERAND,token->value,token);
+            }
+            else if(valueCount ==1 && isOperandNeeded(flags,SHORT_OFF_OPERAND)){
+                  operandFlagCheck(flags,token,SHORT_OFF_OPERAND);
+                  pushBackToken(tokenizer, (Token*)token);
+                  valueShortMem = signedIntCheck(tokenizer);
+                  operand = createLsOperand(SHORT_OFF_OPERAND,valueShortMem,token);
             }
             else if(valueCount ==2 || (valueCount ==1 && isOperandNeeded(flags,LONG_MEM_OPERAND))){
                   operandFlagCheck(flags,token,LONG_MEM_OPERAND);
@@ -572,6 +612,12 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint32_t flags){
                   operandFlagCheck(flags,token,EXT_MEM_OPERAND);
                   operand = createExtMemOperand(EXT_MEM_OPERAND,token->value,token);
               }
+            else if(valueCount ==4){
+                  operandFlagCheck(flags,token,SHORT_OFF_OPERAND);
+                  pushBackToken(tokenizer, (Token*)token);
+                  valueShortMem = signedIntCheck(tokenizer);
+                  operand = createLsOperand(SHORT_OFF_OPERAND,valueShortMem,token);
+            }
             else{
               operandFlagCheck(flags,token,SHORT_MEM_OPERAND);
               operandFlagCheck(flags,token,LONG_MEM_OPERAND);

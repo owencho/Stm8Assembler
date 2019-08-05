@@ -157,6 +157,34 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
 
 // assemblerHandler
 
+MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    ConversionData  dataFlag;
+    int a ;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected complex operand eg sllw X  ");
+    dataFlag = getDataFlag(codeInfo,tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    operand = getOperand(tokenizer ,codeInfo->firstFlags);
+    code = dataFlag.codeTable[operand->type];
+    a = machineCodeLengthFinder(operand,code);
+    operand->dataSize.ms = operand->dataSize.ms + a;
+    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    token =(IntegerToken*)getToken(tokenizer);
+    if(token->str !=NULL){
+      throwException(ERR_INVALID_STM8_OPERAND,token,"Expected nothing after ");
+    }
+    return mcode;
+}
+
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     IntegerToken * initToken;
@@ -347,7 +375,6 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * initToken;
     stm8Operand * operand;
     stm8Operand * operand2nd;
-    ExtensionCodeAndCode code;
     MachineCode* mcode;
     int cmpType = 0;
     int nvalue;
@@ -381,40 +408,38 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 
 
-/*
+
 MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     IntegerToken * initToken;
     stm8Operand * operand;
     stm8Operand * operand2nd;
-    ExtensionCodeAndCode code;
     MachineCode* mcode;
-    int tableloc;
+    ConversionData  dataFlag;
+
 
     token =(IntegerToken*)getToken(tokenizer);
     initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
     if(strcasecmp(token->str,"A")==0){
-        tableloc =0;
-        operand= complexOperandReturn(tokenizer ,codeInfo);
-        if(operand->type == A_OPERAND)
-          throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected not A as src for LD if A is dst eg LD A,#$55");
+      dataFlag = getDataFlag(codeInfo,tokenizer);
+      operandFlagCheck(codeInfo->firstFlags,token,A_OPERAND);
     }
     else{
+        dataFlag = getDataFlag(codeInfo,tokenizer);
         pushBackToken(tokenizer,(Token*) token);
-        tableloc =1;
-        operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
-        operand2nd = complexOperandReturn(tokenizer ,codeInfo);
+        operand = getOperand(tokenizer ,codeInfo->firstFlags);
+        operand2nd = complexOperandReturn(tokenizer ,dataFlag);
         if(operand2nd->type != A_OPERAND)
           throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
     }
 
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA,tableloc);
+    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 
 }
-
+/*
 MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     IntegerToken * initToken;

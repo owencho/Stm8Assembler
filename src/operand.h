@@ -7,15 +7,16 @@ typedef struct stm8Operand stm8Operand ;
 
 #define NA      -1      //used for opcode below
 #define ALL_OPERANDS -1
+//#define
 
 typedef enum {
-  NO_OPERAND,
   A_OPERAND,
   BYTE_OPERAND,
   WORD_OPERAND,
   EXT_MEM_OPERAND,
   SHORT_MEM_OPERAND,
   LONG_MEM_OPERAND,
+  SHORT_OFF_OPERAND,
   BRACKETED_X_OPERAND,
   SHORTOFF_X_OPERAND,
   LONGOFF_X_OPERAND,
@@ -25,6 +26,7 @@ typedef enum {
   LONGOFF_Y_OPERAND,
   EXTOFF_Y_OPERAND,
   SHORTOFF_SP_OPERAND,
+  CC_OPERAND,
   BRACKETED_SHORTPTR_DOT_W_OPERAND,
   BRACKETED_LONGPTR_DOT_W_OPERAND,
   SHORTPTR_DOT_W_BRACKETEDX_OPERAND,
@@ -33,14 +35,14 @@ typedef enum {
   LONGPTR_DOT_E_BRACKETEDX_OPERAND,
   LONGPTR_DOT_E_BRACKETEDY_OPERAND,
   BRACKETED_LONGPTR_DOT_E_OPERAND,
+  SP_OPERAND,
   X_OPERAND,
   Y_OPERAND,
   XL_OPERAND,
   YL_OPERAND,
   XH_OPERAND,
   YH_OPERAND,
-  CC_OPERAND,
-  SP_OPERAND
+  NO_OPERAND,
 } stm8OperandType ;
 
 
@@ -70,10 +72,10 @@ stm8Operand *createOperand( stm8OperandType type,
                             uint16_t ms,
                             uint16_t ls,
                             uint16_t extB);
-stm8Operand *getOperand(Tokenizer *tokenizer ,  uint32_t flags); //maincode
+stm8Operand *getOperand(Tokenizer *tokenizer ,  uint64_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
-void operandFlagCheck(uint32_t flags, IntegerToken* token ,stm8OperandType type);
-stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint32_t flags);
+void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type);
+stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 

@@ -406,7 +406,7 @@ void test_getOperand_given_hash_negative_43_expect_fail(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -635,7 +635,7 @@ void test_getOperand_given_hash_negative_1234_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -662,6 +662,67 @@ void test_getOperand_given_dollarsign_3a7d_expect_shortmem_OPERAND_register_type
   }
 }
 
+void test_getOperand_given_dollarsign_neg3a_expect_shortoff_OPERAND_register_type_is_with_ms_equals_C6(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  -$3a  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(SHORT_OFF_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0xC6, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  }Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
+void test_getOperand_given_negative_hash_1264_expect_error(void) {
+  CEXCEPTION_T ex;
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  -#1264  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 154);
+    TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
+  }
+  freeTokenizer(tokenizer);
+}
+
+void test_getOperand_given_dollarsign_3c_expect_shortoff_OPERAND_register_type_is_with_ms_equals_C6(void) {
+  stm8Operand *operand = NULL;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  $3c  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    operand = getOperand(tokenizer,(1 << SHORT_OFF_OPERAND ));
+    TEST_ASSERT_NOT_NULL(operand);
+    TEST_ASSERT_EQUAL_UINT16(SHORT_OFF_OPERAND, operand->type);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+    TEST_ASSERT_EQUAL_UINT16(0x3c, operand->dataSize.ms);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+    TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    freeTokenizer(tokenizer);
+  }Catch(ex) {
+    dumpTokenErrorMessage(ex, 1);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
+  }
+}
+
 void test_getOperand_given_dollarsign_3a_expect_longmem_OPERAND_register_type_when_shortmem_not_available_is_with_ms_equals_00_ls_equals_3a(void) {
   stm8Operand *operand = NULL;
   Tokenizer *tokenizer = NULL;
@@ -669,7 +730,7 @@ void test_getOperand_given_dollarsign_3a_expect_longmem_OPERAND_register_type_wh
   Try{
     tokenizer = createTokenizer("  $3a  ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORT_MEM_OPERAND));
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SHORT_MEM_OPERAND | 1 << SHORT_OFF_OPERAND ));
     TEST_ASSERT_NOT_NULL(operand);
     TEST_ASSERT_EQUAL_UINT16(LONG_MEM_OPERAND, operand->type);
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
@@ -1568,7 +1629,7 @@ void test_getOperand_given_SP_expect_SP_to_fail_on_flags(void) {
 
   Try {
     tokenizer = createTokenizer("  SP  ");
-    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<SP_OPERAND));
+    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1 << SP_OPERAND ));
     TEST_FAIL_MESSAGE("Expecting ERR_INVALID_UNSUPPORTED_OPERAND exeception to be thrown.");
     freeTokenizer(tokenizer);
   } Catch(ex) {
@@ -1613,7 +1674,7 @@ void test_getOperand_given_CC_expect_CC_to_fail_on_flags(void) {
 
   Try {
     tokenizer = createTokenizer("  CC  ");
-    operand = getOperand(tokenizer,ALL_OPERANDS & ~(1<<CC_OPERAND));
+    operand = getOperand(tokenizer,(ALL_OPERANDS & ~((uint64_t)1<<CC_OPERAND)));
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
