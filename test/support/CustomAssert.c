@@ -3,7 +3,8 @@
 #include "CustomAssert.h"
 #include "Common.h"
 
-#define STRINGIFY(x)     #x
+#define _STRINGIFY(x)     #x
+#define STRINGIFY(x)     _STRINGIFY(x) 
 
 int getExpectedCodeLength(const int expectedCode[] , int length){
     int i=0;

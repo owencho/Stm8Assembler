@@ -153,32 +153,56 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
    return mcode;
 }
 
-
+int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer){
+  int a;
+  int value =operand->dataSize.ms;
+  int orivalue;
+  ExtensionCodeAndCode code;
+  IntegerToken * token;
+  token =(IntegerToken*)getToken(tokenizer);
+  code = dataFlag.codeTable[operand->type];
+  a = machineCodeLengthFinder(operand,code);
+  orivalue = operand->dataSize.ms ;
+  if(value >= 128 ){
+    value = value + a;
+    if(value >= 256){
+      value = value - 256;
+    }
+  }
+  else{
+    value = value+ a;
+  }
+  if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
+    throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",a,orivalue);
+  }
+  return value;
+}
 
 // assemblerHandler
 
 MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
+    IntegerToken * integerToken ;
+    IntegerToken * firstToken;
     stm8Operand * operand;
-    ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
     int a ;
+    int orivalue;
 
-    token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
+    firstToken =(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected complex operand eg sllw X  ");
     dataFlag = getDataFlag(codeInfo,tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     operand = getOperand(tokenizer ,codeInfo->firstFlags);
-    code = dataFlag.codeTable[operand->type];
-    a = machineCodeLengthFinder(operand,code);
-    operand->dataSize.ms = operand->dataSize.ms + a;
-    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*)firstToken);
+    integerToken =(IntegerToken*)getToken(tokenizer);
+    operand->dataSize.ms=getValue2ndCompLength(dataFlag,operand,tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     if(token->str !=NULL){
       throwException(ERR_INVALID_STM8_OPERAND,token,"Expected nothing after ");
     }

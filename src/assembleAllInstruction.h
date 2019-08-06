@@ -12,6 +12,7 @@ ConversionData  getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer);
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,ConversionData  dataFlag);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
+int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer);
 MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand, int nvalue);
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleXYOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
