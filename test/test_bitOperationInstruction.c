@@ -59,7 +59,7 @@ void test_assembleInstruction_given_bres_n_larger_than7_expect_exception_thrown(
     TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_NVALUE, ex->errorCode);
   }
 }
 

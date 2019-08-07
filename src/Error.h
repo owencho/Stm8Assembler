@@ -22,6 +22,9 @@
 #define ERR_INVALID_SYNTAX                76
 #define ERR_DSTSRC_NULL                   77
 #define ERR_INVALID_STM8_INSTRUCTION      78
+#define ERR_OPERAND_NULL                  79
+#define ERR_INVALID_NVALUE                80
+
 
 
 #endif // Error_H

@@ -65,7 +65,8 @@ int hashNValueReturn(Tokenizer* tokenizer ,uint64_t flags , int cmpType){
         if(!(operand->dataSize.ms >= 0 && operand->dataSize.ms <= 7)){
           pushBackToken(tokenizer,(Token*) token);
           token =(IntegerToken*)getToken(tokenizer);
-          throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected eg BCCM $1000,#n , n less than 7 and larger than 0");
+          token =(IntegerToken*)getToken(tokenizer);
+          throwException(ERR_INVALID_NVALUE,token,"Expected eg BCCM $1000,#n , n less than 7 and larger than 0");
         }
         else if(cmpType ==1 ){
           nvalue = 1 + 2*operand->dataSize.ms;
@@ -207,6 +208,7 @@ int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenize
     }
     return value;
 }
+
 int getBTFX2ndCompLength(stm8Operand * operand,Tokenizer * tokenizer){
     int value;
     int orivalue;
@@ -224,7 +226,7 @@ int getBTFX2ndCompLength(stm8Operand * operand,Tokenizer * tokenizer){
       value = value+ 5;
     }
     if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
-      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",a,orivalue);
+      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is 5 and your value is %x which more than 128",orivalue);
     }
     return value;
 }
@@ -232,7 +234,6 @@ int getBTFX2ndCompLength(stm8Operand * operand,Tokenizer * tokenizer){
 // assemblerHandler
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     stm8Operand * operand2nd;
     MachineCode* mcode;
@@ -241,7 +242,7 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
+    nullCheck(ERR_OPERAND_NULL,token,"Expected not NULL ");
     cmpType = (strcasecmp(token->str,"BTJF")==0);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
@@ -287,14 +288,12 @@ MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected complex operand eg sllw X  ");
@@ -311,14 +310,12 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 MachineCode* assembleXYOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL and operand X ,Y eg SUBW X,#$5500 ");
@@ -340,14 +337,12 @@ MachineCode* assembleXYOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand A eg ADD A,($1000,X) ");
@@ -366,7 +361,6 @@ MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
 
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
@@ -374,7 +368,6 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
     int tableloc =0 ;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand A eg ADD A,($1000,X) ");
@@ -393,14 +386,12 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
 
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand ;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     pushBackToken(tokenizer,(Token*)token);
     operand = createOperand(NO_OPERAND,NA,NA,NA,NA,NA);
     dataFlag = getDataFlag(codeInfo,tokenizer);
@@ -410,14 +401,12 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 MachineCode* assembleXYSPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL and operand X ,Y,SP eg ADDW X,($10,SP) ");
@@ -443,14 +432,12 @@ MachineCode* assembleXYSPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer
 
 MachineCode* assembleASPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     ExtensionCodeAndCode code;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL and operand A,SP eg SUB SP,#$9 ");
@@ -472,7 +459,6 @@ MachineCode* assembleASPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
 
 MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     MachineCode* mcode;
     int cmpType = 0;
@@ -480,7 +466,6 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     cmpType = (strcasecmp(token->str,"BCCM")==0) || (strcasecmp(token->str,"BRES")==0);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
@@ -503,7 +488,6 @@ MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
     if(strcasecmp(token->str,"A")==0){

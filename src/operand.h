@@ -75,8 +75,10 @@ stm8Operand *createOperand( stm8OperandType type,
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint64_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type);
+IntegerToken* extendTokenStr(IntegerToken *tokenToExtend , IntegerToken *tokenToCover );
 stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
+int signedIntCheck(Tokenizer *tokenizer);
 
 #endif

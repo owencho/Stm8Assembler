@@ -693,10 +693,10 @@ void test_getOperand_given_negative_hash_1264_expect_error(void) {
     tokenizer = createTokenizer("  -#1264  ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer,ALL_OPERANDS);
-    TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
+    TEST_FAIL_MESSAGE("Expecting ERR_UNSUPPORTED_OPERAND exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }

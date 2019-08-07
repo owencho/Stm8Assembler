@@ -16,17 +16,22 @@
 
 int signedIntCheck(Tokenizer *tokenizer){
     int value;
-    IntegerToken *token = (IntegerToken *)getToken(tokenizer);
+    IntegerToken *token;
+    IntegerToken *initToken;
+    IntegerToken *flagToken;
+    token = (IntegerToken *)getToken(tokenizer);
+    initToken = token;
     if(token->str[0]=='-'){
         token = (IntegerToken *)getToken(tokenizer);
-        if(token->value >= 0 && token->value <= 128){
+        if(token->str[0]!='$' && ispunct(token->str[0])){
+          flagToken = extendTokenStr(initToken ,token);
+          throwException(ERR_INVALID_SYNTAX,flagToken,"Invalid SYNTAX only expect eg -$AA");
+        }
+        else if(token->value >= 0 && token->value <= 127){
             if(token->value == 0)
               value =0;
             else
               value = 256-token->value;
-        }
-        else if(token->str[0]!='$'){
-          throwException(ERR_INVALID_SYNTAX,token,"Invalid SYNTAX only expect eg -$AA");
         }
         else if(token->value > 127){
           throwException(ERR_INTEGER_TOO_LARGE,token,"The range only can be from -128 => x <= 127");
@@ -113,13 +118,13 @@ int valueCheck(IntegerToken* token){
       if(strcmp(token->str,"-")==0){
           return 4;
         }
-      else if(token->value <256 && token->value >0 ){
+      else if(token->value <=255 && token->value >=0 ){
         return 1;
       }
-      else if (token->value >256  && token->value < 65536){
+      else if (token->value >=256  && token->value < 65536){
         return 2;
       }
-      else if (token->value >65536  && token->value < 16777215){
+      else if (token->value >= 65536  && token->value <= 16777215){
         return 3;
       }
       else if (token-> value <0){
@@ -324,6 +329,10 @@ stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokeni
                   operandFlagCheck(flags,flagToken,LONGOFF_X_OPERAND);
                   operand = createMsOperand(LONGOFF_X_OPERAND,value,token);
                 }
+                else if ((valueCount ==1 && !isOperandNeeded(flags,SHORTOFF_X_OPERAND))&& !isOperandNeeded(flags,LONGOFF_X_OPERAND )){
+                  flagToken = extendTokenStr(tokenValue ,token);
+                  operandFlagCheck(flags,flagToken,SHORTOFF_X_OPERAND);
+                }
                 else if (valueCount==3){
                   flagToken = extendTokenStr(tokenValue ,token);
                   operandFlagCheck(flags,flagToken,EXTOFF_X_OPERAND);
@@ -343,6 +352,10 @@ stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokeni
                   flagToken = extendTokenStr(tokenValue ,token);
                   operandFlagCheck(flags,flagToken,LONGOFF_Y_OPERAND);
                   operand = createMsOperand(LONGOFF_Y_OPERAND,value,token);
+                }
+                else if ((valueCount ==1 && !isOperandNeeded(flags,SHORTOFF_Y_OPERAND))&& !isOperandNeeded(flags,LONGOFF_Y_OPERAND )){
+                  flagToken = extendTokenStr(tokenValue ,token);
+                  operandFlagCheck(flags,flagToken,SHORTOFF_Y_OPERAND);
                 }
                 else if (valueCount==3){
                   flagToken = extendTokenStr(tokenValue ,token);

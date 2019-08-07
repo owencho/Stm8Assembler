@@ -154,7 +154,7 @@ MachineCode *assembleInstruction(Tokenizer *tokenizer){
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*) token);
     if(TOKEN_IDENTIFIER_TYPE != token-> type)
-    return NULL;
+      return NULL;
 
     do{
         nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected valid name");
