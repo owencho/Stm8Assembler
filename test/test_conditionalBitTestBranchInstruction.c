@@ -31,8 +31,19 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+void test_assembleInstruction_given_BTJF_OPERAND_expect_0x720F6810(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x40,END};
 
-void test_module_generator_needs_to_be_implemented(void)
-{
-	TEST_IGNORE_MESSAGE("Implement me!");
+    Try{
+        tokenizer = createTokenizer("  BTJF $6810,#7,loop");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
 }

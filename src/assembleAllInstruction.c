@@ -36,18 +36,48 @@ ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer){
     return dataTable;
 }
 
-stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,ConversionData  dataFlag){
+stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags){
     IntegerToken *token;
     stm8Operand * operand;
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_INVALID_SYNTAX,token,"Expected ,");
     if(strcmp(token->str,",")==0){
-        operand = getOperand(tokenizer ,dataFlag.secondFlags);
+        //freeToken
+        operand = getOperand(tokenizer ,flags);
     }
     else{
       throwException(ERR_INVALID_SYNTAX,token,"expected ,");
     }
     return operand;
+
+}
+
+int hashNValueReturn(Tokenizer* tokenizer ,uint64_t flags , int cmpType){
+    IntegerToken *token;
+    stm8Operand * operand;
+    int nvalue;
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_INVALID_SYNTAX,token,"Expected ,");
+    if(strcmp(token->str,",")==0){
+        token =(IntegerToken*)getToken(tokenizer);
+        pushBackToken(tokenizer,(Token*) token);
+        operand = getOperand(tokenizer ,flags);
+        if(!(operand->dataSize.ms >= 0 && operand->dataSize.ms <= 7)){
+          pushBackToken(tokenizer,(Token*) token);
+          token =(IntegerToken*)getToken(tokenizer);
+          throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected eg BCCM $1000,#n , n less than 7 and larger than 0");
+        }
+        else if(cmpType ==1 ){
+          nvalue = 1 + 2*operand->dataSize.ms;
+        }
+        else{
+          nvalue = 2*operand->dataSize.ms;
+        }
+    }
+    else{
+      throwException(ERR_INVALID_SYNTAX,token,"expected ,");
+    }
+    return nvalue;
 
 }
 
@@ -154,31 +184,77 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
 }
 
 int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer){
-  int a;
-  int value =operand->dataSize.ms;
-  int orivalue;
-  ExtensionCodeAndCode code;
-  IntegerToken * token;
-  token =(IntegerToken*)getToken(tokenizer);
-  code = dataFlag.codeTable[operand->type];
-  a = machineCodeLengthFinder(operand,code);
-  orivalue = operand->dataSize.ms ;
-  if(value >= 128 ){
-    value = value + a;
-    if(value >= 256){
-      value = value - 256;
+    int a;
+    int value =operand->dataSize.ms;
+    int orivalue;
+    ExtensionCodeAndCode code;
+    IntegerToken * token;
+    token =(IntegerToken*)getToken(tokenizer);
+    code = dataFlag.codeTable[operand->type];
+    a = machineCodeLengthFinder(operand,code);
+    orivalue = operand->dataSize.ms ;
+    if(value >= 128 ){
+      value = value + a;
+      if(value >= 256){
+        value = value - 256;
+      }
     }
-  }
-  else{
-    value = value+ a;
-  }
-  if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
-    throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",a,orivalue);
-  }
-  return value;
+    else{
+      value = value+ a;
+    }
+    if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
+      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",a,orivalue);
+    }
+    return value;
+}
+int getBTFX2ndCompLength(stm8Operand * operand,Tokenizer * tokenizer){
+    int value;
+    int orivalue;
+    IntegerToken * token;
+    token =(IntegerToken*)getToken(tokenizer);
+    value = operand->dataSize.ms;
+    orivalue = operand->dataSize.ms;
+    if(value >= 128 ){
+      value = value + 5;
+      if(value >= 256){
+        value = value - 256;
+      }
+    }
+    else{
+      value = value+ 5;
+    }
+    if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
+      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",a,orivalue);
+    }
+    return value;
 }
 
 // assemblerHandler
+MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    stm8Operand * operand2nd;
+    MachineCode* mcode;
+    int cmpType = 0;
+    int nvalue;
+    ConversionData  dataFlag;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    cmpType = (strcasecmp(token->str,"BTJF")==0);
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
+    pushBackToken(tokenizer,(Token*) token);
+    dataFlag = getDataFlag(codeInfo,tokenizer);
+    pushBackToken(tokenizer,(Token*) token);
+    operand = getOperand(tokenizer ,codeInfo->firstFlags);
+    nvalue = hashNValueReturn(tokenizer ,dataFlag.secondFlags ,cmpType);
+    operand2nd = complexOperandReturn(tokenizer ,dataFlag.thirdFlags);
+    operand->dataSize.extB=getBTFX2ndCompLength(operand2nd,tokenizer);
+    mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue);
+    return mcode;
+}
 
 MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
@@ -257,35 +333,35 @@ MachineCode* assembleXYOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     else{
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y eg SUBW X,#$5500");
     }
-    operand= complexOperandReturn(tokenizer ,dataFlag);
+    operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 }
 
 MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
-  IntegerToken * token;
-  IntegerToken * initToken;
-  stm8Operand * operand;
-  ExtensionCodeAndCode code;
-  MachineCode* mcode;
-  ConversionData  dataFlag;
+    IntegerToken * token;
+    IntegerToken * initToken;
+    stm8Operand * operand;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    ConversionData  dataFlag;
 
-  token =(IntegerToken*)getToken(tokenizer);
-  initToken = token;
-  token =(IntegerToken*)getToken(tokenizer);
-  pushBackToken(tokenizer,(Token*)token);
-  nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand A eg ADD A,($1000,X) ");
+    token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
+    token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand A eg ADD A,($1000,X) ");
 
-  if(strcasecmp(token->str,"X")==0){
-      dataFlag = getDataFlag(codeInfo,tokenizer);
-      operandFlagCheck(codeInfo->firstFlags,token,X_OPERAND);
-  }
-  else{
-    throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A eg ADD A,($1000,X)");
-  }
-  operand= complexOperandReturn(tokenizer ,dataFlag);
-  mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
-  return mcode;
+    if(strcasecmp(token->str,"X")==0){
+        dataFlag = getDataFlag(codeInfo,tokenizer);
+        operandFlagCheck(codeInfo->firstFlags,token,X_OPERAND);
+    }
+    else{
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A eg ADD A,($1000,X)");
+    }
+    operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    return mcode;
 }
 
 MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
@@ -310,7 +386,7 @@ MachineCode* assembleAOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
     else{
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A eg ADD A,($1000,X)");
     }
-    operand= complexOperandReturn(tokenizer ,dataFlag);
+    operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 }
@@ -360,7 +436,7 @@ MachineCode* assembleXYSPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer
     else{
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected X ,Y,SP eg ADDW X,($10,SP)");
     }
-    operand= complexOperandReturn(tokenizer ,dataFlag);
+    operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 }
@@ -389,7 +465,7 @@ MachineCode* assembleASPComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
     else{
       throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A,SP eg SUB SP,#$9)");
     }
-    operand= complexOperandReturn(tokenizer ,dataFlag);
+    operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 }
@@ -398,7 +474,6 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     IntegerToken * initToken;
     stm8Operand * operand;
-    stm8Operand * operand2nd;
     MachineCode* mcode;
     int cmpType = 0;
     int nvalue;
@@ -413,25 +488,10 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     dataFlag = getDataFlag(codeInfo,tokenizer);
     pushBackToken(tokenizer,(Token*) token);
     operand = getOperand(tokenizer ,codeInfo->firstFlags);
-    operand2nd = complexOperandReturn(tokenizer ,dataFlag);
-    if(!(operand2nd->dataSize.ms >= 0 && operand2nd->dataSize.ms <= 7)){
-      token =(IntegerToken*)getToken(tokenizer);
-      throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected eg BCCM $1000,#n , n less than 7 and larger than 0");
-    }
-
-    else if(cmpType ==1 ){
-      nvalue = 1 + 2*operand2nd->dataSize.ms;
-    }
-    else{
-      nvalue = 2*operand2nd->dataSize.ms;
-    }
+    nvalue = hashNValueReturn(tokenizer ,dataFlag.secondFlags,cmpType);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue);
     return mcode;
 }
-
-
-
-
 
 MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
@@ -454,7 +514,7 @@ MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
         dataFlag = getDataFlag(codeInfo,tokenizer);
         pushBackToken(tokenizer,(Token*) token);
         operand = getOperand(tokenizer ,codeInfo->firstFlags);
-        operand2nd = complexOperandReturn(tokenizer ,dataFlag);
+        operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
         if(operand2nd->type != A_OPERAND)
           throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
     }
