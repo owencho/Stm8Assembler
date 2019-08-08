@@ -1,5 +1,4 @@
 #include "conditionalBranchExecutionInstruction.h"
-////change all to assembleJRXXOperand
 ExtensionCodeAndCode jrcCodeTable[] = {
     [SHORT_OFF_OPERAND]         ={NA,0x25}
 };
@@ -21,17 +20,6 @@ ConversionData jreqFlagTable[]={
 };
 
 CodeInfo jreqCodeInfo={"jreq",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jreqFlagTable};
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-ExtensionCodeAndCode jrfCodeTable[] = {
-    [SHORT_OFF_OPERAND]         ={NA,0x21}
-};
-
-ConversionData jrfFlagTable[]={
-    {"COMP",jrfCodeTable,0,0},
-    {NULL,NULL,0,0},
-};
-
-CodeInfo jrfCodeInfo={"jrf",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jrfFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jrhCodeTable[] = {
     [SHORT_OFF_OPERAND]         ={0x90,0x29}
@@ -197,17 +185,6 @@ ConversionData jrsltFlagTable[]={
 };
 
 CodeInfo jrsltCodeInfo={"jrslt",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jrsltFlagTable};
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-ExtensionCodeAndCode jrtCodeTable[] = {
-    [SHORT_OFF_OPERAND]         ={NA,0x20}
-};
-
-ConversionData jrtFlagTable[]={
-    {"COMP",jrtCodeTable,0,0},
-    {NULL,NULL,0,0},
-};
-
-CodeInfo jrtCodeInfo={"jrt",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jrtFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jrugeCodeTable[] = {
     [SHORT_OFF_OPERAND]         ={NA,0x24}

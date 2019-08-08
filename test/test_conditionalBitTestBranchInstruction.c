@@ -130,7 +130,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_unsupportedOperand(voi
     freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_BTJF_OPERAND_error_on_secondOperand_unsupportedOperand(void) {
+void test_assembleInstruction_given_BTJF_OPERAND_error_on_thirdOperand_unsupportedOperand(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
 
@@ -142,6 +142,73 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_secondOperand_unsuppor
     } Catch(ex) {
         dumpTokenErrorMessage(ex, 416);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_BTJF_OPERAND_error_on_secondOperand_unsupportedOperand(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer(" BTJF $23,#7,(Y)");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_BTJT_OPERAND_expect_0x720E44553d(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x0E,0x44,0x55,0x3d,END};
+
+    Try{
+        tokenizer = createTokenizer("  BTJT $4455,#7,$38");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_BTJt_OPERAND_expect_0x7202004508(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x02,0x00,0x45,0x08,END};
+
+    Try{
+        tokenizer = createTokenizer(" BTJT $45,#1,$3");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_BTJT_OPERAND_expect_0x7202003392(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x02,0x00,0x33,0x92,END};
+
+    Try{
+        tokenizer = createTokenizer(" BTJT $33,#1,-$73");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
 }

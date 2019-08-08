@@ -30,7 +30,155 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
-/*
+void test_assembleInstruction_given_jra_shortoffAA_0x207E(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x20,0x7E,END};
+  Try{
+      tokenizer = createTokenizer("  jra $7C ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jra_negHex20_0x20E2(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x20,0xE2,END};
+  Try{
+      tokenizer = createTokenizer("  jra -$20 ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jra_expect_fail(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  jra  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+    mcode = assembleInstruction(tokenizer);
+    TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jrt_shortoffAA_0x206E(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x20,0x6E,END};
+  Try{
+      tokenizer = createTokenizer("  jrt $6C ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jrt_negHex10_0x20F2(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x20,0xF2,END};
+  Try{
+      tokenizer = createTokenizer("  jrt -$10 ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jra_bracX_expect_fail(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  jrt (X)  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+    mcode = assembleInstruction(tokenizer);
+    TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jra_roundBRac_expect_fail(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  jrt (  ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+    mcode = assembleInstruction(tokenizer);
+    TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jrf_shortoffAA_0x210F(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x21,0x0F,END};
+  Try{
+      tokenizer = createTokenizer("  jrf $D ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_jrf_negHex10_0x21EE(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x21,0xEE,END};
+  Try{
+      tokenizer = createTokenizer("  jrf -$14 ");
+      configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+      mcode = assembleInstruction(tokenizer);
+      TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+
+
 void test_assembleInstruction_given_call_longmem11_expect_0xcd0011(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -252,7 +400,7 @@ void test_assembleInstruction_given_call_z_expect_fail(void) {
     TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 	  freeTokenizer(tokenizer);
 }
@@ -273,20 +421,84 @@ void test_assembleInstruction_given_call_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+/////////////////////////////////////////////////////////////////////////////////
+void test_assembleInstruction_given_callr_shortmem_expect_0xad14(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0xad,0x14,END};
 
+  Try{
+    tokenizer = createTokenizer("  CALLr $12 ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_callr_negshortmem_expect_0xade1(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0xad,0xE1,END};
+
+  Try{
+    tokenizer = createTokenizer("  CALLr -$21 ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+/////////////////////////////////////////////////////////////////////////////////
+void test_assembleInstruction_given_callf_extmem_expect_0x8D35BB20(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x8d,0x35,0xBB,0x20,END};
+
+  Try{
+    tokenizer = createTokenizer("  CALLF $35BB20 ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_callf_longptre_expect_0x928D2FAC(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x92,0x8d,0x2F,0xAC,END};
+
+  Try{
+    tokenizer = createTokenizer("  CALLF [$2FAC.e] ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
 
 void test_assembleInstruction_given_ret_0x81(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x81,END};
 
   Try{
     tokenizer = createTokenizer("  ret ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
     mcode = assembleInstruction(tokenizer);
-    TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_EQUAL_UINT8(1, mcode->length);
-    TEST_ASSERT_EQUAL_HEX8(0x81, mcode->code[0]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   }Catch(ex){
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -314,15 +526,13 @@ void test_assembleInstruction_given_ret_z_expect_fail(void) {
 void test_assembleInstruction_given_retf_0x87(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x87,END};
 
   Try{
     tokenizer = createTokenizer("  retf ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
     mcode = assembleInstruction(tokenizer);
-    TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_EQUAL_UINT8(1, mcode->length);
-    TEST_ASSERT_EQUAL_HEX8(0x87, mcode->code[0]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   }Catch(ex){
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -349,15 +559,13 @@ void test_assembleInstruction_given_retf_yamaha_expect_fail(void) {
 void test_assembleInstruction_given_nop_0x9d(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x9d,END};
 
   Try{
     tokenizer = createTokenizer("  nop ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
     mcode = assembleInstruction(tokenizer);
-    TEST_ASSERT_NOT_NULL(mcode);
-    TEST_ASSERT_EQUAL_UINT8(1, mcode->length);
-    TEST_ASSERT_EQUAL_HEX8(0x9d, mcode->code[0]);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   }Catch(ex){
     dumpTokenErrorMessage(ex, 1);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
@@ -381,4 +589,3 @@ void test_assembleInstruction_given_nop_symbol_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-*/

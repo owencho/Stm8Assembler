@@ -1,5 +1,5 @@
 #include "loadTransferInstruction.h"
-/*
+
 ExtensionCodeAndCode ldACodeTable[] = {
     [BYTE_OPERAND]                             ={NA,0xA6},
     [SHORT_MEM_OPERAND]                        ={NA,0xB6},
@@ -47,12 +47,12 @@ ExtensionCodeAndCode ldComplexCodeTable[] = {
 
 ConversionData ldFlagTable[]={
     {"A",ldACodeTable,LD2ND_SUPPORTED_OPERANDS,0},
-    {"COMP",ldComplexCodeTable,LD2ND_SUPPORTED_OPERANDS,0},
+    {"COMP",ldComplexCodeTable,(1<< A_OPERAND),0},
     {NULL,NULL,0,0},
 };
 
 CodeInfo ldCodeInfo={"ld",LD1ST_SUPPORTED_OPERANDS,
-                      assembleLDOperand,ldFlagTable};
+                      assembleLDandLDFOperand,ldFlagTable};
 
 ExtensionCodeAndCode ldfComplexCodeTable[] = {
     [EXT_MEM_OPERAND]                             ={NA,0xBD},
@@ -72,34 +72,14 @@ ExtensionCodeAndCode ldfACodeTable[] = {
   [BRACKETED_LONGPTR_DOT_E_OPERAND]             ={0x92,0xBC},
 };
 
-
-CodeInfo ldfCodeInfo={"ldf",assembleLDFOperand,{
-    //First operand
-    LDF_SUPPORTED_OPERANDS,
-    //Second operand
-    LDF_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {ldfACodeTable,ldfComplexCodeTable,0,0,0}
+ConversionData ldfFlagTable[]={
+    {"A",ldfACodeTable,LDF_COMP_SUPPORTED_OPERANDS,0},
+    {"COMP",ldfComplexCodeTable,(1<< A_OPERAND),0},
+    {NULL,NULL,0,0},
 };
 
-ExtensionCodeAndCode exgCodeTable[] = {
-[XL_OPERAND]         ={NA,0x41},
-[YL_OPERAND]         ={NA,0x61},
-[LONG_MEM_OPERAND]   ={NA,0x31},
-};
-
-CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
-    //First operand
-    1 << A_OPERAND ,
-    //Second operand
-    EXG_SUPPORTED_OPERANDS,
-    //Third operand
-    0
-  }, {exgCodeTable,0,0,0,0}
-};
-
-
+CodeInfo ldfCodeInfo={"ldf",LDF_SUPPORTED_OPERANDS,
+                      assembleLDandLDFOperand,ldfFlagTable};
 
 ExtensionCodeAndCode ldwComXCodeTable[] = {
     [SHORT_MEM_OPERAND]                        ={NA,0xBF},
@@ -160,13 +140,64 @@ ExtensionCodeAndCode ldwYCodeTable[] = {
     [SP_OPERAND]                          ={0x90,0x96},
 };
 
-CodeInfo ldwCodeInfo={"ldw",assembleLDWOperand,{
+ConversionData ldwFlagTable[]={
+    {"X",ldwXCodeTable,LDW_X_SUPPORTED_OPERANDS,0},
+    {"Y",ldwYCodeTable,LDW_Y_SUPPORTED_OPERANDS,0},
+    {"SP",ldwSPCodeTable,LDW_SP_SUPPORTED_OPERANDS,0},
+    {"COMP",0,(1<< X_OPERAND| 1<< Y_OPERAND),0},
+    {"COMPX",ldwComXCodeTable,0,0},
+    {"COMPY",ldwComYCodeTable,0,0},
+    {NULL,NULL,0,0},
+};
+
+CodeInfo ldwCodeInfo={"ldw",LDW_1ST_SUPPORTED_OPERANDS,
+                      assembleLDWOperand,ldwFlagTable};
+
+ExtensionCodeAndCode clrCodeTable[] = {
+[A_OPERAND]                           ={NA,0x4f},
+[SHORT_MEM_OPERAND]                   ={NA,0x3f},
+[LONG_MEM_OPERAND]                    ={0x72,0x5f},
+[BRACKETED_X_OPERAND]                 ={NA,0x7f},
+[SHORTOFF_X_OPERAND]                  ={NA,0x6f},
+[LONGOFF_X_OPERAND]                   ={0x72,0x4f},
+[BRACKETED_Y_OPERAND]                 ={0x90,0x7f},
+[SHORTOFF_Y_OPERAND]                  ={0x90,0x6f},
+[LONGOFF_Y_OPERAND]                   ={0x90,0x4f},
+[SHORTOFF_SP_OPERAND]                 ={NA,0x0f},
+[BRACKETED_SHORTPTR_DOT_W_OPERAND]    ={0x92,0x3f},
+[BRACKETED_LONGPTR_DOT_W_OPERAND]     ={0x72,0x3f},
+[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]   ={0x92,0x6f},
+[LONGPTR_DOT_W_BRACKETEDX_OPERAND]    ={0x72,0x6f},
+[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]   ={0x91,0x6f},
+};
+
+ConversionData clrFlagTable[]={
+{"A",clrCodeTable,0,0},
+{"COMP",clrCodeTable,0,0},
+{NULL,NULL,0,0},
+};
+
+CodeInfo clrCodeInfo={"clr",CLR_SUPPORTED_OPERANDS,
+                      assembleAOperandAndComplexOperand,clrFlagTable};
+
+/*
+ExtensionCodeAndCode exgCodeTable[] = {
+[XL_OPERAND]         ={NA,0x41},
+[YL_OPERAND]         ={NA,0x61},
+[LONG_MEM_OPERAND]   ={NA,0x31},
+};
+
+CodeInfo exgCodeInfo={"exg",assembleAOperandAndComplexOperand,{
     //First operand
-    LDW_1ST_SUPPORTED_OPERANDS,
+    1 << A_OPERAND ,
     //Second operand
-    0,
+    EXG_SUPPORTED_OPERANDS,
     //Third operand
     0
-  }, {ldwXCodeTable,ldwYCodeTable,ldwSPCodeTable,ldwComXCodeTable,ldwComYCodeTable}
+  }, {exgCodeTable,0,0,0,0}
 };
+
+
+
+
 */

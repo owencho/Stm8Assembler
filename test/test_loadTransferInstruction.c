@@ -30,7 +30,7 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
-/*
+
 void test_assembleInstruction_given_ld_A_hash77_expect_0xA677(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -201,6 +201,22 @@ void test_assembleInstruction_given_ldw_y_word_A_expect_0x1F(void) {
 	  freeTokenizer(tokenizer);
 }
 
+void test_assembleInstruction_given_exg_z_XL_OPERAND_expect_exception(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+
+  Try{
+    tokenizer = createTokenizer("  LDW ($50,SP),CC ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+  } Catch(ex) {
+    dumpTokenErrorMessage(ex, 416);
+    TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+  }
+	  freeTokenizer(tokenizer);
+}
+/*
 
 void test_assembleInstruction_given_exg_XL_OPERAND_expect_0x41(void) {
   MachineCode *mcode =NULL ;

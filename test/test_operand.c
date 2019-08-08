@@ -26,11 +26,11 @@ void test_nullCheck_given_empty_expect_error_thrown(void) {
     tokenizer = createTokenizer("    ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     token = (IntegerToken *)getToken(tokenizer);
-    nullCheck(ERR_INVALID_STM8_OPERAND,token,"NULL detected");
+    nullCheck(ERR_INVALID_SYNTAX,token,"NULL detected");
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -44,11 +44,11 @@ void test_nullCheck_given_w_expect_pass(void) {
     tokenizer = createTokenizer("w");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     token = (IntegerToken *)getToken(tokenizer);
-    nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected w after .");
+    nullCheck(ERR_INVALID_SYNTAX,token,"Expected w after .");
     TEST_ASSERT_NOT_NULL(token->str);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -78,7 +78,7 @@ void test_operandCheck_given_X_expect_return_1(void) {
     TEST_ASSERT_EQUAL(1,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -96,7 +96,7 @@ void test_operandCheck_given_Y_expect_return_2(void) {
     TEST_ASSERT_EQUAL(2,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -114,7 +114,7 @@ void test_operandCheck_given_SP_condition_1_expect_return_3(void) {
     TEST_ASSERT_EQUAL(3,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -132,7 +132,7 @@ void test_operandCheck_given_SP_condition_2_expect_return_3(void) {
     TEST_ASSERT_EQUAL(3,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -151,7 +151,7 @@ void test_operandCheck_given_A_condition_2_expect_return_4(void) {
     TEST_ASSERT_EQUAL(4,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -169,7 +169,7 @@ void test_operandCheck_given_A_condition_1_expect_to_fail(void) {
     int a = operandCheck(token, 1);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -187,7 +187,7 @@ void test_operandCheck_given_A_condition_0_expect_to_fail(void) {
     int a = operandCheck(token, 0);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -205,7 +205,7 @@ void test_operandCheck_given_SP_condition_0_expect_to_fail(void) {
     int a = operandCheck(token, 0);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -223,7 +223,7 @@ void test_operandCheck_given_XY_expect_to_fail(void) {
     int a = operandCheck(token, 2);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -241,7 +241,7 @@ void test_operandCheck_given_22_expect_to_fail(void) {
     int a = operandCheck(token, 2);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -263,7 +263,7 @@ void test_operandCheck_given_23_expect_return_1(void) {
     TEST_ASSERT_EQUAL(1,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -282,7 +282,7 @@ void test_operandCheck_given_2543_expect_return_2(void) {
     TEST_ASSERT_EQUAL(2,a);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -577,7 +577,7 @@ void test_getOperand_given_Z_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -618,7 +618,7 @@ void test_getOperand_given_doublehash_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -774,7 +774,7 @@ void test_getOperand_given_dollarsign_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -814,7 +814,7 @@ void test_getOperand_given_bracX1234_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -831,7 +831,7 @@ void test_getOperand_given_bracX_commar_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -849,7 +849,7 @@ void test_getOperand_given_bracX_without_closing_bracket_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -866,7 +866,7 @@ void test_getOperand_given_bracX_without_opening_bracket_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -883,7 +883,7 @@ void test_getOperand_given_bracketA_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 211);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -944,7 +944,7 @@ void test_getOperand_given_bracX_171_without_closing_bracket_expect_error(void) 
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -1000,7 +1000,7 @@ void test_getOperand_given_881_bracX_expect_error(void) {
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 288);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -1555,7 +1555,7 @@ void test_getOperand_given_7766_longptr_dot_w_bracY_expect_it_to_fail_on_value(v
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
 
@@ -1571,7 +1571,7 @@ void test_getOperand_given_734_Square_BracX_without_closing_bracket_expect_to_fa
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
 
@@ -1587,7 +1587,7 @@ void test_getOperand_given_7564_Square_BracX_without_closing_bracket_expect_to_f
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
 
@@ -1603,7 +1603,7 @@ void test_getOperand_given_7564_Square_BracXdote_with_extra_stuff_expect_error(v
     freeTokenizer(tokenizer);
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_STM8_OPERAND, ex->errorCode);
+    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
 

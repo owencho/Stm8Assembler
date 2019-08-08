@@ -9,6 +9,7 @@
 
 
 ConversionData  getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer);
+ConversionData getLDWDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags);
 int hashNValueReturn(Tokenizer* tokenizer ,uint64_t flags , int cmpType);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
@@ -25,6 +26,8 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDandLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 
 
 

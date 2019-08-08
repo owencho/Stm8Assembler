@@ -85,7 +85,6 @@ InstructionTable instructionTable[]={
     //conditionalBranchExecutionInstruction
     {"jrc",&jrcCodeInfo},
     {"jreq",&jreqCodeInfo},
-    {"jrf",&jrfCodeInfo},
     {"jrh",&jrhCodeInfo},
     {"jrih",&jrihCodeInfo},
     {"jril",&jrilCodeInfo},
@@ -101,7 +100,6 @@ InstructionTable instructionTable[]={
     {"jrsgt",&jrsgtCodeInfo},
     {"jrsle",&jrsleCodeInfo},
     {"jrslt",&jrsltCodeInfo},
-    {"jrt",&jrtCodeInfo},
     {"jruge",&jrugeCodeInfo},
     {"jrugt",&jrugtCodeInfo},
     {"jrule",&jrulecodeInfo},
@@ -109,17 +107,29 @@ InstructionTable instructionTable[]={
     {"jrv",&jrvCodeInfo},
     {"wfe",&wfeCodeInfo},
     //loadTransferInstruction
-  /*  {"ld",&ldCodeInfo},
+    {"ld",&ldCodeInfo},
     {"ldf",&ldfCodeInfo},
-    {"clr",&clrCodeInfo},
-    {"mov",&movCodeInfo},
-    {"exg",&exgCodeInfo},
     {"ldw",&ldwCodeInfo},
+    {"clr",&clrCodeInfo},
+    /*{"mov",&movCodeInfo},
+    {"exg",&exgCodeInfo},
     {"clr",&clrwCodeInfo},
     {"exgw",&exgwCodeInfo},*/
     //conditionalBitTestBranchInstruction
     {"btjt",&btjtCodeInfo},
     {"btjf",&btjfCodeInfo},
+    //unconditionalJumpCallInstruction
+    {"jra",&jraCodeInfo},
+    {"jrt",&jrtCodeInfo},
+    {"jrf",&jrfCodeInfo},
+    {"jp",&jpCodeInfo},
+    {"jpf",&jpfCodeInfo},
+    {"call",&callCodeInfo},
+    {"callr",&callrCodeInfo},
+    {"callf",&callfCodeInfo},
+    {"ret",&retCodeInfo},
+    {"retf",&retfCodeInfo},
+    {"nop",&nopCodeInfo},
     /////////////////////////////////////
 
 
@@ -130,12 +140,11 @@ InstructionTable instructionTable[]={
     /*
 
 
-    {"nop",&nopCodeInfo},
-    {"ret",&retCodeInfo},
-    {"retf",&retfCodeInfo},
+
+
     //////////////////////////////////////
 
-    {"call",&callCodeInfo},
+
 
     */
 

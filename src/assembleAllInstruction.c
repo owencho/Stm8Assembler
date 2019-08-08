@@ -36,6 +36,26 @@ ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer){
     return dataTable;
 }
 
+ConversionData getLDWDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
+    int i = 0;
+    ConversionData  dataTable;
+    char * str;
+    if(operand->type == X_OPERAND){
+      str = "COMPX";
+    }
+    else if(operand->type == Y_OPERAND){
+      str = "COMPY";
+    }
+    do{
+      if(strcasecmp(codeInfo->conDataTable[i].name,str)==0){
+        dataTable = codeInfo->conDataTable[i];
+        break;
+      }
+      i++;
+    }while(codeInfo->conDataTable[i].name != NULL);
+    return dataTable;
+}
+
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags){
     IntegerToken *token;
     stm8Operand * operand;
@@ -478,110 +498,62 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 }
 
-MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+MachineCode* assembleLDandLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     stm8Operand * operand2nd;
     MachineCode* mcode;
     ConversionData  dataFlag;
 
-
     token =(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
     if(strcasecmp(token->str,"A")==0){
-      dataFlag = getDataFlag(codeInfo,tokenizer);
       operandFlagCheck(codeInfo->firstFlags,token,A_OPERAND);
+      pushBackToken(tokenizer,(Token*) token);
+      dataFlag = getDataFlag(codeInfo,tokenizer);
+      operand = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     }
     else{
+        pushBackToken(tokenizer,(Token*) token);
         dataFlag = getDataFlag(codeInfo,tokenizer);
         pushBackToken(tokenizer,(Token*) token);
         operand = getOperand(tokenizer ,codeInfo->firstFlags);
         operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
-        if(operand2nd->type != A_OPERAND)
-          throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     }
-
-    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     return mcode;
 
 }
-/*
+
 MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    int cmpType;
     IntegerToken * token;
-    IntegerToken * initToken;
     stm8Operand * operand;
     stm8Operand * operand2nd;
-    ExtensionCodeAndCode code;
     MachineCode* mcode;
-    int tableloc =0;
+    ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    if(strcasecmp(token->str,"X")==0){
-        tableloc =0;
-        codeInfo->operandExistenceFlags[1]= LDW_X_SUPPORTED_OPERANDS;
-        operand= complexOperandReturn(tokenizer ,codeInfo);
-    }
-    else if(strcasecmp(token->str,"Y")==0){
-      tableloc =1;
-      codeInfo->operandExistenceFlags[1]= LDW_Y_SUPPORTED_OPERANDS;
-      operand= complexOperandReturn(tokenizer ,codeInfo);
-    }
-    else if(strcasecmp(token->str,"SP")==0){
-      tableloc =2;
-      codeInfo->operandExistenceFlags[1]= LDW_SP_SUPPORTED_OPERANDS;
-      operand= complexOperandReturn(tokenizer ,codeInfo);
+    cmpType = (strcmp(token->str,"X")==0 ||strcmp(token->str,"Y")==0 ||strcmp(token->str,"SP")==0 );
+    if(cmpType == 1){
+      pushBackToken(tokenizer,(Token*) token);
+      dataFlag = getDataFlag(codeInfo,tokenizer);
+      operand = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
     }
     else{
         pushBackToken(tokenizer,(Token*) token);
-        operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
-        codeInfo->operandExistenceFlags[1]= LDW_SP_SUPPORTED_OPERANDS;
-        operand2nd = complexOperandReturn(tokenizer ,codeInfo);
-        if(operand2nd->type == X_OPERAND)
-            tableloc =3;
-        else if(operand2nd->type == Y_OPERAND)
-            tableloc =4;
-      }
-
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA,tableloc);
-    return mcode;
-
-}
-
-MachineCode* assembleLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
-    IntegerToken * token;
-    IntegerToken * initToken;
-    stm8Operand * operand;
-    stm8Operand * operand2nd;
-    ExtensionCodeAndCode code;
-    MachineCode* mcode;
-    int tableloc;
-
-    token =(IntegerToken*)getToken(tokenizer);
-    initToken = token;
-    token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    if(strcasecmp(token->str,"A")==0){
-        tableloc =0;
-        operand= complexOperandReturn(tokenizer ,codeInfo);
-        if(operand->type == A_OPERAND)
-          throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected not A as src for LDF if A is dst eg LDF A,($500000,Y)");
-    }
-    else{
+        dataFlag = getDataFlag(codeInfo,tokenizer);
         pushBackToken(tokenizer,(Token*) token);
-        tableloc =1;
-        operand = getOperand(tokenizer ,codeInfo->operandExistenceFlags[0]);
-        operand2nd = complexOperandReturn(tokenizer ,codeInfo);
-        if(operand2nd->type != A_OPERAND)
-            throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected A as src for LD eg LD $50,A");
-      }
-
-    mcode=machineCodeAllocateOutput(tokenizer,codeInfo , operand,NA,tableloc);
+        operand = getOperand(tokenizer ,codeInfo->firstFlags);
+        operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+        dataFlag = getLDWDataFlag(codeInfo,operand2nd);
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    }
     return mcode;
 
 }
-*/
