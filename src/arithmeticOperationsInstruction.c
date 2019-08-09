@@ -1,52 +1,52 @@
 #include "arithmeticOperationsInstruction.h"
 
 ExtensionCodeAndCode adcCodeTable[] = {
-[BYTE_OPERAND]         ={NA,0xa9},
-[SHORT_MEM_OPERAND]    ={NA,0xb9},
-[LONG_MEM_OPERAND]     ={NA,0xc9},
-[BRACKETED_X_OPERAND] ={NA,0xf9},
-[SHORTOFF_X_OPERAND] ={NA,0xe9},
-[LONGOFF_X_OPERAND] ={NA,0xd9},
-[BRACKETED_Y_OPERAND] ={0x90,0xf9},
-[SHORTOFF_Y_OPERAND] ={0x90,0xe9},
-[LONGOFF_Y_OPERAND] ={0x90,0xd9},
-[SHORTOFF_SP_OPERAND] ={NA,0x19},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc9},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc9},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd9},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd9},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd9},
+    [BYTE_OPERAND]         ={NA,0xa9},
+    [SHORT_MEM_OPERAND]    ={NA,0xb9},
+    [LONG_MEM_OPERAND]     ={NA,0xc9},
+    [BRACKETED_X_OPERAND] ={NA,0xf9},
+    [SHORTOFF_X_OPERAND] ={NA,0xe9},
+    [LONGOFF_X_OPERAND] ={NA,0xd9},
+    [BRACKETED_Y_OPERAND] ={0x90,0xf9},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xe9},
+    [LONGOFF_Y_OPERAND] ={0x90,0xd9},
+    [SHORTOFF_SP_OPERAND] ={NA,0x19},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc9},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc9},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd9},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd9},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd9},
 };
 
 ConversionData adcFlagTable[]={
-{"A",adcCodeTable,ADC_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"A",adcCodeTable,ADC_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo adcCodeInfo={"adc",(1 << A_OPERAND),
                       assembleAOperandAndComplexOperand,adcFlagTable};
 
 ExtensionCodeAndCode addCodeTable[] = {
-[BYTE_OPERAND]         ={NA,0xab},
-[SHORT_MEM_OPERAND]    ={NA,0xbb},
-[LONG_MEM_OPERAND]     ={NA,0xcb},
-[BRACKETED_X_OPERAND] ={NA,0xfb},
-[SHORTOFF_X_OPERAND] ={NA,0xeb},
-[LONGOFF_X_OPERAND] ={NA,0xdb},
-[BRACKETED_Y_OPERAND] ={0x90,0xfb},
-[SHORTOFF_Y_OPERAND] ={0x90,0xeb},
-[LONGOFF_Y_OPERAND] ={0x90,0xdb},
-[SHORTOFF_SP_OPERAND] ={NA,0x1b},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xcb},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xcb},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xdb},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xdb},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xdb},
+    [BYTE_OPERAND]         ={NA,0xab},
+    [SHORT_MEM_OPERAND]    ={NA,0xbb},
+    [LONG_MEM_OPERAND]     ={NA,0xcb},
+    [BRACKETED_X_OPERAND] ={NA,0xfb},
+    [SHORTOFF_X_OPERAND] ={NA,0xeb},
+    [LONGOFF_X_OPERAND] ={NA,0xdb},
+    [BRACKETED_Y_OPERAND] ={0x90,0xfb},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xeb},
+    [LONGOFF_Y_OPERAND] ={0x90,0xdb},
+    [SHORTOFF_SP_OPERAND] ={NA,0x1b},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xcb},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xcb},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xdb},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xdb},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xdb},
 };
 
 ConversionData addFlagTable[]={
-{"A",addCodeTable,ADC_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"A",addCodeTable,ADC_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo addCodeInfo={"add",(1 << A_OPERAND),
@@ -68,10 +68,10 @@ ExtensionCodeAndCode addwSPCodeTable[] = {
 };
 
 ConversionData addwFlagTable[]={
-{"X",addwXCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
-{"Y",addwYCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
-{"SP",addwSPCodeTable,(1<<BYTE_OPERAND),0},
-{NULL,NULL,0,0},
+    {"X",addwXCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
+    {"Y",addwYCodeTable,ADDW_XY_SUPPORTED_OPERANDS,0},
+    {"SP",addwSPCodeTable,(1<<BYTE_OPERAND),0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo addwCodeInfo={"addw",(1 << X_OPERAND | 1<< SP_OPERAND | 1 << Y_OPERAND ),
@@ -100,9 +100,9 @@ ExtensionCodeAndCode subSPCodeTable[] = {
 };
 
 ConversionData subFlagTable[]={
-{"A",subACodeTable,ADC_SUPPORTED_OPERANDS,0},
-{"SP",subSPCodeTable,(1<<BYTE_OPERAND),0},
-{NULL,NULL,0,0},
+    {"A",subACodeTable,ADC_SUPPORTED_OPERANDS,0},
+    {"SP",subSPCodeTable,(1<<BYTE_OPERAND),0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo subCodeInfo={"sub",(1 << A_OPERAND | 1<< SP_OPERAND ),
@@ -119,9 +119,9 @@ ExtensionCodeAndCode divYCodeTable[] = {
 };
 
 ConversionData divFlagTable[]={
-{"X",divXCodeTable,(1 << A_OPERAND | 1 << Y_OPERAND),0},
-{"Y",divYCodeTable,(1 << A_OPERAND),0},
-{NULL,NULL,0,0},
+    {"X",divXCodeTable,(1 << A_OPERAND | 1 << Y_OPERAND),0},
+    {"Y",divYCodeTable,(1 << A_OPERAND),0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo divCodeInfo={"div",(1 << X_OPERAND | 1<< Y_OPERAND ),
@@ -140,9 +140,9 @@ ExtensionCodeAndCode subwYCodeTable[] = {
 };
 
 ConversionData subwFlagTable[]={
-{"X",subwXCodeTable,SUBW_SUPPORTED_OPERANDS,0},
-{"Y",subwYCodeTable,SUBW_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"X",subwXCodeTable,SUBW_SUPPORTED_OPERANDS,0},
+    {"Y",subwYCodeTable,SUBW_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo subwCodeInfo={"subw",(1 << X_OPERAND | 1<< Y_OPERAND ),
@@ -150,53 +150,53 @@ CodeInfo subwCodeInfo={"subw",(1 << X_OPERAND | 1<< Y_OPERAND ),
 
 
 ExtensionCodeAndCode sbcCodeTable[] = {
-[BYTE_OPERAND]         ={NA,0xa2},
-[SHORT_MEM_OPERAND]    ={NA,0xb2},
-[LONG_MEM_OPERAND]     ={NA,0xc2},
-[BRACKETED_X_OPERAND] ={NA,0xf2},
-[SHORTOFF_X_OPERAND] ={NA,0xe2},
-[LONGOFF_X_OPERAND] ={NA,0xd2},
-[BRACKETED_Y_OPERAND] ={0x90,0xf2},
-[SHORTOFF_Y_OPERAND] ={0x90,0xe2},
-[LONGOFF_Y_OPERAND] ={0x90,0xd2},
-[SHORTOFF_SP_OPERAND] ={NA,0x12},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc2},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc2},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd2},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd2},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd2},
+    [BYTE_OPERAND]         ={NA,0xa2},
+    [SHORT_MEM_OPERAND]    ={NA,0xb2},
+    [LONG_MEM_OPERAND]     ={NA,0xc2},
+    [BRACKETED_X_OPERAND] ={NA,0xf2},
+    [SHORTOFF_X_OPERAND] ={NA,0xe2},
+    [LONGOFF_X_OPERAND] ={NA,0xd2},
+    [BRACKETED_Y_OPERAND] ={0x90,0xf2},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xe2},
+    [LONGOFF_Y_OPERAND] ={0x90,0xd2},
+    [SHORTOFF_SP_OPERAND] ={NA,0x12},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc2},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc2},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd2},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd2},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd2},
 };
 
 ConversionData sbcFlagTable[]={
-{"A",sbcCodeTable,ADC_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"A",sbcCodeTable,ADC_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo sbcCodeInfo={"sbc",(1 << A_OPERAND),
                       assembleAOperandAndComplexOperand,sbcFlagTable};
 
 ExtensionCodeAndCode negcodeTable[] = {
-[A_OPERAND]         ={NA,0x40},
-[SHORT_MEM_OPERAND]    ={NA,0x30},
-[LONG_MEM_OPERAND]     ={0x72,0x50},
-[BRACKETED_X_OPERAND] ={NA,0x70},
-[SHORTOFF_X_OPERAND] ={NA,0x60},
-[LONGOFF_X_OPERAND] ={0x72,0x40},
-[BRACKETED_Y_OPERAND] ={0x90,0x70},
-[SHORTOFF_Y_OPERAND] ={0x90,0x60},
-[LONGOFF_Y_OPERAND] ={0x90,0x40},
-[SHORTOFF_SP_OPERAND] ={NA,0x00},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0x30},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0x30},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0x60},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0x60},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0x60},
+    [A_OPERAND]         ={NA,0x40},
+    [SHORT_MEM_OPERAND]    ={NA,0x30},
+    [LONG_MEM_OPERAND]     ={0x72,0x50},
+    [BRACKETED_X_OPERAND] ={NA,0x70},
+    [SHORTOFF_X_OPERAND] ={NA,0x60},
+    [LONGOFF_X_OPERAND] ={0x72,0x40},
+    [BRACKETED_Y_OPERAND] ={0x90,0x70},
+    [SHORTOFF_Y_OPERAND] ={0x90,0x60},
+    [LONGOFF_Y_OPERAND] ={0x90,0x40},
+    [SHORTOFF_SP_OPERAND] ={NA,0x00},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0x30},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0x30},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0x60},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0x60},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0x60},
 };
 
 ConversionData negFlagTable[]={
-{"A",negcodeTable,NA,0},
-{"COMP",negcodeTable,NA,0},
-{NULL,NULL,0,0},
+    {"A",negcodeTable,NA,0},
+    {"COMP",negcodeTable,NA,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo negCodeInfo={"neg",NEG_SUPPORTED_OPERANDS,
@@ -204,32 +204,32 @@ CodeInfo negCodeInfo={"neg",NEG_SUPPORTED_OPERANDS,
 
 
 ExtensionCodeAndCode mulXCodeTable[] = {
-[A_OPERAND]         ={NA,0x42},
+    [A_OPERAND]         ={NA,0x42},
 };
 
 ExtensionCodeAndCode mulYCodeTable[] = {
-[A_OPERAND]         ={0x90,0x42},
+    [A_OPERAND]         ={0x90,0x42},
 };
 
 ConversionData mulFlagTable[]={
-{"X",mulXCodeTable,(1<<A_OPERAND),0},
-{"Y",mulYCodeTable,(1<<A_OPERAND),0},
-{NULL,NULL,0,0},
+    {"X",mulXCodeTable,(1<<A_OPERAND),0},
+    {"Y",mulYCodeTable,(1<<A_OPERAND),0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo mulCodeInfo={"mul",(1 << X_OPERAND | 1<< Y_OPERAND ),
                     assembleXYOperand,mulFlagTable};
 
 ExtensionCodeAndCode negwcodeTable[] = {
-[X_OPERAND]    ={NA,0x50},
-[Y_OPERAND]    ={0x90,0x50},
+    [X_OPERAND]    ={NA,0x50},
+    [Y_OPERAND]    ={0x90,0x50},
 
 };
 
 ConversionData negwFlagTable[]={
-{"X",negwcodeTable,0,0},
-{"Y",negwcodeTable,0,0},
-{NULL,NULL,0,0},
+    {"X",negwcodeTable,0,0},
+    {"Y",negwcodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo negwCodeInfo={"negw",(1 << X_OPERAND | 1<< Y_OPERAND ),

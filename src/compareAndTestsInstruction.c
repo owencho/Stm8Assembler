@@ -1,26 +1,26 @@
 #include "compareAndTestsInstruction.h"
 
 ExtensionCodeAndCode cpCodeTable[] = {
-[BYTE_OPERAND]         ={NA,0xa1},
-[SHORT_MEM_OPERAND]    ={NA,0xb1},
-[LONG_MEM_OPERAND]     ={NA,0xc1},
-[BRACKETED_X_OPERAND] ={NA,0xf1},
-[SHORTOFF_X_OPERAND] ={NA,0xe1},
-[LONGOFF_X_OPERAND] ={NA,0xd1},
-[BRACKETED_Y_OPERAND] ={0x90,0xf1},
-[SHORTOFF_Y_OPERAND] ={0x90,0xe1},
-[LONGOFF_Y_OPERAND] ={0x90,0xd1},
-[SHORTOFF_SP_OPERAND] ={NA,0x11},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc1},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc1},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd1},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd1},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd1},
+    [BYTE_OPERAND]         ={NA,0xa1},
+    [SHORT_MEM_OPERAND]    ={NA,0xb1},
+    [LONG_MEM_OPERAND]     ={NA,0xc1},
+    [BRACKETED_X_OPERAND] ={NA,0xf1},
+    [SHORTOFF_X_OPERAND] ={NA,0xe1},
+    [LONGOFF_X_OPERAND] ={NA,0xd1},
+    [BRACKETED_Y_OPERAND] ={0x90,0xf1},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xe1},
+    [LONGOFF_Y_OPERAND] ={0x90,0xd1},
+    [SHORTOFF_SP_OPERAND] ={NA,0x11},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc1},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc1},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd1},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd1},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd1},
 };
 
 ConversionData cpFlagTable[]={
-{"A",cpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"A",cpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo cpCodeInfo={"cp",(1 << A_OPERAND),
@@ -54,26 +54,26 @@ CodeInfo tnzCodeInfo={"tnz",TNZ_SUPPORTED_OPERANDS,
                       assembleOneOperand,tnzFlagTable};
 ////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode bcpCodeTable[] = {
-[BYTE_OPERAND]         ={NA,0xa5},
-[SHORT_MEM_OPERAND]    ={NA,0xb5},
-[LONG_MEM_OPERAND]     ={NA,0xc5},
-[BRACKETED_X_OPERAND] ={NA,0xf5},
-[SHORTOFF_X_OPERAND] ={NA,0xe5},
-[LONGOFF_X_OPERAND] ={NA,0xd5},
-[BRACKETED_Y_OPERAND] ={0x90,0xf5},
-[SHORTOFF_Y_OPERAND] ={0x90,0xe5},
-[LONGOFF_Y_OPERAND] ={0x90,0xd5},
-[SHORTOFF_SP_OPERAND] ={NA,0x15},
-[BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc5},
-[BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc5},
-[SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd5},
-[LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd5},
-[SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd5},
+    [BYTE_OPERAND]         ={NA,0xa5},
+    [SHORT_MEM_OPERAND]    ={NA,0xb5},
+    [LONG_MEM_OPERAND]     ={NA,0xc5},
+    [BRACKETED_X_OPERAND] ={NA,0xf5},
+    [SHORTOFF_X_OPERAND] ={NA,0xe5},
+    [LONGOFF_X_OPERAND] ={NA,0xd5},
+    [BRACKETED_Y_OPERAND] ={0x90,0xf5},
+    [SHORTOFF_Y_OPERAND] ={0x90,0xe5},
+    [LONGOFF_Y_OPERAND] ={0x90,0xd5},
+    [SHORTOFF_SP_OPERAND] ={NA,0x15},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]={0x92,0xc5},
+    [BRACKETED_LONGPTR_DOT_W_OPERAND]={0x72,0xc5},
+    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]={0x92,0xd5},
+    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]={0x72,0xd5},
+    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]={0x91,0xd5},
 };
 
 ConversionData bcpFlagTable[]={
-{"A",bcpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"A",bcpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo bcpCodeInfo={"bcp",(1 << A_OPERAND),
@@ -105,9 +105,9 @@ ExtensionCodeAndCode cpwYCodeTable[] ={
 };
 
 ConversionData cpwFlagTable[]={
-{"X",cpwXCodeTable,CPW_X_SUPPORTED_OPERANDS,0},
-{"Y",cpwYCodeTable,CPW_Y_SUPPORTED_OPERANDS,0},
-{NULL,NULL,0,0},
+    {"X",cpwXCodeTable,CPW_X_SUPPORTED_OPERANDS,0},
+    {"Y",cpwYCodeTable,CPW_Y_SUPPORTED_OPERANDS,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo cpwCodeInfo={"cpw",COMPAREWORD_SUPPORTED_OPERANDS,

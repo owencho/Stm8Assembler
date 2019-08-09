@@ -28,7 +28,8 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleLDandLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleMOVperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 

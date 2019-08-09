@@ -430,14 +430,14 @@ MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *to
     token =(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand A eg ADD A,($1000,X) ");
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL operand X eg EXGW X,Y  ");
 
     if(strcasecmp(token->str,"X")==0){
         dataFlag = getDataFlag(codeInfo,tokenizer);
         operandFlagCheck(codeInfo->firstFlags,token,X_OPERAND);
     }
     else{
-      throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand A eg ADD A,($1000,X)");
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected operand X eg EXGW X,Y ");
     }
     operand= complexOperandReturn(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
@@ -563,7 +563,76 @@ MachineCode* assembleTwowithNOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 }
 
-MachineCode* assembleLDandLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+MachineCode* assembleLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    int cmpType ,xlType,ylType,xhType,yhType;
+    IntegerToken * token;
+    stm8Operand * operand;
+    stm8Operand * operand2nd;
+    MachineCode* mcode;
+    ConversionData  dataFlag;
+    stm8OperandType type;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    freeToken(token);
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
+    xlType = (strcasecmp(token->str,"XL")==0);
+    ylType = (strcasecmp(token->str,"YL")==0);
+    xhType = (strcasecmp(token->str,"XH")==0);
+    yhType = (strcasecmp(token->str,"YH")==0);
+    cmpType = (xlType || ylType || xhType || yhType );
+    if(strcasecmp(token->str,"A")==0){
+        operandFlagCheck(codeInfo->firstFlags,token,A_OPERAND);
+        pushBackToken(tokenizer,(Token*) token);
+        dataFlag = getDataFlag(codeInfo,tokenizer);
+        operand = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    }
+    else if(cmpType ==1 ){
+        if(xlType ==1 ){
+          operandFlagCheck(codeInfo->firstFlags,token,XL_OPERAND);
+          type=XL_OPERAND;
+        }
+        else if(ylType ==1 ){
+          operandFlagCheck(codeInfo->firstFlags,token,YL_OPERAND);
+          type=YL_OPERAND;
+        }
+        else if(xhType ==1 ){
+          operandFlagCheck(codeInfo->firstFlags,token,XH_OPERAND);
+          type=XH_OPERAND;
+        }
+        else if(yhType ==1 ){
+          operandFlagCheck(codeInfo->firstFlags,token,YH_OPERAND);
+          type=YH_OPERAND;
+        }
+        else{
+          operandFlagCheck(codeInfo->firstFlags,token,XL_OPERAND);
+          operandFlagCheck(codeInfo->firstFlags,token,YL_OPERAND);
+          operandFlagCheck(codeInfo->firstFlags,token,XH_OPERAND);
+          operandFlagCheck(codeInfo->firstFlags,token,YH_OPERAND);
+        }
+        pushBackToken(tokenizer,(Token*) token);
+        dataFlag = getDataFlag(codeInfo,tokenizer);
+        operand = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+        operand->type = type;
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    }
+    else if (!isalpha(token->str[0])){
+        pushBackToken(tokenizer,(Token*) token);
+        dataFlag = getDataFlag(codeInfo,tokenizer);
+        pushBackToken(tokenizer,(Token*) token);
+        operand = getOperand(tokenizer ,codeInfo->firstFlags);
+        operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    }
+    else{
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
+    }
+    return mcode;
+
+}
+
+MachineCode* assembleLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     stm8Operand * operand;
     stm8Operand * operand2nd;

@@ -167,3 +167,20 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+void test_assembleInstruction_given_int_0x82773121(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x82,0x77,0x31,0x21,END};
+
+    Try{
+        tokenizer = createTokenizer("  int $773121 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex){
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}

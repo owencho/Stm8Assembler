@@ -38,6 +38,7 @@ InstructionTable instructionTable[]={
     {"wfi",&wfiCodeInfo},
     {"halt",&haltCodeInfo},
     {"iret",&iretCodeInfo},
+    {"int" ,&intCodeInfo},
     //bitOperationInstruction
     {"bcpl",&bcplCodeInfo},
     {"bccm",&bccmCodeInfo},
@@ -112,9 +113,9 @@ InstructionTable instructionTable[]={
     {"ldw",&ldwCodeInfo},
     {"clr",&clrCodeInfo},
     {"mov",&movCodeInfo},
-    /*{"exg",&exgCodeInfo},
+    {"exg",&exgCodeInfo},
     {"clr",&clrwCodeInfo},
-    {"exgw",&exgwCodeInfo},*/
+    {"exgw",&exgwCodeInfo},
     //conditionalBitTestBranchInstruction
     {"btjt",&btjtCodeInfo},
     {"btjf",&btjfCodeInfo},
@@ -130,24 +131,6 @@ InstructionTable instructionTable[]={
     {"ret",&retCodeInfo},
     {"retf",&retfCodeInfo},
     {"nop",&nopCodeInfo},
-    /////////////////////////////////////
-
-
-
-    //
-
-
-    /*
-
-
-
-
-    //////////////////////////////////////
-
-
-
-    */
-
     {NULL,NULL}
 };
 
@@ -177,6 +160,5 @@ MachineCode *assembleInstruction(Tokenizer *tokenizer){
     if(instructionTable[i].name == NULL){
         throwException(ERR_INVALID_STM8_INSTRUCTION,token,"Invalid instruction name!");
     }
-
     return mcode ;
 }

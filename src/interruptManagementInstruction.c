@@ -44,3 +44,16 @@ ConversionData iretFlagTable[]={
 };
 
 CodeInfo iretCodeInfo={"iret",0,assembleNoOperand,iretFlagTable};
+
+ExtensionCodeAndCode intCodeTable[] = {
+    [EXT_MEM_OPERAND]    ={NA,0x82},
+
+};
+
+ConversionData intFlagTable[]={
+    {"COMP",intCodeTable,0,0},
+    {NULL,NULL,0,0},
+};
+
+CodeInfo intCodeInfo={"int",(1 << EXT_MEM_OPERAND),
+                      assembleOneOperand,intFlagTable};
