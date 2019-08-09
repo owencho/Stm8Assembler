@@ -10,12 +10,14 @@
 
 ConversionData  getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer);
 ConversionData getLDWDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
+ConversionData getMOVDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags);
 int hashNValueReturn(Tokenizer* tokenizer ,uint64_t flags , int cmpType);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
 int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer);
 MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand, int nvalue);
+MachineCode* mcodeMOVLONGOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand , uint16_t ms);
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleXYOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleXOperandAndComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
@@ -28,6 +30,7 @@ MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleLDandLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleMOVperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 
 
 

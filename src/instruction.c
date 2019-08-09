@@ -111,8 +111,8 @@ InstructionTable instructionTable[]={
     {"ldf",&ldfCodeInfo},
     {"ldw",&ldwCodeInfo},
     {"clr",&clrCodeInfo},
-    /*{"mov",&movCodeInfo},
-    {"exg",&exgCodeInfo},
+    {"mov",&movCodeInfo},
+    /*{"exg",&exgCodeInfo},
     {"clr",&clrwCodeInfo},
     {"exgw",&exgwCodeInfo},*/
     //conditionalBitTestBranchInstruction

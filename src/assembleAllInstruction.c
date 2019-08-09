@@ -56,6 +56,44 @@ ConversionData getLDWDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
     return dataTable;
 }
 
+ConversionData getMOVDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
+    int i = 0;
+    ConversionData  dataTable;
+    char * str;
+    if(operand->type == LONG_MEM_OPERAND){
+      str = "LONG";
+    }
+    else if(operand->type == SHORT_MEM_OPERAND){
+      str = "SHORT";
+    }
+    do{
+      if(strcasecmp(codeInfo->conDataTable[i].name,str)==0){
+        dataTable = codeInfo->conDataTable[i];
+        break;
+      }
+      i++;
+    }while(codeInfo->conDataTable[i].name != NULL);
+    return dataTable;
+}
+
+stm8Operand * getMOVOpcode(stm8Operand * dst ,stm8Operand * src ){
+    stm8Operand * operand;
+    if(dst->type == LONG_MEM_OPERAND){
+      if(src->type == BYTE_OPERAND){
+      operand = createOperand(BYTE_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,dst->dataSize.ls);
+      }
+      else if(src->type == LONG_MEM_OPERAND){
+      operand = createOperand(LONG_MEM_OPERAND,NA,NA,src->dataSize.ls,dst->dataSize.ms,dst->dataSize.ls);
+      }
+    }
+    else if(dst->type == SHORT_MEM_OPERAND){
+      if(src->type == SHORT_MEM_OPERAND){
+        operand = createOperand(SHORT_MEM_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,dst->dataSize.ls);
+      }
+    }
+    return operand;
+}
+
 stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags){
     IntegerToken *token;
     stm8Operand * operand;
@@ -174,6 +212,33 @@ int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code){
     return i;
 }
 
+MachineCode* mcodeMOVLONGOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand , uint16_t ms){
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    int a =0;
+    IntegerToken * token;
+    IntegerToken * initToken;
+    initToken = token;
+    token =(IntegerToken*)getToken(tokenizer);
+    if(token->str==NULL){
+            code = dataFlag.codeTable[operand->type];
+            code.code=ms;
+    }
+    else{
+        throwException(ERR_INVALID_SYNTAX,token,"expected nothing after that");
+    }
+
+    if(code.extCode ==0 && code.code ==0){
+      throwException(ERR_UNSUPPORTED_OPERAND,initToken,"This operand doesnt supported ");
+    }
+    else{
+      a = machineCodeLengthFinder(operand,code);
+      mcode =malloc(sizeof(MachineCode)+1+ a);
+      mcode = outputMachineCode(operand,code,a);
+    }
+   return mcode;
+}
+
 MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand, int nvalue){
     ExtensionCodeAndCode code;
     MachineCode* mcode;
@@ -194,7 +259,7 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
     }
 
     if(code.extCode ==0 && code.code ==0){
-      throwException(ERR_UNSUPPORTED_OPERAND,initToken,"This operand doesnt supported ");
+      throwException(ERR_UNSUPPORTED_OPERAND,token,"This operand doesnt supported ");
     }
     else{
       a = machineCodeLengthFinder(operand,code);
@@ -556,4 +621,34 @@ MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     }
     return mcode;
 
+}
+
+MachineCode* assembleMOVperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    IntegerToken * token;
+    stm8Operand * operand;
+    stm8Operand * operand2nd;
+    MachineCode* mcode;
+    int cmpType = 0;
+    int nvalue;
+    ConversionData  dataFlag;
+
+    token =(IntegerToken*)getToken(tokenizer);
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
+    pushBackToken(tokenizer,(Token*) token);
+    dataFlag = getDataFlag(codeInfo,tokenizer);
+    pushBackToken(tokenizer,(Token*) token);
+    operand = getOperand(tokenizer ,codeInfo->firstFlags);
+    dataFlag = getMOVDataFlag(codeInfo,operand);
+    operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+    operand = getMOVOpcode(operand , operand2nd);
+    cmpType =(operand->type == LONG_MEM_OPERAND && operand2nd->type == LONG_MEM_OPERAND);
+    if(cmpType ==1 ){
+        mcode=mcodeMOVLONGOutput(tokenizer,dataFlag ,operand,operand2nd->dataSize.ms);
+    }
+    else{
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA);
+    }
+
+    return mcode;
 }

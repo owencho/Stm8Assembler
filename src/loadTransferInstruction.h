@@ -7,6 +7,7 @@ CodeInfo ldCodeInfo;
 CodeInfo ldfCodeInfo;
 CodeInfo ldwCodeInfo;
 CodeInfo clrCodeInfo;
+CodeInfo movCodeInfo;
 
 
 #define  LD1ST_SUPPORTED_OPERANDS                       \

@@ -180,6 +180,26 @@ ConversionData clrFlagTable[]={
 CodeInfo clrCodeInfo={"clr",CLR_SUPPORTED_OPERANDS,
                       assembleAOperandAndComplexOperand,clrFlagTable};
 
+ExtensionCodeAndCode movLONGCodeTable[] = {
+    [BYTE_OPERAND]                        ={NA,0x35},
+    [LONG_MEM_OPERAND]                   ={0x55,NA},
+
+};
+
+ExtensionCodeAndCode movSHORTCodeTable[] = {
+    [SHORT_MEM_OPERAND]                   ={NA,0x45},
+};
+
+ConversionData movFlagTable[]={
+    {"COMP",0,(1<< LONG_MEM_OPERAND| 1<< SHORT_MEM_OPERAND),0},
+    {"LONG",movLONGCodeTable,(1<< LONG_MEM_OPERAND| 1<< BYTE_OPERAND),0},
+    {"SHORT",movSHORTCodeTable,(1<< SHORT_MEM_OPERAND),0},
+    {NULL,NULL,0,0},
+};
+
+CodeInfo movCodeInfo={"mov",(1<< LONG_MEM_OPERAND| 1<< SHORT_MEM_OPERAND),
+                      assembleMOVperand,movFlagTable};
+
 /*
 ExtensionCodeAndCode exgCodeTable[] = {
 [XL_OPERAND]         ={NA,0x41},

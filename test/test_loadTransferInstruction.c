@@ -201,7 +201,7 @@ void test_assembleInstruction_given_ldw_y_word_A_expect_0x1F(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_exg_z_XL_OPERAND_expect_exception(void) {
+void test_assembleInstruction_given_ldw_shortptrSP_CC_OPERAND_expect_exception(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
 
@@ -216,6 +216,58 @@ void test_assembleInstruction_given_exg_z_XL_OPERAND_expect_exception(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+
+void test_assembleInstruction_given_mov_longmem_byte_expect_0x35AA8000(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x35,0xAA,0x80,0x00,END};
+
+  Try{
+    tokenizer = createTokenizer(" MOV $8000, #$AA ");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  } Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_mov_longmem_longmem_expect_0x3510008000(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x55,0x10,0x00,0x80,0x00,END};
+
+  Try{
+    tokenizer = createTokenizer("MOV $8000,$1000");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  } Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_mov_shortmem_shortmem_expect_0x451080(void) {
+  MachineCode *mcode =NULL ;
+  Tokenizer *tokenizer = NULL;
+  int expectedMcode[]={0x45,0x10,0x80,END};
+
+  Try{
+    tokenizer = createTokenizer("MOV $80,$10");
+    configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+    mcode = assembleInstruction(tokenizer);
+    TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  } Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
 /*
 
 void test_assembleInstruction_given_exg_XL_OPERAND_expect_0x41(void) {
