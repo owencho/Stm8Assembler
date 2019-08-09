@@ -184,3 +184,37 @@ void test_assembleInstruction_given_int_0x82773121(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+void test_assembleInstruction_given_int_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer("   int");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_int_A_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer("   int A ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}

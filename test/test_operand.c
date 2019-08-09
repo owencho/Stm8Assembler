@@ -404,6 +404,7 @@ void test_getOperand_given_hash_negative_43_expect_fail(void) {
   Try{
     tokenizer = createTokenizer("#-43");
     operand = getOperand(tokenizer,ALL_OPERANDS);
+    TEST_FAIL_MESSAGE("Expecting ERR_INVALID_HASH_VALUE exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 93);
     TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
@@ -632,7 +633,7 @@ void test_getOperand_given_hash_negative_1234_expect_error(void) {
     tokenizer = createTokenizer("  #-1234  ");
     configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
     operand = getOperand(tokenizer,ALL_OPERANDS);
-    TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
+    TEST_FAIL_MESSAGE("Expecting ERR_INVALID_HASH_VALUE exeception to be thrown.");
   } Catch(ex) {
     dumpTokenErrorMessage(ex, 154);
     TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);

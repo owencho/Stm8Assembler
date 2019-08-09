@@ -114,7 +114,7 @@ InstructionTable instructionTable[]={
     {"clr",&clrCodeInfo},
     {"mov",&movCodeInfo},
     {"exg",&exgCodeInfo},
-    {"clr",&clrwCodeInfo},
+    {"clrw",&clrwCodeInfo},
     {"exgw",&exgwCodeInfo},
     //conditionalBitTestBranchInstruction
     {"btjt",&btjtCodeInfo},

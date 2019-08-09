@@ -672,7 +672,7 @@ MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     token =(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    cmpType = (strcmp(token->str,"X")==0 ||strcmp(token->str,"Y")==0 ||strcmp(token->str,"SP")==0 );
+    cmpType = (strcasecmp(token->str,"X")==0 ||strcasecmp(token->str,"Y")==0 ||strcasecmp(token->str,"SP")==0 );
     if(cmpType == 1){
       pushBackToken(tokenizer,(Token*) token);
       dataFlag = getDataFlag(codeInfo,tokenizer);
@@ -705,11 +705,15 @@ MachineCode* assembleMOVperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
     pushBackToken(tokenizer,(Token*) token);
-    dataFlag = getDataFlag(codeInfo,tokenizer);
-    pushBackToken(tokenizer,(Token*) token);
     operand = getOperand(tokenizer ,codeInfo->firstFlags);
     dataFlag = getMOVDataFlag(codeInfo,operand);
     operand2nd = complexOperandReturn(tokenizer ,dataFlag.secondFlags);
+    if(operand->type == SHORT_MEM_OPERAND && (operand2nd->type ==BYTE_OPERAND ||operand2nd->type ==LONG_MEM_OPERAND )){
+      operand = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,operand->dataSize.ms,NA);
+    }
+    else if(operand->type == LONG_MEM_OPERAND && operand2nd->type == SHORT_MEM_OPERAND){
+      operand2nd = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,operand2nd->dataSize.ms,NA);
+    }
     operand = getMOVOpcode(operand , operand2nd);
     cmpType =(operand->type == LONG_MEM_OPERAND && operand2nd->type == LONG_MEM_OPERAND);
     if(cmpType ==1 ){

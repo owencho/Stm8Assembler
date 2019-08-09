@@ -55,13 +55,13 @@ CodeInfo addCodeInfo={"add",(1 << A_OPERAND),
 
 ExtensionCodeAndCode addwXCodeTable[] = {
     [WORD_OPERAND]={NA,0x1c},
-    [LONG_MEM_OPERAND] ={72,0xbb},
-    [SHORTOFF_SP_OPERAND]={72,0xfb}
+    [LONG_MEM_OPERAND] ={0x72,0xbb},
+    [SHORTOFF_SP_OPERAND]={0x72,0xfb}
 };
 ExtensionCodeAndCode addwYCodeTable[] = {
-    [WORD_OPERAND] ={72,0xa9},
-    [LONG_MEM_OPERAND] ={72,0xb9},
-    [SHORTOFF_SP_OPERAND] ={72,0xf9}
+    [WORD_OPERAND] ={0x72,0xa9},
+    [LONG_MEM_OPERAND] ={0x72,0xb9},
+    [SHORTOFF_SP_OPERAND] ={0x72,0xf9}
 };
 ExtensionCodeAndCode addwSPCodeTable[] = {
     [BYTE_OPERAND] ={NA,0x5b}

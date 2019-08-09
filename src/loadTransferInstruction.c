@@ -106,7 +106,7 @@ ExtensionCodeAndCode ldwComYCodeTable[] = {
     [SHORT_MEM_OPERAND]                    ={0x90,0xBF},
     [LONG_MEM_OPERAND]                     ={0x90,0xCF},
     [SHORTOFF_SP_OPERAND]                  ={NA,0x17},
-    [BRACKETED_SHORTPTR_DOT_W_OPERAND]     ={0x91,0xDF},
+    [BRACKETED_SHORTPTR_DOT_W_OPERAND]     ={0x91,0xCF},
 };
 
 ExtensionCodeAndCode ldwSPCodeTable[] = {
@@ -182,7 +182,7 @@ ConversionData clrFlagTable[]={
 };
 
 CodeInfo clrCodeInfo={"clr",CLR_SUPPORTED_OPERANDS,
-                      assembleAOperandAndComplexOperand,clrFlagTable};
+                      assembleOneOperand,clrFlagTable};
 
 ExtensionCodeAndCode movLONGCodeTable[] = {
     [BYTE_OPERAND]                        ={NA,0x35},
@@ -192,12 +192,13 @@ ExtensionCodeAndCode movLONGCodeTable[] = {
 
 ExtensionCodeAndCode movSHORTCodeTable[] = {
     [SHORT_MEM_OPERAND]                   ={NA,0x45},
+    [BYTE_OPERAND]                        ={NA,0x35},
+    [LONG_MEM_OPERAND]                   ={0x55,NA},
 };
 
 ConversionData movFlagTable[]={
-    {"COMP",0,(1<< LONG_MEM_OPERAND| 1<< SHORT_MEM_OPERAND),0},
-    {"LONG",movLONGCodeTable,(1<< LONG_MEM_OPERAND| 1<< BYTE_OPERAND),0},
-    {"SHORT",movSHORTCodeTable,(1<< SHORT_MEM_OPERAND),0},
+    {"LONG",movLONGCodeTable,(1<< SHORT_MEM_OPERAND| 1<< LONG_MEM_OPERAND| 1<< BYTE_OPERAND),0},
+    {"SHORT",movSHORTCodeTable,(1<< SHORT_MEM_OPERAND| 1<< LONG_MEM_OPERAND| 1<< BYTE_OPERAND),0},
     {NULL,NULL,0,0},
 };
 
@@ -238,7 +239,7 @@ ExtensionCodeAndCode exgwCodeTable[] = {
 };
 
 ConversionData exgwFlagTable[]={
-    {"X",exgwCodeTable,0,0},
+    {"X",exgwCodeTable,(1<< Y_OPERAND),0},
     {NULL,NULL,0,0},
 };
 
