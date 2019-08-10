@@ -68,5 +68,5 @@ CodeInfo tnzwCodeInfo;
     1<<LONGOFF_X_OPERAND                          |     \
     1<<BRACKETED_SHORTPTR_DOT_W_OPERAND           |     \
     1<<SHORTPTR_DOT_W_BRACKETEDX_OPERAND          |     \
-    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND)
+    1<<LONGPTR_DOT_W_BRACKETEDX_OPERAND  )
 #endif // compareAndTestsInstruction_H

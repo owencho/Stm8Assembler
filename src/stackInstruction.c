@@ -1,37 +1,37 @@
 #include "stackInstruction.h"
 
 ExtensionCodeAndCode pushCodeTable[] = {
-[A_OPERAND]         ={NA,0x88},
-[CC_OPERAND]        ={NA,0x8a},
-[BYTE_OPERAND]      ={NA,0x4B},
-[LONG_MEM_OPERAND]  ={NA,0x3B},
+    [A_OPERAND]         ={NA,0x88},
+    [CC_OPERAND]        ={NA,0x8a},
+    [BYTE_OPERAND]      ={NA,0x4B},
+    [LONG_MEM_OPERAND]  ={NA,0x3B},
 };
 
 ConversionData pushFlagTable[]={
-{"A",pushCodeTable,0,0},
-{"CC",pushCodeTable,0,0},
-{"COMP",pushCodeTable,0,0},
-{NULL,NULL,0,0},
+    {"A",pushCodeTable,0,0},
+    {"CC",pushCodeTable,0,0},
+    {"COMP",pushCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo pushCodeInfo={"push",PUSH_SUPPORTED_OPERANDS,
-                      assembleOneOperand,pushFlagTable};
+                        assembleOneOperand,pushFlagTable};
 
 ExtensionCodeAndCode popCodeTable[] = {
-[A_OPERAND]         ={NA,0x84},
-[CC_OPERAND]        ={NA,0x86},
-[LONG_MEM_OPERAND]  ={NA,0x32},
+    [A_OPERAND]         ={NA,0x84},
+    [CC_OPERAND]        ={NA,0x86},
+    [LONG_MEM_OPERAND]  ={NA,0x32},
 };
 
 ConversionData popFlagTable[]={
-{"A",popCodeTable,0,0},
-{"CC",popCodeTable,0,0},
-{"COMP",popCodeTable,0,0},
-{NULL,NULL,0,0},
+    {"A",popCodeTable,0,0},
+    {"CC",popCodeTable,0,0},
+    {"COMP",popCodeTable,0,0},
+    {NULL,NULL,0,0},
 };
 
 CodeInfo popCodeInfo={"pop",POP_SUPPORTED_OPERANDS,
-                    assembleOneOperand,popFlagTable};
+                      assembleOneOperand,popFlagTable};
 
 ExtensionCodeAndCode pushwCodeTable[] = {
     [X_OPERAND]         ={NA,0x89},
@@ -45,7 +45,7 @@ ConversionData pushwFlagTable[]={
 };
 
 CodeInfo pushwCodeInfo={"pushw",STACKWORD_SUPPORTED_OPERANDS,
-                       assembleOneOperand,pushwFlagTable};
+                        assembleOneOperand,pushwFlagTable};
 
 
 ExtensionCodeAndCode popwCodeTable[] = {
@@ -60,4 +60,4 @@ ConversionData popwFlagTable[]={
 };
 
 CodeInfo popwCodeInfo={"popw",STACKWORD_SUPPORTED_OPERANDS,
-                       assembleOneOperand,popwFlagTable};
+                        assembleOneOperand,popwFlagTable};

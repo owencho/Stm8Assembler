@@ -14,6 +14,21 @@
 
 //SubProgram
 
+void squareBracketFlagCheck(IntegerToken *token, stm8Operand * operand ,uint64_t flags){
+    if(operand->type == BRACKETED_SHORTPTR_DOT_W_OPERAND){
+        operandFlagCheck(flags,token,BRACKETED_SHORTPTR_DOT_W_OPERAND);
+    }
+    else if(operand->type == BRACKETED_LONGPTR_DOT_W_OPERAND){
+        operandFlagCheck(flags,token,BRACKETED_LONGPTR_DOT_W_OPERAND);
+    }
+    else if(operand->type == BRACKETED_LONGPTR_DOT_E_OPERAND){
+        operandFlagCheck(flags,token,BRACKETED_LONGPTR_DOT_E_OPERAND);
+    }
+    else{
+        throwException(ERR_UNSUPPORTED_OPERAND,token,"expected only [] ");
+    }
+}
+
 int signedIntCheck(Tokenizer *tokenizer){
     int value;
     IntegerToken *token;
@@ -147,6 +162,7 @@ stm8Operand *createOperand( stm8OperandType type,
                             uint16_t ms,
                             uint16_t ls,
                             uint16_t extB){
+
     stm8Operand *operand =malloc(sizeof(stm8Operand));
     operand->dataSize.extCode = extCode;
     operand->type = type;
@@ -160,6 +176,7 @@ stm8Operand *createOperand( stm8OperandType type,
 stm8Operand *createLsOperand( stm8OperandType type,
                               int value,
                               IntegerToken *token){
+
     stm8Operand *operand =malloc(sizeof(stm8Operand));
     if(value <256 && value >= 0){
       operand = createOperand(type,NA,NA,value,NA,NA);
@@ -240,7 +257,7 @@ stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags){
           operandType = CC_OPERAND;
       }
       else{
-        throwException(ERR_INVALID_SYNTAX,valueToken,"Invalid Operand");
+        throwException(ERR_INVALID_OPERAND,valueToken,"Invalid Operand");
       }
     if(token->str == NULL){
       flagToken = extendTokenStr(valueToken ,token);
@@ -266,13 +283,18 @@ stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokeni
              if(operandCounter==1){
                  if(valueCount==1 && isOperandNeeded(flags,SHORTPTR_DOT_W_BRACKETEDX_OPERAND)){
                       flagToken = extendTokenStr(tokenValue ,token);
-                      operandFlagCheck(flags,tokenValue,SHORTPTR_DOT_W_BRACKETEDX_OPERAND);
+                      operandFlagCheck(flags,flagToken,SHORTPTR_DOT_W_BRACKETEDX_OPERAND);
                       operand = createLsOperand(SHORTPTR_DOT_W_BRACKETEDX_OPERAND,value,token);
                  }
                  else if (valueCount==2 || (valueCount ==1 && isOperandNeeded(flags,LONGPTR_DOT_W_BRACKETEDX_OPERAND))){
                      flagToken = extendTokenStr(tokenValue ,token);
                      operandFlagCheck(flags,flagToken,LONGPTR_DOT_W_BRACKETEDX_OPERAND);
                      operand = createMsOperand(LONGPTR_DOT_W_BRACKETEDX_OPERAND,value,token);
+                 }
+                 else{
+                   flagToken = extendTokenStr(tokenValue ,token);
+                   operandFlagCheck(flags,flagToken,SHORTPTR_DOT_W_BRACKETEDX_OPERAND);
+                   operandFlagCheck(flags,flagToken,LONGPTR_DOT_W_BRACKETEDX_OPERAND);
                  }
              }
              else if(operandCounter==2){
@@ -281,7 +303,6 @@ stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokeni
                      operandFlagCheck(flags,flagToken,SHORTPTR_DOT_W_BRACKETEDY_OPERAND);
                      operand = createLsOperand(SHORTPTR_DOT_W_BRACKETEDY_OPERAND,value,token);
                  }
-
                else{
                     throwException(ERR_INVALID_SYNTAX,tokenValue,"Expected only value less than 65536 and larger than 0");
                }
@@ -423,13 +444,9 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                 nullCheck(ERR_INVALID_SYNTAX,token,"Expected ] closing squarebracket");
                 if(strcmp(token->str,"]")==0){
                     if(valueCount==1 && isOperandNeeded(flags,BRACKETED_SHORTPTR_DOT_W_OPERAND) ){
-                        flagToken = extendTokenStr(initToken ,token);
-                        operandFlagCheck(flags,flagToken,BRACKETED_SHORTPTR_DOT_W_OPERAND);
                         operand = createLsOperand(BRACKETED_SHORTPTR_DOT_W_OPERAND,value,token);
                     }
                     else if (valueCount==2 || (valueCount ==1 && isOperandNeeded(flags,BRACKETED_LONGPTR_DOT_W_OPERAND))){
-                        flagToken = extendTokenStr(initToken,token);
-                        operandFlagCheck(flags,flagToken,BRACKETED_LONGPTR_DOT_W_OPERAND);
                         operand = createMsOperand(BRACKETED_LONGPTR_DOT_W_OPERAND,value,token);
                     }
                 }
@@ -443,8 +460,6 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                 nullCheck(ERR_INVALID_SYNTAX,token,"Expected ] closing squarebracket");
                 if(strcmp(token->str,"]")==0){
                     if(valueCount==2 || (valueCount ==1 && isOperandNeeded(flags,BRACKETED_LONGPTR_DOT_E_OPERAND))){
-                      flagToken = extendTokenStr(initToken ,token);
-                      operandFlagCheck(flags,flagToken,BRACKETED_LONGPTR_DOT_E_OPERAND);
                       operand = createMsOperand(BRACKETED_LONGPTR_DOT_E_OPERAND,value,token);
                     }
                     else{
@@ -461,13 +476,9 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
         }
         else if(strcmp(token->str,"]")==0){
             if(valueCount==1){
-                flagToken = extendTokenStr(initToken ,token);
-                operandFlagCheck(flags,flagToken,BRACKETED_SHORTPTR_DOT_W_OPERAND);
                 operand = createLsOperand(BRACKETED_SHORTPTR_DOT_W_OPERAND,value,token);
             }
             else if (valueCount==2){
-                flagToken = extendTokenStr(initToken,token);
-                operandFlagCheck(flags,flagToken,BRACKETED_LONGPTR_DOT_W_OPERAND);
                 operand = createMsOperand(BRACKETED_LONGPTR_DOT_W_OPERAND,value,token);
             }
         }
@@ -563,6 +574,7 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
     stm8Operand *operand =NULL;
     IntegerToken *token;
     IntegerToken *initToken;
+    IntegerToken * flagToken;
     int lsCount = 0;
     int msCount = 0;
     uint16_t valueLs ;
@@ -580,6 +592,10 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
       else if(strcmp(token->str,"[")==0){
           pushBackToken(tokenizer, (Token*)token);
           operand = operandHandleSquareBracket(tokenizer,flags);
+          token =(IntegerToken*)getToken(tokenizer);
+          flagToken = extendTokenStr(initToken,token);
+          squareBracketFlagCheck(flagToken,operand,flags);
+          pushBackToken(tokenizer, (Token*)token);
       }
       else if(strcmp(token->str,"#")==0){
           token = (IntegerToken *)getToken(tokenizer);

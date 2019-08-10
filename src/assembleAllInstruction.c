@@ -247,6 +247,7 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
     IntegerToken * initToken;
     initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*) token);
     if(token->str==NULL){
             code = dataFlag.codeTable[operand->type];
 
