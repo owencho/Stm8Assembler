@@ -29,7 +29,7 @@ void test_nullCheck_given_empty_expect_error_thrown(void) {
     nullCheck(ERR_INVALID_SYNTAX,token,"NULL detected");
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -47,7 +47,7 @@ void test_nullCheck_given_w_expect_pass(void) {
     nullCheck(ERR_INVALID_SYNTAX,token,"Expected w after .");
     TEST_ASSERT_NOT_NULL(token->str);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -77,7 +77,7 @@ void test_operandCheck_given_X_expect_return_1(void) {
     int a = operandCheck(token, 0);
     TEST_ASSERT_EQUAL(1,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -95,7 +95,7 @@ void test_operandCheck_given_Y_expect_return_2(void) {
     int a = operandCheck(token, 0);
     TEST_ASSERT_EQUAL(2,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -113,7 +113,7 @@ void test_operandCheck_given_SP_condition_1_expect_return_3(void) {
     int a = operandCheck(token, 1);
     TEST_ASSERT_EQUAL(3,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -131,7 +131,7 @@ void test_operandCheck_given_SP_condition_2_expect_return_3(void) {
     int a = operandCheck(token, 2);
     TEST_ASSERT_EQUAL(3,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -150,7 +150,7 @@ void test_operandCheck_given_A_condition_2_expect_return_4(void) {
     int a = operandCheck(token, 2);
     TEST_ASSERT_EQUAL(4,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -168,7 +168,7 @@ void test_operandCheck_given_A_condition_1_expect_to_fail(void) {
     token = (IntegerToken *)getToken(tokenizer);
     int a = operandCheck(token, 1);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -186,7 +186,7 @@ void test_operandCheck_given_A_condition_0_expect_to_fail(void) {
     token = (IntegerToken *)getToken(tokenizer);
     int a = operandCheck(token, 0);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -204,7 +204,7 @@ void test_operandCheck_given_SP_condition_0_expect_to_fail(void) {
     token = (IntegerToken *)getToken(tokenizer);
     int a = operandCheck(token, 0);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -222,7 +222,7 @@ void test_operandCheck_given_XY_expect_to_fail(void) {
     token = (IntegerToken *)getToken(tokenizer);
     int a = operandCheck(token, 2);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -240,7 +240,7 @@ void test_operandCheck_given_22_expect_to_fail(void) {
     token = (IntegerToken *)getToken(tokenizer);
     int a = operandCheck(token, 2);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -262,7 +262,7 @@ void test_operandCheck_given_23_expect_return_1(void) {
     int a = valueCheck(token);
     TEST_ASSERT_EQUAL(1,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -281,7 +281,7 @@ void test_operandCheck_given_2543_expect_return_2(void) {
     int a = valueCheck(token);
     TEST_ASSERT_EQUAL(2,a);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -300,7 +300,7 @@ void test_operandCheck_given_negative_1234_expect_fail(void) {
     int a = valueCheck(token);
     TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -325,7 +325,7 @@ void test_getOperand_given_A_expect_A_register_type_is_returned(void) {
     //freeOperand(operand);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -347,7 +347,7 @@ void test_getOperand_given_CC_expect_CC_register_type_is_returned(void) {
     //freeOperand(operand);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -369,7 +369,7 @@ void test_getOperand_given_hash55_expect_BYTE_OPERAND_register_type_is_with_ms_e
   TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -390,7 +390,7 @@ void test_getOperand_given_hash7_expect_BYTE_OPERAND_register_type_is_with_ms_eq
   TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -406,7 +406,7 @@ void test_getOperand_given_hash_negative_43_expect_fail(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting ERR_INVALID_HASH_VALUE exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 93);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -429,7 +429,7 @@ void test_getOperand_given_dollarsign_3a_expect_shortmem_OPERAND_register_type_i
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -451,7 +451,7 @@ void test_getOperand_given_dollarsign_3a3b3c_expect_EXT_MEM_OPERAND_register_typ
     TEST_ASSERT_EQUAL_UINT16(0x3c, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -473,7 +473,7 @@ void test_getOperand_given_33_expect_shortmem_OPERAND_register_type_is_with_ms_e
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -495,7 +495,7 @@ void test_getOperand_given_XL_expect_XL_OPERAND_register_type(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -517,7 +517,7 @@ void test_getOperand_given_XL_expect_YL_OPERAND_register_type(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -539,7 +539,7 @@ void test_getOperand_given_XH_expect_XH_OPERAND_register_type(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -561,7 +561,7 @@ void test_getOperand_given_XH_expect_YH_OPERAND_register_type(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -577,8 +577,8 @@ void test_getOperand_given_Z_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting ERR_INTEGER_NEGATIVE exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
-    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+    dumpTokenErrorMessage(ex, __LINE__);
+    TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
   freeTokenizer(tokenizer);
 }
@@ -602,7 +602,7 @@ void test_getOperand_given_hash_1000_expect_error(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -618,7 +618,7 @@ void test_getOperand_given_doublehash_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -635,7 +635,7 @@ void test_getOperand_given_hash_negative_1234_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting ERR_INVALID_HASH_VALUE exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_HASH_VALUE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -658,7 +658,7 @@ void test_getOperand_given_dollarsign_3a7d_expect_shortmem_OPERAND_register_type
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   }Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -680,7 +680,7 @@ void test_getOperand_given_dollarsign_neg3a_expect_shortoff_OPERAND_register_typ
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   }Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -696,7 +696,7 @@ void test_getOperand_given_negative_hash_1264_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting ERR_UNSUPPORTED_OPERAND exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -719,7 +719,7 @@ void test_getOperand_given_dollarsign_3c_expect_shortoff_OPERAND_register_type_i
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   }Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -741,7 +741,7 @@ void test_getOperand_given_dollarsign_3a_expect_longmem_OPERAND_register_type_wh
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   }Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -757,7 +757,7 @@ void test_getOperand_given_negative_3_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -774,7 +774,7 @@ void test_getOperand_given_dollarsign_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -798,7 +798,7 @@ void test_getOperand_given_bracketedX_expect_BracX_Operand(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -814,7 +814,7 @@ void test_getOperand_given_bracX1234_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -831,7 +831,7 @@ void test_getOperand_given_bracX_commar_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -849,7 +849,7 @@ void test_getOperand_given_bracX_without_closing_bracket_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -866,7 +866,7 @@ void test_getOperand_given_bracX_without_opening_bracket_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -883,7 +883,7 @@ void test_getOperand_given_bracketA_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 211);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -906,7 +906,7 @@ void test_getOperand_given_bracketed_Space_X_expect_BracX_Operand(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -928,7 +928,7 @@ void test_getOperand_given_bracketed_161_X_expect_Brac_OPERAND_register_type_is_
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -944,7 +944,7 @@ void test_getOperand_given_bracX_171_without_closing_bracket_expect_error(void) 
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -961,7 +961,7 @@ void test_getOperand_given_bracX_value_zzzz_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_INTEGER, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -984,7 +984,7 @@ void test_getOperand_given_bracketed_2a3b4e_X_expect_EXTOFF_X_OPERAND_register_t
     TEST_ASSERT_EQUAL_UINT16(0x4e, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1000,7 +1000,7 @@ void test_getOperand_given_881_bracX_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 288);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -1017,7 +1017,7 @@ void test_getOperand_given_bracX_neg_311_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 154);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -1040,7 +1040,7 @@ void test_getOperand_given_bracketed_dollarsign_517d_X_expect_Brac_OPERAND_regis
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1062,7 +1062,7 @@ void test_getOperand_given_bracketedY_expect_BracY_Operand(void) {
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1084,7 +1084,7 @@ void test_getOperand_given_bracketed_207_Y_expect_SHORTOFFY_OPERAND_register_typ
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1106,7 +1106,7 @@ void test_getOperand_given_bracketed_dollarsign_678d_y_expect_longoffY_OPERAND_r
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1128,7 +1128,7 @@ void test_getOperand_given_bracketed_dollarsign_99678d_y_expect_extoffY_OPERAND_
     TEST_ASSERT_EQUAL_UINT16(0x8d, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1151,7 +1151,7 @@ void test_getOperand_given_bracketed_dollarsign_10_SP_expect_SP_OPERAND_register
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1167,7 +1167,7 @@ void test_getOperand_given_negative_256_sp_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -1190,7 +1190,7 @@ void test_getOperand_given_bracketed_dollarsign_77_dot_w_expect_shortptrw_OPERAN
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1212,7 +1212,7 @@ void test_getOperand_given_bracketed_dollarsign_85_expect_shortptrw_OPERAND_regi
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1234,7 +1234,7 @@ void test_getOperand_given_bracketed_dollarsign_123d_dot_w_expect_longptrw_OPERA
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1256,7 +1256,7 @@ void test_getOperand_given_bracketed_dollarsign_556d_expect_longptrw_OPERAND_reg
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1273,7 +1273,7 @@ void test_getOperand_given_negative_256_w_expect_error(void) {
     operand = getOperand(tokenizer,ALL_OPERANDS);
     TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
   }
   freeTokenizer(tokenizer);
@@ -1297,7 +1297,7 @@ void test_getOperand_given_bracketed_dollarsign_84_dot_w_and_X_expect_shortptrwX
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1319,7 +1319,7 @@ void test_getOperand_given_bracketed_dollarsign_43_and_X_expect_shortptrwX_OPERA
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1341,7 +1341,7 @@ void test_getOperand_given_bracketed_dollarsign_679d_dot_w_and_X_expect_longptrw
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1363,7 +1363,7 @@ void test_getOperand_given_bracketed_dollarsign_7856_and_X_expectLONGPTR_DOT_W_B
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1385,7 +1385,7 @@ void test_getOperand_given_bracketed_dollarsign_76_dot_w_and_Y_expect_shortptrwY
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1407,7 +1407,7 @@ void test_getOperand_given_bracketed_dollarsign_58_dot_w_and_Y_expect_shortptrwY
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1429,7 +1429,7 @@ void test_getOperand_given_bracketed_dollarsign_58_dot_e_expected_BRACKETED_LONG
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1451,7 +1451,7 @@ void test_getOperand_given_bracketed_dollarsign_5766_dot_e_expected_BRACKETED_LO
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1473,7 +1473,7 @@ void test_getOperand_given_bracketed_dollarsign_12_dot_e_and_X_expect_LONGPTR_DO
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(LONGPTR_DOT_E_BRACKETEDX_OPERAND, ex->errorCode);
   }
 }
@@ -1495,7 +1495,7 @@ void test_getOperand_given_bracketed_dollarsign_3456_dote_and_X_expect_LONGPTR_D
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1517,7 +1517,7 @@ void test_getOperand_given_bracketed_dollarsign_4977_dot_e_and_Y_expect_LONGPTR_
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(LONGPTR_DOT_E_BRACKETEDX_OPERAND, ex->errorCode);
   }
 }
@@ -1539,7 +1539,7 @@ void test_getOperand_given_bracketed_dollarsign_34_and_Y_expect_LONGPTR_DOT_E_BR
     TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
   }
 }
@@ -1555,8 +1555,8 @@ void test_getOperand_given_7766_longptr_dot_w_bracY_expect_it_to_fail_on_value(v
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
-    TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+    dumpTokenErrorMessage(ex, __LINE__);
+    TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
   }
 }
 
@@ -1571,7 +1571,7 @@ void test_getOperand_given_734_Square_BracX_without_closing_bracket_expect_to_fa
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
@@ -1587,7 +1587,7 @@ void test_getOperand_given_7564_Square_BracX_without_closing_bracket_expect_to_f
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
@@ -1603,7 +1603,7 @@ void test_getOperand_given_7564_Square_BracXdote_with_extra_stuff_expect_error(v
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
   }
 }
@@ -1619,7 +1619,7 @@ void test_getOperand_given_A_expect_A_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1634,7 +1634,7 @@ void test_getOperand_given_SP_expect_SP_to_fail_on_flags(void) {
     TEST_FAIL_MESSAGE("Expecting ERR_INVALID_UNSUPPORTED_OPERAND exeception to be thrown.");
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1649,7 +1649,7 @@ void test_getOperand_given_X_expect_X_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1664,7 +1664,7 @@ void test_getOperand_given_Y_expect_Y_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1679,7 +1679,7 @@ void test_getOperand_given_CC_expect_CC_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1695,7 +1695,7 @@ void test_getOperand_given_Byte_expect_Byte_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1711,7 +1711,7 @@ void test_getOperand_given_SHORT_MEM_expect_SHORT_MEM_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1727,7 +1727,7 @@ void test_getOperand_given_LONG_MEM_expect_LONG_MEM_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1743,7 +1743,7 @@ void test_getOperand_given_BracketX_expect_BracketX_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1759,7 +1759,7 @@ void test_getOperand_given_SHORTOFF_X_expect_SHORTOFF_X_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1775,7 +1775,7 @@ void test_getOperand_given_LONGOFF_X_expect_LONGOFF_X_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1791,7 +1791,7 @@ void test_getOperand_given_BracketY_expect_BracketY_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1807,7 +1807,7 @@ void test_getOperand_given_SHORTOFF_Y_expect_SHORTOFF_Y_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1823,7 +1823,7 @@ void test_getOperand_given_LONGOFF_Y_expect_LONGOFF_Y_to_fail_on_flags(void) {
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1839,7 +1839,7 @@ void test_getOperand_given_SHORTOFF_SP_expect_SHORTOFF_SP_to_fail_on_flags(void)
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1855,7 +1855,7 @@ void test_getOperand_given_SHORTOFF_DOT_W_expect_SHORTOFF_DOT_W_to_fail_on_flags
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1871,7 +1871,7 @@ void test_getOperand_given_LONGOFF_DOT_W_expect_LONGOFF_DOT_W_to_fail_on_flags(v
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1887,7 +1887,7 @@ void test_getOperand_given_SHORTPTR_DOT_W_BRACKETEDX_expect_SHORTPTR_DOT_W_BRACK
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1903,7 +1903,7 @@ void test_getOperand_given_LONGPTR_DOT_W_BRACKETEDX_expect_LONGPTR_DOT_W_BRACKET
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1919,7 +1919,7 @@ void test_getOperand_given_SHORTPTR_DOT_W_BRACKETEDY_expect_SHORTPTR_DOT_W_BRACK
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1935,7 +1935,7 @@ void test_getOperand_given_LONGPTR_DOT_E_BRACKETEDX_OPERAND_expect_LONGPTR_DOT_E
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1951,7 +1951,7 @@ void test_getOperand_given_BRACKETED_LONGPTR_DOT_E_OPERAND_expect_BRACKETED_LONG
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1967,7 +1967,7 @@ void test_getOperand_given_LONGPTR_DOT_E_BRACKETEDY_OPERAND_expect_LONGPTR_DOT_E
 
     freeTokenizer(tokenizer);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 416);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
   }
 }
@@ -1987,7 +1987,7 @@ void test_error_throwing(void) {
 		token->affix = INFIX;
     throwException(ERR_SYSTEM_ERROR, token, "Just for fun: Do not expect a number here: %s", token->str);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
   }
 }
 */

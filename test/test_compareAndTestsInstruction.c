@@ -311,8 +311,156 @@ void test_assembleInstruction_given_cp_X_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
+///////////////////TNZ TEST/////////////////////////////////////////////////////
+void test_assembleInstruction_given_tnz_A_expect_0x4d(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x4d,END};
+    Try{
+        tokenizer = createTokenizer("  tnz a ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_NOT_NULL(mcode);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_shortmem_expect_0x3d21(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x3d,0x21,END};
+    Try{
+        tokenizer = createTokenizer("  tnz $21 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_NOT_NULL(mcode);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_longmem_OPERAND_expect_0x725D1335(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x5D,0x13,0x35,END};
+    Try{
+        tokenizer = createTokenizer("  TNZ $1335 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_bracketX_OPERAND_expect_0x7d(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x7d,END};
+    Try{
+        tokenizer = createTokenizer("  tnz (X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
 
 
+void test_assembleInstruction_given_tnz_SHORTOFF_X_OPERAND_expect_0x6d23(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x6d,0x23,END};
+    Try{
+        tokenizer = createTokenizer("  tnz ($23,X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_LONGOFF_X_OPERAND_expect_0x724d4896(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x4d,0x48,0x96,END};
+    Try{
+        tokenizer = createTokenizer("  tnz  ($4896,X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_bracketY_expect_0x907d(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x90,0x7d,END};
+    Try{
+        tokenizer = createTokenizer("  tnz (y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_SHORTOFF_Y_OPERAND_expect_0x906d45(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x90,0x6d,0x45,END};
+    Try{
+        tokenizer = createTokenizer("  tnz ($45,Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_LONGOFF_Y_OPERAND_expect_0x904d5525(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x90,0x4d,0x55,0x25,END};
+
+    Try{
+        tokenizer = createTokenizer("  tnz  ($5525,Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
 void test_assembleInstruction_given_tnz_shortptrSP_OPERAND_expect_0x0D33(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -329,12 +477,76 @@ void test_assembleInstruction_given_tnz_shortptrSP_OPERAND_expect_0x0D33(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_tnz_shortptrSP_OPERAND_expect_0x725D1335(void) {
+void test_assembleInstruction_given_tnz_shortptrdotW_OPERAND_expect_0x923dae(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x72,0x5D,0x13,0x35,END};
+    int expectedMcode[]={0x92,0x3d,0xae,END};
+
     Try{
-        tokenizer = createTokenizer("  TNZ $1335 ");
+        tokenizer = createTokenizer("  tnz  [$ae] ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_tnz_longptrdotW_OPERAND_expect_0x723daded(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x3d,0xad,0xed,END};
+
+    Try{
+        tokenizer = createTokenizer("  tnz [$aded.w] ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_tnz_shortptrwX_OPERAND_expect_0x926d11(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x92,0x6d,0x11,END};
+
+    Try{
+        tokenizer = createTokenizer("   tnz ([$11],X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_tnz_longptrwX_OPERAND_expect_0x726dACFA(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0x6d,0xAC,0xFA,END};
+
+    Try{
+        tokenizer = createTokenizer("  tnz ([$ACFA.w],X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_tnz_shortptrwY_OPERAND_expect_0x916d33(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x91,0x6d,0x33,END};
+    Try{
+        tokenizer = createTokenizer("  tnz ([$33.w],Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -345,12 +557,163 @@ void test_assembleInstruction_given_tnz_shortptrSP_OPERAND_expect_0x725D1335(voi
 	  freeTokenizer(tokenizer);
 }
 
+void test_assembleInstruction_given_tnz_brackety_with_extra_Operand_operand_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer(" tnz (y),([$10.w],Y)  ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_x_operand_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer(" tnz X  ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_tnz_word_operand_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer(" tnz #$1234  ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+/////////////////////////////bcp test////////////////////////////////////////////
+void test_assembleInstruction_given_bcp_byte_expect_0xa521(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xa5,0x21,END};
+    Try{
+        tokenizer = createTokenizer("  bcp a, #$21 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_NOT_NULL(mcode);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_shortmem_expect_0xb577(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xb5,0x77,END};
+    Try{
+        tokenizer = createTokenizer("  bcp a, $77 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_NOT_NULL(mcode);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_longmem_expect_0xc53211(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xc5,0x32,0x11,END};
+    Try{
+        tokenizer = createTokenizer("  bcp a, $3211 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_NOT_NULL(mcode);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_bracketX_OPERAND_expect_0xF5(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xF5,END};
+    Try{
+        tokenizer = createTokenizer("  bcp A,(X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+
+void test_assembleInstruction_given_bcp_SHORTOFF_X_OPERAND_expect_0xe522(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xe5,0x22,END};
+    Try{
+        tokenizer = createTokenizer("  bcP a, ($22,X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_LONGOFF_X_OPERAND_expect_0xd54896(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0xd5,0x48,0x96,END};
+    Try{
+        tokenizer = createTokenizer("  bcp a, ($4896,X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
 void test_assembleInstruction_given_bcp_BRACKETED_Y_OPERAND_expect_0x90f5(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
     int expectedMcode[]={0x90,0xf5,END};
     Try{
-        tokenizer = createTokenizer("  bCp A, (Y) ");
+        tokenizer = createTokenizer("  bcp A, (Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -361,6 +724,54 @@ void test_assembleInstruction_given_bcp_BRACKETED_Y_OPERAND_expect_0x90f5(void) 
 	  freeTokenizer(tokenizer);
 }
 
+void test_assembleInstruction_given_bcp_SHORTOFF_Y_OPERAND_expect_0x90e545(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x90,0xe5,0x45,END};
+    Try{
+        tokenizer = createTokenizer("  bcp a, ($45,Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_LONGOFF_Y_OPERAND_expect_0x90d55525(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x90,0xd5,0x55,0x25,END};
+
+    Try{
+        tokenizer = createTokenizer("  bcp a, ($5525,Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_bcp_shortoffSP_OPERAND_expect_0x1131(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x15,0x31,END};
+
+    Try{
+        tokenizer = createTokenizer("  bcp a, ($31,SP) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
 void test_assembleInstruction_given_bcp_a_shortptrw_OPERAND_expect_0x92c531(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -376,6 +787,87 @@ void test_assembleInstruction_given_bcp_a_shortptrw_OPERAND_expect_0x92c531(void
   }
 	  freeTokenizer(tokenizer);
 }
+void test_assembleInstruction_given_bcp_longptrdotW_OPERAND_expect_0x72c1a132(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0xc5,0xa1,0x32,END};
+
+    Try{
+        tokenizer = createTokenizer("  bcp a,[$a132.w] ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_bcp_shortptrwX_OPERAND_expect_0x92d511(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x92,0xd5,0x11,END};
+
+    Try{
+        tokenizer = createTokenizer("   bcp a,([$11],X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_bcp_longptrwX_OPERAND_expect_0x72D5ACFA(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x72,0xD5,0xAC,0xFA,END};
+
+    Try{
+        tokenizer = createTokenizer("  bcp a,([$ACFA.w],X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, 1);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+void test_assembleInstruction_given_bcp_shortptrwY_OPERAND_expect_0x91D533(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x91,0xD5,0x33,END};
+    Try{
+        tokenizer = createTokenizer("  bcp A,([$33.w],Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+  }Catch(ex){
+    dumpTokenErrorMessage(ex, 1);
+    TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+  }
+	  freeTokenizer(tokenizer);
+}
+
+void test_assembleInstruction_given_bcp_a_invalid_operand_expect_fail(void) {
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+
+    Try{
+        tokenizer = createTokenizer(" bcp a,([$1000.w],Y)  ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, 416);
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+
 //CPWX/////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cpw_word_expect_0xa30021(void) {
     MachineCode *mcode =NULL ;

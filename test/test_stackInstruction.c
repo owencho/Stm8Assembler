@@ -345,7 +345,7 @@ void test_assembleInstruction_given_popw_f_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpTokenErrorMessage(ex, 416);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
 }

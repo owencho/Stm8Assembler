@@ -72,14 +72,18 @@ stm8Operand *createOperand( stm8OperandType type,
                             uint16_t ms,
                             uint16_t ls,
                             uint16_t extB);
-                            
+
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint64_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type);
 IntegerToken* extendTokenStr(IntegerToken *tokenToExtend , IntegerToken *tokenToCover );
 stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags);
+stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags);
+stm8Operand *operandHandleHash(Tokenizer* tokenizer ,uint64_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 int signedIntCheck(Tokenizer *tokenizer);
+stm8OperandType symbolOperandCheck(IntegerToken * token);
+void finalNullCheck(Tokenizer* tokenizer);
 
 #endif

@@ -12,6 +12,7 @@
 #define ERR_EXPECTING_OPERATOR            52
 #define ERR_INTEGER_DOLLAR_TO_LARGE       60
 #define ERR_INVALID_HASH_VALUE            61
+#define ERR_INVALID_SIGNEDINT_VALUE       62
 #define ERR_INTEGER_NEGATIVE              70
 #define ERR_INTEGER_TOO_LARGE             71
 #define ERR_INTEGER_TOO_SMALL             72
@@ -24,7 +25,7 @@
 #define ERR_INVALID_STM8_INSTRUCTION      78
 #define ERR_OPERAND_NULL                  79
 #define ERR_INVALID_NVALUE                80
-
+#define ERR_DATATABLE_NULL                81
 
 
 #endif // Error_H

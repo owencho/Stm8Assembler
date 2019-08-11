@@ -25,7 +25,7 @@ ConversionData andFlagTable[]={
 };
 
 CodeInfo andCodeInfo={"and",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,andFlagTable};
+                      assembleSymbolComplexOperand,andFlagTable};
 
 
 ExtensionCodeAndCode orCodeTable[] = {
@@ -52,7 +52,7 @@ ConversionData orFlagTable[]={
 };
 
 CodeInfo orCodeInfo={"or",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,orFlagTable};
+                      assembleSymbolComplexOperand,orFlagTable};
 
 
 ExtensionCodeAndCode xorCodeTable[] = {
@@ -80,7 +80,7 @@ ConversionData xorFlagTable[]={
 };
 
 CodeInfo xorCodeInfo={"xor",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,xorFlagTable};
+                      assembleSymbolComplexOperand,xorFlagTable};
 
 ExtensionCodeAndCode cplCodeTable[] = {
     [A_OPERAND]                                 ={NA,0x43},

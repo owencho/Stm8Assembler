@@ -145,8 +145,10 @@ MachineCode *assembleInstruction(Tokenizer *tokenizer){
     //find codeInfo on instructionTable
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*) token);
-    if(TOKEN_IDENTIFIER_TYPE != token-> type)
-      return NULL;
+    if(TOKEN_IDENTIFIER_TYPE != token-> type){
+        throwException(ERR_INVALID_STM8_INSTRUCTION,token,"Invalid instruction name! \n '%s' This is not a valid instruction name ",token->str);
+        return NULL;
+    }
 
     do{
         nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected valid name");
@@ -158,7 +160,7 @@ MachineCode *assembleInstruction(Tokenizer *tokenizer){
         i++;
     }while(instructionTable[i].name != NULL);
     if(instructionTable[i].name == NULL){
-        throwException(ERR_INVALID_STM8_INSTRUCTION,token,"Invalid instruction name!");
+        throwException(ERR_INVALID_STM8_INSTRUCTION,token,"Invalid instruction name! \n '%s' This is not a valid instruction name ",token->str);
     }
     return mcode ;
 }

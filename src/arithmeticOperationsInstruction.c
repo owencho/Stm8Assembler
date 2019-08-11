@@ -24,7 +24,7 @@ ConversionData adcFlagTable[]={
 };
 
 CodeInfo adcCodeInfo={"adc",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,adcFlagTable};
+                      assembleSymbolComplexOperand,adcFlagTable};
 
 ExtensionCodeAndCode addCodeTable[] = {
     [BYTE_OPERAND]         ={NA,0xab},
@@ -50,7 +50,7 @@ ConversionData addFlagTable[]={
 };
 
 CodeInfo addCodeInfo={"add",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,addFlagTable};
+                      assembleSymbolComplexOperand,addFlagTable};
 
 
 ExtensionCodeAndCode addwXCodeTable[] = {
@@ -75,7 +75,7 @@ ConversionData addwFlagTable[]={
 };
 
 CodeInfo addwCodeInfo={"addw",(1 << X_OPERAND | 1<< SP_OPERAND | 1 << Y_OPERAND ),
-                      assembleXYSPComplexOperand,addwFlagTable};
+                      assembleSymbolComplexOperand,addwFlagTable};
 
 
 ExtensionCodeAndCode subACodeTable[] = {
@@ -106,7 +106,7 @@ ConversionData subFlagTable[]={
 };
 
 CodeInfo subCodeInfo={"sub",(1 << A_OPERAND | 1<< SP_OPERAND ),
-                      assembleASPComplexOperand,subFlagTable};
+                      assembleSymbolComplexOperand,subFlagTable};
 
 
 
@@ -125,7 +125,7 @@ ConversionData divFlagTable[]={
 };
 
 CodeInfo divCodeInfo={"div",(1 << X_OPERAND | 1<< Y_OPERAND ),
-                      assembleXYOperand,divFlagTable};
+                      assembleSymbolComplexOperand,divFlagTable};
 
 /////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode subwXCodeTable[] = {
@@ -146,7 +146,7 @@ ConversionData subwFlagTable[]={
 };
 
 CodeInfo subwCodeInfo={"subw",(1 << X_OPERAND | 1<< Y_OPERAND ),
-                      assembleXYOperand,subwFlagTable};
+                      assembleSymbolComplexOperand,subwFlagTable};
 
 
 ExtensionCodeAndCode sbcCodeTable[] = {
@@ -173,7 +173,7 @@ ConversionData sbcFlagTable[]={
 };
 
 CodeInfo sbcCodeInfo={"sbc",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,sbcFlagTable};
+                      assembleSymbolComplexOperand,sbcFlagTable};
 
 ExtensionCodeAndCode negcodeTable[] = {
     [A_OPERAND]         ={NA,0x40},
@@ -218,7 +218,7 @@ ConversionData mulFlagTable[]={
 };
 
 CodeInfo mulCodeInfo={"mul",(1 << X_OPERAND | 1<< Y_OPERAND ),
-                    assembleXYOperand,mulFlagTable};
+                    assembleSymbolComplexOperand,mulFlagTable};
 
 ExtensionCodeAndCode negwcodeTable[] = {
     [X_OPERAND]    ={NA,0x50},

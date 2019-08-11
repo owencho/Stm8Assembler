@@ -56,7 +56,7 @@ ConversionData ldFlagTable[]={
 };
 
 CodeInfo ldCodeInfo={"ld",LD1ST_SUPPORTED_OPERANDS,
-                      assembleLDOperand,ldFlagTable};
+                      assembleLDFLDOperand,ldFlagTable};
 
 ExtensionCodeAndCode ldfComplexCodeTable[] = {
     [EXT_MEM_OPERAND]                             ={NA,0xBD},
@@ -83,7 +83,7 @@ ConversionData ldfFlagTable[]={
 };
 
 CodeInfo ldfCodeInfo={"ldf",LDF_SUPPORTED_OPERANDS,
-                      assembleLDFOperand,ldfFlagTable};
+                      assembleLDFLDOperand,ldfFlagTable};
 
 ExtensionCodeAndCode ldwComXCodeTable[] = {
     [SHORT_MEM_OPERAND]                        ={NA,0xBF},
@@ -218,7 +218,7 @@ ConversionData exgFlagTable[]={
 };
 
 CodeInfo exgCodeInfo={"exg",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,exgFlagTable};
+                      assembleSymbolComplexOperand,exgFlagTable};
 
 ExtensionCodeAndCode clrwCodeTable[] = {
     [X_OPERAND]         ={NA,0x5F},
@@ -244,4 +244,4 @@ ConversionData exgwFlagTable[]={
 };
 
 CodeInfo exgwCodeInfo={"exgw",(1 << X_OPERAND),
-                      assembleXOperandAndComplexOperand,exgwFlagTable};
+                      assembleSymbolComplexOperand,exgwFlagTable};

@@ -24,7 +24,7 @@ ConversionData cpFlagTable[]={
 };
 
 CodeInfo cpCodeInfo={"cp",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,cpFlagTable};
+                      assembleSymbolComplexOperand,cpFlagTable};
 ////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode tnzCodeTable[] = {
     [A_OPERAND]                                 ={NA,0x4D},
@@ -77,7 +77,7 @@ ConversionData bcpFlagTable[]={
 };
 
 CodeInfo bcpCodeInfo={"bcp",(1 << A_OPERAND),
-                      assembleAOperandAndComplexOperand,bcpFlagTable};
+                      assembleSymbolComplexOperand,bcpFlagTable};
 ////////////////////////////////////////////////////////////////////////////////
 
 ExtensionCodeAndCode cpwXCodeTable[] = {
@@ -111,7 +111,7 @@ ConversionData cpwFlagTable[]={
 };
 
 CodeInfo cpwCodeInfo={"cpw",COMPAREWORD_SUPPORTED_OPERANDS,
-                      assembleXYOperand,cpwFlagTable};
+                      assembleSymbolComplexOperand,cpwFlagTable};
 ////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode tnzwCodeTable[] = {
     [X_OPERAND]         ={NA,0x5D},

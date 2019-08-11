@@ -240,7 +240,7 @@ CodeInfo jrulecodeInfo={"jrule",(1 << SHORT_OFF_OPERAND) ,
                         assembleJRXXOperand,jruleFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jrultCodeTable[] = {
-    [SHORT_OFF_OPERAND]         ={NA,0x25}
+    [SHORT_OFF_OPERAND]         ={NA,0x24}
 };
 
 ConversionData jrultFlagTable[]={

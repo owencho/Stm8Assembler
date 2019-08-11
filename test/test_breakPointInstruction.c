@@ -46,7 +46,7 @@ void test_assembleInstruction_given_Break_0x8b(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -63,7 +63,7 @@ void test_assembleInstruction_given_break_f_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -80,7 +80,7 @@ void test_assembleInstruction_given_break_1_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);

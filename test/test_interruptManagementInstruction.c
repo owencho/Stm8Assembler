@@ -42,7 +42,7 @@ void test_assembleInstruction_given_halt_0x8c(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -59,7 +59,7 @@ void test_assembleInstruction_given_halt_ggmu_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -76,7 +76,7 @@ void test_assembleInstruction_given_iret_0x80(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -93,7 +93,7 @@ void test_assembleInstruction_given_iret_m12m_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -111,7 +111,7 @@ void test_assembleInstruction_given_trap_0x83(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -128,7 +128,7 @@ void test_assembleInstruction_given_trap_1_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -145,7 +145,7 @@ void test_assembleInstruction_given_wfi_0x8f(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -162,7 +162,7 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -179,7 +179,7 @@ void test_assembleInstruction_given_int_0x82773121(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     }Catch(ex){
-        dumpTokenErrorMessage(ex, 1);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
@@ -196,7 +196,7 @@ void test_assembleInstruction_given_int_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -213,7 +213,7 @@ void test_assembleInstruction_given_int_A_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);

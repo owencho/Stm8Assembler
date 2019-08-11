@@ -33,7 +33,7 @@ void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_w
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -54,7 +54,7 @@ void test_customAssert_given_length5_machineCode_to_Compare_with_expectedMcode_e
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -75,7 +75,7 @@ void test_customAssert_given_length5_machineCode_to_Compare_with_different_code5
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -96,7 +96,7 @@ void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_e
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -116,7 +116,7 @@ void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_w
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -135,7 +135,7 @@ void test_customAssert_given_length3_machineCode_to_Compare_with_expectedMcode_e
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -154,7 +154,7 @@ void test_customAssert_given_length3_machineCode_to_Compare_with_different_code3
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -172,7 +172,7 @@ void test_customAssert_given_length2_machineCode_to_Compare_with_expectedMcode_e
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -190,7 +190,7 @@ void test_customAssert_given_length2_machineCode_to_Compare_with_different_code1
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -207,7 +207,7 @@ void test_customAssert_given_length1_machineCode_to_Compare_with_expectedMcode_e
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -224,7 +224,7 @@ void test_customAssert_given_length1_machineCode_to_Compare_with_different_expec
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -238,7 +238,7 @@ void test_customAssert_given_NULL_machineCode_expect_fail(void) {
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
@@ -255,7 +255,7 @@ void test_customAssert_given_NULL_expectedmachineCode__expect_fail(void) {
   Try{
     TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
   } Catch(ex) {
-    dumpTokenErrorMessage(ex, 1);
+    dumpTokenErrorMessage(ex, __LINE__);
     TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
   }
 	  freeTokenizer(tokenizer);
