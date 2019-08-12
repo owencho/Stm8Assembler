@@ -1,244 +1,118 @@
-void test_assembleInstruction_given_neg_A_OPERAND_expect_0x40(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x40,END};
+#include <stdio.h>
+#include "unity.h"
+#include "CustomAssert.h"
+#include "Common.h"
 
-    Try{
-        tokenizer = createTokenizer("  NEG A ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+#define _STRINGIFY(x)     #x
+#define STRINGIFY(x)     _STRINGIFY(x)
+
+int getExpectedCodeLength(const int expectedCode[] , int length){
+    int i=0;
+
+    while(expectedCode[i]!=END && (i != length)){
+      i++;
     }
-    freeTokenizer(tokenizer);
+    return i;
 }
 
-void test_assembleInstruction_given_neg_shortmem12_OPERAND_expect_0x3012(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x30,0x12,END};
+int getExpectedOperandCodeLength(const int expectedCode[] , int length){
+    int i=0;
 
-    Try{
-        tokenizer = createTokenizer("  NEG $12 ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    while(expectedCode[i]!=ENDOPERAND && (i != length)){
+      i++;
     }
-    freeTokenizer(tokenizer);
+    return i;
 }
-void test_assembleInstruction_given_neg_longmemff11_OPERAND_expect_0x7250FF11(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x72,0x50,0xFF,0x11,END};
 
-    Try{
-        tokenizer = createTokenizer("  NEG $FF11 ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-    }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_bracX_OPERAND_expect_0x70(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x70,END};
+void assertEqualOperand (const int expectedOperand[],
+                         const stm8Operand* actualOperand,
+                         const UNITY_LINE_TYPE lineNumber){
 
-    Try{
-        tokenizer = createTokenizer("  NEG (   X ) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    int length;
+    char msg[1024];
+    if(actualOperand == NULL){
+      UNITY_TEST_FAIL(lineNumber,"The actual Operand is NULL");
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortoffX_OPERAND_expect_0x60BB(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x60,0xBB,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG($BB,X) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    if(expectedOperand == NULL){
+      UNITY_TEST_FAIL(lineNumber,"The expected Operand is NULL");
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_longoffX_OPERAND_expect_0x72401A3B(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x72,0x40,0x1A,0x3B,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG ($1A3B,X) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    length =getExpectedOperandCodeLength(expectedOperand,MAX_CODE_LENGTH + 1);
+    UNITY_TEST_ASSERT_EQUAL_INT(length,6,lineNumber,
+                                "The Length of expectedOperand are not the same");
+    if(expectedOperand[0] != actualOperand->type) {
+      sprintf(msg,"Expected %u but encountered %u , the operand type is not the same",expectedOperand[0], actualOperand->type );
+      UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_bracY_OPERAND_expect_0x9070(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x90,0x70,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG ( Y ) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    else if(expectedOperand[1] != actualOperand->dataSize.extCode){
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index 1 is not the same",expectedOperand[1], actualOperand->dataSize.extCode );
+        UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortoffY_OPERAND_expect_0x906077(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x90,0x60,0x77,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG($77,Y) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    else if(expectedOperand[2] != actualOperand->dataSize.code){
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index 2 is not the same",expectedOperand[2], actualOperand->dataSize.code );
+        UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_longoffY_OPERAND_expect_0x9040C172(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x90,0x40,0xC1,0x72,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG ($C172,Y) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    else if(expectedOperand[3] != actualOperand->dataSize.ms){
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index 3 is not the same",expectedOperand[3], actualOperand->dataSize.ms );
+        UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortoffSP_OPERAND_expect_0x0055(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x00,0x55,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG($55,SP) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    else if(expectedOperand[4] != actualOperand->dataSize.ls){
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index 4 is not the same",expectedOperand[4], actualOperand->dataSize.ls );
+        UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortptrdotW_OPERAND_expect_0x9230F4(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x92,0x30,0xF4,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG [$F4] ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    else if(expectedOperand[5] != actualOperand->dataSize.extB){
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index 5 is not the same",expectedOperand[5], actualOperand->dataSize.extB );
+        UNITY_TEST_FAIL(lineNumber,msg);
     }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_longptrdotW_OPERAND_expect_0x7230F1E2(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x72,0x30,0xF1,0xE2,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG [$F1E2.w] ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-    }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortptrwX_OPERAND_expect_0x926065(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x92,0x60,0x65,END};
-
-    Try{
-        tokenizer = createTokenizer("   NEG([$65],X) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-    }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_longptrwX_OPERAND_expect_0x7260EEAA(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x72,0x60,0xEE,0xAA,END};
-
-    Try{
-        tokenizer = createTokenizer("  NEG([$EEAA.w],X) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-    }
-    freeTokenizer(tokenizer);
-}
-void test_assembleInstruction_given_neg_shortptrwY_OPERAND_expect_0x916005(void) {
-    MachineCode *mcode =NULL ;
-    Tokenizer *tokenizer = NULL;
-    int expectedMcode[]={0x91,0x60,0x05,END};
-
-    Try{
-        tokenizer = createTokenizer("   NEG([$5],Y) ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-    }Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-    }
-    freeTokenizer(tokenizer);
 }
 
 
-dumpTokenErrorMessage(ex, __LINE__);
+void assertEqualMCode (const int expectedMCode[],
+                      const MachineCode* actualMcode,
+                      const UNITY_LINE_TYPE lineNumber){
+
+    char msg[1024];
+    int length;
+    int i;
+
+    if(actualMcode == NULL){
+      UNITY_TEST_FAIL(lineNumber,"The actual Machine code is NULL");
+    }
+    if(expectedMCode == NULL){
+      UNITY_TEST_FAIL(lineNumber,"The expected Mcode is NULL");
+    }
+
+    length =getExpectedCodeLength(expectedMCode,MAX_CODE_LENGTH + 1);
+    if(length > MAX_CODE_LENGTH){
+      UNITY_TEST_FAIL(lineNumber,"The length is too long (>="STRINGIFY(MAX_CODE_LENGTH)").");
+    }
+     UNITY_TEST_ASSERT_EQUAL_INT(length,actualMcode->length,lineNumber,
+                                 "The Length of Machine code are not the same");
+    for(i=0;i<length;i++){
+      if(expectedMCode[i]!=actualMcode->code[i]) {
+        sprintf(msg,"Expected 0x%x but encountered 0x%x , the code at index %d is not the same",expectedMCode[i],actualMcode->code[i],i );
+        UNITY_TEST_FAIL(lineNumber,msg);
+      }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void assertEqualOperand (const int expectedOperand[],
+                         const stm8Operand* actualOperand,
+                         const UNITY_LINE_TYPE lineNumber);
+
+#define TEST_ASSERT_EQUAL_OPERAND(expectedOperand,operand)                                          \
+                              assertEqualOperand(expectedOperand,operand,__LINE__)

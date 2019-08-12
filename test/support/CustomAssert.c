@@ -4,7 +4,7 @@
 #include "Common.h"
 
 #define _STRINGIFY(x)     #x
-#define STRINGIFY(x)     _STRINGIFY(x) 
+#define STRINGIFY(x)     _STRINGIFY(x)
 
 int getExpectedCodeLength(const int expectedCode[] , int length){
     int i=0;
@@ -14,7 +14,6 @@ int getExpectedCodeLength(const int expectedCode[] , int length){
     }
     return i;
 }
-
 
 void assertEqualMCode (const int expectedMCode[],
                       const MachineCode* actualMcode,

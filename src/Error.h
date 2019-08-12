@@ -1,7 +1,7 @@
 #ifndef Error_H
 #define Error_H
 
-// !!!Example error code. Please replace them with yours.!!!
+// Error code
 #define ERR_SYSTEM_ERROR                  10
 #define ERR_INVALID_INSTRUCTION           20
 #define ERR_INVALID_OPERAND               21
@@ -13,10 +13,10 @@
 #define ERR_INTEGER_DOLLAR_TO_LARGE       60
 #define ERR_INVALID_HASH_VALUE            61
 #define ERR_INVALID_SIGNEDINT_VALUE       62
+#define ERR_INVALID_MOV_OPERAND           63
 #define ERR_INTEGER_NEGATIVE              70
 #define ERR_INTEGER_TOO_LARGE             71
 #define ERR_INTEGER_TOO_SMALL             72
-//for STM8 operand
 #define ERR_INVALID_STM8_OPERAND          73
 #define ERR_UNSUPPORTED_OPERAND           74
 #define ERR_INTEGER_NULL                  75

@@ -2,6 +2,7 @@
 #define Common_H
 
 #define END -1
+// #define ENDOPERAND -2
 
 char *skipWhiteSpaces(char *str);
 char *skipNonWhiteSpaces(char *str);
