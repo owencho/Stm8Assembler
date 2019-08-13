@@ -48,7 +48,7 @@ stm8OperandType symbolOperandCheck(IntegerToken * token){
     return operandType;
 }
 
-void finalNullCheck(Tokenizer* tokenizer){
+void notNullCheck(Tokenizer* tokenizer){
     IntegerToken * token;
     token =(IntegerToken*)getToken(tokenizer);
     if(token->str !=NULL){
@@ -445,13 +445,11 @@ stm8Operand *operandHandleHash(Tokenizer* tokenizer ,uint64_t flags){
     int valueCount = valueCheck(token);
     if(valueCount == 1 && isOperandNeeded(flags,BYTE_OPERAND)){
         flagToken = extendTokenStr(initToken,token);
-        freeToken(initToken);
         operandFlagCheck(flags,flagToken,BYTE_OPERAND);
         operand = createOperand(BYTE_OPERAND,NA,NA,token->value,NA,NA);
     }
     else if((valueCount == 2 || valueCount == 1) && isOperandNeeded(flags,WORD_OPERAND)){
         flagToken = extendTokenStr(initToken,token);
-        freeToken(initToken);
         operandFlagCheck(flags,flagToken,WORD_OPERAND);
         operand = createMsOperand(WORD_OPERAND,token->value,token);
     }
@@ -707,7 +705,7 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
       pushBackToken(tokenizer, (Token*)token);
       if(isalpha(token->str[0])){
           operand = operandHandleFirstSymbol(tokenizer, flags);
-          finalNullCheck(tokenizer);
+          notNullCheck(tokenizer);
       }
       else if(strcmp(token->str,"[")==0){
           operand = operandHandleSquareBracket(tokenizer,flags);

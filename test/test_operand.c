@@ -1591,23 +1591,6 @@ void test_getOperand_given_7564_Square_BracX_without_closing_bracket_expect_to_f
     freeTokenizer(tokenizer);
 }
 
-void test_getOperand_given_7564_Square_BracXdote_with_extra_stuff_expect_error(void) {
-    stm8Operand *operand = NULL;
-    Tokenizer *tokenizer = NULL;
-
-    Try {
-        tokenizer = createTokenizer("  [$7564.e],S  ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        operand = getOperand(tokenizer,ALL_OPERANDS);
-        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
-    } Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
-    }
-    freeTokenizer(tokenizer);
-}
-
-
 void test_getOperand_given_A_expect_A_to_fail_on_flags(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1970,24 +1953,3 @@ void test_getOperand_given_LONGPTR_DOT_E_BRACKETEDY_OPERAND_expect_LONGPTR_DOT_E
     }
     freeTokenizer(tokenizer);
 }
-
-
-
-
-
-
-/*
-void test_error_throwing(void) {
-Tokenizer *tokenizer;
-Token *token;
-Try {
-tokenizer = createTokenizer(" 45 abu bakar ");
-token = getToken(tokenizer);
-token->affix = INFIX;
-throwException(ERR_SYSTEM_ERROR, token, "Just for fun: Do not expect a number here: %s", token->str);
-} Catch(ex) {
-dumpTokenErrorMessage(ex, __LINE__);
-}
-freeTokenizer(tokenizer);
-}
-*/

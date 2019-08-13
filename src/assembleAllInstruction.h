@@ -7,21 +7,19 @@
 #define NA      -1
 #define ALL_OPERANDS -1
 
-
-ConversionData  getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer);
-ConversionData getLDWDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
+//Sub-module
+ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer);
+ConversionData getLDWComplexDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
 ConversionData getMOVDataFlag(CodeInfo *codeInfo,stm8Operand * operand);
 stm8Operand * getMOVOpcode(stm8Operand * dst ,stm8Operand * src );
-stm8Operand * complexOperandReturn(Tokenizer* tokenizer ,uint64_t flags);
-int hashNValueReturn(Tokenizer* tokenizer ,uint64_t flags , int cmpType);
+void commarCheck(Tokenizer* tokenizer);
+int hashNValueReturn(Tokenizer* tokenizer , int cmpType);
 MachineCode* outputMachineCode(stm8Operand * operand,ExtensionCodeAndCode code, int length);
 int machineCodeLengthFinder(stm8Operand * operand,ExtensionCodeAndCode code);
-int getValue2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer);
-MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand, int nvalue);
-MachineCode* mcodeMOVLONGOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand , uint16_t ms);
-
-
-
+MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  dataFlag , stm8Operand *operand, int nvalue, int movMs2ndOpValue);
+int getJRXX2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer);
+int getBTFX2ndCompLength(stm8Operand * operand,IntegerToken * token);
+//AssembleHandler
 MachineCode* assembleJRXXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);

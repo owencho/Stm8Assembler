@@ -84,6 +84,6 @@ int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 int signedIntCheck(Tokenizer *tokenizer);
 stm8OperandType symbolOperandCheck(IntegerToken * token);
-void finalNullCheck(Tokenizer* tokenizer);
+void notNullCheck(Tokenizer* tokenizer);
 
 #endif
