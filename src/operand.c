@@ -705,7 +705,6 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
       pushBackToken(tokenizer, (Token*)token);
       if(isalpha(token->str[0])){
           operand = operandHandleFirstSymbol(tokenizer, flags);
-          notNullCheck(tokenizer);
       }
       else if(strcmp(token->str,"[")==0){
           operand = operandHandleSquareBracket(tokenizer,flags);

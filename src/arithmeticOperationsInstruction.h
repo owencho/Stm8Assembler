@@ -1,7 +1,6 @@
-#include "assembleAllInstruction.h"
 #ifndef arithmeticOperationsInstruction_H
 #define arithmeticOperationsInstruction_H
-
+#include "assembleAllInstruction.h"
 CodeInfo adcCodeInfo;
 CodeInfo addCodeInfo;
 CodeInfo addwCodeInfo;

@@ -14,27 +14,32 @@
 #include <errno.h>
 //movOpcode havent test yet
 
-ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer* tokenizer){
+stm8Operand * oneOperandHandler(Tokenizer * tokenizer , uint64_t flags){
+    IntegerToken* token;
+    stm8Operand* operand ;
+    token =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL");
+    pushBackToken(tokenizer,(Token*)token);
+    operand= getOperand(tokenizer ,flags);
+    pushBackToken(tokenizer,(Token*)token);
+    return operand;
+}
+
+ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer * tokenizer,stm8Operand* operand){
     int i = 0;
     IntegerToken *token;
     ConversionData  dataTable;
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_INVALID_STM8_OPERAND,token,"Expected valid name");
     do{
-      if(strcasecmp(codeInfo->conDataTable[i].name,token->str)==0){
+      if(codeInfo->conDataTable[i].type==operand->type){
         dataTable = codeInfo->conDataTable[i];
         break;
       }
-      else if (!isalpha(token->str[0])){
-        if(strcasecmp(codeInfo->conDataTable[i].name,"COMP")==0){
-          dataTable = codeInfo->conDataTable[i];
-          break;
-        }
-      }
       i++;
-    }while(codeInfo->conDataTable[i].name != NULL);
-    if(codeInfo->conDataTable[i].name == NULL){
-        dataTable = codeInfo->conDataTable[i];
+    }while(codeInfo->conDataTable[i].codeTable != NULL);
+    if(codeInfo->conDataTable[i].codeTable != NULL){
+        throwException(ERR_DATATABLE_NULL,token,"expected table are null");
     }
     return dataTable;
 }
@@ -56,8 +61,8 @@ ConversionData getLDWComplexDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
           break;
       }
       i++;
-    }while(codeInfo->conDataTable[i].name != NULL);
-    if(codeInfo->conDataTable[i].name == NULL){
+    }while(codeInfo->conDataTable[i].codeTable != NULL);
+    if(codeInfo->conDataTable[i].codeTable != NULL){
       dataTable = codeInfo->conDataTable[i];
     }
     return dataTable;
@@ -86,6 +91,7 @@ ConversionData getMOVDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
     }
     return dataTable;
 }
+
 
 stm8Operand * getMOVOpcode(stm8Operand * dst ,stm8Operand * src ){
     stm8Operand * operand;
@@ -243,11 +249,11 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*) token);
     if(token->str==NULL){
-            if(dataFlag.name != NULL && (movMs2ndOpValue != NA && movMs2ndOpValue <= 255)){
+            if(dataFlag.type != NO_TABLE_OPERAND && (movMs2ndOpValue != NA && movMs2ndOpValue <= 255)){
               code = dataFlag.codeTable[operand->type];
               code.code=movMs2ndOpValue;
             }
-            else if(dataFlag.name != NULL)
+            else if(dataFlag.type != NO_TABLE_OPERAND)
                 code = dataFlag.codeTable[operand->type];
             else
               throwException(ERR_DATATABLE_NULL,token,"couldnt locate the data Table");
@@ -299,7 +305,7 @@ int getJRXX2ndCompLength(ConversionData dataFlag,stm8Operand * operand,Tokenizer
     return value;
 }
 
-int getBTFX2ndCompLength(stm8Operand * operand,IntegerToken * token){
+int getBTJX2ndCompLength(stm8Operand * operand,IntegerToken * token){
     int value;
     int orivalue;
     value = operand->dataSize.ms;
@@ -320,7 +326,7 @@ int getBTFX2ndCompLength(stm8Operand * operand,IntegerToken * token){
 }
 
 // assemblerHandler
-
+/*
 MachineCode* assembleLDFLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     int cmpType;
     IntegerToken * token;
@@ -382,7 +388,7 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     pushBackToken(tokenizer,(Token*) token);
     commarCheck(tokenizer);
     operand2nd= getOperand(tokenizer ,dataFlag.thirdFlags);
-    operand->dataSize.extB=getBTFX2ndCompLength(operand2nd,token);
+    operand->dataSize.extB=getBTJX2ndCompLength(operand2nd,token);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue,NA);
     notNullCheck(tokenizer);
     return mcode;
@@ -532,7 +538,7 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     notNullCheck(tokenizer);
     return mcode;
 }
-
+*/
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     stm8Operand * operand ;
@@ -543,7 +549,7 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
     operand = createOperand(NO_OPERAND,NA,NA,NA,NA,NA);
-    dataFlag = getDataFlag(codeInfo,tokenizer);
+    dataFlag = getDataFlag(codeInfo,tokenizer,operand);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
     notNullCheck(tokenizer);
     return mcode;
@@ -559,14 +565,12 @@ MachineCode* assembleSymbolComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokeniz
 
     token =(IntegerToken*)getToken(tokenizer);
     freeToken(token);
-    token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL");
-    operandType = symbolOperandCheck(token);
-    operandFlagCheck(codeInfo->firstFlags, token ,operandType);
-    pushBackToken(tokenizer,(Token*)token);
-    dataFlag = getDataFlag(codeInfo,tokenizer);
+    operand = oneOperandHandler(tokenizer ,codeInfo->firstFlags);
+    dataFlag = getDataFlag(codeInfo,tokenizer,operand);
     commarCheck(tokenizer);
-    operand= getOperand(tokenizer ,dataFlag.secondFlags);
+    operand = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+    token =(IntegerToken*)getToken(tokenizer);
+    freeToken(token);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
     notNullCheck(tokenizer);
     return mcode;

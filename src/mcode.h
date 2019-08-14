@@ -1,17 +1,8 @@
-#include "unity.h"
-#include "Common.h"
-#include "Token.h"
-#include "Error.h"
-#include "Tokenizer.h"
-#include "CException.h"
-#include "Exception.h"
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdlib.h>
-#include <errno.h>
 #ifndef mcode_H
 #define mcode_H
+#include "Common.h"
+#include "Tokenizer.h"
+#include "operand.h"
 
 typedef struct InstructionTable InstructionTable;
 typedef struct MachineCode MachineCode;
@@ -38,7 +29,7 @@ struct CodeInfo{
 };
 
 struct ConversionData{
-    char* name;
+    stm8OperandType type;
     ExtensionCodeAndCode *codeTable;
     uint32_t secondFlags;
     uint32_t thirdFlags;

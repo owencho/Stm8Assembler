@@ -95,7 +95,20 @@ void assertEqualMCode (const int expectedMCode[],
     }
 }
 
-
+{SHORT_MEM_OPERAND,negcodeTable,NA,0},
+{LONG_MEM_OPERAND,negcodeTable,NA,0},
+{BRACKETED_X_OPERAND,negcodeTable,NA,0},
+{SHORTOFF_X_OPERAND,negcodeTable,NA,0},
+{LONGOFF_X_OPERAND,negcodeTable,NA,0},
+{BRACKETED_Y_OPERAND,negcodeTable,NA,0},
+{SHORTOFF_Y_OPERAND,negcodeTable,NA,0},
+{LONGOFF_Y_OPERAND,negcodeTable,NA,0},
+{SHORTOFF_SP_OPERAND,negcodeTable,NA,0},
+{BRACKETED_SHORTPTR_DOT_W_OPERAND,negcodeTable,NA,0},
+{BRACKETED_LONGPTR_DOT_W_OPERAND,negcodeTable,NA,0},
+{SHORTPTR_DOT_W_BRACKETEDX_OPERAND,negcodeTable,NA,0},
+{LONGPTR_DOT_W_BRACKETEDX_OPERAND,negcodeTable,NA,0},
+{SHORTPTR_DOT_W_BRACKETEDY_OPERAND,negcodeTable,NA,0},
 
 
 

@@ -13,10 +13,11 @@
 #include <errno.h>
 
 InstructionTable instructionTable[]={
+
     //arithmeticOperationsInstruction
-    {"neg",&negCodeInfo},
+//    {"neg",&negCodeInfo},
     {"adc",&adcCodeInfo},
-    {"add",&addCodeInfo},
+  /*  {"add",&addCodeInfo},
     {"sub",&subCodeInfo},
     {"mul",&mulCodeInfo},
     {"sbc",&sbcCodeInfo},
@@ -131,6 +132,7 @@ InstructionTable instructionTable[]={
     {"ret",&retCodeInfo},
     {"retf",&retfCodeInfo},
     {"nop",&nopCodeInfo},
+*/
     {NULL,NULL}
 };
 

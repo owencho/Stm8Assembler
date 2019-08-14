@@ -28,7 +28,7 @@
 #include "CustomAssert.h"
 #include "stackInstruction.h"
 CEXCEPTION_T ex;
-
+/*
 void setUp(void)
 {
 }
@@ -478,7 +478,7 @@ void test_MachineCodeAllocateOutput_given_shortmemBB_expect_2(void) {
 
 // only usable on JRXX Instruction return value which changed to 2nd compliment for negative value
 // it also add the length of machine code with the value together
-void test_getJRXX2ndCompLength_given_shortmemBB_expect_2(void) {
+void test_getJRXX2ndCompLength_given_jrc_hex15_expect_0x17(void) {
     stm8Operand *operand = NULL;
     IntegerToken * token;
 		Tokenizer *tokenizer = NULL;
@@ -493,17 +493,18 @@ void test_getJRXX2ndCompLength_given_shortmemBB_expect_2(void) {
         dataFlag = getDataFlag(&jrcCodeInfo,tokenizer);
         token =(IntegerToken*)getToken(tokenizer);
         value = getJRXX2ndCompLength(dataFlag,operand,tokenizer);
-        TEST_ASSERT_EQUAL_HEX8(0x18,value);
+        TEST_ASSERT_EQUAL_HEX8(0x17,value);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
 }
+508693
 /*
 // only usable on BTJX Instruction return value which changed to 2nd compliment for negative value
 // it also add the length of machine code with the value together
-void test_getJRXX2ndCompLength_given_shortmemBB_expect_2(void) {
+void test_getgetBTJX2ndCompLength2ndCompLength_given_shortmemBB_expect_2(void) {
     stm8Operand *operand = NULL;
     IntegerToken * token;
 		Tokenizer *tokenizer = NULL;
@@ -513,7 +514,7 @@ void test_getJRXX2ndCompLength_given_shortmemBB_expect_2(void) {
     Try{
         tokenizer = createTokenizer(" BJTF $10");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        operand = createOperand(SHORT_OFF_OPERAND,NA,NA,0x15,NA,NA);
+        operand = createOperand(SHORT_OFF_OPERAND,NA,NA,0x10,NA,NA);
         token =(IntegerToken*)getToken(tokenizer);
         dataFlag = getDataFlag(&jrcCodeInfo,tokenizer);
         token =(IntegerToken*)getToken(tokenizer);

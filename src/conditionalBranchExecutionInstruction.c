@@ -4,8 +4,8 @@ ExtensionCodeAndCode jrcCodeTable[] = {
 };
 
 ConversionData jrcFlagTable[]={
-    {"COMP",jrcCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrcCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrcCodeInfo={"jrc",(1 << SHORT_OFF_OPERAND),
@@ -16,8 +16,8 @@ ExtensionCodeAndCode jreqCodeTable[] = {
 };
 
 ConversionData jreqFlagTable[]={
-    {"COMP",jreqCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jreqCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jreqCodeInfo={"jreq",(1 << SHORT_OFF_OPERAND) ,
@@ -28,8 +28,8 @@ ExtensionCodeAndCode jrhCodeTable[] = {
 };
 
 ConversionData jrhFlagTable[]={
-    {"COMP",jrhCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrhCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrhCodeInfo={"jrh",(1 << SHORT_OFF_OPERAND) ,
@@ -40,8 +40,8 @@ ExtensionCodeAndCode jrihCodeTable[] = {
 };
 
 ConversionData jrihFlagTable[]={
-    {"COMP",jrihCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrihCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrihCodeInfo={"jrih",(1 << SHORT_OFF_OPERAND) ,
@@ -52,8 +52,8 @@ ExtensionCodeAndCode jrilCodeTable[] = {
 };
 
 ConversionData jrilFlagTable[]={
-    {"COMP",jrilCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrilCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrilCodeInfo={"jril",(1 << SHORT_OFF_OPERAND) ,
@@ -64,8 +64,8 @@ ExtensionCodeAndCode jrmCodeTable[] = {
 };
 
 ConversionData jrmFlagTable[]={
-    {"COMP",jrmCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrmCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrmCodeInfo={"jrm",(1 << SHORT_OFF_OPERAND) ,
@@ -76,8 +76,8 @@ ExtensionCodeAndCode jrmiCodeTable[] = {
 };
 
 ConversionData jrmiFlagTable[]={
-    {"COMP",jrmiCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrmiCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrmiCodeInfo={"jrmi",(1 << SHORT_OFF_OPERAND) ,
@@ -88,8 +88,8 @@ ExtensionCodeAndCode jrncCodeTable[] = {
 };
 
 ConversionData jrncFlagTable[]={
-    {"COMP",jrncCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrncCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrncCodeInfo={"jrnc",(1 << SHORT_OFF_OPERAND) ,
@@ -100,8 +100,8 @@ ExtensionCodeAndCode jrneCodeTable[] = {
 };
 
 ConversionData jrneFlagTable[]={
-    {"COMP",jrneCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrneCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrneCodeInfo={"jrne",(1 << SHORT_OFF_OPERAND) ,
@@ -112,8 +112,8 @@ ExtensionCodeAndCode jrnhCodeTable[] = {
 };
 
 ConversionData jrnhFlagTable[]={
-    {"COMP",jrnhCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrnhCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrnhCodeInfo={"jrnh",(1 << SHORT_OFF_OPERAND) ,
@@ -124,8 +124,8 @@ ExtensionCodeAndCode jrnmCodeTable[] = {
 };
 
 ConversionData jrnmFlagTable[]={
-    {"COMP",jrnmCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrnmCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrnmCodeInfo={"jrnm",(1 << SHORT_OFF_OPERAND) ,
@@ -136,8 +136,8 @@ ExtensionCodeAndCode jrnvCodeTable[] = {
 };
 
 ConversionData jrnvFlagTable[]={
-    {"COMP",jrnvCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrnvCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrnvCodeInfo={"jrnv",(1 << SHORT_OFF_OPERAND) ,
@@ -148,8 +148,8 @@ ExtensionCodeAndCode jrplCodeTable[] = {
 };
 
 ConversionData jrplFlagTable[]={
-    {"COMP",jrplCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrplCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrplCodeInfo={"jrpl",(1 << SHORT_OFF_OPERAND) ,
@@ -160,8 +160,8 @@ ExtensionCodeAndCode jrsgeCodeTable[] = {
 };
 
 ConversionData jrsgeFlagTable[]={
-    {"COMP",jrsgeCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrsgeCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrsgeCodeInfo={"jrsge",(1 << SHORT_OFF_OPERAND) ,
@@ -172,8 +172,8 @@ ExtensionCodeAndCode jrsgtCodeTable[] = {
 };
 
 ConversionData jrsgtFlagTable[]={
-    {"COMP",jrsgtCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrsgtCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrsgtCodeInfo={"jrsgt",(1 << SHORT_OFF_OPERAND) ,
@@ -184,8 +184,8 @@ ExtensionCodeAndCode jrsleCodeTable[] = {
 };
 
 ConversionData jrsleFlagTable[]={
-    {"COMP",jrsleCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrsleCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrsleCodeInfo={"jrsle",(1 << SHORT_OFF_OPERAND) ,
@@ -196,8 +196,8 @@ ExtensionCodeAndCode jrsltCodeTable[] = {
 };
 
 ConversionData jrsltFlagTable[]={
-    {"COMP",jrsltCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrsltCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrsltCodeInfo={"jrslt",(1 << SHORT_OFF_OPERAND) ,
@@ -208,8 +208,8 @@ ExtensionCodeAndCode jrugeCodeTable[] = {
 };
 
 ConversionData jrugeFlagTable[]={
-    {"COMP",jrugeCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrugeCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrugeCodeInfo={"jruge",(1 << SHORT_OFF_OPERAND) ,
@@ -220,8 +220,8 @@ ExtensionCodeAndCode jrugtCodeTable[] = {
 };
 
 ConversionData jrugtFlagTable[]={
-    {"COMP",jrugtCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrugtCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrugtCodeInfo={"jrugt",(1 << SHORT_OFF_OPERAND) ,
@@ -232,8 +232,8 @@ ExtensionCodeAndCode jruleCodeTable[] = {
 };
 
 ConversionData jruleFlagTable[]={
-    {"COMP",jruleCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jruleCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrulecodeInfo={"jrule",(1 << SHORT_OFF_OPERAND) ,
@@ -244,8 +244,8 @@ ExtensionCodeAndCode jrultCodeTable[] = {
 };
 
 ConversionData jrultFlagTable[]={
-    {"COMP",jrultCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrultCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrultCodeInfo={"jrult",(1 << SHORT_OFF_OPERAND),
@@ -256,8 +256,8 @@ ExtensionCodeAndCode jrvCodeTable[] = {
 };
 
 ConversionData jrvFlagTable[]={
-    {"COMP",jrvCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {SHORT_OFF_OPERAND,jrvCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo jrvCodeInfo={"jrv",(1 << SHORT_OFF_OPERAND),
@@ -269,8 +269,8 @@ ExtensionCodeAndCode wfeCodeTable[] = {
 };
 
 ConversionData wfeFlagTable[]={
-    {"wfe",wfeCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {NO_OPERAND,wfeCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo wfeCodeInfo={"wfe",0 ,assembleNoOperand,wfeFlagTable};

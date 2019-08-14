@@ -6,8 +6,8 @@ ExtensionCodeAndCode bccmCodeTable[] = {
 };
 
 ConversionData bccmFlagTable[]={
-    {"COMP",bccmCodeTable,(1 <<BYTE_OPERAND),0},
-    {NULL,NULL,0,0},
+    {LONG_MEM_OPERAND,bccmCodeTable,(1 <<BYTE_OPERAND),0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo bccmCodeInfo={"bccm",(1 << LONG_MEM_OPERAND),
@@ -18,8 +18,8 @@ ExtensionCodeAndCode bcplCodeTable[] = {
 };
 
 ConversionData bcplFlagTable[]={
-    {"COMP",bcplCodeTable,(1 <<BYTE_OPERAND),0},
-    {NULL,NULL,0,0},
+    {LONG_MEM_OPERAND,bcplCodeTable,(1 <<BYTE_OPERAND),0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo bcplCodeInfo={"bcpl",(1 << LONG_MEM_OPERAND),
@@ -30,8 +30,8 @@ ExtensionCodeAndCode bresCodeTable[] = {
 };
 
 ConversionData bresFlagTable[]={
-    {"COMP",bresCodeTable,(1 <<BYTE_OPERAND),0},
-    {NULL,NULL,0,0},
+    {LONG_MEM_OPERAND,bresCodeTable,(1 <<BYTE_OPERAND),0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo bresCodeInfo={"bres",(1 << LONG_MEM_OPERAND),
@@ -42,8 +42,8 @@ ExtensionCodeAndCode bsetCodeTable[] = {
 };
 
 ConversionData bsetFlagTable[]={
-    {"COMP",bsetCodeTable,(1 <<BYTE_OPERAND),0},
-    {NULL,NULL,0,0},
+    {LONG_MEM_OPERAND,bsetCodeTable,(1 <<BYTE_OPERAND),0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo bsetCodeInfo={"bset",(1 << LONG_MEM_OPERAND),

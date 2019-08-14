@@ -1,7 +1,6 @@
-#include "Tokenizer.h"
 #ifndef _OPERAND_H
 #define _OPERAND_H
-
+#include "Tokenizer.h"
 typedef struct stm8Operand stm8Operand ;
 
 
@@ -43,6 +42,7 @@ typedef enum {
     YH_OPERAND,
     CC_OPERAND,
     NO_OPERAND,
+    NO_TABLE_OPERAND,
 } stm8OperandType ;
 
 

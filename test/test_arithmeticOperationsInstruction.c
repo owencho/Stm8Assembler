@@ -30,6 +30,7 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+/*
 //NEG test /////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_neg_A_OPERAND_expect_0x40(void) {
     MachineCode *mcode =NULL ;
@@ -272,6 +273,8 @@ void test_assembleInstruction_given_neg_shortptrwY_OPERAND_expect_0x916005(void)
     }
     freeTokenizer(tokenizer);
 }
+*/
+
 //ADC testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_adc_hash33_expect_0xa933(void) {
     MachineCode *mcode =NULL ;
@@ -535,7 +538,7 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
 }
-
+/*
 //ADD testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_add_hash33_expect_0xab21(void) {
     MachineCode *mcode =NULL ;
@@ -1839,3 +1842,4 @@ void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+*/

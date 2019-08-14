@@ -20,8 +20,8 @@ ExtensionCodeAndCode andCodeTable[] = {
 
 
 ConversionData andFlagTable[]={
-    {"A",andCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NULL,NULL,0,0},
+    {A_OPERAND,andCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo andCodeInfo={"and",(1 << A_OPERAND),
@@ -47,8 +47,8 @@ ExtensionCodeAndCode orCodeTable[] = {
 };
 
 ConversionData orFlagTable[]={
-    {"A",orCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NULL,NULL,0,0},
+    {A_OPERAND,orCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo orCodeInfo={"or",(1 << A_OPERAND),
@@ -75,8 +75,8 @@ ExtensionCodeAndCode xorCodeTable[] = {
 
 
 ConversionData xorFlagTable[]={
-    {"A",xorCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NULL,NULL,0,0},
+    {A_OPERAND,xorCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo xorCodeInfo={"xor",(1 << A_OPERAND),
@@ -101,9 +101,22 @@ ExtensionCodeAndCode cplCodeTable[] = {
 };
 
 ConversionData cplFlagTable[]={
-    {"A",cplCodeTable,0,0},
-    {"COMP",cplCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {A_OPERAND,cplCodeTable,0,0},
+    {SHORT_MEM_OPERAND,cplCodeTable,NA,0},
+    {LONG_MEM_OPERAND,cplCodeTable,NA,0},
+    {BRACKETED_X_OPERAND,cplCodeTable,NA,0},
+    {SHORTOFF_X_OPERAND,cplCodeTable,NA,0},
+    {LONGOFF_X_OPERAND,cplCodeTable,NA,0},
+    {BRACKETED_Y_OPERAND,cplCodeTable,NA,0},
+    {SHORTOFF_Y_OPERAND,cplCodeTable,NA,0},
+    {LONGOFF_Y_OPERAND,cplCodeTable,NA,0},
+    {SHORTOFF_SP_OPERAND,cplCodeTable,NA,0},
+    {BRACKETED_SHORTPTR_DOT_W_OPERAND,cplCodeTable,NA,0},
+    {BRACKETED_LONGPTR_DOT_W_OPERAND,cplCodeTable,NA,0},
+    {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,cplCodeTable,NA,0},
+    {LONGPTR_DOT_W_BRACKETEDX_OPERAND,cplCodeTable,NA,0},
+    {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,cplCodeTable,NA,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo cplCodeInfo={"cpl",CPL_SUPPORTED_OPERANDS,
@@ -115,9 +128,9 @@ ExtensionCodeAndCode cplwCodeTable[] = {
 };
 
 ConversionData cplwFlagTable[]={
-    {"X",cplwCodeTable,0,0},
-    {"Y",cplwCodeTable,0,0},
-    {NULL,NULL,0,0},
+    {X_OPERAND,cplwCodeTable,0,0},
+    {Y_OPERAND,cplwCodeTable,0,0},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo cplwCodeInfo={"cplw",CPLW_SUPPORTED_OPERANDS,

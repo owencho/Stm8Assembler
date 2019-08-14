@@ -6,8 +6,8 @@ ExtensionCodeAndCode btjXCodeTable[] = {
 };
 
 ConversionData btjXFlagTable[]={
-    {"COMP", btjXCodeTable,(1<<BYTE_OPERAND),(1<<SHORT_OFF_OPERAND)},
-    {NULL,NULL,0,0},
+    {LONG_MEM_OPERAND, btjXCodeTable,(1<<BYTE_OPERAND),(1<<SHORT_OFF_OPERAND)},
+    {NO_TABLE_OPERAND,NULL,0,0},
 };
 
 CodeInfo btjtCodeInfo={"btjt",(1 << LONG_MEM_OPERAND),
