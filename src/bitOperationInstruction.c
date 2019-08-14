@@ -7,11 +7,11 @@ ExtensionCodeAndCode bccmCodeTable[] = {
 
 ConversionData bccmFlagTable[]={
     {LONG_MEM_OPERAND,bccmCodeTable,(1 <<BYTE_OPERAND),0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo bccmCodeInfo={"bccm",(1 << LONG_MEM_OPERAND),
-                      assembleTwowithNOperand,bccmFlagTable};
+                      assembleTwoComplexOperand,bccmFlagTable};
 
 ExtensionCodeAndCode bcplCodeTable[] = {
     [LONG_MEM_OPERAND]     ={0x90,0x10},
@@ -19,11 +19,11 @@ ExtensionCodeAndCode bcplCodeTable[] = {
 
 ConversionData bcplFlagTable[]={
     {LONG_MEM_OPERAND,bcplCodeTable,(1 <<BYTE_OPERAND),0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo bcplCodeInfo={"bcpl",(1 << LONG_MEM_OPERAND),
-                      assembleTwowithNOperand,bcplFlagTable};
+                      assembleTwoComplexOperand,bcplFlagTable};
 
 ExtensionCodeAndCode bresCodeTable[] = {
     [LONG_MEM_OPERAND]     ={0x72,0x10},
@@ -31,11 +31,11 @@ ExtensionCodeAndCode bresCodeTable[] = {
 
 ConversionData bresFlagTable[]={
     {LONG_MEM_OPERAND,bresCodeTable,(1 <<BYTE_OPERAND),0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo bresCodeInfo={"bres",(1 << LONG_MEM_OPERAND),
-                      assembleTwowithNOperand,bresFlagTable};
+                      assembleTwoComplexOperand,bresFlagTable};
 
 ExtensionCodeAndCode bsetCodeTable[] = {
     [LONG_MEM_OPERAND]     ={0x72,0x10},
@@ -43,8 +43,8 @@ ExtensionCodeAndCode bsetCodeTable[] = {
 
 ConversionData bsetFlagTable[]={
     {LONG_MEM_OPERAND,bsetCodeTable,(1 <<BYTE_OPERAND),0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo bsetCodeInfo={"bset",(1 << LONG_MEM_OPERAND),
-                      assembleTwowithNOperand,bsetFlagTable};
+                      assembleTwoComplexOperand,bsetFlagTable};

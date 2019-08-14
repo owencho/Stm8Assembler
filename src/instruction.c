@@ -15,9 +15,9 @@
 InstructionTable instructionTable[]={
 
     //arithmeticOperationsInstruction
-//    {"neg",&negCodeInfo},
+    {"neg",&negCodeInfo},
     {"adc",&adcCodeInfo},
-  /*  {"add",&addCodeInfo},
+    {"add",&addCodeInfo},
     {"sub",&subCodeInfo},
     {"mul",&mulCodeInfo},
     {"sbc",&sbcCodeInfo},
@@ -85,7 +85,7 @@ InstructionTable instructionTable[]={
     {"cpl",&cplCodeInfo},
     {"cplw",&cplwCodeInfo},
     //conditionalBranchExecutionInstruction
-    {"jrc",&jrcCodeInfo},
+     {"jrc",&jrcCodeInfo},
     {"jreq",&jreqCodeInfo},
     {"jrh",&jrhCodeInfo},
     {"jrih",&jrihCodeInfo},
@@ -111,7 +111,7 @@ InstructionTable instructionTable[]={
     //loadTransferInstruction
     {"ld",&ldCodeInfo},
     {"ldf",&ldfCodeInfo},
-    {"ldw",&ldwCodeInfo},
+//    {"ldw",&ldwCodeInfo},
     {"clr",&clrCodeInfo},
     {"mov",&movCodeInfo},
     {"exg",&exgCodeInfo},
@@ -120,7 +120,7 @@ InstructionTable instructionTable[]={
     //conditionalBitTestBranchInstruction
     {"btjt",&btjtCodeInfo},
     {"btjf",&btjfCodeInfo},
-    //unconditionalJumpCallInstruction
+   //unconditionalJumpCallInstruction
     {"jra",&jraCodeInfo},
     {"jrt",&jrtCodeInfo},
     {"jrf",&jrfCodeInfo},
@@ -132,7 +132,7 @@ InstructionTable instructionTable[]={
     {"ret",&retCodeInfo},
     {"retf",&retfCodeInfo},
     {"nop",&nopCodeInfo},
-*/
+
     {NULL,NULL}
 };
 

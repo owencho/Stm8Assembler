@@ -20,7 +20,7 @@ ExtensionCodeAndCode cpCodeTable[] = {
 
 ConversionData cpFlagTable[]={
     {A_OPERAND,cpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo cpCodeInfo={"cp",(1 << A_OPERAND),
@@ -60,7 +60,7 @@ ConversionData tnzFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,tnzCodeTable,0,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,tnzCodeTable,0,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,tnzCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo tnzCodeInfo={"tnz",TNZ_SUPPORTED_OPERANDS,
@@ -86,7 +86,7 @@ ExtensionCodeAndCode bcpCodeTable[] = {
 
 ConversionData bcpFlagTable[]={
     {A_OPERAND,bcpCodeTable,COMPARE_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo bcpCodeInfo={"bcp",(1 << A_OPERAND),
@@ -120,7 +120,7 @@ ExtensionCodeAndCode cpwYCodeTable[] ={
 ConversionData cpwFlagTable[]={
     {X_OPERAND,cpwXCodeTable,CPW_X_SUPPORTED_OPERANDS,0},
     {Y_OPERAND,cpwYCodeTable,CPW_Y_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo cpwCodeInfo={"cpw",COMPAREWORD_SUPPORTED_OPERANDS,
@@ -134,7 +134,7 @@ ExtensionCodeAndCode tnzwCodeTable[] = {
 ConversionData tnzwFlagTable[]={
     {X_OPERAND,tnzwCodeTable,0,0},
     {Y_OPERAND,tnzwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo tnzwCodeInfo={"tnzw",COMPAREWORD_SUPPORTED_OPERANDS,

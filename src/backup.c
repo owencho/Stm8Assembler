@@ -95,23 +95,38 @@ void assertEqualMCode (const int expectedMCode[],
     }
 }
 
-{SHORT_MEM_OPERAND,negcodeTable,NA,0},
-{LONG_MEM_OPERAND,negcodeTable,NA,0},
-{BRACKETED_X_OPERAND,negcodeTable,NA,0},
-{SHORTOFF_X_OPERAND,negcodeTable,NA,0},
-{LONGOFF_X_OPERAND,negcodeTable,NA,0},
-{BRACKETED_Y_OPERAND,negcodeTable,NA,0},
-{SHORTOFF_Y_OPERAND,negcodeTable,NA,0},
-{LONGOFF_Y_OPERAND,negcodeTable,NA,0},
-{SHORTOFF_SP_OPERAND,negcodeTable,NA,0},
-{BRACKETED_SHORTPTR_DOT_W_OPERAND,negcodeTable,NA,0},
-{BRACKETED_LONGPTR_DOT_W_OPERAND,negcodeTable,NA,0},
-{SHORTPTR_DOT_W_BRACKETEDX_OPERAND,negcodeTable,NA,0},
-{LONGPTR_DOT_W_BRACKETEDX_OPERAND,negcodeTable,NA,0},
-{SHORTPTR_DOT_W_BRACKETEDY_OPERAND,negcodeTable,NA,0},
+MachineCode* assembleSymbolComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    int bitOPCheck =0;
+    int nvalue = NA;
+    IntegerToken * token;
+    stm8Operand * operand;
+    stm8Operand * operand1st;
+    stm8OperandType operandType;
+    ExtensionCodeAndCode code;
+    MachineCode* mcode;
+    ConversionData  dataFlag;
 
-
-
+    token =(IntegerToken*)getToken(tokenizer);
+    bitOPCheck= bitOperationCheck(token);
+    freeToken(token);
+    token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    operand1st = oneOperandHandler(tokenizer ,codeInfo->firstFlags);
+    pushBackToken(tokenizer,(Token*)token);
+    dataFlag = getDataFlag(codeInfo,tokenizer,operand1st);
+    token =(IntegerToken*)getToken(tokenizer);
+    commarCheck(tokenizer);
+    operand = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+    if(bitOPCheck != 0){
+        nvalue = hashNValueReturn(tokenizer , operand,bitOPCheck);
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand1st,nvalue,NA);
+    }
+    else{
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
+    }
+    notNullCheck(tokenizer);
+    return mcode;
+}
 
 
 

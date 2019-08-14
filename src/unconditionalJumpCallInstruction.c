@@ -6,10 +6,10 @@ ExtensionCodeAndCode jraCodeTable[] = {
 
 ConversionData jraFlagTable[]={
     {SHORT_OFF_OPERAND,jraCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
-CodeInfo jraCodeInfo={"jra",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jraFlagTable};
+CodeInfo jraCodeInfo={"jra",(1 << SHORT_OFF_OPERAND) ,assembleOneOperand,jraFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jrfCodeTable[] = {
     [SHORT_OFF_OPERAND]         ={NA,0x21}
@@ -17,10 +17,10 @@ ExtensionCodeAndCode jrfCodeTable[] = {
 
 ConversionData jrfFlagTable[]={
     {SHORT_OFF_OPERAND,jrfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
-CodeInfo jrfCodeInfo={"jrf",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jrfFlagTable};
+CodeInfo jrfCodeInfo={"jrf",(1 << SHORT_OFF_OPERAND) ,assembleOneOperand,jrfFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jrtCodeTable[] = {
     [SHORT_OFF_OPERAND]         ={NA,0x20}
@@ -28,10 +28,10 @@ ExtensionCodeAndCode jrtCodeTable[] = {
 
 ConversionData jrtFlagTable[]={
     {SHORT_OFF_OPERAND,jrtCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
-CodeInfo jrtCodeInfo={"jrt",(1 << SHORT_OFF_OPERAND) ,assembleJRXXOperand,jrtFlagTable};
+CodeInfo jrtCodeInfo={"jrt",(1 << SHORT_OFF_OPERAND) ,assembleOneOperand,jrtFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode jpCodeTable[] = {
     [LONG_MEM_OPERAND]                         ={NA,0xCC},
@@ -61,7 +61,7 @@ ConversionData jpFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,jpCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,jpCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,jpCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo jpCodeInfo={"jp",UNCONJUMP_SUPPORTED_OPERANDS ,assembleOneOperand,jpFlagTable};
@@ -74,7 +74,7 @@ ExtensionCodeAndCode jpfCodeTable[] = {
 ConversionData jpfFlagTable[]={
     {EXT_MEM_OPERAND,jpfCodeTable,0,0},
     {BRACKETED_LONGPTR_DOT_E_OPERAND,jpfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo jpfCodeInfo={"jpf",XXF_SUPPORTED_OPERANDS,assembleOneOperand,jpfFlagTable};
@@ -107,7 +107,7 @@ ConversionData callFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,callCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,callCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,callCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo callCodeInfo={"call",UNCONJUMP_SUPPORTED_OPERANDS,assembleOneOperand,callFlagTable};
@@ -119,10 +119,10 @@ ExtensionCodeAndCode callrCodeTable[] = {
 
 ConversionData callrFlagTable[]={
     {SHORT_OFF_OPERAND,callrCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
-CodeInfo callrCodeInfo={"callr",(1<< SHORT_OFF_OPERAND),assembleJRXXOperand,callrFlagTable};
+CodeInfo callrCodeInfo={"callr",(1<< SHORT_OFF_OPERAND),assembleOneOperand,callrFlagTable};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode callfCodeTable[] = {
     [EXT_MEM_OPERAND]                         ={NA,0x8D},
@@ -133,7 +133,7 @@ ExtensionCodeAndCode callfCodeTable[] = {
 ConversionData callfFlagTable[]={
     {EXT_MEM_OPERAND,callfCodeTable,0,0},
     {BRACKETED_LONGPTR_DOT_E_OPERAND,callfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo callfCodeInfo={"callf",XXF_SUPPORTED_OPERANDS,assembleOneOperand,callfFlagTable};
@@ -143,7 +143,7 @@ ExtensionCodeAndCode retCodeTable[] = {
 };
 ConversionData retFlagTable[]={
     {NO_OPERAND,retCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo retCodeInfo={"ret",0,assembleNoOperand,retFlagTable};
@@ -153,7 +153,7 @@ ExtensionCodeAndCode retfCodeTable[] = {
 };
 ConversionData retfFlagTable[]={
     {NO_OPERAND,retfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo retfCodeInfo={"retf",0,assembleNoOperand,retfFlagTable};
@@ -164,7 +164,7 @@ ExtensionCodeAndCode nopCodeTable[] = {
 
 ConversionData nopFlagTable[]={
     {NO_OPERAND,nopCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo nopCodeInfo={"nop",0,assembleNoOperand,nopFlagTable};

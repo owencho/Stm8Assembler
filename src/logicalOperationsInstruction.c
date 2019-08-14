@@ -21,7 +21,7 @@ ExtensionCodeAndCode andCodeTable[] = {
 
 ConversionData andFlagTable[]={
     {A_OPERAND,andCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo andCodeInfo={"and",(1 << A_OPERAND),
@@ -48,7 +48,7 @@ ExtensionCodeAndCode orCodeTable[] = {
 
 ConversionData orFlagTable[]={
     {A_OPERAND,orCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo orCodeInfo={"or",(1 << A_OPERAND),
@@ -76,7 +76,7 @@ ExtensionCodeAndCode xorCodeTable[] = {
 
 ConversionData xorFlagTable[]={
     {A_OPERAND,xorCodeTable,LOGICAL_SUPPORTED_OPERANDS,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo xorCodeInfo={"xor",(1 << A_OPERAND),
@@ -116,7 +116,7 @@ ConversionData cplFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,cplCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,cplCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,cplCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo cplCodeInfo={"cpl",CPL_SUPPORTED_OPERANDS,
@@ -130,7 +130,7 @@ ExtensionCodeAndCode cplwCodeTable[] = {
 ConversionData cplwFlagTable[]={
     {X_OPERAND,cplwCodeTable,0,0},
     {Y_OPERAND,cplwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo cplwCodeInfo={"cplw",CPLW_SUPPORTED_OPERANDS,

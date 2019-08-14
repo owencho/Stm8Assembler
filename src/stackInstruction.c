@@ -12,7 +12,7 @@ ConversionData pushFlagTable[]={
     {CC_OPERAND,pushCodeTable,0,0},
     {BYTE_OPERAND,pushCodeTable,0,0},
     {LONG_MEM_OPERAND,pushCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo pushCodeInfo={"push",PUSH_SUPPORTED_OPERANDS,
@@ -28,7 +28,7 @@ ConversionData popFlagTable[]={
     {A_OPERAND,popCodeTable,0,0},
     {CC_OPERAND,popCodeTable,0,0},
     {LONG_MEM_OPERAND,popCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo popCodeInfo={"pop",POP_SUPPORTED_OPERANDS,
@@ -42,7 +42,7 @@ ExtensionCodeAndCode pushwCodeTable[] = {
 ConversionData pushwFlagTable[]={
     {X_OPERAND,pushwCodeTable,0,0},
     {Y_OPERAND,pushwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo pushwCodeInfo={"pushw",STACKWORD_SUPPORTED_OPERANDS,
@@ -57,7 +57,7 @@ ExtensionCodeAndCode popwCodeTable[] = {
 ConversionData popwFlagTable[]={
     {X_OPERAND,popwCodeTable,0,0},
     {Y_OPERAND,popwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo popwCodeInfo={"popw",STACKWORD_SUPPORTED_OPERANDS,

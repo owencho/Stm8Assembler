@@ -6,7 +6,7 @@ ExtensionCodeAndCode ccfCodeTable[] = {
 
 ConversionData ccfFlagTable[]={
     {NO_OPERAND,ccfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo ccfCodeInfo={"neg",NO_OPERAND,assembleNoOperand,ccfFlagTable};
@@ -18,7 +18,7 @@ ExtensionCodeAndCode rcfCodeTable[] = {
 
 ConversionData rcfFlagTable[]={
     {NO_OPERAND,rcfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rcfCodeInfo={"rcf",NO_OPERAND,assembleNoOperand,rcfFlagTable};
@@ -30,7 +30,7 @@ ExtensionCodeAndCode rimCodeTable[] = {
 
 ConversionData rimFlagTable[]={
     {NO_OPERAND,rimCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rimCodeInfo={"rim",NO_OPERAND,assembleNoOperand,rimFlagTable};
@@ -41,7 +41,7 @@ ExtensionCodeAndCode simCodeTable[] = {
 
 ConversionData simFlagTable[]={
     {NO_OPERAND,simCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo simCodeInfo={"sim",NO_OPERAND,assembleNoOperand,simFlagTable};
@@ -52,7 +52,7 @@ ExtensionCodeAndCode rvfCodeTable[] = {
 
 ConversionData rvfFlagTable[]={
     {NO_OPERAND,rvfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rvfCodeInfo={"rvf",NO_OPERAND,assembleNoOperand,rvfFlagTable};
@@ -63,7 +63,7 @@ ExtensionCodeAndCode scfCodeTable[] = {
 
 ConversionData scfFlagTable[]={
     {NO_OPERAND,scfCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo scfCodeInfo={"scf",NO_OPERAND,assembleNoOperand,scfFlagTable};

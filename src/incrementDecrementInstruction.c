@@ -34,7 +34,7 @@ ConversionData incFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,incCodeTable,0,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,incCodeTable,0,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,incCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo incCodeInfo={"inc",INCDEC_SUPPORTED_OPERANDS,
@@ -74,7 +74,7 @@ ConversionData decFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,decCodeTable,0,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,decCodeTable,0,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,decCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo decCodeInfo={"dec",INCDEC_SUPPORTED_OPERANDS,
@@ -88,7 +88,7 @@ ExtensionCodeAndCode incwCodeTable[] = {
 ConversionData incwFlagTable[]={
     {X_OPERAND,incwCodeTable,0,0},
     {Y_OPERAND,incwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo incwCodeInfo={"incw",INCDECWORD_SUPPORTED_OPERANDS,
@@ -103,7 +103,7 @@ ExtensionCodeAndCode decwCodeTable[] = {
 ConversionData decwFlagTable[]={
     {X_OPERAND,decwCodeTable,0,0},
     {Y_OPERAND,decwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo decwCodeInfo={"decw",INCDECWORD_SUPPORTED_OPERANDS,

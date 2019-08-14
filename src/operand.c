@@ -502,7 +502,6 @@ stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags){
         operandFlagCheck(flags,token,SHORT_MEM_OPERAND);
         operandFlagCheck(flags,token,LONG_MEM_OPERAND);
     }
-    freeToken(token);
     return operand;
 }
 

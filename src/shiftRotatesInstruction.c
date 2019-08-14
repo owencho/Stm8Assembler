@@ -34,7 +34,7 @@ ConversionData sllSlaFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,sllAndSlaCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,sllAndSlaCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,sllAndSlaCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo sllCodeInfo={"sll",SHIFT_SUPPORTED_OPERANDS,
@@ -78,7 +78,7 @@ ConversionData srlFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,srlCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,srlCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,srlCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo srlCodeInfo={"srl",SHIFT_SUPPORTED_OPERANDS,
@@ -118,7 +118,7 @@ ConversionData sraFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,sraCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,sraCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,sraCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo sraCodeInfo={"sra",SHIFT_SUPPORTED_OPERANDS,
@@ -159,7 +159,7 @@ ConversionData rlcFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,rlcCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,rlcCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,rlcCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rlcCodeInfo={"rlc",SHIFT_SUPPORTED_OPERANDS,
@@ -200,7 +200,7 @@ ConversionData rrcFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,rrcCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,rrcCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,rrcCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rrcCodeInfo={"rrc",SHIFT_SUPPORTED_OPERANDS,
@@ -241,7 +241,7 @@ ConversionData swapFlagTable[]={
     {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,swapCodeTable,NA,0},
     {LONGPTR_DOT_W_BRACKETEDX_OPERAND,swapCodeTable,NA,0},
     {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,swapCodeTable,NA,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo swapCodeInfo={"swap",SHIFT_SUPPORTED_OPERANDS,
@@ -255,7 +255,7 @@ ExtensionCodeAndCode slXwCodeTable[] = {
 ConversionData slXwFlagTable[]={
     {X_OPERAND,slXwCodeTable,0,0},
     {Y_OPERAND,slXwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo sllwCodeInfo={"sllw",SHIFTWORD_SUPPORTED_OPERANDS,
@@ -273,7 +273,7 @@ ExtensionCodeAndCode srlwCodeTable[] = {
 ConversionData srlwFlagTable[]={
     {X_OPERAND,srlwCodeTable,0,0},
     {Y_OPERAND,srlwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo srlwCodeInfo={"srlw",SHIFTWORD_SUPPORTED_OPERANDS,
@@ -288,13 +288,11 @@ ExtensionCodeAndCode srawCodeTable[] = {
 ConversionData srawFlagTable[]={
     {X_OPERAND,srawCodeTable,0,0},
     {Y_OPERAND,srawCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo srawCodeInfo={"sraw",SHIFTWORD_SUPPORTED_OPERANDS,
                        assembleOneOperand,srawFlagTable};
-
-
 ///////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rlcwCodeTable[] = {
     [X_OPERAND]         ={NA,0x59},
@@ -304,12 +302,11 @@ ExtensionCodeAndCode rlcwCodeTable[] = {
 ConversionData rlcwFlagTable[]={
     {X_OPERAND,rlcwCodeTable,0,0},
     {Y_OPERAND,rlcwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rlcwCodeInfo={"rlcw",SHIFTWORD_SUPPORTED_OPERANDS,
                        assembleOneOperand,rlcwFlagTable};
-
 ///////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rrcwCodeTable[] = {
     [X_OPERAND]         ={NA,0x56},
@@ -319,12 +316,11 @@ ExtensionCodeAndCode rrcwCodeTable[] = {
 ConversionData rrcwFlagTable[]={
     {X_OPERAND,rrcwCodeTable,0,0},
     {Y_OPERAND,rrcwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rrcwCodeInfo={"rrcw",SHIFTWORD_SUPPORTED_OPERANDS,
                        assembleOneOperand,rrcwFlagTable};
-
 ///////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode swapwCodeTable[] = {
     [X_OPERAND]         ={NA,0x5E},
@@ -334,12 +330,11 @@ ExtensionCodeAndCode swapwCodeTable[] = {
 ConversionData swapwFlagTable[]={
     {X_OPERAND,swapwCodeTable,0,0},
     {Y_OPERAND,swapwCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo swapwCodeInfo={"swapw",SHIFTWORD_SUPPORTED_OPERANDS,
                         assembleOneOperand,swapwFlagTable};
-
 ///////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rlwaCodeTable[] = {
     [X_OPERAND]         ={NA,0x02},
@@ -349,12 +344,11 @@ ExtensionCodeAndCode rlwaCodeTable[] = {
 ConversionData rlwaFlagTable[]={
     {X_OPERAND,rlwaCodeTable,0,0},
     {Y_OPERAND,rlwaCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rlwaCodeInfo={"rlwa",SHIFTWORD_SUPPORTED_OPERANDS,
                        assembleOneOperand,rlwaFlagTable};
-
 ///////////////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rrwaCodeTable[] = {
     [X_OPERAND]         ={NA,0x01},
@@ -364,7 +358,7 @@ ExtensionCodeAndCode rrwaCodeTable[] = {
 ConversionData rrwaFlagTable[]={
     {X_OPERAND,rrwaCodeTable,0,0},
     {Y_OPERAND,rrwaCodeTable,0,0},
-    {NO_TABLE_OPERAND,NULL,0,0},
+    {0,NULL,0,0},
 };
 
 CodeInfo rrwaCodeInfo={"rrwa",SHIFTWORD_SUPPORTED_OPERANDS,
