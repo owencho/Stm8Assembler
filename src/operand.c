@@ -48,14 +48,6 @@ stm8OperandType symbolOperandCheck(IntegerToken * token){
     return operandType;
 }
 
-void notNullCheck(Tokenizer* tokenizer){
-    IntegerToken * token;
-    token =(IntegerToken*)getToken(tokenizer);
-    if(token->str !=NULL){
-        throwException(ERR_INVALID_SYNTAX,token,"Expected nothing after this ");
-    }
-}
-
 void squareBracketFlagCheck(IntegerToken *token, stm8Operand * operand ,uint64_t flags){
     if(operand->type == BRACKETED_SHORTPTR_DOT_W_OPERAND){
         operandFlagCheck(flags,token,BRACKETED_SHORTPTR_DOT_W_OPERAND);

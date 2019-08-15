@@ -853,23 +853,6 @@ void test_getOperand_given_bracX_without_closing_bracket_expect_error(void) {
     freeTokenizer(tokenizer);
 }
 
-void test_getOperand_given_bracX_without_opening_bracket_expect_error(void) {
-    CEXCEPTION_T ex;
-    stm8Operand *operand = NULL;
-    Tokenizer *tokenizer = NULL;
-
-    Try{
-        tokenizer = createTokenizer("   X )  ");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        operand = getOperand(tokenizer,ALL_OPERANDS);
-        TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
-    } Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
-    }
-    freeTokenizer(tokenizer);
-}
-
 void test_getOperand_given_bracketA_expect_error(void) {
     CEXCEPTION_T ex;
     stm8Operand *operand = NULL;

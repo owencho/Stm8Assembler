@@ -12,8 +12,15 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <errno.h>
-//movOpcode havent test yet
-//confirm required
+
+void notNullCheck(Tokenizer* tokenizer){
+    IntegerToken * token;
+    token =(IntegerToken*)getToken(tokenizer);
+    if(token->str !=NULL){
+        throwException(ERR_INVALID_SYNTAX,token,"Expected nothing after this ");
+    }
+}
+
 stm8Operand * oneOperandHandler(Tokenizer * tokenizer , uint64_t flags){
     IntegerToken* token;
     stm8Operand* operand ;
@@ -280,70 +287,6 @@ stm8Operand * getMOVOperand(Tokenizer* tokenizer,stm8Operand * dst ,stm8Operand 
     return operand;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-
-ConversionData getLDWComplexDataFlag(CodeInfo *codeInfo,stm8Operand * operand){
-    int i = 0;
-    IntegerToken *token;
-    ConversionData  dataTable;
-    char * str;
-    if(operand->type == X_OPERAND){
-      str = "COMPX";
-    }
-    else if(operand->type == Y_OPERAND){
-      str = "COMPY";
-    }
-    do{
-      if(codeInfo->conDataTable[i].type==operand->type){
-          dataTable = codeInfo->conDataTable[i];
-          break;
-      }
-      i++;
-    }while(codeInfo->conDataTable[i].codeTable != NULL);
-    if(codeInfo->conDataTable[i].codeTable == NULL){
-      dataTable = codeInfo->conDataTable[i];
-    }
-    return dataTable;
-}
-
-
-MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
-    int cmpType;
-    IntegerToken * token;
-    stm8Operand * operand;
-    stm8Operand * operand2nd;
-    stm8OperandType operandType;
-    MachineCode* mcode;
-    ConversionData  dataFlag;
-
-    token =(IntegerToken*)getToken(tokenizer);
-    token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    if(isalpha(token->str[0])){
-        operandType = symbolOperandCheck(token);
-        operandFlagCheck(codeInfo->firstFlags, token ,operandType);
-        pushBackToken(tokenizer,(Token*)token);
-        dataFlag = getDataFlag(codeInfo,tokenizer,operand);
-        commarCheck(tokenizer);
-        operand= getOperand(tokenizer ,dataFlag.secondFlags);
-    }
-    else{
-        pushBackToken(tokenizer,(Token*) token);
-        dataFlag = getDataFlag(codeInfo,tokenizer,operand);
-        pushBackToken(tokenizer,(Token*) token);
-        operand = getOperand(tokenizer ,codeInfo->firstFlags);
-        commarCheck(tokenizer);
-        operand2nd= getOperand(tokenizer ,dataFlag.secondFlags);
-        dataFlag = getLDWComplexDataFlag(codeInfo,operand2nd);
-    }
-    mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
-    notNullCheck(tokenizer);
-    return mcode;
-
-}
-
-
-
 // assemblerHandler
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
@@ -388,8 +331,6 @@ MachineCode* assembleLDXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 }
 
-
-//must use
 MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     int conditionShortOff = 0;
     IntegerToken * token;
