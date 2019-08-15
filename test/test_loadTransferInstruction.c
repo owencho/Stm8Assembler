@@ -967,7 +967,7 @@ void test_assembleInstruction_given_ldf_X_XL_OPERAND_expect_exception(void) {
     }
 	  freeTokenizer(tokenizer);
 }
-/*
+
 void test_assembleInstruction_given_ldw_X_word_expect_0xAE0055(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1995,7 +1995,7 @@ void test_assembleInstruction_given_ldw_longptrwX_Y_withextradollar_OPERAND_expe
     }
 	  freeTokenizer(tokenizer);
 }
-*/
+
 void test_assembleInstruction_given_ldw_clr_A_expect_0x4F(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

@@ -57,7 +57,7 @@ int bitOperationCheck(IntegerToken * token){
   int mul2Type;
   int mul2plus1Type;
   mul2Type = (strcasecmp(token->str,"BCPL")==0) || (strcasecmp(token->str,"BSET")==0) || (strcasecmp(token->str,"btjt")==0);
-  mul2plus1Type = (strcasecmp(token->str,"BCCM")==0) || (strcasecmp(token->str,"BRES")==0) || (strcasecmp(token->str,"btjt")==0);
+  mul2plus1Type = (strcasecmp(token->str,"BCCM")==0) || (strcasecmp(token->str,"BRES")==0) || (strcasecmp(token->str,"btjf")==0);
   if(mul2Type == 1)
     return 1;
   else if (mul2plus1Type ==1)
@@ -341,47 +341,10 @@ MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 
 }
-/*
-MachineCode* assembleMOVperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
-    IntegerToken * token;
-    stm8Operand * operand;
-    stm8Operand * operand2nd;
-    MachineCode* mcode;
-    int cmpType = 0;
-    int nvalue;
-    ConversionData  dataFlag;
 
-    token =(IntegerToken*)getToken(tokenizer);
-    freeToken(token);
-    token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    pushBackToken(tokenizer,(Token*) token);
-    operand = getOperand(tokenizer ,codeInfo->firstFlags);
-    dataFlag = getMOVDataFlag(codeInfo,operand);
-    commarCheck(tokenizer);
-    operand2nd= getOperand(tokenizer ,dataFlag.secondFlags);
-    if(operand->type == SHORT_MEM_OPERAND && (operand2nd->type ==BYTE_OPERAND ||operand2nd->type ==LONG_MEM_OPERAND )){
-        operand = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,operand->dataSize.ms,NA);
-    }
-    else if(operand->type == LONG_MEM_OPERAND && operand2nd->type == SHORT_MEM_OPERAND){
-        operand2nd = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,operand2nd->dataSize.ms,NA);
-    }
-    operand = getMOVOpcode(operand , operand2nd);
-    if(operand->type == NO_OPERAND){
-        throwException(ERR_INVALID_MOV_OPERAND,token,"invalid mov operand ");
-    }
-    cmpType =(operand->type == LONG_MEM_OPERAND && operand2nd->type == LONG_MEM_OPERAND);
-    if(cmpType ==1 ){
-      mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,operand2nd->dataSize.ms);
-    }
-    else{
-        mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
-    }
-    notNullCheck(tokenizer);
-    return mcode;
-}
-*/
 
+
+// assemblerHandler
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     stm8Operand * operand;
@@ -393,7 +356,9 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     firstMcode = assembleTwoComplexOperand(codeInfo ,tokenizer);
     commarCheck(tokenizer);
     operand = oneOperandHandler(tokenizer ,(1<< SHORT_OFF_OPERAND));
-    value =get2ndCompValue(dataFlag,operand,tokenizer);
+    token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*)token);
+    value =additionValueWithLength(operand,5,token);
     mcode =malloc(sizeof(MachineCode)+6);
     mcode= firstMcode;
     mcode->code[4] = value;
@@ -401,16 +366,18 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     notNullCheck(tokenizer);
     return mcode;
 }
-// assemblerHandler
 
-MachineCode* assembleLDFLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+MachineCode* assembleLDXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     MachineCode* mcode;
     IntegerToken * token;
     IntegerToken * initToken;
+    int condition;
     initToken=(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    if(strcasecmp(token->str,"A")==0){
+    condition = strcasecmp(token->str,"A")==0 || strcasecmp(token->str,"X")==0 ||
+                strcasecmp(token->str,"Y")==0 || strcasecmp(token->str,"SP")==0;
+    if(condition ==1 ){
       pushBackToken(tokenizer,(Token*) initToken);
       mcode = assembleSymbolComplexOperand(codeInfo ,tokenizer);
     }
@@ -468,7 +435,8 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
 MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     int bitOPCheck =0;
-    int btfXCheck =0;
+    int btjXCheck =0;
+    int ldwCheck =0;
     int movOPCheck =0;
     int cmpType=0;
     int nvalue = NA;
@@ -481,7 +449,8 @@ MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
     ConversionData  dataFlag;
 
     token =(IntegerToken*)getToken(tokenizer);
-    btfXCheck = (strncasecmp(token->str,"btf",3)==0);
+    btjXCheck = (strncasecmp(token->str,"btj",3)==0);
+    ldwCheck = (strcasecmp(token->str,"ldw")==0);
     bitOPCheck= bitOperationCheck(token);
     movOPCheck= (strcasecmp(token->str,"MOV")==0);
     freeToken(token);
@@ -503,11 +472,16 @@ MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
         else
             mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
     }
+    else if(ldwCheck ==1){
+      operand2nd = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+      operand->type = operand2nd->type;
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
+    }
     else{
       operand2nd = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
       mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
     }
-    if(btfXCheck =0){
+    if(btjXCheck =0){
       notNullCheck(tokenizer);
     }
     return mcode;

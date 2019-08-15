@@ -28,7 +28,7 @@
 #include "CustomAssert.h"
 #include "stackInstruction.h"
 CEXCEPTION_T ex;
-/*
+
 void setUp(void)
 {
 }
@@ -36,7 +36,7 @@ void setUp(void)
 void tearDown(void)
 {
 }
-
+/*
 void test_getDataFlag_given_bccmCodeINfo_comp_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
 		IntegerToken * token;

@@ -27,7 +27,7 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleSymbolComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
-MachineCode* assembleLDFLDOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
+MachineCode* assembleLDXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer);
 
 
 

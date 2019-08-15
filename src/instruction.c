@@ -111,7 +111,7 @@ InstructionTable instructionTable[]={
     //loadTransferInstruction
     {"ld",&ldCodeInfo},
     {"ldf",&ldfCodeInfo},
-//    {"ldw",&ldwCodeInfo},
+    {"ldw",&ldwCodeInfo},
     {"clr",&clrCodeInfo},
     {"mov",&movCodeInfo},
     {"exg",&exgCodeInfo},
@@ -132,7 +132,6 @@ InstructionTable instructionTable[]={
     {"ret",&retCodeInfo},
     {"retf",&retfCodeInfo},
     {"nop",&nopCodeInfo},
-
     {NULL,NULL}
 };
 

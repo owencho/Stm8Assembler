@@ -69,7 +69,7 @@ ConversionData ldFlagTable[]={
 };
 
 CodeInfo ldCodeInfo={"ld",LD1ST_SUPPORTED_OPERANDS,
-                      assembleLDFLDOperand,ldFlagTable};
+                      assembleLDXOperand,ldFlagTable};
 
 ExtensionCodeAndCode ldfComplexCodeTable[] = {
     [EXT_MEM_OPERAND]                             ={NA,0xBD},
@@ -101,7 +101,7 @@ ConversionData ldfFlagTable[]={
 };
 
 CodeInfo ldfCodeInfo={"ldf",LDF_SUPPORTED_OPERANDS,
-                      assembleLDFLDOperand,ldfFlagTable};
+                      assembleLDXOperand,ldfFlagTable};
 
 ExtensionCodeAndCode ldwSPCodeTable[] = {
     [X_OPERAND]                        ={NA,0x94},
@@ -138,45 +138,90 @@ ExtensionCodeAndCode ldwYCodeTable[] = {
     [SP_OPERAND]                          ={0x90,0x96},
 };
 
-
-ExtensionCodeAndCode ldwComXCodeTable[] = {
-    [SHORT_MEM_OPERAND]                        ={NA,0xBF},
-    [LONG_MEM_OPERAND]                         ={NA,0xCF},
-    [SHORTOFF_SP_OPERAND]                      ={NA,0x1F},
-    [BRACKETED_SHORTPTR_DOT_W_OPERAND]         ={0x92,0xCF},
-    [BRACKETED_LONGPTR_DOT_W_OPERAND]          ={0x72,0xCF},
-    [BRACKETED_Y_OPERAND]                      ={0x90,0xFF},
-    [SHORTOFF_Y_OPERAND]                       ={0x90,0xEF},
-    [LONGOFF_Y_OPERAND]                        ={0x90,0xDF},
-    [SHORTPTR_DOT_W_BRACKETEDY_OPERAND]        ={0x91,0xDF},
+ExtensionCodeAndCode ldwShortMemCodeTable[] = {
+    [X_OPERAND]                        ={NA,0xBF},
+    [Y_OPERAND]                        ={0x90,0xBF},
 };
 
-ExtensionCodeAndCode ldwComYCodeTable[] = {
-    [SHORT_MEM_OPERAND]                    ={0x90,0xBF},
-    [LONG_MEM_OPERAND]                     ={0x90,0xCF},
-    [SHORTOFF_SP_OPERAND]                  ={NA,0x17},
-    [BRACKETED_X_OPERAND]                  ={NA,0xFF},
-    [SHORTOFF_X_OPERAND]                   ={NA,0xEF},
-    [LONGOFF_X_OPERAND]                    ={NA,0xDF},
-    [SHORTPTR_DOT_W_BRACKETEDX_OPERAND]    ={0x92,0xDF},
-    [LONGPTR_DOT_W_BRACKETEDX_OPERAND]     ={0x72,0xDF},
-    [BRACKETED_SHORTPTR_DOT_W_OPERAND]     ={0x91,0xCF},
+ExtensionCodeAndCode ldwLongMemCodeTable[] = {
+    [X_OPERAND]                        ={NA,0xCF},
+    [Y_OPERAND]                        ={0x90,0xCF},
 };
 
+ExtensionCodeAndCode ldwShortOffSPCodeTable[] = {
+    [X_OPERAND]                        ={NA,0x1F},
+    [Y_OPERAND]                        ={NA,0x17},
+};
 
+ExtensionCodeAndCode ldwBracXCodeTable[] = {
+    [Y_OPERAND]                        ={NA,0xFF},
+};
+
+ExtensionCodeAndCode ldwShortOffBracXCodeTable[] = {
+    [Y_OPERAND]                        ={NA,0xEF},
+};
+
+ExtensionCodeAndCode ldwLongOffBracXCodeTable[] = {
+    [Y_OPERAND]                        ={NA,0xDF},
+};
+
+ExtensionCodeAndCode ldwBracYCodeTable[] = {
+    [X_OPERAND]                        ={0x90,0xFF},
+};
+
+ExtensionCodeAndCode ldwShortOffBracYCodeTable[] = {
+    [X_OPERAND]                        ={0x90,0xEF},
+};
+
+ExtensionCodeAndCode ldwLongOffBracYCodeTable[] = {
+    [X_OPERAND]                        ={0x90,0xDF},
+};
+
+ExtensionCodeAndCode ldwBracShortPtrWCodeTable[] = {
+    [X_OPERAND]                        ={0x92,0xCF},
+    [Y_OPERAND]                        ={0x91,0xCF},
+};
+
+ExtensionCodeAndCode ldwBraclongPtrWCodeTable[] = {
+    [X_OPERAND]                        ={0x72,0xCF},
+};
+
+ExtensionCodeAndCode ldwShortPtrWBracXCodeTable[] = {
+    [Y_OPERAND]                        ={0x92,0xDF},
+};
+
+ExtensionCodeAndCode ldwLongPtrWBracXCodeTable[] = {
+    [Y_OPERAND]                        ={0x72,0xDF},
+};
+
+ExtensionCodeAndCode ldwShortPtrWBracYCodeTable[] = {
+    [X_OPERAND]                        ={0x91,0xDF},
+};
 
 ConversionData ldwFlagTable[]={
     {X_OPERAND,ldwXCodeTable,LDW_X_SUPPORTED_OPERANDS,0},
     {Y_OPERAND,ldwYCodeTable,LDW_Y_SUPPORTED_OPERANDS,0},
-    {SP_OPERAND,ldwSPCodeTable,LDW_SP_SUPPORTED_OPERANDS,0},
-    {X_OPERAND,0,(1<< X_OPERAND| 1<< Y_OPERAND),0},  //comp
-    {Y_OPERAND,ldwComXCodeTable,0,0},                // compx
-    {X_OPERAND,ldwComYCodeTable,0,0},                // compy
+    {SP_OPERAND,ldwSPCodeTable,LDW_XY_SUPPORTED_OPERANDS,0},
+    {SHORT_MEM_OPERAND,ldwShortMemCodeTable,LDW_XY_SUPPORTED_OPERANDS,0},
+    {LONG_MEM_OPERAND,ldwLongMemCodeTable,LDW_XY_SUPPORTED_OPERANDS,0},
+    {SHORTOFF_SP_OPERAND,ldwShortOffSPCodeTable,LDW_XY_SUPPORTED_OPERANDS,0},
+    {BRACKETED_X_OPERAND,ldwBracXCodeTable,(1<<Y_OPERAND),0},
+    {SHORTOFF_X_OPERAND,ldwShortOffBracXCodeTable,(1<<Y_OPERAND),0},
+    {LONGOFF_X_OPERAND,ldwLongOffBracXCodeTable,(1<<Y_OPERAND),0},
+    {BRACKETED_Y_OPERAND,ldwBracYCodeTable,(1<<X_OPERAND),0},
+    {SHORTOFF_Y_OPERAND,ldwShortOffBracYCodeTable,(1<<X_OPERAND),0},
+    {LONGOFF_Y_OPERAND,ldwLongOffBracYCodeTable,(1<<X_OPERAND),0},
+    {BRACKETED_SHORTPTR_DOT_W_OPERAND,ldwBracShortPtrWCodeTable,LDW_XY_SUPPORTED_OPERANDS,0},
+    {BRACKETED_LONGPTR_DOT_W_OPERAND,ldwBraclongPtrWCodeTable,(1<<X_OPERAND),0},
+    {SHORTPTR_DOT_W_BRACKETEDX_OPERAND,ldwShortPtrWBracXCodeTable,(1<<Y_OPERAND),0},
+    {LONGPTR_DOT_W_BRACKETEDX_OPERAND,ldwLongPtrWBracXCodeTable,(1<<Y_OPERAND),0},
+    {SHORTPTR_DOT_W_BRACKETEDY_OPERAND,ldwShortPtrWBracYCodeTable,(1<<X_OPERAND),0},
     {0,NULL,0,0},
 };
 
 CodeInfo ldwCodeInfo={"ldw",LDW_1ST_SUPPORTED_OPERANDS,
-                      assembleLDWOperand,ldwFlagTable};
+                      assembleLDXOperand,ldwFlagTable};
+
 
 ExtensionCodeAndCode clrCodeTable[] = {
     [A_OPERAND]                           ={NA,0x4f},

@@ -127,7 +127,7 @@ CodeInfo exgwCodeInfo;
     1<<X_OPERAND                                    |     \
     1<<SP_OPERAND)
 
-#define  LDW_SP_SUPPORTED_OPERANDS                         \
+#define  LDW_XY_SUPPORTED_OPERANDS                         \
     (1<<X_OPERAND                                    |     \
     1<<Y_OPERAND)
 
