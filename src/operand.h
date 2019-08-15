@@ -4,7 +4,7 @@
 typedef struct stm8Operand stm8Operand ;
 
 
-#define NA      -1      //used for opcode below
+   //used for opcode below
 #define ALL_OPERANDS -1
 //#define
 
@@ -72,14 +72,25 @@ stm8Operand *createOperand( stm8OperandType type,
                             uint16_t ms,
                             uint16_t ls,
                             uint16_t extB);
+stm8Operand *createLsOperand( stm8OperandType type,
+                              int value,
+                              IntegerToken *token);
+stm8Operand *createMsOperand( stm8OperandType type,
+                              int value,
+                              IntegerToken *token);
+stm8Operand *createExtMemOperand( stm8OperandType type,
+                                  int value,
+                                  IntegerToken *token);
 
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint64_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type);
+void squareBracketFlagCheck(IntegerToken *token, stm8Operand * operand ,uint64_t flags);
 IntegerToken* extendTokenStr(IntegerToken *tokenToExtend , IntegerToken *tokenToCover );
 stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags);
 stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags);
 stm8Operand *operandHandleHash(Tokenizer* tokenizer ,uint64_t flags);
+stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 int signedIntCheck(Tokenizer *tokenizer);

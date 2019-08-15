@@ -6,6 +6,26 @@
 #define _STRINGIFY(x)     #x
 #define STRINGIFY(x)     _STRINGIFY(x)
 
+void test_valueCheck_given_z_expect_fail(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    int a;
+
+    Try{
+        tokenizer = createTokenizer("z");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        int a = valueCheck(token);
+        TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+
+
 int getExpectedCodeLength(const int expectedCode[] , int length){
     int i=0;
 

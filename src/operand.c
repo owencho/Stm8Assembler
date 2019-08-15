@@ -59,7 +59,7 @@ void squareBracketFlagCheck(IntegerToken *token, stm8Operand * operand ,uint64_t
         operandFlagCheck(flags,token,BRACKETED_LONGPTR_DOT_E_OPERAND);
     }
     else{
-        throwException(ERR_UNSUPPORTED_OPERAND,token,"expected only [ ] ");
+        throwException(ERR_UNSUPPORTED_OPERAND,token,"operand Not Supported ");
     }
 }
 
@@ -82,7 +82,7 @@ int signedIntCheck(Tokenizer *tokenizer){
             else
               value = 256-token->value;
         }
-        else if(token->value > 127){
+        else if(token->value > 128){
           throwException(ERR_INVALID_SIGNEDINT_VALUE,token,"The range only can be from -128 => x <= 127");
         }
         else{
@@ -160,7 +160,7 @@ int valueCheck(IntegerToken* token){
         else if (token-> value <0){
             throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
         }
-        else if (token-> value >65536){
+        else if (token-> value >16777216){
             throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 65536 eg ($1000)");
         }
   }
@@ -180,7 +180,7 @@ int valueCheck(IntegerToken* token){
       else if (token-> value <0){
           throwException(ERR_INTEGER_NEGATIVE,token,"The integer number must be positive eg ($10)");
       }
-      else if (token-> value >65536){
+      else if (token-> value >16777216){
           throwException(ERR_INTEGER_TOO_LARGE,token,"The integer number must smaller than 65536 eg ($1000)");
       }
   }
@@ -226,7 +226,7 @@ stm8Operand *createMsOperand( stm8OperandType type,
                               int value,
                               IntegerToken *token){
     stm8Operand *operand =malloc(sizeof(stm8Operand));
-    if(value <65536){
+    if(value >=0 && value <65536){
         uint16_t valueLs = value & 0xff;  // low
         uint16_t valueMs = value >> 8;    // high
         operand = createOperand(type,NA,NA,valueMs,valueLs,NA);
@@ -256,6 +256,8 @@ stm8Operand *createExtMemOperand( stm8OperandType type,
     }
     return operand;
 }
+
+
 
 stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue,Tokenizer* tokenizer , int value, int valueCount , int squarecount){
     int operandCounter =0;
@@ -491,8 +493,7 @@ stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags){
         operand = createLsOperand(SHORT_OFF_OPERAND,valueShortMem,token);
     }
     else{
-        operandFlagCheck(flags,token,SHORT_MEM_OPERAND);
-        operandFlagCheck(flags,token,LONG_MEM_OPERAND);
+        throwException(ERR_UNSUPPORTED_OPERAND,token,"Operand is not supported");
     }
     return operand;
 }
@@ -527,7 +528,7 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
         if(strcmp(token->str,".")==0){
             freeToken(token);
             token = (IntegerToken *)getToken(tokenizer);
-            nullCheck(ERR_INVALID_SYNTAX,token,"Expected w after .");
+            nullCheck(ERR_INVALID_SYNTAX,token,"Expected w / e after .");
             if(strcasecmp(token->str,"W")==0){
                 freeToken(token);
                 token = (IntegerToken *)getToken(tokenizer);
@@ -543,7 +544,10 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                         throwException(ERR_INTEGER_TOO_LARGE,valueBracToken,"value too large expected less than 65535");
                     }
                     else if(valueCount ==4){
-                        throwException(ERR_INTEGER_TOO_SMALL,valueBracToken,"Expected value too small expected positive value ");
+                        throwException(ERR_INTEGER_NEGATIVE,valueBracToken,"Expected value negative expected positive value ");
+                    }
+                    else{
+                        throwException(ERR_UNSUPPORTED_OPERAND,valueBracToken,"Expected longptr and shortptr is not supported");
                     }
                 }
                 else{
@@ -562,10 +566,10 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                         throwException(ERR_INTEGER_TOO_LARGE,valueBracToken,"value too large expected less than 65535");
                     }
                     else if(valueCount ==4){
-                        throwException(ERR_INTEGER_TOO_SMALL,valueBracToken,"Expected value too small expected positive value ");
+                        throwException(ERR_INTEGER_NEGATIVE,valueBracToken,"Expected value negative expected positive value ");
                     }
                     else{
-                        throwException(ERR_UNSUPPORTED_OPERAND,token,"Expected longptr and shortptr is not supported");
+                        throwException(ERR_UNSUPPORTED_OPERAND,valueBracToken,"Expected longptr and shortptr is not supported");
                     }
                 }
                 else{
@@ -692,7 +696,7 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
 
       token =(IntegerToken*)getToken(tokenizer);
       initToken = token;
-      nullCheck(ERR_DSTSRC_NULL,token,"The must include the source eg (X)");
+      nullCheck(ERR_DSTSRC_NULL,token,"The must include the source");
       pushBackToken(tokenizer, (Token*)token);
       if(isalpha(token->str[0])){
           operand = operandHandleFirstSymbol(tokenizer, flags);

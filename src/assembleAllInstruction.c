@@ -21,16 +21,6 @@ void notNullCheck(Tokenizer* tokenizer){
     }
 }
 
-stm8Operand * oneOperandHandler(Tokenizer * tokenizer , uint64_t flags){
-    IntegerToken* token;
-    stm8Operand* operand ;
-    token =(IntegerToken*)getToken(tokenizer);
-    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL");
-    pushBackToken(tokenizer,(Token*)token);
-    operand= getOperand(tokenizer ,flags);
-    return operand;
-}
-
 ConversionData getDataFlag(CodeInfo *codeInfo,Tokenizer * tokenizer,stm8Operand* operand){
     int i = 0;
     IntegerToken *token;
@@ -63,6 +53,7 @@ void commarCheck(Tokenizer* tokenizer){
 int bitOperationCheck(IntegerToken * token){
   int mul2Type;
   int mul2plus1Type;
+  nullCheck(ERR_INVALID_SYNTAX,token,"Expected instruction");
   mul2Type = (strcasecmp(token->str,"BCPL")==0) || (strcasecmp(token->str,"BSET")==0) || (strcasecmp(token->str,"btjt")==0);
   mul2plus1Type = (strcasecmp(token->str,"BCCM")==0) || (strcasecmp(token->str,"BRES")==0) || (strcasecmp(token->str,"btjf")==0);
   if(mul2Type == 1)
@@ -71,6 +62,81 @@ int bitOperationCheck(IntegerToken * token){
     return 2;
   else
     return 0;
+}
+
+int get2ndCompValue(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer){
+    int mCodeLength;
+    int value;
+    ExtensionCodeAndCode code;
+    IntegerToken * token;
+    token =(IntegerToken*)getToken(tokenizer);
+    code = dataFlag.codeTable[operand->type];
+    mCodeLength = machineCodeLengthFinder(operand,code);
+    value =addition2ndCompValueWithLength(operand,mCodeLength,token);
+    return value;
+}
+
+int addition2ndCompValueWithLength(stm8Operand * operand,int length,IntegerToken *token){
+    int value;
+    int orivalue;
+    value = operand->dataSize.ms;
+    orivalue = operand->dataSize.ms ;
+    if(value >= 128  && value < 256 ){
+      value = value + length;
+      if(value >= 256){
+        value = value - 256;
+      }
+    }
+    else if (value == 65535 ){
+      throwException(ERR_INTEGER_NULL,token,"Your input operand is invalid has no value");
+    }
+    else if (value >= 0){
+      value = value+ length;
+    }
+    else {
+      throwException(ERR_INTEGER_NEGATIVE,token,"Your value is %d which is less than 0",orivalue);
+    }
+    if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
+      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",length,orivalue);
+    }
+    return value;
+}
+
+stm8Operand * getMOVOperand(Tokenizer* tokenizer,stm8Operand * dst ,stm8Operand * src ){
+    IntegerToken *token;
+    token =(IntegerToken*)getToken(tokenizer);
+    pushBackToken(tokenizer,(Token*) token);
+    stm8Operand * operand;
+    if(dst->type == SHORT_MEM_OPERAND && (src->type ==BYTE_OPERAND ||src->type ==LONG_MEM_OPERAND )){
+        dst = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,dst->dataSize.ms,NA);
+    }
+    else if(dst->type == LONG_MEM_OPERAND && src->type == SHORT_MEM_OPERAND){
+        src = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,src->dataSize.ms,NA);
+    }
+
+    if(dst->type == LONG_MEM_OPERAND){
+      if(src->type == BYTE_OPERAND){
+      operand = createOperand(BYTE_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,dst->dataSize.ls);
+      }
+      else if(src->type == LONG_MEM_OPERAND){
+      operand = createOperand(LONG_MEM_OPERAND,NA,NA,src->dataSize.ls,dst->dataSize.ms,dst->dataSize.ls);
+      }
+      else{
+        throwException(ERR_INVALID_MOV_OPERAND,token,"invalid mov operand ");
+      }
+    }
+    else if(dst->type == SHORT_MEM_OPERAND){
+      if(src->type == SHORT_MEM_OPERAND){
+        operand = createOperand(SHORT_MEM_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,NA);
+      }
+      else{
+        throwException(ERR_INVALID_MOV_OPERAND,token,"invalid mov operand ");
+      }
+    }
+    else{
+        throwException(ERR_INVALID_MOV_OPERAND,token,"invalid mov operand ");
+    }
+    return operand;
 }
 
 int hashNValueReturn(Tokenizer* tokenizer , int cmpType){
@@ -191,11 +257,11 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
     initToken = token;
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*) token);
-    if(dataFlag.type != NO_TABLE_OPERAND && (movMs2ndOpValue != NA && movMs2ndOpValue <= 255)){
+    if(dataFlag.codeTable != NULL && (movMs2ndOpValue != NA && movMs2ndOpValue <= 255)){
       code = dataFlag.codeTable[operand->type];
       code.code=movMs2ndOpValue;
     }
-    else if(dataFlag.type != NO_TABLE_OPERAND)
+    else if(dataFlag.codeTable != NULL)
         code = dataFlag.codeTable[operand->type];
     else
       throwException(ERR_DATATABLE_NULL,token,"couldnt locate the data Table");
@@ -203,91 +269,55 @@ MachineCode* machineCodeAllocateOutput(Tokenizer* tokenizer,ConversionData  data
     if(nvalue >= 0 && nvalue <= 15){
       code.code =code.code + nvalue;
     }
-
-    if(code.extCode ==0 && code.code ==0){
-      throwException(ERR_CODE_NULL,token,"couldnt locate the ExtensionCode And Code");
-    }
-    else{
-      a = machineCodeLengthFinder(operand,code);
-      mcode =malloc(sizeof(MachineCode)+1+ a);
-      mcode = outputMachineCode(operand,code,a);
-      if(mcode == NULL){
-        throwException(ERR_MCODE_NULL,token,"length generated are different");
-      }
+    a = machineCodeLengthFinder(operand,code);
+    mcode =malloc(sizeof(MachineCode)+1+ a);
+    mcode = outputMachineCode(operand,code,a);
+    if(mcode == NULL){
+      throwException(ERR_MCODE_NULL,token,"length generated are different");
     }
    return mcode;
 }
 
-int get2ndCompValue(ConversionData dataFlag,stm8Operand * operand,Tokenizer * tokenizer){
-    int mCodeLength;
-    int value;
-    ExtensionCodeAndCode code;
-    IntegerToken * token;
-    token =(IntegerToken*)getToken(tokenizer);
-    code = dataFlag.codeTable[operand->type];
-    mCodeLength = machineCodeLengthFinder(operand,code);
-    value =additionValueWithLength(operand,mCodeLength,token);
-    return value;
-}
-
-int additionValueWithLength(stm8Operand * operand,int length,IntegerToken *token){
-    int value;
-    int orivalue;
-    value = operand->dataSize.ms;
-    orivalue = operand->dataSize.ms ;
-    if(value >= 128 ){
-      value = value + length;
-      if(value >= 256){
-        value = value - 256;
-      }
-    }
-    else{
-      value = value+ length;
-    }
-    if((orivalue < 128) && (value >= 128 )|| (orivalue > 128) && (value >= 255 )){
-      throwException(ERR_INTEGER_TOO_LARGE,token,"Expected signed value as your size is %d and your value is %x which more than 128",length,orivalue);
-    }
-    return value;
-}
-
-stm8Operand * getMOVOperand(Tokenizer* tokenizer,stm8Operand * dst ,stm8Operand * src ){
-    IntegerToken *token;
-    token =(IntegerToken*)getToken(tokenizer);
-    pushBackToken(tokenizer,(Token*) token);
-    stm8Operand * operand;
-    if(dst->type == SHORT_MEM_OPERAND && (src->type ==BYTE_OPERAND ||src->type ==LONG_MEM_OPERAND )){
-        dst = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,dst->dataSize.ms,NA);
-    }
-    else if(dst->type == LONG_MEM_OPERAND && src->type == SHORT_MEM_OPERAND){
-        src = createOperand(LONG_MEM_OPERAND,NA,NA,0x00,src->dataSize.ms,NA);
-    }
-
-    if(dst->type == LONG_MEM_OPERAND){
-      if(src->type == BYTE_OPERAND){
-      operand = createOperand(BYTE_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,dst->dataSize.ls);
-      }
-      else if(src->type == LONG_MEM_OPERAND){
-      operand = createOperand(LONG_MEM_OPERAND,NA,NA,src->dataSize.ls,dst->dataSize.ms,dst->dataSize.ls);
-      }
-      else{
-        operand = createOperand(NO_OPERAND,NA,NA,NA,NA,NA);
-      }
-    }
-    else if(dst->type == SHORT_MEM_OPERAND){
-      if(src->type == SHORT_MEM_OPERAND){
-        operand = createOperand(SHORT_MEM_OPERAND,NA,NA,src->dataSize.ms,dst->dataSize.ms,NA);
-      }
-      else{
-        operand = createOperand(NO_OPERAND,NA,NA,NA,NA,NA);
-      }
-    }
-    else{
-        throwException(ERR_INVALID_MOV_OPERAND,token,"invalid mov operand ");
-    }
-    return operand;
-}
 
 // assemblerHandler
+MachineCode* assembleLDWOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+    MachineCode* mcode;
+    IntegerToken * token;
+    IntegerToken * opToken;
+    IntegerToken * flagToken;
+    stm8OperandType secondOpType;
+    int condition;
+    ConversionData  dataFlag;
+    stm8Operand * operand2nd = NULL;
+    stm8Operand * operand = NULL;
+
+    token=(IntegerToken*)getToken(tokenizer);
+    opToken =(IntegerToken*)getToken(tokenizer);
+    nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
+    condition =strcasecmp(opToken->str,"X")==0 ||strcasecmp(opToken->str,"Y")==0 ||
+               strcasecmp(opToken->str,"SP")==0;
+
+    if(condition ==1){
+      pushBackToken(tokenizer,(Token*) token);
+      mcode = assembleSymbolComplexOperand(codeInfo ,tokenizer);
+    }
+    else{
+      pushBackToken(tokenizer,(Token*) opToken);
+      operand = getOperand(tokenizer ,codeInfo->firstFlags);
+      dataFlag = getDataFlag(codeInfo,tokenizer,operand);
+      commarCheck(tokenizer);
+      token =(IntegerToken*)getToken(tokenizer);
+      flagToken=extendTokenStr(opToken , token );
+      pushBackToken(tokenizer,(Token*)token);
+      operand2nd = getOperand(tokenizer ,ALL_OPERANDS);
+      operandFlagCheck(dataFlag.secondFlags, flagToken ,operand2nd->type);
+      operand->type = operand2nd->type;
+      mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
+      notNullCheck(tokenizer);
+    }
+    return mcode;
+}
+
 MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     IntegerToken * token;
     stm8Operand * operand;
@@ -298,10 +328,10 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 
     firstMcode = assembleTwoComplexOperand(codeInfo ,tokenizer);
     commarCheck(tokenizer);
-    operand = oneOperandHandler(tokenizer ,(1<< SHORT_OFF_OPERAND));
+    operand = getOperand(tokenizer ,(1<< SHORT_OFF_OPERAND));
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
-    value =additionValueWithLength(operand,5,token);
+    value =addition2ndCompValueWithLength(operand,5,token);
     mcode =malloc(sizeof(MachineCode)+6);
     mcode= firstMcode;
     mcode->code[4] = value;
@@ -310,7 +340,7 @@ MachineCode* assembleBTJXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     return mcode;
 }
 
-MachineCode* assembleLDXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
+MachineCode* assembleLDLDFOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     MachineCode* mcode;
     IntegerToken * token;
     IntegerToken * initToken;
@@ -318,9 +348,7 @@ MachineCode* assembleLDXOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     initToken=(IntegerToken*)getToken(tokenizer);
     token =(IntegerToken*)getToken(tokenizer);
     nullCheck(ERR_DSTSRC_NULL,token,"Expected not NULL ");
-    condition = strcasecmp(token->str,"A")==0 || strcasecmp(token->str,"X")==0 ||
-                strcasecmp(token->str,"Y")==0 || strcasecmp(token->str,"SP")==0;
-    if(condition ==1 ){
+    if(strcasecmp(token->str,"A")==0 ){
       pushBackToken(tokenizer,(Token*) initToken);
       mcode = assembleSymbolComplexOperand(codeInfo ,tokenizer);
     }
@@ -345,7 +373,7 @@ MachineCode* assembleOneOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     freeToken(token);
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
-    operand = oneOperandHandler(tokenizer ,codeInfo->firstFlags);
+    operand = getOperand(tokenizer ,codeInfo->firstFlags);
     dataFlag = getDataFlag(codeInfo,tokenizer,operand);
     if(conditionShortOff ==1){
         token =(IntegerToken*)getToken(tokenizer);
@@ -377,7 +405,6 @@ MachineCode* assembleNoOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
 MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer){
     int bitOPCheck =0;
     int btjXCheck =0;
-    int ldwCheck =0;
     int movOPCheck =0;
     int cmpType=0;
     int nvalue = NA;
@@ -391,13 +418,12 @@ MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
 
     token =(IntegerToken*)getToken(tokenizer);
     btjXCheck = (strncasecmp(token->str,"btj",3)==0);
-    ldwCheck = (strcasecmp(token->str,"ldw")==0);
     bitOPCheck= bitOperationCheck(token);
     movOPCheck= (strcasecmp(token->str,"MOV")==0);
     freeToken(token);
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
-    operand = oneOperandHandler(tokenizer ,codeInfo->firstFlags);
+    operand = getOperand(tokenizer ,codeInfo->firstFlags);
     dataFlag = getDataFlag(codeInfo,tokenizer,operand);
     commarCheck(tokenizer);
     if(bitOPCheck != 0){
@@ -405,7 +431,7 @@ MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
         mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue,NA);
     }
     else if (movOPCheck ==1){
-        operand2nd = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+        operand2nd = getOperand(tokenizer ,dataFlag.secondFlags);
         operand = getMOVOperand(tokenizer,operand , operand2nd);
         cmpType =(operand->type == LONG_MEM_OPERAND && operand2nd->type == LONG_MEM_OPERAND);
         if(cmpType ==1 )
@@ -413,13 +439,8 @@ MachineCode* assembleTwoComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokenizer)
         else
             mcode=machineCodeAllocateOutput(tokenizer,dataFlag , operand,NA,NA);
     }
-    else if(ldwCheck ==1){
-      operand2nd = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
-      operand->type = operand2nd->type;
-      mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
-    }
     else{
-      operand2nd = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+      operand2nd = getOperand(tokenizer ,dataFlag.secondFlags);
       mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
     }
     if(btjXCheck =0){
@@ -443,12 +464,12 @@ MachineCode* assembleSymbolComplexOperand(CodeInfo *codeInfo ,Tokenizer *tokeniz
     freeToken(token);
     token =(IntegerToken*)getToken(tokenizer);
     pushBackToken(tokenizer,(Token*)token);
-    operand1st = oneOperandHandler(tokenizer ,codeInfo->firstFlags);
+    operand1st = getOperand(tokenizer ,codeInfo->firstFlags);
     pushBackToken(tokenizer,(Token*)token);
     dataFlag = getDataFlag(codeInfo,tokenizer,operand1st);
     token =(IntegerToken*)getToken(tokenizer);
     commarCheck(tokenizer);
-    operand = oneOperandHandler(tokenizer ,dataFlag.secondFlags);
+    operand = getOperand(tokenizer ,dataFlag.secondFlags);
     mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
     notNullCheck(tokenizer);
     return mcode;
