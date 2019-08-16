@@ -30,6 +30,15 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is conditionCodeFlagModificationInstruction test file which test
+*  SIM RIM SCF RCF CCF RVF
+* these instruction supports no operand
+*
+*can refer STM8 instruction set for more information
+**/
+
+//rcf testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_rcf_0x98(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -62,7 +71,7 @@ void test_assembleInstruction_given_rcF_t0t0_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//ccf testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ccf_0x8c(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -95,6 +104,8 @@ void test_assembleInstruction_given_ccf_abcd123_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+//rim testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_rIm_0x9a(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -127,7 +138,7 @@ void test_assembleInstruction_given_Rim_ironman_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//rvf testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_rvf_0x9c(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -160,7 +171,7 @@ void test_assembleInstruction_given_rvf_12789_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//scf testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_scf_0x99(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -193,7 +204,7 @@ void test_assembleInstruction_given_SCF_symbol_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//sim testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sim_0x9b(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

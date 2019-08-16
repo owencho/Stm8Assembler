@@ -28,13 +28,16 @@
 #include "stackInstruction.h"
 CEXCEPTION_T ex;
 
-void setUp(void)
-{
-}
+void setUp(void){}
 
-void tearDown(void)
-{
-}
+void tearDown(void){}
+
+/*
+* This is breakPointInstruction test file which test
+* break instruction
+*
+*can refer STM8 instruction set for more information
+**/
 
 void test_assembleInstruction_given_Break_0x8b(void) {
     MachineCode *mcode =NULL ;
@@ -51,7 +54,7 @@ void test_assembleInstruction_given_Break_0x8b(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+// exception thrown because break instruction only supports no operand
 void test_assembleInstruction_given_break_f_expect_fail(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

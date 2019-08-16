@@ -31,6 +31,13 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is compareAndTestsInstruction test file which test
+* CP , TNZ , BCP , CPW and TNZW instruction
+*
+*can refer STM8 instruction set for more information
+**/
+
 //cp testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cp_byte_expect_0xa121(void) {
     MachineCode *mcode =NULL ;
@@ -868,7 +875,7 @@ void test_assembleInstruction_given_bcp_a_invalid_operand_expect_fail(void) {
 }
 
 
-//CPWX/////////////////////////////////////////////////////////////////////////////
+//CPW OPERAND/////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cpw_word_expect_0xa30021(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1201,7 +1208,7 @@ void test_assembleInstruction_given_cpw_y_unsupported_operand_expect_fail(void) 
     freeTokenizer(tokenizer);
 }
 
-
+//TNZW testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_tnzw_X_OPERAND_expect_0x5D(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

@@ -30,7 +30,14 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+/*
+* This is stackInstruction test file which test
+* PUSH POP PUSHW POPW
+* these instruction supports one operand
+*can refer STM8 instruction set for more information
+**/
 
+//PUSH testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_push_A_OPERAND_expect_0x88(void) {
     MachineCode *mcode =NULL ;
@@ -150,6 +157,8 @@ void test_assembleInstruction_given_push_X_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
+//POP testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_pop_A_OPERAND_expect_0x84(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -215,6 +224,8 @@ void test_assembleInstruction_given_pop_extmem_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+//PUSHW testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_pushw_x_OPERAND_expect_0x89(void) {
     MachineCode *mcode =NULL ;
@@ -283,6 +294,8 @@ void test_assembleInstruction_given_pushw_X_commar_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+//POPW testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_popw_x_OPERAND_expect_0x85(void) {
     MachineCode *mcode =NULL ;

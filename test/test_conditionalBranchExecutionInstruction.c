@@ -30,6 +30,15 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is conditionalBranchExecutionInstruction test file which test
+* All JRxx instruction except JRF and JRT
+* this JRXX supports short_off operand which includes
+* negative and positive value (-128 <= x <= 127)
+*can refer STM8 instruction set for more information
+**/
+
+//jrc testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_jrc_shortoffAA_0x253e(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -62,7 +71,7 @@ void test_assembleInstruction_given_jrc_negHex33_0x25CF(void) {
     freeTokenizer(tokenizer);
 }
 
-
+//jreq testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_jreq_shortoff56_0x2758(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -94,6 +103,7 @@ void test_assembleInstruction_given_jreq_neghex12_0x27F0(void) {
     }
     freeTokenizer(tokenizer);
 }
+//jrh testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_jrh_shortoff67_0x90290C(void) {
     MachineCode *mcode =NULL ;
@@ -126,6 +136,7 @@ void test_assembleInstruction_given_jrh_negHEX1_0x902902(void) {
     }
     freeTokenizer(tokenizer);
 }
+//jrih testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_jrih_shortoff54_0x902F57(void) {
     MachineCode *mcode =NULL ;
@@ -158,6 +169,7 @@ void test_assembleInstruction_given_jrih_negHEX80_0x902F83(void) {
     }
     freeTokenizer(tokenizer);
 }
+//jril testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_jril_shortoff54_0x902F57(void) {
     MachineCode *mcode =NULL ;
@@ -190,6 +202,9 @@ void test_assembleInstruction_given_jril_negHEX2_0x902F01(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+//jrm testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_jrm_shortoff31_0x902D31(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -222,6 +237,8 @@ void test_assembleInstruction_given_jrm_negHEX80_0x902dd0(void) {
     freeTokenizer(tokenizer);
 }
 
+//jrmi testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_jrmi_shortoff54_0x2B4f(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -253,6 +270,7 @@ void test_assembleInstruction_given_jrmi_negHEX2_0x2b00(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRNC testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRNC_shortoff54_0x2433(void) {
     MachineCode *mcode =NULL ;
@@ -286,6 +304,8 @@ void test_assembleInstruction_given_JRNC_negHEX_0x24e1(void) {
     freeTokenizer(tokenizer);
 }
 
+//JRNE testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_JRNE_shortoff_0x2633(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -317,6 +337,8 @@ void test_assembleInstruction_given_JRNE_negHEX_0x26cf(void) {
     }
     freeTokenizer(tokenizer);
 }
+
+//JRNH testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRNH_shortoff_0x902812(void) {
     MachineCode *mcode =NULL ;
@@ -350,6 +372,8 @@ void test_assembleInstruction_given_JRNH_negHEX_0x9028e1(void) {
     freeTokenizer(tokenizer);
 }
 
+//JRNM testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_JRNM_shortoff_0x902c25(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -382,6 +406,7 @@ void test_assembleInstruction_given_JRNM_negHEX_0x902cae(void) {
     freeTokenizer(tokenizer);
 }
 
+//JRNv testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_JRNv_shortoff_0x2824(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -414,6 +439,8 @@ void test_assembleInstruction_given_JRNv_negHEX_0x24f1(void) {
     freeTokenizer(tokenizer);
 }
 
+//JRpl testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_JRpl_shortoff_0x2a24(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -445,6 +472,7 @@ void test_assembleInstruction_given_JRpl_negHEX_0x2af1(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRsge testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRsge_shortoff_0x2e2b(void) {
     MachineCode *mcode =NULL ;
@@ -477,6 +505,7 @@ void test_assembleInstruction_given_JRsge_negHEX_0x2eed(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRsgt testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRsgt_shortoff_0x2c2b(void) {
     MachineCode *mcode =NULL ;
@@ -509,6 +538,7 @@ void test_assembleInstruction_given_JRsgt_negHEX_0x2ced(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRsle testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRsle_shortoff_0x2d33(void) {
     MachineCode *mcode =NULL ;
@@ -541,13 +571,14 @@ void test_assembleInstruction_given_JRsle_negHEX_0x2de9(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRsLt testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRslt_shortoff_0x2f33(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
     int expectedMcode[]={0x2f,0x35,END};
     Try{
-        tokenizer = createTokenizer("  JRslt $33 ");
+        tokenizer = createTokenizer("  JRsLt $33 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -573,6 +604,7 @@ void test_assembleInstruction_given_JRslt_negHEX_0x2fe9(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRuge testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRuge_shortoff_0x2477(void) {
     MachineCode *mcode =NULL ;
@@ -605,13 +637,14 @@ void test_assembleInstruction_given_JRuge_negHEX_0x2489(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRugt testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRugt_shortoff_0x2443(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
     int expectedMcode[]={0x22,0x43,END};
     Try{
-        tokenizer = createTokenizer("  JRugt $41");
+        tokenizer = createTokenizer("  Jrugt $41");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -637,6 +670,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x248e(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRule testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRule_shortoff_0x2323(void) {
     MachineCode *mcode =NULL ;
@@ -669,6 +703,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x23b1(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRc testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRc_shortoff_0x2543(void) {
     MachineCode *mcode =NULL ;
@@ -701,6 +736,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x258e(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRult testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRult_shortoff_0x2453(void) {
     MachineCode *mcode =NULL ;
@@ -733,6 +769,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x24e1(void) {
     }
     freeTokenizer(tokenizer);
 }
+//JRV testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_JRv_shortoff_0x2903(void) {
     MachineCode *mcode =NULL ;
@@ -800,7 +837,7 @@ void test_assembleInstruction_given_jrv_AA_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
-///////////////////////////////////////////////////////////////////////////////
+//wfe testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_wfe_0x728f(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

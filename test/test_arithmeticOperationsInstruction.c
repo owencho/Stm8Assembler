@@ -30,6 +30,12 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+/*
+* This is arithmeticOperationsInstruction test file which test
+* NEG , ADC ,ADD ,SUB, SBC ,MUL ,DIV, DIVW ,NEGW ,ADDW
+* SUBW,
+*can refer STM8 instruction set for more information
+**/
 
 //NEG test /////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_neg_A_OPERAND_expect_0x40(void) {

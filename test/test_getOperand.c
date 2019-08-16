@@ -15,6 +15,15 @@ void setUp(void) {}
 
 void tearDown(void) {}
 
+/*
+* This is getOperand test file which test
+* getOperand function
+* this getOperand take the token and check the operand
+* it returns stm8Type , extCode, code,extB
+*  ms, ls ,extB
+**/
+
+
 void test_getOperand_given_A_expect_A_register_type_is_returned(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;

@@ -31,6 +31,15 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is conditionalBitTestBranchInstruction test file which test
+* BTJT and BTJF instruction
+* this both instruction support the third operand as short_off operand which supports
+* negative and positive value (-128 <= x <= 127)
+*can refer STM8 instruction set for more information
+**/
+
+
 void test_assembleInstruction_given_BTJF_OPERAND_expect_0x720F681016(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -81,7 +90,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_expect_0x72030033F3(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//exception thrown due to 81 is more than 127 for second compliment
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_signedint(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

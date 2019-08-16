@@ -81,7 +81,9 @@ stm8Operand *createMsOperand( stm8OperandType type,
 stm8Operand *createExtMemOperand( stm8OperandType type,
                                   int value,
                                   IntegerToken *token);
-
+stm8Operand *comparingLastOperand(uint64_t flags,IntegerToken* tokenValue
+                                  ,Tokenizer* tokenizer , int value,
+                                    int valueCount , int squarecount);
 stm8Operand *getOperand(Tokenizer *tokenizer ,  uint64_t flags); //maincode
 void nullCheck(int errorCode, IntegerToken* token , char *message);
 void operandFlagCheck(uint64_t flags, IntegerToken* token ,stm8OperandType type);
@@ -91,6 +93,7 @@ stm8Operand *operandHandleFirstSymbol(Tokenizer* tokenizer ,uint64_t flags);
 stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags);
 stm8Operand *operandHandleHash(Tokenizer* tokenizer ,uint64_t flags);
 stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags);
+stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer ,uint64_t flags);
 int operandCheck(IntegerToken* token, int condition);
 int valueCheck(IntegerToken* token);
 int signedIntCheck(Tokenizer *tokenizer);

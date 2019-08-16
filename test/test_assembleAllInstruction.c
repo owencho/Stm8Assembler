@@ -747,12 +747,12 @@ void test_machineCodeLengthFinder_given_shortmemBB_expect_2(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
 }
-/*
+
 //this movMs2ndOpValue on MachineCodeAllocateOutput used when both operand is LONG_MEM_OPERAND only for mov instruction
 // nvalue is used when hashNValueReturn function is used for special instruction eg BJTF ,BJTH ,BCPL ,BCCM
 //MachineCodeAllocateOutput check at last which it detect is null or not , if not null exception will be thrown
 // it will take value of ExtensionCodeAndCode based on the dataFlag provided and use operand to find its value
-void test_MachineCodeAllocateOutput_given_shortmemBB_expect_2(void) {
+void test_MachineCodeAllocateOutput_given_mov_expect_pass(void) {
     stm8Operand *dst = NULL;
     stm8Operand *src = NULL;
     stm8Operand *operand = NULL;
@@ -760,19 +760,23 @@ void test_MachineCodeAllocateOutput_given_shortmemBB_expect_2(void) {
 		Tokenizer *tokenizer = NULL;
     ConversionData  dataFlag;
     MachineCode* mcode;
-    int expectedMcode[]={0x55,0x12,0x34,0xAA,0xBB,END};
+    int expectedMcode[]={0x55,0x12,0x00,0x13,0x10,END};
 
     Try{
-        tokenizer = createTokenizer("   mov $AABB,$1234 ");
+        tokenizer = createTokenizer("   mov $1310,$1200 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-        dst = getOperand(tokenizer,1<<LONG_MEM_OPERAND);
-        token = (IntegerToken *)getToken(tokenizer);
-        pushBackToken(tokenizer , (*token)token);
-        dataFlag =getDataFlag(&movCodeInfo,tokenizer,dst);
+        //first it tokenize the first $1310 check with getOperand
+        dst = getOperand(tokenizer,(1<<LONG_MEM_OPERAND));
+        //second it find the data Flag check with operand get from dst
+        dataFlag = getDataFlag(&movCodeInfo,tokenizer,dst);
+        //check commar between two operand
         commarCheck(tokenizer);
-        src = getOperand(tokenizer,1<<LONG_MEM_OPERAND);
+        //second it tokenize the first $1200 check with getOperand
+        src = getOperand(tokenizer,( 1<<LONG_MEM_OPERAND));
+        //check both operand with special mov operand
         operand = getMOVOperand(tokenizer,dst , src );
+        //get machine code with this function
         mcode = machineCodeAllocateOutput(tokenizer,dataFlag ,operand, NA ,src->dataSize.ms);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -781,4 +785,67 @@ void test_MachineCodeAllocateOutput_given_shortmemBB_expect_2(void) {
     }
     freeTokenizer(tokenizer);
 }
-*/
+
+void test_MachineCodeAllocateOutput_given_bset_longmem_hash_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    IntegerToken * token;
+		Tokenizer *tokenizer = NULL;
+    ConversionData  dataFlag;
+    MachineCode* mcode;
+    int nvalue ;
+    int bitOpCheck;
+    int expectedMcode[]={0x72,0x12,0x10,0x00,END};
+
+    Try{
+        tokenizer = createTokenizer("  BSET $1000,#1");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        // firstly getToken "BSET"
+        token = (IntegerToken *)getToken(tokenizer);
+        // check the bitOperationCheck condition which will return 2,1,0 depends on which instruction
+        bitOpCheck= bitOperationCheck(token);
+        // getOperand on $1000
+        operand= getOperand(tokenizer,(1<<LONG_MEM_OPERAND));
+        // getDataFlag on this $1000 operand
+        dataFlag = getDataFlag(&bsetCodeInfo,tokenizer,operand);
+        //check commar between two operand
+        commarCheck(tokenizer);
+        // get nvalue on this second byte value
+        nvalue = hashNValueReturn(tokenizer ,bitOpCheck);
+        // get MachineCode with bringing in the nvalue
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue,NA);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_MachineCodeAllocateOutput_given_jp_longmem_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    IntegerToken * token;
+		Tokenizer *tokenizer = NULL;
+    ConversionData  dataFlag;
+    MachineCode* mcode;
+    int nvalue ;
+    int bitOpCheck;
+    int expectedMcode[]={0xCC,0x10,0x00,END};
+
+    Try{
+        tokenizer = createTokenizer("  JP $1000 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        // firstly getToken "BSET"
+        token = (IntegerToken *)getToken(tokenizer);
+        // getOperand on $1000
+        operand= getOperand(tokenizer,(1<<LONG_MEM_OPERAND));
+        // getDataFlag on this $1000 operand
+        dataFlag = getDataFlag(&jpCodeInfo,tokenizer,operand);
+        // get MachineCode with bringing in the nvalue
+        mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}

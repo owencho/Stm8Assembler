@@ -18,6 +18,15 @@ void tearDown(void){}
 
 CEXCEPTION_T ex;
 
+/*
+* This is CustomAssert test file which test
+* TEST_ASSERT_EQUAL_MACHINECODE
+* this CustomAssert is used to compare the expected machine code
+* and output machine code
+* This test file is not enabled default
+* please remove x from the test file name to conduct the testing
+**/
+
 void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_with_one_more_expect_fail(void) {
   MachineCode *mcode ;
 	mcode=malloc(sizeof(MachineCode)+1+4);
@@ -177,7 +186,7 @@ void test_customAssert_given_length2_machineCode_to_Compare_with_expectedMcode_e
   }
 	  freeTokenizer(tokenizer);
 }
-
+//Ceedling will throw error when it is NULL, wrong length ,and wrong machine code compare
 void test_customAssert_given_length2_machineCode_to_Compare_with_different_code1_expectedMcode_expect_fail(void) {
   MachineCode *mcode ;
 	mcode=malloc(sizeof(MachineCode)+1+2);

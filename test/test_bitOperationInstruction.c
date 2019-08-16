@@ -30,7 +30,14 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+/*
+* This is bitOperationInstruction test file which test
+* BSET , BRES , BCPL , BCCM
+*
+*can refer STM8 instruction set for more information
+**/
 
+//BSET instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BSET_dollarsign5643_expect_0x72125643(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -78,7 +85,7 @@ void test_assembleInstruction_given_bSET_word_expect_exception_thrown(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+///only expect last operand as BYTE_OPERAND for bitOperationInstruction
 void test_assembleInstruction_given_bSET_longmem_zzzz_expect_exception_thrown(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -110,7 +117,7 @@ void test_assembleInstruction_given_bSET_without_commar_expect_exception_thrown(
     }
     freeTokenizer(tokenizer);
 }
-
+// this input is thrown due to the #N value only restricted to 0 to 7
 void test_assembleInstruction_given_bSET_n_larger_than7_expect_exception_thrown(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -127,6 +134,7 @@ void test_assembleInstruction_given_bSET_n_larger_than7_expect_exception_thrown(
     freeTokenizer(tokenizer);
 }
 
+//BRES instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BRES_longmem1230_hash7_expect_0x721F1230(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -176,7 +184,7 @@ void test_assembleInstruction_given_BRES_longmem310_hash7_expect_0x72110310(void
     }
 	  freeTokenizer(tokenizer);
 }
-
+// this input is thrown due to the #N value only restricted to 0 to 7
 void test_assembleInstruction_given_bres_n_larger_than7_expect_exception_thrown(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -192,7 +200,7 @@ void test_assembleInstruction_given_bres_n_larger_than7_expect_exception_thrown(
     }
     freeTokenizer(tokenizer);
 }
-
+//BCPL instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BCPL_dollarsign1233_expect_0x90141233(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -259,7 +267,7 @@ void test_assembleInstruction_given_BCPL_extmem_expect_fail(void) {
     }
 	  freeTokenizer(tokenizer);
 }
-
+//BCCM instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BCCM_dollarsign7749_n0_expect_0x90111233(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

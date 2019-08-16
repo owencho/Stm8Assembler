@@ -27,10 +27,16 @@
 #include "CustomAssert.h"
 #include "stackInstruction.h"
 CEXCEPTION_T ex;
-
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is loadTransferInstruction test file which test
+* LD LDF CLR MOV EXG LDW CLRW EXGW
+*can refer STM8 instruction set for more information
+**/
+
+//LD testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ld_A_hash77_expect_0xA677(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -697,6 +703,7 @@ void test_assembleInstruction_given_ld_y_XL_OPERAND_expect_exception(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//LDF testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ldf_A_extmem_expect_0xBC345612(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -967,6 +974,7 @@ void test_assembleInstruction_given_ldf_X_XL_OPERAND_expect_exception(void) {
     }
 	  freeTokenizer(tokenizer);
 }
+//LDW testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_ldw_X_word_expect_0xAE0055(void) {
     MachineCode *mcode =NULL ;
@@ -1996,6 +2004,7 @@ void test_assembleInstruction_given_ldw_longptrwX_Y_withextradollar_OPERAND_expe
 	  freeTokenizer(tokenizer);
 }
 
+//CLR testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ldw_clr_A_expect_0x4F(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2284,7 +2293,7 @@ void test_assembleInstruction_given_clr_A_ZZ_expect_exception(void) {
 }
 
 
-
+//MOV testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_mov_longmem_byte_expect_0x35AA8000(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2418,7 +2427,7 @@ void test_assembleInstruction_given_mov__longmem_longmem_without_commar_OPERAND_
 	  freeTokenizer(tokenizer);
 }
 
-
+//EXG testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_exg_XL_OPERAND_expect_0x41(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2518,6 +2527,8 @@ void test_assembleInstruction_given_exg_A_XL_withoutcommar_OPERAND_expect_except
 	  freeTokenizer(tokenizer);
 }
 
+//CLRW testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_clrw_X_OPERAND_expect_0x5F(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2584,7 +2595,9 @@ void test_assembleInstruction_given_clrw_X_1_OPERAND_expect_exception(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_exg_X_Y_expect_0x51(void) {
+//exgw testing ////////////////////////////////////////////////////////////////////////////////////////////
+
+void test_assembleInstruction_given_exgw_X_Y_expect_0x51(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
     int expectedMcode[]={0x51,END};
@@ -2601,7 +2614,7 @@ void test_assembleInstruction_given_exg_X_Y_expect_0x51(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_exg_Y_X_expect_fail(void) {
+void test_assembleInstruction_given_exgw_Y_X_expect_fail(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
 
@@ -2617,7 +2630,7 @@ void test_assembleInstruction_given_exg_Y_X_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_exg_X_X_expect_fail(void) {
+void test_assembleInstruction_given_exgw_X_X_expect_fail(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
 
@@ -2633,7 +2646,7 @@ void test_assembleInstruction_given_exg_X_X_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
-void test_assembleInstruction_given_exg_X_expect_fail(void) {
+void test_assembleInstruction_given_exgw_X_expect_fail(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
 

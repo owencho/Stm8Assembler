@@ -30,6 +30,15 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is interruptManagementInstruction test file which test
+*  TRAP WFI HALT IRET  INT instruction
+* these instruction supports no operand except INT supports one operand
+*can refer STM8 instruction set for information
+**/
+
+
+//halt testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_halt_0x8c(void) {
     MachineCode *mcode =NULL ;
@@ -65,6 +74,8 @@ void test_assembleInstruction_given_halt_ggmu_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
+//iret testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_iret_0x80(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -99,7 +110,7 @@ void test_assembleInstruction_given_iret_m12m_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
-
+//trap testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_trap_0x83(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -133,7 +144,7 @@ void test_assembleInstruction_given_trap_1_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//wfi testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_wfi_0x8f(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -167,7 +178,7 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//int testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_int_0x82773121(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

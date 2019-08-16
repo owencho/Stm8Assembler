@@ -31,6 +31,15 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is incrementDecrementInstruction test file which test
+* INC DEC INCW DECW
+* these instruction supports one operand 
+*can refer STM8 instruction set for more information
+**/
+
+//INC testing ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_inc_A_OPERAND_expect_0x4C(void) {
 		MachineCode *mcode =NULL ;
 		Tokenizer *tokenizer = NULL;
@@ -298,7 +307,7 @@ void test_assembleInstruction_given_inc_shortptrwY_OPERAND_expect_0x916C20(void)
 	  freeTokenizer(tokenizer);
 }
 
-
+//DEC testing ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_dec_A_OPERAND_expect_0x4A(void) {
 			MachineCode *mcode =NULL ;
@@ -571,8 +580,7 @@ void test_assembleInstruction_given_dec_X_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
-
-
+//INCW testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_incw_x_OPERAND_expect_0x5C(void) {
 		MachineCode *mcode =NULL ;
 		Tokenizer *tokenizer = NULL;
@@ -623,7 +631,7 @@ void test_assembleInstruction_given_incw_f_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//DECW testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_decw_x_OPERAND_expect_0x5A(void) {
 		MachineCode *mcode =NULL ;
 		Tokenizer *tokenizer = NULL;

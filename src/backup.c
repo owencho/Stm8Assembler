@@ -6,6 +6,16 @@
 #define _STRINGIFY(x)     #x
 #define STRINGIFY(x)     _STRINGIFY(x)
 
+/*
+* This is incrementDecrementInstruction test file which test
+* INC DEC INCW DECW
+* these instruction supports one operand
+*can refer STM8 instruction set for more information
+**/
+
+//cp testing ////////////////////////////////////////////////////////////////////////////////////////////
+
+
 void test_valueCheck_given_z_expect_fail(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;

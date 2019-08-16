@@ -30,6 +30,14 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+
+/*
+* This is logicalOperationsInstruction test file which test
+* AND OR XOR CPL CPLW instruction
+*
+*can refer STM8 instruction set for more information
+**/
+
 //AND testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_AND_byte_expect_0xa421(void) {
     MachineCode *mcode =NULL ;
@@ -1330,7 +1338,7 @@ void test_assembleInstruction_given_cpl_extmemY_operand_expect_exception(void) {
     freeTokenizer(tokenizer);
 }
 
-///////////CPLW OPERAND///////////////////////////////////////////////
+///////////CPLW OPERAND////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_cplw_X_OPERAND_expect_0x53(void) {
     MachineCode *mcode =NULL ;
