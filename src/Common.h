@@ -1,7 +1,7 @@
 #ifndef Common_H
 #define Common_H
 
-#define END -1
+#define END     -1
 #define NA      -1   
 
 char *skipWhiteSpaces(char *str);

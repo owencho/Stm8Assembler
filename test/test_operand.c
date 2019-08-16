@@ -28,13 +28,13 @@ void tearDown(void) {}
 //it will throw exception if any invalid symbol detected
 void test_symbolOperandCheck_given_A_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  A ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(A_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -44,13 +44,13 @@ void test_symbolOperandCheck_given_A_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_X_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  X");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(X_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -60,13 +60,13 @@ void test_symbolOperandCheck_given_X_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_Y_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  Y ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(Y_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -76,13 +76,13 @@ void test_symbolOperandCheck_given_Y_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_SP_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  SP ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(SP_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -92,13 +92,13 @@ void test_symbolOperandCheck_given_SP_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_XL_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  XL ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(XL_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -108,13 +108,13 @@ void test_symbolOperandCheck_given_XL_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_YL_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  YL ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(YL_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -124,13 +124,13 @@ void test_symbolOperandCheck_given_YL_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_YH_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  YH ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(YH_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -140,13 +140,13 @@ void test_symbolOperandCheck_given_YH_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_XH_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  Xh ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(XH_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -156,13 +156,13 @@ void test_symbolOperandCheck_given_XH_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_CC_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  cc ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_ASSERT_EQUAL_UINT16(CC_OPERAND, opType);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -172,13 +172,13 @@ void test_symbolOperandCheck_given_CC_expect_pass(void) {
 }
 void test_symbolOperandCheck_given_z_expect_fail(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  z ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
-				opType = symbolOperandCheck(token);
+        opType = symbolOperandCheck(token);
         TEST_FAIL_MESSAGE("Expecting error exeception to be thrown.");
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -191,12 +191,12 @@ void test_symbolOperandCheck_given_z_expect_fail(void) {
 // only applicable on squareBracket
 void test_squareBracketFlagCheck_given_shortptrw_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  [$22] ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
@@ -212,12 +212,12 @@ void test_squareBracketFlagCheck_given_shortptrw_expect_pass(void) {
 
 void test_squareBracketFlagCheck_given_longptrw_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  [$2222] ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
@@ -233,12 +233,12 @@ void test_squareBracketFlagCheck_given_longptrw_expect_pass(void) {
 
 void test_squareBracketFlagCheck_given_longptre_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  [$2222.e] ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
@@ -254,12 +254,12 @@ void test_squareBracketFlagCheck_given_longptre_expect_pass(void) {
 
 void test_squareBracketFlagCheck_given_X_expect_fail(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     Try{
         tokenizer = createTokenizer("  X ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
@@ -277,13 +277,13 @@ void test_squareBracketFlagCheck_given_X_expect_fail(void) {
 // it will throw if the positive value is larger than 127 and neg value lesser than 128
 void test_signedIntCheck_given_hash22_expect_22(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  $22 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0x22, value);
     } Catch(ex) {
@@ -294,13 +294,13 @@ void test_signedIntCheck_given_hash22_expect_22(void) {
 }
 void test_signedIntCheck_given_hash0_expect_0x00(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  $0 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0x0, value);
     } Catch(ex) {
@@ -312,13 +312,13 @@ void test_signedIntCheck_given_hash0_expect_0x00(void) {
 
 void test_signedIntCheck_given_hash7F_expect_0x7F(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  $7F ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0x7F, value);
     } Catch(ex) {
@@ -330,13 +330,13 @@ void test_signedIntCheck_given_hash7F_expect_0x7F(void) {
 
 void test_signedIntCheck_given_hash80_expect_fail(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  $80 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -347,13 +347,13 @@ void test_signedIntCheck_given_hash80_expect_fail(void) {
 
 void test_signedIntCheck_given_hashneg31_expect_0xCF(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  -$31 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0xCF, value);
     } Catch(ex) {
@@ -364,13 +364,13 @@ void test_signedIntCheck_given_hashneg31_expect_0xCF(void) {
 }
 void test_signedIntCheck_given_hashneg0_expect_0x00(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  -$0 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0x0, value);
     } Catch(ex) {
@@ -382,13 +382,13 @@ void test_signedIntCheck_given_hashneg0_expect_0x00(void) {
 
 void test_signedIntCheck_given_hashneg80_expect_0x80(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  -$80 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
         TEST_ASSERT_EQUAL_HEX16(0x80, value);
     } Catch(ex) {
@@ -400,13 +400,13 @@ void test_signedIntCheck_given_hashneg80_expect_0x80(void) {
 
 void test_signedIntCheck_given_hashneg81_expect_fail(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     stm8Operand * operand;
     stm8OperandType opType;
     int value;
     Try{
         tokenizer = createTokenizer("  -$81 ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         value = signedIntCheck(tokenizer);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -419,7 +419,7 @@ void test_signedIntCheck_given_hashneg81_expect_fail(void) {
 //and length of token
 void test_extendTokenStr_given_AB_expect_tokenstr_AB(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     IntegerToken * initToken;
     IntegerToken * flagToken;
     stm8Operand * operand;
@@ -427,7 +427,7 @@ void test_extendTokenStr_given_AB_expect_tokenstr_AB(void) {
     int value;
     Try{
         tokenizer = createTokenizer("  A B ");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         initToken = (IntegerToken *)getToken(tokenizer);
         token = (IntegerToken *)getToken(tokenizer);
         flagToken =extendTokenStr(initToken ,token);
@@ -441,7 +441,7 @@ void test_extendTokenStr_given_AB_expect_tokenstr_AB(void) {
 
 void test_extendTokenStr_given_hash12_A_C_expect_tokenstr_A_C(void) {
     Tokenizer *tokenizer = NULL;
-		IntegerToken * token;
+    IntegerToken * token;
     IntegerToken * initToken;
     IntegerToken * flagToken;
     stm8Operand * operand;
@@ -449,7 +449,7 @@ void test_extendTokenStr_given_hash12_A_C_expect_tokenstr_A_C(void) {
     int value;
     Try{
         tokenizer = createTokenizer("  $12 A C");
-				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         initToken = (IntegerToken *)getToken(tokenizer);
         token = (IntegerToken *)getToken(tokenizer);
         freeToken(token);
@@ -1271,6 +1271,78 @@ void test_comparingLastOperand_given_shortoffY21_expect_pass(void) {
     freeTokenizer(tokenizer);
 }
 
+void test_comparingLastOperand_given_shortmem0_bracX_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    IntegerToken *tokenValue ;
+    int value;
+    int valueCount;
+    Try{
+        tokenizer = createTokenizer("($0,X)");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        //get token for integer value
+        tokenValue = (IntegerToken *)getToken(tokenizer);
+        value = tokenValue -> value;
+        TEST_ASSERT_EQUAL_UINT16(0x0, value);
+        //check value is which short,long or ext
+        valueCount = valueCheck(tokenValue);
+        TEST_ASSERT_EQUAL_INT(1, valueCount);
+        //commarCheck
+        commarCheck(tokenizer);
+        //compare the condition and return operand .squareCount zero due to no squarebracket
+        operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,0);
+        TEST_ASSERT_NOT_NULL(operand);
+        TEST_ASSERT_EQUAL_UINT16(BRACKETED_X_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_comparingLastOperand_given_shortmem0_bracY_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    IntegerToken *tokenValue ;
+    int value;
+    int valueCount;
+    Try{
+        tokenizer = createTokenizer("($0,Y)");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        //get token for integer value
+        tokenValue = (IntegerToken *)getToken(tokenizer);
+        value = tokenValue -> value;
+        TEST_ASSERT_EQUAL_UINT16(0x0, value);
+        //check value is which short,long or ext
+        valueCount = valueCheck(tokenValue);
+        TEST_ASSERT_EQUAL_INT(1, valueCount);
+        //commarCheck
+        commarCheck(tokenizer);
+        //compare the condition and return operand .squareCount zero due to no squarebracket
+        operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,0);
+        TEST_ASSERT_NOT_NULL(operand);
+        TEST_ASSERT_EQUAL_UINT16(BRACKETED_Y_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
 void test_comparingLastOperand_given_shortptrw_Y_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1289,7 +1361,7 @@ void test_comparingLastOperand_given_shortptrw_Y_expect_pass(void) {
         //commarCheck
         commarCheck(tokenizer);
         //compare the condition and return operand .valueCount 1 is for short
-        //squareCount 1 due to shortptrw / longptrw
+        //squareCount 1 due to shortptrw / longptrw squareBracket
         operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,1);
         TEST_ASSERT_NOT_NULL(operand);
         TEST_ASSERT_EQUAL_UINT16(SHORTPTR_DOT_W_BRACKETEDY_OPERAND, operand->type);
@@ -1297,6 +1369,40 @@ void test_comparingLastOperand_given_shortptrw_Y_expect_pass(void) {
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
         TEST_ASSERT_EQUAL_UINT16(12, operand->dataSize.ms);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_comparingLastOperand_given_longptrw_X_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    IntegerToken *tokenValue ;
+    int value;
+    int valueCount;
+    Try{
+        tokenizer = createTokenizer("([$1212],X)");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        //get operand for squarebracket
+        operand=operandHandleSquareBracket(tokenizer,ALL_OPERANDS);
+        valueCount = 2;
+        value = (operand->dataSize.ms << 8) | operand->dataSize.ls;
+        //commarCheck
+        commarCheck(tokenizer);
+        //compare the condition and return operand .valueCount==2 is for longptr
+        //squareCount 1 due to shortptrw / longptrw squareBracket
+        operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,1);
+        TEST_ASSERT_NOT_NULL(operand);
+        TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_W_BRACKETEDX_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(0x12, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(0x12, operand->dataSize.ls);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1325,7 +1431,7 @@ void test_comparingLastOperand_given_longptre_X_expect_pass(void) {
         //commarCheck
         commarCheck(tokenizer);
         //compare the condition and return operand .valueCount 2 is for long
-        //squareCount 2 due to longptre
+        //squareCount 2 due to longptre squareBracket
         operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,2);
         TEST_ASSERT_NOT_NULL(operand);
         TEST_ASSERT_EQUAL_UINT16(LONGPTR_DOT_E_BRACKETEDX_OPERAND, operand->type);
@@ -2053,7 +2159,9 @@ void test_operandHandleSquareBracket_given_unsupportedflag_shortoff_dote_expect_
     Try{
         tokenizer = createTokenizer(" [$22.w] ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        operand = operandHandleSquareBracket(tokenizer ,ALL_OPERANDS && ~(1<<BRACKETED_SHORTPTR_DOT_W_OPERAND |1<<BRACKETED_LONGPTR_DOT_W_OPERAND));
+        operand = operandHandleSquareBracket(tokenizer ,ALL_OPERANDS
+                                            && ~(1<<BRACKETED_SHORTPTR_DOT_W_OPERAND
+                                                |1<<BRACKETED_LONGPTR_DOT_W_OPERAND));
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);

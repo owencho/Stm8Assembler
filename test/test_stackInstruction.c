@@ -54,6 +54,7 @@ void test_assembleInstruction_given_push_A_OPERAND_expect_0x88(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_CC_OPERAND_expect_0x8A(void) {
@@ -71,6 +72,7 @@ void test_assembleInstruction_given_push_CC_OPERAND_expect_0x8A(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_Byte_OPERAND_expect_0x4B55(void) {
@@ -88,6 +90,7 @@ void test_assembleInstruction_given_push_Byte_OPERAND_expect_0x4B55(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_longmem_OPERAND_expect_0x3B0077(void) {
@@ -105,6 +108,7 @@ void test_assembleInstruction_given_push_longmem_OPERAND_expect_0x3B0077(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_longmem_OPERAND_expect_0x3B8877(void) {
@@ -122,6 +126,7 @@ void test_assembleInstruction_given_push_longmem_OPERAND_expect_0x3B8877(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_expect_fail(void) {
@@ -139,6 +144,7 @@ void test_assembleInstruction_given_push_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_X_expect_fail(void) {
@@ -155,6 +161,7 @@ void test_assembleInstruction_given_push_X_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //POP instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,6 +181,7 @@ void test_assembleInstruction_given_pop_A_OPERAND_expect_0x84(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_pop_CC_OPERAND_expect_0x86(void) {
@@ -191,6 +199,7 @@ void test_assembleInstruction_given_pop_CC_OPERAND_expect_0x86(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_pop_longmem_OPERAND_expect_0x323354(void) {
@@ -208,6 +217,7 @@ void test_assembleInstruction_given_pop_longmem_OPERAND_expect_0x323354(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_pop_extmem_expect_fail(void) {
     MachineCode *mcode =NULL ;
@@ -223,6 +233,7 @@ void test_assembleInstruction_given_pop_extmem_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //PUSHW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -236,13 +247,13 @@ void test_assembleInstruction_given_pushw_x_OPERAND_expect_0x89(void) {
         tokenizer = createTokenizer("  pushw x ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_pushw_y_OPERAND_expect_0x9089(void) {
@@ -254,13 +265,13 @@ void test_assembleInstruction_given_pushw_y_OPERAND_expect_0x9089(void) {
         tokenizer = createTokenizer("  pushw y ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_push_shortmem_expect_fail(void) {
@@ -277,6 +288,7 @@ void test_assembleInstruction_given_push_shortmem_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_pushw_X_commar_expect_fail(void) {
@@ -293,6 +305,7 @@ void test_assembleInstruction_given_pushw_X_commar_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //POPW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -312,6 +325,7 @@ void test_assembleInstruction_given_popw_x_OPERAND_expect_0x85(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_popw_y_OPERAND_expect_0x9085(void) {
@@ -329,6 +343,7 @@ void test_assembleInstruction_given_popw_y_OPERAND_expect_0x9085(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_popw_X_commar_expect_fail(void) {
@@ -345,6 +360,7 @@ void test_assembleInstruction_given_popw_X_commar_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_popw_f_expect_fail(void) {
@@ -361,4 +377,5 @@ void test_assembleInstruction_given_popw_f_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

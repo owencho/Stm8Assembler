@@ -51,8 +51,9 @@ void test_assembleInstruction_given_BSET_dollarsign5643_expect_0x72125643(void) 
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
-  }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
+}
 
 void test_assembleInstruction_given_BSET_dollarsign21_expect_0x721A0021(void) {
     MachineCode *mcode =NULL ;
@@ -68,6 +69,7 @@ void test_assembleInstruction_given_BSET_dollarsign21_expect_0x721A0021(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_bSET_word_expect_exception_thrown(void) {
@@ -84,6 +86,7 @@ void test_assembleInstruction_given_bSET_word_expect_exception_thrown(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 ///only expect last operand as BYTE_OPERAND for bitOperationInstruction
 void test_assembleInstruction_given_bSET_longmem_zzzz_expect_exception_thrown(void) {
@@ -100,6 +103,7 @@ void test_assembleInstruction_given_bSET_longmem_zzzz_expect_exception_thrown(vo
         TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_bSET_without_commar_expect_exception_thrown(void) {
@@ -116,6 +120,7 @@ void test_assembleInstruction_given_bSET_without_commar_expect_exception_thrown(
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 // this input is thrown due to the #N value only restricted to 0 to 7
 void test_assembleInstruction_given_bSET_n_larger_than7_expect_exception_thrown(void) {
@@ -132,6 +137,7 @@ void test_assembleInstruction_given_bSET_n_larger_than7_expect_exception_thrown(
         TEST_ASSERT_EQUAL(ERR_INVALID_NVALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //BRES instruction/////////////////////////////////////////////////////////////////////
@@ -149,7 +155,8 @@ void test_assembleInstruction_given_BRES_longmem1230_hash7_expect_0x721F1230(voi
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_BRES_shortmem30_hash7_expect_0x721F0030(void) {
     MachineCode *mcode =NULL ;
@@ -165,7 +172,8 @@ void test_assembleInstruction_given_BRES_shortmem30_hash7_expect_0x721F0030(void
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BRES_longmem310_hash7_expect_0x72110310(void) {
@@ -182,7 +190,8 @@ void test_assembleInstruction_given_BRES_longmem310_hash7_expect_0x72110310(void
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 // this input is thrown due to the #N value only restricted to 0 to 7
 void test_assembleInstruction_given_bres_n_larger_than7_expect_exception_thrown(void) {
@@ -199,6 +208,7 @@ void test_assembleInstruction_given_bres_n_larger_than7_expect_exception_thrown(
         TEST_ASSERT_EQUAL(ERR_INVALID_NVALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //BCPL instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BCPL_dollarsign1233_expect_0x90141233(void) {
@@ -215,7 +225,8 @@ void test_assembleInstruction_given_BCPL_dollarsign1233_expect_0x90141233(void) 
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BCPL_shortmem12_expect_0x90140012(void) {
@@ -232,7 +243,8 @@ void test_assembleInstruction_given_BCPL_shortmem12_expect_0x90140012(void) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BCPL_shortmem24_expect_0x90100024(void) {
@@ -249,7 +261,8 @@ void test_assembleInstruction_given_BCPL_shortmem24_expect_0x90100024(void) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BCPL_extmem_expect_fail(void) {
@@ -265,7 +278,8 @@ void test_assembleInstruction_given_BCPL_extmem_expect_fail(void) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //BCCM instruction/////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_BCCM_dollarsign7749_n0_expect_0x90111233(void) {
@@ -283,6 +297,7 @@ void test_assembleInstruction_given_BCCM_dollarsign7749_n0_expect_0x90111233(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BCCM_dollarsign7749_expect_0x90141233(void) {
@@ -299,7 +314,8 @@ void test_assembleInstruction_given_BCCM_dollarsign7749_expect_0x90141233(void) 
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BCcm_brackX_expect_fail(void) {
@@ -315,5 +331,6 @@ void test_assembleInstruction_given_BCcm_brackX_expect_fail(void) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
-	  freeTokenizer(tokenizer);
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

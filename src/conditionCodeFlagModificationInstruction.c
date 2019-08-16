@@ -1,7 +1,7 @@
 #include "conditionCodeFlagModificationInstruction.h"
 
 ExtensionCodeAndCode ccfCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x8c}
+    [NO_OPERAND]         ={NA,0x8c}
 };
 
 ConversionData ccfFlagTable[]={
@@ -24,7 +24,7 @@ ConversionData rcfFlagTable[]={
 CodeInfo rcfCodeInfo={"rcf",NO_OPERAND,assembleNoOperand,rcfFlagTable};
 ///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rimCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x9a}
+    [NO_OPERAND]         ={NA,0x9a}
 };
 
 
@@ -36,7 +36,7 @@ ConversionData rimFlagTable[]={
 CodeInfo rimCodeInfo={"rim",NO_OPERAND,assembleNoOperand,rimFlagTable};
 ///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode simCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x9b}
+    [NO_OPERAND]         ={NA,0x9b}
 };
 
 ConversionData simFlagTable[]={
@@ -47,7 +47,7 @@ ConversionData simFlagTable[]={
 CodeInfo simCodeInfo={"sim",NO_OPERAND,assembleNoOperand,simFlagTable};
 ///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode rvfCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x9c}
+    [NO_OPERAND]         ={NA,0x9c}
 };
 
 ConversionData rvfFlagTable[]={
@@ -58,7 +58,7 @@ ConversionData rvfFlagTable[]={
 CodeInfo rvfCodeInfo={"rvf",NO_OPERAND,assembleNoOperand,rvfFlagTable};
 ///////////////////////////////////////////////////////////////////////
 ExtensionCodeAndCode scfCodeTable[] = {
-  [NO_OPERAND]         ={NA,0x99}
+    [NO_OPERAND]         ={NA,0x99}
 };
 
 ConversionData scfFlagTable[]={

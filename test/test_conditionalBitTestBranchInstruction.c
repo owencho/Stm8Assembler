@@ -55,6 +55,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_expect_0x720F681016(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_expect_0x720300330A(void) {
@@ -72,6 +73,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_expect_0x720300330A(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_expect_0x72030033F3(void) {
@@ -89,6 +91,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_expect_0x72030033F3(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //exception thrown due to 81 is more than 127 for second compliment
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_signedint(void) {
@@ -105,6 +108,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_signedint(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_n_value(void) {
@@ -121,6 +125,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_n_value(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_NVALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_unsupportedOperand(void) {
@@ -137,6 +142,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_unsupportedOperand(voi
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_thirdOperand_unsupportedOperand(void) {
@@ -153,6 +159,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_thirdOperand_unsupport
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_secondOperand_unsupportedOperand(void) {
@@ -169,6 +176,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_secondOperand_unsuppor
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJF_OPERAND_error_on_extra_symbol(void) {
@@ -185,6 +193,7 @@ void test_assembleInstruction_given_BTJF_OPERAND_error_on_extra_symbol(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJT_OPERAND_expect_0x720E44553d(void) {
@@ -202,6 +211,7 @@ void test_assembleInstruction_given_BTJT_OPERAND_expect_0x720E44553d(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJt_OPERAND_expect_0x7202004508(void) {
@@ -219,6 +229,7 @@ void test_assembleInstruction_given_BTJt_OPERAND_expect_0x7202004508(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_BTJT_OPERAND_expect_0x7202003392(void) {
@@ -236,4 +247,5 @@ void test_assembleInstruction_given_BTJT_OPERAND_expect_0x7202003392(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

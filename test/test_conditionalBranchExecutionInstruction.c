@@ -53,6 +53,7 @@ void test_assembleInstruction_given_jrc_shortoffAA_0x253e(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrc_negHex33_0x25CF(void) {
@@ -69,6 +70,7 @@ void test_assembleInstruction_given_jrc_negHex33_0x25CF(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //jreq instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +88,7 @@ void test_assembleInstruction_given_jreq_shortoff56_0x2758(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jreq_neghex12_0x27F0(void) {
@@ -102,6 +105,7 @@ void test_assembleInstruction_given_jreq_neghex12_0x27F0(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //jrh instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -119,6 +123,7 @@ void test_assembleInstruction_given_jrh_shortoff67_0x90290C(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrh_negHEX1_0x902902(void) {
@@ -135,6 +140,7 @@ void test_assembleInstruction_given_jrh_negHEX1_0x902902(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //jrih instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -152,6 +158,7 @@ void test_assembleInstruction_given_jrih_shortoff54_0x902F57(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrih_negHEX80_0x902F83(void) {
@@ -168,6 +175,7 @@ void test_assembleInstruction_given_jrih_negHEX80_0x902F83(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //jril instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -185,6 +193,7 @@ void test_assembleInstruction_given_jril_shortoff54_0x902F57(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jril_negHEX2_0x902F01(void) {
@@ -201,6 +210,7 @@ void test_assembleInstruction_given_jril_negHEX2_0x902F01(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //jrm instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,6 +229,7 @@ void test_assembleInstruction_given_jrm_shortoff31_0x902D31(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrm_negHEX80_0x902dd0(void) {
@@ -235,6 +246,7 @@ void test_assembleInstruction_given_jrm_negHEX80_0x902dd0(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //jrmi instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,6 +265,7 @@ void test_assembleInstruction_given_jrmi_shortoff54_0x2B4f(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrmi_negHEX2_0x2b00(void) {
@@ -269,6 +282,7 @@ void test_assembleInstruction_given_jrmi_negHEX2_0x2b00(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRNC instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -286,6 +300,7 @@ void test_assembleInstruction_given_JRNC_shortoff54_0x2433(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRNC_negHEX_0x24e1(void) {
@@ -302,6 +317,7 @@ void test_assembleInstruction_given_JRNC_negHEX_0x24e1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //JRNE instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -320,6 +336,7 @@ void test_assembleInstruction_given_JRNE_shortoff_0x2633(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRNE_negHEX_0x26cf(void) {
@@ -336,6 +353,7 @@ void test_assembleInstruction_given_JRNE_negHEX_0x26cf(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //JRNH instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -354,6 +372,7 @@ void test_assembleInstruction_given_JRNH_shortoff_0x902812(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRNH_negHEX_0x9028e1(void) {
@@ -370,6 +389,7 @@ void test_assembleInstruction_given_JRNH_negHEX_0x9028e1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //JRNM instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,6 +408,7 @@ void test_assembleInstruction_given_JRNM_shortoff_0x902c25(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRNM_negHEX_0x902cae(void) {
@@ -404,6 +425,7 @@ void test_assembleInstruction_given_JRNM_negHEX_0x902cae(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //JRNv instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -421,6 +443,7 @@ void test_assembleInstruction_given_JRNv_shortoff_0x2824(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRNv_negHEX_0x24f1(void) {
@@ -437,6 +460,7 @@ void test_assembleInstruction_given_JRNv_negHEX_0x24f1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //JRpl instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -455,6 +479,7 @@ void test_assembleInstruction_given_JRpl_shortoff_0x2a24(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRpl_negHEX_0x2af1(void) {
@@ -471,6 +496,7 @@ void test_assembleInstruction_given_JRpl_negHEX_0x2af1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRsge instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -488,6 +514,7 @@ void test_assembleInstruction_given_JRsge_shortoff_0x2e2b(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRsge_negHEX_0x2eed(void) {
@@ -504,6 +531,7 @@ void test_assembleInstruction_given_JRsge_negHEX_0x2eed(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRsgt instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -521,6 +549,7 @@ void test_assembleInstruction_given_JRsgt_shortoff_0x2c2b(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRsgt_negHEX_0x2ced(void) {
@@ -537,6 +566,7 @@ void test_assembleInstruction_given_JRsgt_negHEX_0x2ced(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRsle instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -554,6 +584,7 @@ void test_assembleInstruction_given_JRsle_shortoff_0x2d33(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRsle_negHEX_0x2de9(void) {
@@ -570,6 +601,7 @@ void test_assembleInstruction_given_JRsle_negHEX_0x2de9(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRsLt instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -587,6 +619,7 @@ void test_assembleInstruction_given_JRslt_shortoff_0x2f33(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRslt_negHEX_0x2fe9(void) {
@@ -603,6 +636,7 @@ void test_assembleInstruction_given_JRslt_negHEX_0x2fe9(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRuge instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -620,6 +654,7 @@ void test_assembleInstruction_given_JRuge_shortoff_0x2477(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRuge_negHEX_0x2489(void) {
@@ -636,6 +671,7 @@ void test_assembleInstruction_given_JRuge_negHEX_0x2489(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRugt instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -653,6 +689,7 @@ void test_assembleInstruction_given_JRugt_shortoff_0x2443(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRugt_negHEX_0x248e(void) {
@@ -669,6 +706,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x248e(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRule instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -686,6 +724,7 @@ void test_assembleInstruction_given_JRule_shortoff_0x2323(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRugt_negHEX_0x23b1(void) {
@@ -702,6 +741,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x23b1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRc instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -719,6 +759,7 @@ void test_assembleInstruction_given_JRc_shortoff_0x2543(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRugt_negHEX_0x258e(void) {
@@ -735,6 +776,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x258e(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRult instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -752,6 +794,7 @@ void test_assembleInstruction_given_JRult_shortoff_0x2453(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRugt_negHEX_0x24e1(void) {
@@ -768,6 +811,7 @@ void test_assembleInstruction_given_JRugt_negHEX_0x24e1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //JRV instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -785,6 +829,7 @@ void test_assembleInstruction_given_JRv_shortoff_0x2903(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_JRv_negHEX_0x25AC(void) {
@@ -801,6 +846,7 @@ void test_assembleInstruction_given_JRv_negHEX_0x25AC(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrv_neg80_expect_fail(void) {
@@ -810,7 +856,6 @@ void test_assembleInstruction_given_jrv_neg80_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  JRv -$82 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -818,6 +863,7 @@ void test_assembleInstruction_given_jrv_neg80_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_jrv_AA_expect_fail(void) {
@@ -827,7 +873,6 @@ void test_assembleInstruction_given_jrv_AA_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  JRv $AA ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -835,6 +880,7 @@ void test_assembleInstruction_given_jrv_AA_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //wfe instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -852,6 +898,7 @@ void test_assembleInstruction_given_wfe_0x728f(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_wfe_2_expect_fail(void) {
@@ -861,7 +908,6 @@ void test_assembleInstruction_given_wfe_2_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  wfe 2 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -869,4 +915,5 @@ void test_assembleInstruction_given_wfe_2_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

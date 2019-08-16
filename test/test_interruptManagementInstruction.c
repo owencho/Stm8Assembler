@@ -55,6 +55,7 @@ void test_assembleInstruction_given_halt_0x8c(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_halt_ggmu_expect_fail(void) {
@@ -64,7 +65,6 @@ void test_assembleInstruction_given_halt_ggmu_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  halt ggmu ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -72,6 +72,7 @@ void test_assembleInstruction_given_halt_ggmu_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //iret instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +92,7 @@ void test_assembleInstruction_given_iret_0x80(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_iret_m12m_expect_fail(void) {
@@ -100,7 +102,6 @@ void test_assembleInstruction_given_iret_m12m_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  iret m12m ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -108,6 +109,7 @@ void test_assembleInstruction_given_iret_m12m_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //trap instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,6 +128,7 @@ void test_assembleInstruction_given_trap_0x83(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_trap_1_expect_fail(void) {
@@ -135,7 +138,6 @@ void test_assembleInstruction_given_trap_1_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  trap 1 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -143,6 +145,7 @@ void test_assembleInstruction_given_trap_1_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //wfi instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_wfi_0x8f(void) {
@@ -160,6 +163,7 @@ void test_assembleInstruction_given_wfi_0x8f(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_wfi_54_expect_fail(void) {
@@ -169,7 +173,6 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  wfi 54 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -177,6 +180,7 @@ void test_assembleInstruction_given_wfi_54_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //int instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_int_0x82773121(void) {
@@ -194,6 +198,7 @@ void test_assembleInstruction_given_int_0x82773121(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_int_expect_fail(void) {
@@ -203,7 +208,6 @@ void test_assembleInstruction_given_int_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("   int");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -211,6 +215,7 @@ void test_assembleInstruction_given_int_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_int_A_expect_fail(void) {
@@ -220,7 +225,6 @@ void test_assembleInstruction_given_int_A_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("   int A ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -228,4 +232,5 @@ void test_assembleInstruction_given_int_A_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

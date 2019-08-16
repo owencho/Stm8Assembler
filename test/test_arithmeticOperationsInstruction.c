@@ -53,6 +53,7 @@ void test_assembleInstruction_given_neg_A_OPERAND_expect_0x40(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_neg_shortmem12_OPERAND_expect_0x3012(void) {
@@ -70,6 +71,7 @@ void test_assembleInstruction_given_neg_shortmem12_OPERAND_expect_0x3012(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_longmemff11_OPERAND_expect_0x7250FF11(void) {
     MachineCode *mcode =NULL ;
@@ -86,6 +88,7 @@ void test_assembleInstruction_given_neg_longmemff11_OPERAND_expect_0x7250FF11(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_bracX_OPERAND_expect_0x70(void) {
     MachineCode *mcode =NULL ;
@@ -102,6 +105,7 @@ void test_assembleInstruction_given_neg_bracX_OPERAND_expect_0x70(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortoffX_OPERAND_expect_0x60BB(void) {
     MachineCode *mcode =NULL ;
@@ -118,6 +122,7 @@ void test_assembleInstruction_given_neg_shortoffX_OPERAND_expect_0x60BB(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_longoffX_OPERAND_expect_0x72401A3B(void) {
     MachineCode *mcode =NULL ;
@@ -134,6 +139,7 @@ void test_assembleInstruction_given_neg_longoffX_OPERAND_expect_0x72401A3B(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_bracY_OPERAND_expect_0x9070(void) {
     MachineCode *mcode =NULL ;
@@ -150,6 +156,7 @@ void test_assembleInstruction_given_neg_bracY_OPERAND_expect_0x9070(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortoffY_OPERAND_expect_0x906077(void) {
     MachineCode *mcode =NULL ;
@@ -166,6 +173,7 @@ void test_assembleInstruction_given_neg_shortoffY_OPERAND_expect_0x906077(void) 
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_longoffY_OPERAND_expect_0x9040C172(void) {
     MachineCode *mcode =NULL ;
@@ -182,6 +190,7 @@ void test_assembleInstruction_given_neg_longoffY_OPERAND_expect_0x9040C172(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortoffSP_OPERAND_expect_0x0055(void) {
     MachineCode *mcode =NULL ;
@@ -198,6 +207,7 @@ void test_assembleInstruction_given_neg_shortoffSP_OPERAND_expect_0x0055(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortptrdotW_OPERAND_expect_0x9230F4(void) {
     MachineCode *mcode =NULL ;
@@ -214,6 +224,7 @@ void test_assembleInstruction_given_neg_shortptrdotW_OPERAND_expect_0x9230F4(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_longptrdotW_OPERAND_expect_0x7230F1E2(void) {
     MachineCode *mcode =NULL ;
@@ -230,6 +241,7 @@ void test_assembleInstruction_given_neg_longptrdotW_OPERAND_expect_0x7230F1E2(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortptrwX_OPERAND_expect_0x926065(void) {
     MachineCode *mcode =NULL ;
@@ -246,6 +258,7 @@ void test_assembleInstruction_given_neg_shortptrwX_OPERAND_expect_0x926065(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_longptrwX_OPERAND_expect_0x7260EEAA(void) {
     MachineCode *mcode =NULL ;
@@ -262,6 +275,7 @@ void test_assembleInstruction_given_neg_longptrwX_OPERAND_expect_0x7260EEAA(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_neg_shortptrwY_OPERAND_expect_0x916005(void) {
     MachineCode *mcode =NULL ;
@@ -278,6 +292,7 @@ void test_assembleInstruction_given_neg_shortptrwY_OPERAND_expect_0x916005(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //ADC instruction testing ////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,6 +311,7 @@ void test_assembleInstruction_given_adc_hash33_expect_0xa933(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_bracketX_expect_0xf9(void) {
     MachineCode *mcode =NULL ;
@@ -312,6 +328,7 @@ void test_assembleInstruction_given_adc_bracketX_expect_0xf9(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_SHORTOFF_X_OPERAND_expect_0xe9c1(void) {
@@ -328,6 +345,7 @@ void test_assembleInstruction_given_adc_SHORTOFF_X_OPERAND_expect_0xe9c1(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_LONGOFF_X_OPERAND_expect_0xd9c1aa(void) {
@@ -344,6 +362,7 @@ void test_assembleInstruction_given_adc_LONGOFF_X_OPERAND_expect_0xd9c1aa(void) 
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_bracketY_expect_0x90f9(void) {
@@ -360,6 +379,7 @@ void test_assembleInstruction_given_adc_bracketY_expect_0x90f9(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_SHORTOFF_Y_OPERAND_expect_0x90e9d7(void) {
@@ -376,6 +396,7 @@ void test_assembleInstruction_given_adc_SHORTOFF_Y_OPERAND_expect_0x90e9d7(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_LONGOFF_Y_OPERAND_expect_0x90d9a2c3(void) {
@@ -392,6 +413,7 @@ void test_assembleInstruction_given_adc_LONGOFF_Y_OPERAND_expect_0x90d9a2c3(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_shortoffSP_OPERAND_expect_0x1933(void) {
     MachineCode *mcode =NULL ;
@@ -408,6 +430,7 @@ void test_assembleInstruction_given_adc_shortoffSP_OPERAND_expect_0x1933(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_shortptrdotW_OPERAND_expect_0x92c9f1(void) {
     MachineCode *mcode =NULL ;
@@ -424,6 +447,7 @@ void test_assembleInstruction_given_adc_shortptrdotW_OPERAND_expect_0x92c9f1(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_longptrdotW_OPERAND_expect_0x72c9F1E2(void) {
     MachineCode *mcode =NULL ;
@@ -440,6 +464,7 @@ void test_assembleInstruction_given_adc_longptrdotW_OPERAND_expect_0x72c9F1E2(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_shortptrwX_OPERAND_expect_0x92d965(void) {
     MachineCode *mcode =NULL ;
@@ -456,6 +481,7 @@ void test_assembleInstruction_given_adc_shortptrwX_OPERAND_expect_0x92d965(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_longptrwX_OPERAND_expect_0x72D9AAEE(void) {
     MachineCode *mcode =NULL ;
@@ -472,6 +498,7 @@ void test_assembleInstruction_given_adc_longptrwX_OPERAND_expect_0x72D9AAEE(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_adc_shortptrwY_OPERAND_expect_0x91d905(void) {
     MachineCode *mcode =NULL ;
@@ -488,6 +515,7 @@ void test_assembleInstruction_given_adc_shortptrwY_OPERAND_expect_0x91d905(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -504,6 +532,8 @@ void test_assembleInstruction_given_adc_z_BracketedY_without_commar_expect_excep
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_z_expect_exception_thrown(void) {
@@ -519,6 +549,8 @@ void test_assembleInstruction_given_adc_z_expect_exception_thrown(void) {
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thrown(void) {
@@ -534,6 +566,8 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
         dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //ADD instruction testing ////////////////////////////////////////////////////////////////////////////////////////////
@@ -553,6 +587,7 @@ void test_assembleInstruction_given_add_hash33_expect_0xab21(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xbb(void) {
     MachineCode *mcode =NULL ;
@@ -571,6 +606,7 @@ void test_assembleInstruction_given_add_bracketed_X_OPERAND_expect_0xbb(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -589,6 +625,7 @@ void test_assembleInstruction_given_add_SHORTOFF_X_OPERAND_expect_0xeb68(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_add_LONGOFF_X_OPERAND_expect_0xdbc456(void) {
@@ -605,6 +642,7 @@ void test_assembleInstruction_given_add_LONGOFF_X_OPERAND_expect_0xdbc456(void) 
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_add_bracketY_expect_0x90fb(void) {
@@ -621,6 +659,7 @@ void test_assembleInstruction_given_add_bracketY_expect_0x90fb(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_add_SHORTOFF_Y_OPERAND_expect_0x90eb45(void) {
@@ -637,6 +676,7 @@ void test_assembleInstruction_given_add_SHORTOFF_Y_OPERAND_expect_0x90eb45(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_add_LONGOFF_Y_OPERAND_expect_0x90db7749(void) {
@@ -654,6 +694,7 @@ void test_assembleInstruction_given_add_LONGOFF_Y_OPERAND_expect_0x90db7749(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_shortoffSP_OPERAND_expect_0x1b66(void) {
     MachineCode *mcode =NULL ;
@@ -670,6 +711,7 @@ void test_assembleInstruction_given_add_shortoffSP_OPERAND_expect_0x1b66(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_shortptrdotW_OPERAND_expect_0x92cbA1(void) {
     MachineCode *mcode =NULL ;
@@ -686,6 +728,7 @@ void test_assembleInstruction_given_add_shortptrdotW_OPERAND_expect_0x92cbA1(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_longptrdotW_OPERAND_expect_0x72c9F1E2(void) {
     MachineCode *mcode =NULL ;
@@ -702,6 +745,7 @@ void test_assembleInstruction_given_add_longptrdotW_OPERAND_expect_0x72c9F1E2(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_shortptrwX_OPERAND_expect_0x92db11(void) {
     MachineCode *mcode =NULL ;
@@ -718,6 +762,7 @@ void test_assembleInstruction_given_add_shortptrwX_OPERAND_expect_0x92db11(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_longptrwX_OPERAND_expect_0x72DBACAC(void) {
     MachineCode *mcode =NULL ;
@@ -734,6 +779,7 @@ void test_assembleInstruction_given_add_longptrwX_OPERAND_expect_0x72DBACAC(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_add_shortptrwY_OPERAND_expect_0x91db9A(void) {
     MachineCode *mcode =NULL ;
@@ -750,6 +796,7 @@ void test_assembleInstruction_given_add_shortptrwY_OPERAND_expect_0x91db9A(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -815,6 +862,7 @@ void test_assembleInstruction_given_sub_hash33_expect_0xab21(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_shortmem_expect_0xb087(void) {
     MachineCode *mcode =NULL ;
@@ -831,6 +879,7 @@ void test_assembleInstruction_given_sub_shortmem_expect_0xb087(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_longmem_expect_0xc02204(void) {
     MachineCode *mcode =NULL ;
@@ -846,6 +895,7 @@ void test_assembleInstruction_given_sub_longmem_expect_0xc02204(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_bracketed_X_OPERAND_expect_0xf0(void) {
     MachineCode *mcode =NULL ;
@@ -862,6 +912,7 @@ void test_assembleInstruction_given_sub_bracketed_X_OPERAND_expect_0xf0(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -879,6 +930,7 @@ void test_assembleInstruction_given_sub_SHORTOFF_X_OPERAND_expect_0xe068(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_LONGOFF_X_OPERAND_expect_0xd0654c(void) {
@@ -895,6 +947,7 @@ void test_assembleInstruction_given_sub_LONGOFF_X_OPERAND_expect_0xd0654c(void) 
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_bracketY_expect_0x90f0(void) {
@@ -911,6 +964,7 @@ void test_assembleInstruction_given_sub_bracketY_expect_0x90f0(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_SHORTOFF_Y_OPERAND_expect_0x90e045(void) {
@@ -927,6 +981,7 @@ void test_assembleInstruction_given_sub_SHORTOFF_Y_OPERAND_expect_0x90e045(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_LONGOFF_Y_OPERAND_expect_0x90d09981(void) {
@@ -944,6 +999,7 @@ void test_assembleInstruction_given_sub_LONGOFF_Y_OPERAND_expect_0x90d09981(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_shortoffSP_OPERAND_expect_0x1054(void) {
     MachineCode *mcode =NULL ;
@@ -960,6 +1016,7 @@ void test_assembleInstruction_given_sub_shortoffSP_OPERAND_expect_0x1054(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_shortptrdotW_OPERAND_expect_0x92c0A0(void) {
     MachineCode *mcode =NULL ;
@@ -976,6 +1033,7 @@ void test_assembleInstruction_given_sub_shortptrdotW_OPERAND_expect_0x92c0A0(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_longptrdotW_OPERAND_expect_0x72c03309(void) {
     MachineCode *mcode =NULL ;
@@ -992,6 +1050,7 @@ void test_assembleInstruction_given_sub_longptrdotW_OPERAND_expect_0x72c03309(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_shortptrwX_OPERAND_expect_0x92d011(void) {
     MachineCode *mcode =NULL ;
@@ -1008,6 +1067,7 @@ void test_assembleInstruction_given_sub_shortptrwX_OPERAND_expect_0x92d011(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_longptrwX_OPERAND_expect_0x72D0BDBD(void) {
     MachineCode *mcode =NULL ;
@@ -1024,6 +1084,7 @@ void test_assembleInstruction_given_sub_longptrwX_OPERAND_expect_0x72D0BDBD(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sub_shortptrwY_OPERAND_expect_0x91d09A(void) {
     MachineCode *mcode =NULL ;
@@ -1040,6 +1101,7 @@ void test_assembleInstruction_given_sub_shortptrwY_OPERAND_expect_0x91d09A(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_SP_BYTe_OPERAND_hash99_expect_0x5299(void) {
@@ -1057,6 +1119,7 @@ void test_assembleInstruction_given_sub_SP_BYTe_OPERAND_hash99_expect_0x5299(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sub_SHORTOFF_X_OPERAND_expect_fail(void) {
@@ -1073,6 +1136,7 @@ void test_assembleInstruction_given_sub_SHORTOFF_X_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -1090,6 +1154,7 @@ void test_assembleInstruction_given_sub_A_SP_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //SBC instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sbc_byte_expect_0xa221(void) {
@@ -1106,6 +1171,7 @@ void test_assembleInstruction_given_sbc_byte_expect_0xa221(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_shortmem_expect_0xb297(void) {
     MachineCode *mcode =NULL ;
@@ -1121,6 +1187,7 @@ void test_assembleInstruction_given_sbc_shortmem_expect_0xb297(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_longmem_expect_0xc2DD22(void) {
     MachineCode *mcode =NULL ;
@@ -1136,6 +1203,7 @@ void test_assembleInstruction_given_sbc_longmem_expect_0xc2DD22(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_bracketed_X_OPERAND_expect_0xf2(void) {
     MachineCode *mcode =NULL ;
@@ -1152,6 +1220,7 @@ void test_assembleInstruction_given_sbc_bracketed_X_OPERAND_expect_0xf2(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -1170,6 +1239,7 @@ void test_assembleInstruction_given_sbc_a_BRACKETED_SHORTPTR_DOT_W_OPERAND_hash5
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sbc_LONGOFF_X_OPERAND_expect_0xd26512(void) {
@@ -1186,6 +1256,7 @@ void test_assembleInstruction_given_sbc_LONGOFF_X_OPERAND_expect_0xd26512(void) 
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sbc_bracketY_expect_0x90f2(void) {
@@ -1202,6 +1273,7 @@ void test_assembleInstruction_given_sbc_bracketY_expect_0x90f2(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sbc_SHORTOFF_Y_OPERAND_00_expect_0x90f2(void) {
@@ -1218,6 +1290,7 @@ void test_assembleInstruction_given_sbc_SHORTOFF_Y_OPERAND_00_expect_0x90f2(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sbc_LONGOFF_Y_OPERAND_expect_0x90d24416(void) {
@@ -1235,6 +1308,7 @@ void test_assembleInstruction_given_sbc_LONGOFF_Y_OPERAND_expect_0x90d24416(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_shortoffSP_OPERAND_expect_0x120A(void) {
     MachineCode *mcode =NULL ;
@@ -1251,6 +1325,7 @@ void test_assembleInstruction_given_sbc_shortoffSP_OPERAND_expect_0x120A(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_shortptrdotW_OPERAND_expect_0x92c20F(void) {
     MachineCode *mcode =NULL ;
@@ -1267,6 +1342,7 @@ void test_assembleInstruction_given_sbc_shortptrdotW_OPERAND_expect_0x92c20F(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_longptrdotW_OPERAND_expect_0x72c2244(void) {
     MachineCode *mcode =NULL ;
@@ -1283,6 +1359,7 @@ void test_assembleInstruction_given_sbc_longptrdotW_OPERAND_expect_0x72c2244(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_shortptrwX_OPERAND_expect_0x92d231(void) {
     MachineCode *mcode =NULL ;
@@ -1299,6 +1376,7 @@ void test_assembleInstruction_given_sbc_shortptrwX_OPERAND_expect_0x92d231(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_sbc_longptrwX_OPERAND_expect_0x72D2BDBD(void) {
     MachineCode *mcode =NULL ;
@@ -1315,6 +1393,7 @@ void test_assembleInstruction_given_sbc_longptrwX_OPERAND_expect_0x72D2BDBD(void
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sbc_z_OPERAND_expect_fail(void) {
@@ -1331,6 +1410,7 @@ void test_assembleInstruction_given_sbc_z_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -1350,6 +1430,7 @@ void test_assembleInstruction_given_mul_x_a_OPERAND_expect_0x42(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_mul_y_a_OPERAND_expect_0x9042(void) {
@@ -1367,6 +1448,7 @@ void test_assembleInstruction_given_mul_y_a_OPERAND_expect_0x9042(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_mul_A_OPERAND_expect_fail(void) {
@@ -1383,6 +1465,7 @@ void test_assembleInstruction_given_mul_A_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_mul_X_X_OPERAND_expect_fail(void) {
@@ -1399,6 +1482,7 @@ void test_assembleInstruction_given_mul_X_X_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_mul_X_Y_withoutcommar_OPERAND_expect_fail(void) {
@@ -1415,6 +1499,7 @@ void test_assembleInstruction_given_mul_X_Y_withoutcommar_OPERAND_expect_fail(vo
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -1434,6 +1519,7 @@ void test_assembleInstruction_given_div_x_A_OPERAND_expect_0x62(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_div_x_y_OPERAND_expect_0x65(void) {
@@ -1451,6 +1537,7 @@ void test_assembleInstruction_given_div_x_y_OPERAND_expect_0x65(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_div_Y_A_OPERAND_expect_0x9062(void) {
@@ -1463,12 +1550,13 @@ void test_assembleInstruction_given_div_Y_A_OPERAND_expect_0x9062(void) {
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-        } Catch(ex) {
-            dumpTokenErrorMessage(ex, __LINE__);
-            TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-        }
-        freeTokenizer(tokenizer);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
+}
 
 void test_assembleInstruction_given_div_A_Y_OPERAND_expect_fail(void) {
     MachineCode *mcode =NULL ;
@@ -1484,6 +1572,7 @@ void test_assembleInstruction_given_div_A_Y_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_div_A_BYTE_OPERAND_expect_fail(void) {
@@ -1500,6 +1589,7 @@ void test_assembleInstruction_given_div_A_BYTE_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //NEGW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_negw_x_OPERAND_expect_0x50(void) {
@@ -1517,6 +1607,7 @@ void test_assembleInstruction_given_negw_x_OPERAND_expect_0x50(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_negw_y_OPERAND_expect_0x9050(void) {
@@ -1534,6 +1625,7 @@ void test_assembleInstruction_given_negw_y_OPERAND_expect_0x9050(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_negw_OPERAND_expect_fail(void) {
@@ -1550,24 +1642,26 @@ void test_assembleInstruction_given_negw_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //ADDW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_addw_x_hashword_OPERAND_expect_0x1c1554(void) {
-        MachineCode *mcode =NULL ;
-        Tokenizer *tokenizer = NULL;
-        int expectedMcode[]={0x1c,0x15,0x54,END};
+    MachineCode *mcode =NULL ;
+    Tokenizer *tokenizer = NULL;
+    int expectedMcode[]={0x1c,0x15,0x54,END};
 
-        Try{
-            tokenizer = createTokenizer("  ADdw X, #$1554 ");
-            configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-            mcode = assembleInstruction(tokenizer);
-            TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
-        }Catch(ex) {
-            dumpTokenErrorMessage(ex, __LINE__);
-            TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
-        }
-        freeTokenizer(tokenizer);
+    Try{
+        tokenizer = createTokenizer("  ADdw X, #$1554 ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        mcode = assembleInstruction(tokenizer);
+        TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
+    }Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
+    freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
+}
 void test_assembleInstruction_given_addw_x_longmem_OPERAND_expect_0xbb2254(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1583,6 +1677,7 @@ void test_assembleInstruction_given_addw_x_longmem_OPERAND_expect_0xbb2254(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_addw_x_shortoffSP_OPERAND_expect_0x72FB10(void) {
     MachineCode *mcode =NULL ;
@@ -1599,6 +1694,7 @@ void test_assembleInstruction_given_addw_x_shortoffSP_OPERAND_expect_0x72FB10(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_addw_y_hashword_OPERAND_expect_0x72A98862(void) {
@@ -1616,6 +1712,7 @@ void test_assembleInstruction_given_addw_y_hashword_OPERAND_expect_0x72A98862(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_addw_y_longmem_OPERAND_expect_0x72b92233(void) {
     MachineCode *mcode =NULL ;
@@ -1632,6 +1729,7 @@ void test_assembleInstruction_given_addw_y_longmem_OPERAND_expect_0x72b92233(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_addw_y_shortoffSP_OPERAND_expect_0x72F910(void) {
     MachineCode *mcode =NULL ;
@@ -1648,6 +1746,7 @@ void test_assembleInstruction_given_addw_y_shortoffSP_OPERAND_expect_0x72F910(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_addw_x_word_OPERAND_expect_exception(void) {
@@ -1664,6 +1763,7 @@ void test_assembleInstruction_given_addw_x_word_OPERAND_expect_exception(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_addw_A_word_OPERAND_expect_exception(void) {
@@ -1680,6 +1780,7 @@ void test_assembleInstruction_given_addw_A_word_OPERAND_expect_exception(void) {
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //SUBW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_subw_x_word_OPERAND_expect_0x1d1024(void) {
@@ -1697,6 +1798,7 @@ void test_assembleInstruction_given_subw_x_word_OPERAND_expect_0x1d1024(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_subw_x_longmem_OPERAND_expect_0xb03134(void) {
     MachineCode *mcode =NULL ;
@@ -1713,6 +1815,7 @@ void test_assembleInstruction_given_subw_x_longmem_OPERAND_expect_0xb03134(void)
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_subw_x_shortoffSP_OPERAND_expect_0x72F0FA(void) {
     MachineCode *mcode =NULL ;
@@ -1729,6 +1832,7 @@ void test_assembleInstruction_given_subw_x_shortoffSP_OPERAND_expect_0x72F0FA(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_subw_y_hashword_OPERAND_expect_0x72A28822(void) {
@@ -1746,6 +1850,7 @@ void test_assembleInstruction_given_subw_y_hashword_OPERAND_expect_0x72A28822(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 void test_assembleInstruction_given_subw_Y_longmem_OPERAND_expect_0x72b21114(void) {
     MachineCode *mcode =NULL ;
@@ -1762,6 +1867,7 @@ void test_assembleInstruction_given_subw_Y_longmem_OPERAND_expect_0x72b21114(voi
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_subw_y_shortoffSP_OPERAND_expect_0x72F245(void) {
@@ -1779,6 +1885,7 @@ void test_assembleInstruction_given_subw_y_shortoffSP_OPERAND_expect_0x72F245(vo
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 
@@ -1796,4 +1903,5 @@ void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

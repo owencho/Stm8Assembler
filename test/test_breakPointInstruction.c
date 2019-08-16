@@ -53,6 +53,7 @@ void test_assembleInstruction_given_Break_0x8b(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 // exception thrown because break instruction only supports no operand
 void test_assembleInstruction_given_break_f_expect_fail(void) {
@@ -62,7 +63,6 @@ void test_assembleInstruction_given_break_f_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  break f ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -70,6 +70,7 @@ void test_assembleInstruction_given_break_f_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_break_1_expect_fail(void) {
@@ -79,7 +80,6 @@ void test_assembleInstruction_given_break_1_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  break 1 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -87,4 +87,5 @@ void test_assembleInstruction_given_break_1_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

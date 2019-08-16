@@ -53,6 +53,7 @@ void test_assembleInstruction_given_rcf_0x98(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_rcF_t0t0_expect_fail(void) {
@@ -62,7 +63,6 @@ void test_assembleInstruction_given_rcF_t0t0_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  rcF t0t0 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -70,6 +70,7 @@ void test_assembleInstruction_given_rcF_t0t0_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //ccf instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ccf_0x8c(void) {
@@ -86,6 +87,7 @@ void test_assembleInstruction_given_ccf_0x8c(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_ccf_abcd123_expect_fail(void) {
@@ -95,7 +97,6 @@ void test_assembleInstruction_given_ccf_abcd123_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  CcF abcd123 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -103,6 +104,7 @@ void test_assembleInstruction_given_ccf_abcd123_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 //rim instruction test ////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,6 +122,7 @@ void test_assembleInstruction_given_rIm_0x9a(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_Rim_ironman_expect_fail(void) {
@@ -129,7 +132,6 @@ void test_assembleInstruction_given_Rim_ironman_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  Rim IronMan ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -137,6 +139,7 @@ void test_assembleInstruction_given_Rim_ironman_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //rvf instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_rvf_0x9c(void) {
@@ -153,6 +156,7 @@ void test_assembleInstruction_given_rvf_0x9c(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_rvf_12789_expect_fail(void) {
@@ -162,7 +166,6 @@ void test_assembleInstruction_given_rvf_12789_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  rvf 12789 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -170,6 +173,7 @@ void test_assembleInstruction_given_rvf_12789_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //scf instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_scf_0x99(void) {
@@ -186,6 +190,7 @@ void test_assembleInstruction_given_scf_0x99(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_SCF_symbol_expect_fail(void) {
@@ -195,7 +200,6 @@ void test_assembleInstruction_given_SCF_symbol_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  SCF ! ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -203,6 +207,7 @@ void test_assembleInstruction_given_SCF_symbol_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 //sim instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sim_0x9b(void) {
@@ -220,6 +225,7 @@ void test_assembleInstruction_given_sim_0x9b(void) {
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }
 
 void test_assembleInstruction_given_sim_symbol_expect_fail(void) {
@@ -229,7 +235,6 @@ void test_assembleInstruction_given_sim_symbol_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  sim @ ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -237,4 +242,5 @@ void test_assembleInstruction_given_sim_symbol_expect_fail(void) {
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
+    freeMachineCode(mcode);
 }

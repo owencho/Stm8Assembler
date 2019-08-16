@@ -13,7 +13,6 @@
 #include <errno.h>
 
 InstructionTable instructionTable[]={
-
     //arithmeticOperationsInstruction
     {"neg",&negCodeInfo},
     {"adc",&adcCodeInfo},
@@ -85,7 +84,7 @@ InstructionTable instructionTable[]={
     {"cpl",&cplCodeInfo},
     {"cplw",&cplwCodeInfo},
     //conditionalBranchExecutionInstruction
-     {"jrc",&jrcCodeInfo},
+    {"jrc",&jrcCodeInfo},
     {"jreq",&jreqCodeInfo},
     {"jrh",&jrhCodeInfo},
     {"jrih",&jrihCodeInfo},
@@ -120,7 +119,7 @@ InstructionTable instructionTable[]={
     //conditionalBitTestBranchInstruction
     {"btjt",&btjtCodeInfo},
     {"btjf",&btjfCodeInfo},
-   //unconditionalJumpCallInstruction
+    //unconditionalJumpCallInstruction
     {"jra",&jraCodeInfo},
     {"jrt",&jrtCodeInfo},
     {"jrf",&jrfCodeInfo},
