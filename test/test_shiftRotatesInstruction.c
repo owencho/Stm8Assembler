@@ -31,6 +31,16 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 
+/*
+* This is shiftRotatesInstruction test file which test
+* SLL SRL SRA RLC RRC SWAP SLLW SRLW SRAW RLCW RRCW
+* SLAW SWAPW RLWA RRWA instruction
+* these instruction supports one operand
+*can refer STM8 instruction set for more information
+**/
+
+//SLL instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_sll_A_OPERAND_expect_0x40(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -275,7 +285,8 @@ void test_assembleInstruction_given_sll_shortptrwY_OPERAND_expect_0x916805(void)
 }
 
 
-//srl test
+//SRL instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void test_assembleInstruction_given_srl_A_OPERAND_expect_0x44(void) {
     MachineCode *mcode =NULL ;
@@ -519,8 +530,7 @@ void test_assembleInstruction_given_srl_shortptrwY_OPERAND_expect_0x91640F(void)
     freeTokenizer(tokenizer);
 }
 
-////SRA test
-
+//SRA instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sra_A_OPERAND_expect_0x47(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -763,7 +773,7 @@ void test_assembleInstruction_given_sra_shortptrwY_OPERAND_expect_0x916766(void)
     freeTokenizer(tokenizer);
 }
 
-//RLC
+//RLC instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_rlc_A_OPERAND_expect_0x49(void) {
     MachineCode *mcode =NULL ;
@@ -1010,7 +1020,8 @@ void test_assembleInstruction_given_rlc_shortptrwY_OPERAND_expect_0x916951(void)
 
 
 
-//RrC TEST
+//RRC instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_rrc_A_OPERAND_expect_0x46(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1255,7 +1266,8 @@ void test_assembleInstruction_given_rrc_shortptrwY_OPERAND_expect_0x916615(void)
 }
 
 
-//SWAP
+//SWAP instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_swap_A_OPERAND_expect_0x4e(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1536,7 +1548,8 @@ void test_assembleInstruction_given_swap_shortptr0_X_OPERAND_expect_0x7e(void) {
 
 
 
-//SLLW
+//SLLW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_sllw_x_OPERAND_expect_0x58(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1644,7 +1657,8 @@ void test_assembleInstruction_given_sllw_Z_expect_fail(void) {
 }
 
 
-//slaw
+//SLAW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 
 void test_assembleInstruction_given_slaw_x_OPERAND_expect_0x58(void) {
 	MachineCode *mcode =NULL ;
@@ -1752,7 +1766,8 @@ void test_assembleInstruction_given_slaw_Q_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
-//srlw
+//SRLW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_srlw_x_OPERAND_expect_0x54(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1809,7 +1824,8 @@ void test_assembleInstruction_given_srlw_Q_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
-//sraw
+//SRAW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_sraw_x_OPERAND_expect_0x57(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1864,7 +1880,8 @@ void test_assembleInstruction_given_weird_slaw_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-//rlcw
+//RLCW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_rlcw_x_OPERAND_expect_0x59(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1902,7 +1919,9 @@ void test_assembleInstruction_given_rlcw_y_OPERAND_expect_0x9059(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-//rrcw
+
+//RRCW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_rrcw_x_OPERAND_expect_0x56(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1940,7 +1959,8 @@ void test_assembleInstruction_given_rrcw_y_OPERAND_expect_0x9056(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-//SWAPW
+//SWAPW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_swapw_x_OPERAND_expect_0x5E(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -1978,7 +1998,8 @@ void test_assembleInstruction_given_swap_y_OPERAND_expect_0x905E(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-//RLWA
+//RLWA instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_rlwa_x_OPERAND_expect_0x02(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;
@@ -2016,7 +2037,8 @@ void test_assembleInstruction_given_rlwa_y_OPERAND_expect_0x9002(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-//RRWA
+//RRWA instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_rrwa_x_OPERAND_expect_0x01(void) {
 	MachineCode *mcode =NULL ;
 	Tokenizer *tokenizer = NULL;

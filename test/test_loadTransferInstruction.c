@@ -36,7 +36,7 @@ void tearDown(void){}
 *can refer STM8 instruction set for more information
 **/
 
-//LD testing ////////////////////////////////////////////////////////////////////////////////////////////
+//LD instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ld_A_hash77_expect_0xA677(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -703,7 +703,7 @@ void test_assembleInstruction_given_ld_y_XL_OPERAND_expect_exception(void) {
 	  freeTokenizer(tokenizer);
 }
 
-//LDF testing ////////////////////////////////////////////////////////////////////////////////////////////
+//LDF instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ldf_A_extmem_expect_0xBC345612(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -974,7 +974,7 @@ void test_assembleInstruction_given_ldf_X_XL_OPERAND_expect_exception(void) {
     }
 	  freeTokenizer(tokenizer);
 }
-//LDW testing ////////////////////////////////////////////////////////////////////////////////////////////
+//LDW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_ldw_X_word_expect_0xAE0055(void) {
     MachineCode *mcode =NULL ;
@@ -2004,7 +2004,7 @@ void test_assembleInstruction_given_ldw_longptrwX_Y_withextradollar_OPERAND_expe
 	  freeTokenizer(tokenizer);
 }
 
-//CLR testing ////////////////////////////////////////////////////////////////////////////////////////////
+//CLR instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_ldw_clr_A_expect_0x4F(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2293,7 +2293,7 @@ void test_assembleInstruction_given_clr_A_ZZ_expect_exception(void) {
 }
 
 
-//MOV testing ////////////////////////////////////////////////////////////////////////////////////////////
+//MOV instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_mov_longmem_byte_expect_0x35AA8000(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2427,7 +2427,7 @@ void test_assembleInstruction_given_mov__longmem_longmem_without_commar_OPERAND_
 	  freeTokenizer(tokenizer);
 }
 
-//EXG testing ////////////////////////////////////////////////////////////////////////////////////////////
+//EXG instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_exg_XL_OPERAND_expect_0x41(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -2527,7 +2527,7 @@ void test_assembleInstruction_given_exg_A_XL_withoutcommar_OPERAND_expect_except
 	  freeTokenizer(tokenizer);
 }
 
-//CLRW testing ////////////////////////////////////////////////////////////////////////////////////////////
+//CLRW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_clrw_X_OPERAND_expect_0x5F(void) {
     MachineCode *mcode =NULL ;
@@ -2595,7 +2595,7 @@ void test_assembleInstruction_given_clrw_X_1_OPERAND_expect_exception(void) {
 	  freeTokenizer(tokenizer);
 }
 
-//exgw testing ////////////////////////////////////////////////////////////////////////////////////////////
+//exgw instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_exgw_X_Y_expect_0x51(void) {
     MachineCode *mcode =NULL ;

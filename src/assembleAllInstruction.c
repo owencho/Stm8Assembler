@@ -158,7 +158,7 @@ int hashNValueReturn(Tokenizer* tokenizer , int cmpType){
       nvalue = 2*operand->dataSize.ms;
     }
     else{
-      throwException(ERR_INVALID_INPUT,token,"invalid compare Type");
+      throwException(ERR_INVALID_INPUT,token,"invalid compareType input expect 1 or 2 !");
     }
     return nvalue;
 

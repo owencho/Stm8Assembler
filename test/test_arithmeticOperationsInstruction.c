@@ -37,7 +37,7 @@ void tearDown(void){}
 *can refer STM8 instruction set for more information
 **/
 
-//NEG test /////////////////////////////////////////////////////////////////////////////////
+//NEG instruction testing /////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_neg_A_OPERAND_expect_0x40(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -280,7 +280,7 @@ void test_assembleInstruction_given_neg_shortptrwY_OPERAND_expect_0x916005(void)
     freeTokenizer(tokenizer);
 }
 
-//ADC testing ////////////////////////////////////////////////////////////////////////////////////////////
+//ADC instruction testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_adc_hash33_expect_0xa933(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -288,7 +288,6 @@ void test_assembleInstruction_given_adc_hash33_expect_0xa933(void) {
     Try{
         tokenizer = createTokenizer("  AdC a, #$33 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -305,7 +304,6 @@ void test_assembleInstruction_given_adc_bracketX_expect_0xf9(void) {
     Try{
         tokenizer = createTokenizer("  AdC a, (x) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -323,7 +321,6 @@ void test_assembleInstruction_given_adc_SHORTOFF_X_OPERAND_expect_0xe9c1(void) {
     Try{
         tokenizer = createTokenizer("  AdC a, ($c1,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -340,7 +337,6 @@ void test_assembleInstruction_given_adc_LONGOFF_X_OPERAND_expect_0xd9c1aa(void) 
     Try{
         tokenizer = createTokenizer("  AdC a, ($c1aa,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -357,9 +353,7 @@ void test_assembleInstruction_given_adc_bracketY_expect_0x90f9(void) {
     Try{
         tokenizer = createTokenizer("  AdC a, (y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -375,7 +369,6 @@ void test_assembleInstruction_given_adc_SHORTOFF_Y_OPERAND_expect_0x90e9d7(void)
     Try{
         tokenizer = createTokenizer("  AdC a, ($d7,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -392,7 +385,6 @@ void test_assembleInstruction_given_adc_LONGOFF_Y_OPERAND_expect_0x90d9a2c3(void
     Try{
         tokenizer = createTokenizer("  AdC a, ($a2c3,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -544,7 +536,7 @@ void test_assembleInstruction_given_adc_with_extra_operand_expect_exception_thro
     }
 }
 
-//ADD testing ////////////////////////////////////////////////////////////////////////////////////////////
+//ADD instruction testing ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_add_hash33_expect_0xab21(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -606,7 +598,6 @@ void test_assembleInstruction_given_add_LONGOFF_X_OPERAND_expect_0xdbc456(void) 
     Try{
         tokenizer = createTokenizer("  add a, ($c456,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -623,9 +614,7 @@ void test_assembleInstruction_given_add_bracketY_expect_0x90fb(void) {
     Try{
         tokenizer = createTokenizer("  add a, (y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -641,7 +630,6 @@ void test_assembleInstruction_given_add_SHORTOFF_Y_OPERAND_expect_0x90eb45(void)
     Try{
         tokenizer = createTokenizer("  add a, ($45,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -659,9 +647,7 @@ void test_assembleInstruction_given_add_LONGOFF_Y_OPERAND_expect_0x90db7749(void
     Try{
         tokenizer = createTokenizer("  ADd a, ($7749,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -814,7 +800,7 @@ void test_assembleInstruction_given_add_with_extra_operand_expect_exception_thro
 
 
 
-//SUB testing///////////////////////////////////////////////////////////////////////////
+//SUB instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sub_hash33_expect_0xab21(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -822,9 +808,7 @@ void test_assembleInstruction_given_sub_hash33_expect_0xab21(void) {
     Try{
         tokenizer = createTokenizer("  sub a, #$66 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -839,7 +823,6 @@ void test_assembleInstruction_given_sub_shortmem_expect_0xb087(void) {
     Try{
         tokenizer = createTokenizer("  sub a, $87 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
@@ -856,9 +839,7 @@ void test_assembleInstruction_given_sub_longmem_expect_0xc02204(void) {
     Try{
         tokenizer = createTokenizer("  sub a, $2204 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -874,9 +855,7 @@ void test_assembleInstruction_given_sub_bracketed_X_OPERAND_expect_0xf0(void) {
     Try{
         tokenizer = createTokenizer("  sub a, (X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -893,7 +872,6 @@ void test_assembleInstruction_given_sub_SHORTOFF_X_OPERAND_expect_0xe068(void) {
     Try{
         tokenizer = createTokenizer("  sub a, ($68,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -910,7 +888,6 @@ void test_assembleInstruction_given_sub_LONGOFF_X_OPERAND_expect_0xd0654c(void) 
     Try{
         tokenizer = createTokenizer("  sub a, ($654c,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -927,9 +904,7 @@ void test_assembleInstruction_given_sub_bracketY_expect_0x90f0(void) {
     Try{
         tokenizer = createTokenizer("  sub a, (y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -945,7 +920,6 @@ void test_assembleInstruction_given_sub_SHORTOFF_Y_OPERAND_expect_0x90e045(void)
     Try{
         tokenizer = createTokenizer("  sub a, ($45,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -963,9 +937,7 @@ void test_assembleInstruction_given_sub_LONGOFF_Y_OPERAND_expect_0x90d09981(void
     Try{
         tokenizer = createTokenizer("  sub a, ($9981,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1119,7 +1091,7 @@ void test_assembleInstruction_given_sub_A_SP_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-//SBC testing///////////////////////////////////////////////////////////////////////////
+//SBC instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_sbc_byte_expect_0xa221(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1127,9 +1099,7 @@ void test_assembleInstruction_given_sbc_byte_expect_0xa221(void) {
     Try{
         tokenizer = createTokenizer("  sbc a, #$21 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1144,9 +1114,7 @@ void test_assembleInstruction_given_sbc_shortmem_expect_0xb297(void) {
     Try{
         tokenizer = createTokenizer("  sbc a, $97 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1161,9 +1129,7 @@ void test_assembleInstruction_given_sbc_longmem_expect_0xc2DD22(void) {
     Try{
         tokenizer = createTokenizer("  sbc a, $DD22 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1179,9 +1145,7 @@ void test_assembleInstruction_given_sbc_bracketed_X_OPERAND_expect_0xf2(void) {
     Try{
         tokenizer = createTokenizer("  sbc a, (X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1215,7 +1179,6 @@ void test_assembleInstruction_given_sbc_LONGOFF_X_OPERAND_expect_0xd26512(void) 
     Try{
         tokenizer = createTokenizer("  sbc a, ($6512,X) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -1232,9 +1195,7 @@ void test_assembleInstruction_given_sbc_bracketY_expect_0x90f2(void) {
     Try{
         tokenizer = createTokenizer("  sbc a, (y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1250,7 +1211,6 @@ void test_assembleInstruction_given_sbc_SHORTOFF_Y_OPERAND_00_expect_0x90f2(void
     Try{
         tokenizer = createTokenizer("  sbc a, ($00,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
@@ -1268,9 +1228,7 @@ void test_assembleInstruction_given_sbc_LONGOFF_Y_OPERAND_expect_0x90d24416(void
     Try{
         tokenizer = createTokenizer("  sbc a, ($4416,Y) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
-        TEST_ASSERT_NOT_NULL(mcode);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);
     } Catch(ex) {
         dumpTokenErrorMessage(ex, __LINE__);
@@ -1366,7 +1324,6 @@ void test_assembleInstruction_given_sbc_z_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  SBC z,($10,SP) ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1419,7 +1376,6 @@ void test_assembleInstruction_given_mul_A_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  MUL A,A  ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1436,7 +1392,6 @@ void test_assembleInstruction_given_mul_X_X_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  MUL X,X  ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1453,7 +1408,6 @@ void test_assembleInstruction_given_mul_X_Y_withoutcommar_OPERAND_expect_fail(vo
     Try{
         tokenizer = createTokenizer("  MUL X Y  ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1481,7 +1435,7 @@ void test_assembleInstruction_given_div_x_A_OPERAND_expect_0x62(void) {
     }
     freeTokenizer(tokenizer);
 }
-//divw test
+
 void test_assembleInstruction_given_div_x_y_OPERAND_expect_0x65(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1523,7 +1477,6 @@ void test_assembleInstruction_given_div_A_Y_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  dIv A, Y ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1540,7 +1493,6 @@ void test_assembleInstruction_given_div_A_BYTE_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  dIv Y, #55 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1549,7 +1501,7 @@ void test_assembleInstruction_given_div_A_BYTE_OPERAND_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-//NEGW testing///////////////////////////////////////////////////////////////////////////
+//NEGW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_negw_x_OPERAND_expect_0x50(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1591,7 +1543,6 @@ void test_assembleInstruction_given_negw_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  nEgw  ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
@@ -1600,7 +1551,7 @@ void test_assembleInstruction_given_negw_OPERAND_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-    //ADDW testing///////////////////////////////////////////////////////////////////////////
+//ADDW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_addw_x_hashword_OPERAND_expect_0x1c1554(void) {
         MachineCode *mcode =NULL ;
         Tokenizer *tokenizer = NULL;
@@ -1730,7 +1681,7 @@ void test_assembleInstruction_given_addw_A_word_OPERAND_expect_exception(void) {
     }
     freeTokenizer(tokenizer);
 }
-//SUBW testing///////////////////////////////////////////////////////////////////////////
+//SUBW instruction testing///////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_subw_x_word_OPERAND_expect_0x1d1024(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1838,7 +1789,6 @@ void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
     Try{
         tokenizer = createTokenizer("  subw Z, #55 ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {

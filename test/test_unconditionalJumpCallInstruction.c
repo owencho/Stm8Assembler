@@ -30,6 +30,16 @@ CEXCEPTION_T ex;
 
 void setUp(void){}
 void tearDown(void){}
+
+/*
+* This is unconditionalJumpCallInstruction test file which test
+* JRA JRT JRF JP JPF CALL CALLR CALLF RET RETF NOP
+* these instruction supports one operand
+*can refer STM8 instruction set for more information
+**/
+
+//JRA instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_jra_shortoffAA_0x207E(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -78,6 +88,8 @@ void test_assembleInstruction_given_jra_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+
+//JRT instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_jrt_shortoffAA_0x206E(void) {
   MachineCode *mcode =NULL ;
@@ -145,6 +157,8 @@ void test_assembleInstruction_given_jra_roundBRac_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//JRF instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_jrf_shortoffAA_0x210F(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -176,6 +190,7 @@ void test_assembleInstruction_given_jrf_negHex10_0x21EE(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+//JP instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_jp_longmem71_expect_0xcc0071(void) {
   MachineCode *mcode =NULL ;
@@ -432,6 +447,8 @@ void test_assembleInstruction_given_jp_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//JPF instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_jpf_extmem_expect_0xac2ffffc(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -533,6 +550,7 @@ void test_assembleInstruction_given_jpf_brackX_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//CALL instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_call_longmem11_expect_0xcd0011(void) {
   MachineCode *mcode =NULL ;
@@ -776,7 +794,8 @@ void test_assembleInstruction_given_call_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-/////////////////////////////////////////////////////////////////////////////////
+//CALLR instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_callr_shortmem_expect_0xad14(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -826,7 +845,8 @@ void test_assembleInstruction_given_callr_brackX_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
-/////////////////////////////////////////////////////////////////////////////////
+//CALLF instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_callf_extmem_expect_0x8D35BB20(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -878,6 +898,8 @@ void test_assembleInstruction_given_callf_ggwp_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//RET instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_ret_0x81(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -912,6 +934,8 @@ void test_assembleInstruction_given_ret_z_expect_fail(void) {
 	  freeTokenizer(tokenizer);
 }
 
+//RETF instruction test ////////////////////////////////////////////////////////////////////////////////////////////
+
 void test_assembleInstruction_given_retf_0x87(void) {
   MachineCode *mcode =NULL ;
   Tokenizer *tokenizer = NULL;
@@ -944,6 +968,8 @@ void test_assembleInstruction_given_retf_yamaha_expect_fail(void) {
   }
 	  freeTokenizer(tokenizer);
 }
+
+//NOP instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_nop_0x9d(void) {
   MachineCode *mcode =NULL ;

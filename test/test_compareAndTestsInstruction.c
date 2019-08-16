@@ -38,7 +38,7 @@ void tearDown(void){}
 *can refer STM8 instruction set for more information
 **/
 
-//cp testing ////////////////////////////////////////////////////////////////////////////////////////////
+//cp instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cp_byte_expect_0xa121(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -318,7 +318,7 @@ void test_assembleInstruction_given_cp_X_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
-///////////////////TNZ TEST/////////////////////////////////////////////////////
+//TNZ instruction TEST/////////////////////////////////////////////////////
 void test_assembleInstruction_given_tnz_A_expect_0x4d(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -611,7 +611,7 @@ void test_assembleInstruction_given_tnz_word_operand_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-/////////////////////////////bcp test////////////////////////////////////////////
+//bcp instruction test////////////////////////////////////////////
 void test_assembleInstruction_given_bcp_byte_expect_0xa521(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -875,7 +875,7 @@ void test_assembleInstruction_given_bcp_a_invalid_operand_expect_fail(void) {
 }
 
 
-//CPW OPERAND/////////////////////////////////////////////////////////////////////////////
+//CPW instruction test/////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cpw_word_expect_0xa30021(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1208,7 +1208,7 @@ void test_assembleInstruction_given_cpw_y_unsupported_operand_expect_fail(void) 
     freeTokenizer(tokenizer);
 }
 
-//TNZW testing ////////////////////////////////////////////////////////////////////////////////////////////
+//TNZW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_tnzw_X_OPERAND_expect_0x5D(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;

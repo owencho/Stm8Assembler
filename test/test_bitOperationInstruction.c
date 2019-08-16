@@ -54,7 +54,7 @@ void test_assembleInstruction_given_BSET_dollarsign5643_expect_0x72125643(void) 
 	  freeTokenizer(tokenizer);
   }
 
-void test_assembleInstruction_given_BSET_dollarsign5643_expect_0x721A0021(void) {
+void test_assembleInstruction_given_BSET_dollarsign21_expect_0x721A0021(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
     int expectedMcode[]={0x72,0x1A,0x00,0x21,END};

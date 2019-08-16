@@ -7,14 +7,25 @@
 #define STRINGIFY(x)     _STRINGIFY(x)
 
 /*
-* This is incrementDecrementInstruction test file which test
-* INC DEC INCW DECW
+* This is unconditionalJumpCallInstruction test file which test
+* JRA JRT JRF JP JPF CALL CALLR CALLF RET RETF NOP
 * these instruction supports one operand
 *can refer STM8 instruction set for more information
 **/
+//cp testing //////////////////////////////////////////////////////////////////////////////
 
-//cp testing ////////////////////////////////////////////////////////////////////////////////////////////
 
+//////////////
+
+//symbolOperandCheck function test/////////////////////////////////////////////////////////
+//symbolOperandCheck will check the token string and return the operand type
+// only applicable on symbol eg X,Y,SP etc
+//it will throw exception if any invalid symbol detected
+
+//hashNValueReturn function test/////////////////////////////////////////////////////////
+// When the cmpType bring in as 2 which will return value = 1 + 2*n;
+// When the cmpType bring in as 1 which will return value = 2*n;
+// it will throw exception when #n is less than 0 and more than 7
 
 void test_valueCheck_given_z_expect_fail(void) {
     stm8Operand *operand = NULL;
@@ -35,6 +46,12 @@ void test_valueCheck_given_z_expect_fail(void) {
     freeTokenizer(tokenizer);
 }
 
+token =(IntegerToken*)getToken(tokenizer);
+flagToken = extendTokenStr(initToken ,token);
+operandFlagCheck(flags,flagToken,SHORT_OFF_OPERAND);
+pushBackToken(tokenizer, (Token*)initToken);
+valueShortMem = signedIntCheck(tokenizer);
+operand = createLsOperand(SHORT_OFF_OPERAND,valueShortMem,token);
 
 int getExpectedCodeLength(const int expectedCode[] , int length){
     int i=0;

@@ -12,11 +12,20 @@
 #include "assembleAllInstruction.h"
 
 CEXCEPTION_T ex;
-
 void setUp(void) {}
-
 void tearDown(void) {}
 
+/*
+* This is assembleAllInstruction test file which test
+* all the assembleAllInstruction eg notNullCheck, getDataFlag,commarCheck
+* bitOperationCheck and more..
+*
+**/
+
+//symbolOperandCheck function test/////////////////////////////////////////////////////////
+//symbolOperandCheck will check the token string and return the operand type
+// only applicable on symbol eg X,Y,SP etc
+//it will throw exception if any invalid symbol detected
 void test_symbolOperandCheck_given_A_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
 		IntegerToken * token;
@@ -177,7 +186,9 @@ void test_symbolOperandCheck_given_z_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//squareBracketFlagCheck function test/////////////////////////////////////////////////////////
+//squareBracketFlagCheck will check the flag and throw if flag is not Supported
+// only applicable on squareBracket
 void test_squareBracketFlagCheck_given_shortptrw_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
 		IntegerToken * token;
@@ -261,7 +272,9 @@ void test_squareBracketFlagCheck_given_X_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//signedIntCheck function test/////////////////////////////////////////////////////////
+//signedIntCheck will take the value and convert into second compliment
+// it will throw if the positive value is larger than 127 and neg value lesser than 128
 void test_signedIntCheck_given_hash22_expect_22(void) {
     Tokenizer *tokenizer = NULL;
 		IntegerToken * token;
@@ -401,7 +414,9 @@ void test_signedIntCheck_given_hashneg81_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//extendTokenStr function test/////////////////////////////////////////////////////////
+//extendTokenStr will take two token and extend it which it will extend the string
+//and length of token
 void test_extendTokenStr_given_AB_expect_tokenstr_AB(void) {
     Tokenizer *tokenizer = NULL;
 		IntegerToken * token;
@@ -424,6 +439,31 @@ void test_extendTokenStr_given_AB_expect_tokenstr_AB(void) {
     freeTokenizer(tokenizer);
 }
 
+void test_extendTokenStr_given_hash12_A_C_expect_tokenstr_A_C(void) {
+    Tokenizer *tokenizer = NULL;
+		IntegerToken * token;
+    IntegerToken * initToken;
+    IntegerToken * flagToken;
+    stm8Operand * operand;
+    stm8OperandType opType;
+    int value;
+    Try{
+        tokenizer = createTokenizer("  $12 A C");
+				configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        initToken = (IntegerToken *)getToken(tokenizer);
+        token = (IntegerToken *)getToken(tokenizer);
+        freeToken(token);
+        token = (IntegerToken *)getToken(tokenizer);
+        flagToken =extendTokenStr(initToken ,token);
+        TEST_ASSERT_EQUAL_STRING("$12 A C", flagToken->str);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+//nullCheck function test/////////////////////////////////////////////////////////
+//nullCheck throw exception when the token is null
 void test_nullCheck_given_empty_expect_error_thrown(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -459,7 +499,9 @@ void test_nullCheck_given_w_expect_pass(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//operandFlagCheck function test/////////////////////////////////////////////////////////
+//operandFlagCheck check the flag and the operand type
+// it throw exception when the operand is unsupported
 void test_operandFlagCheck_given_X_expect_pass_flags(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -495,7 +537,7 @@ void test_operandFlagCheck_given_X_expect_fail_on_flags(void) {
     freeTokenizer(tokenizer);
 }
 
-
+//operandCheck function test/////////////////////////////////////////////////////////
 /*operandCheck return value as it detect which symbol
 as the condition that bring inside this module is
 when condition is 2 means it support X Y SP A
@@ -688,6 +730,7 @@ void test_operandCheck_given_22_expect_to_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
+//valueCheck function test/////////////////////////////////////////////////////////
 //valueCheck is used to check is this value ls or ms
 // ls will return 1 (<256)
 // ms will return 2 (>256)
@@ -901,7 +944,8 @@ void test_valueCheck_given_z_expect_fail(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//createOperand function test/////////////////////////////////////////////////////////
+// used to generate stm8Operand* type by putting all the data required
 void test_createOperand_given_SHORTOFFX90_SHORTOFF_X_OPERAND_with_0x90(void) {
     stm8Operand *operand = NULL;
     Try{
@@ -935,7 +979,9 @@ void test_createOperand_given_EXTOFFX903133_expect_EXTOFF_X_OPERAND_with_0x90313
       TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }
 }
-
+//createLsOperand function test/////////////////////////////////////////////////////////
+// used to generate stm8Operand* type by putting operandType , value and token
+// this is used for value that is less than 256
 void test_createLsOperand_given_hash12_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1003,7 +1049,11 @@ void test_createLsOperand_given_hash100_expect_exception(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//createMsOperand function test/////////////////////////////////////////////////////////
+// used to generate stm8Operand* type by putting operandType , value and token
+// this is used for value that is larger than 256 and less than 65536
+// this createMsOperand also used for short operand eg SHORT_MEM_OPERAND
+// SHORTOFF_X_OPERAND SHORTOFF_Y_OPERAND when only Long operand is supported
 void test_createMsOperand_given_hashFFFF_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1071,7 +1121,12 @@ void test_createMsOperand_given_hash100000_expect_exception(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//createExtMemOperand function test/////////////////////////////////////////////////////////
+// used to generate stm8Operand* type by putting operandType , value and token
+// this is used for value that is larger than 65535 and less than 0xFFFFFF
+// this createMsOperand also used for short and long operand eg SHORT_MEM_OPERAND
+// SHORTOFF_X_OPERAND SHORTOFF_Y_OPERAND LONGOFF_Y_OPERAND
+//when only extended operand is supported
 void test_createExtMemOperand_given_hashFFFFFF_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1121,9 +1176,30 @@ void test_createExtMemOperand_given_0_expect_pass(void) {
     }
     freeTokenizer(tokenizer);
 }
-// this comparingLastOperand is used on operandHandleRoundBracket which handle (complex , symbol)
-//complex can be squarebracket type , memory type and symbol eg X , Y ,SP
-void test_comparingLastOperand_given_0_expect_pass(void) {
+
+void test_createExtMemOperand_given_hash1FFFFFF_expect_exception(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    int a;
+
+    Try{
+        tokenizer = createTokenizer("$1ffffff");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        operand = createExtMemOperand(EXT_MEM_OPERAND, token->value,token);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+    }
+    freeTokenizer(tokenizer);
+}
+//comparingLastOperand function test/////////////////////////////////////////////////////////
+// this comparingLastOperand is only used on operandHandleRoundBracket which handle (complex , symbol)
+//complex can be squarebracket type , memory type and symbol eg SHORTPTR_DOT_W_BRACKETEDX_OPERAND
+// LONGPTR_DOT_E_BRACKETEDX_OPERAND and etc
+// it will check the last operand and compare and return the relevant operand
+void test_comparingLastOperand_given_shortoffX_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
     IntegerToken *token ;
@@ -1137,8 +1213,10 @@ void test_comparingLastOperand_given_0_expect_pass(void) {
         //get token for integer value
         tokenValue = (IntegerToken *)getToken(tokenizer);
         value = tokenValue -> value;
+        TEST_ASSERT_EQUAL_UINT16(0x12, value);
         //check value is which short,long or ext
         valueCount = valueCheck(tokenValue);
+        TEST_ASSERT_EQUAL_INT(1, valueCount);
         //commarCheck
         commarCheck(tokenizer);
         //compare the condition and return operand .squareCount zero due to no squarebracket
@@ -1148,6 +1226,42 @@ void test_comparingLastOperand_given_0_expect_pass(void) {
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
         TEST_ASSERT_EQUAL_UINT16(0x12, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpTokenErrorMessage(ex, __LINE__);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_comparingLastOperand_given_shortoffY21_expect_pass(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+    IntegerToken *token ;
+    IntegerToken *tokenValue ;
+    int value;
+    int valueCount;
+    Try{
+        tokenizer = createTokenizer("($21,Y)");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        token = (IntegerToken *)getToken(tokenizer);
+        //get token for integer value
+        tokenValue = (IntegerToken *)getToken(tokenizer);
+        value = tokenValue -> value;
+        TEST_ASSERT_EQUAL_UINT16(0x21, value);
+        //check value is which short,long or ext
+        valueCount = valueCheck(tokenValue);
+        TEST_ASSERT_EQUAL_INT(1, valueCount);
+        //commarCheck
+        commarCheck(tokenizer);
+        //compare the condition and return operand .squareCount zero due to no squarebracket
+        operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,0);
+        TEST_ASSERT_NOT_NULL(operand);
+        TEST_ASSERT_EQUAL_UINT16(SHORTOFF_Y_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(0x21, operand->dataSize.ms);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
     } Catch(ex) {
@@ -1170,7 +1284,6 @@ void test_comparingLastOperand_given_shortptrw_Y_expect_pass(void) {
         token = (IntegerToken *)getToken(tokenizer);
         //get operand for squarebracket
         operand=operandHandleSquareBracket(tokenizer,ALL_OPERANDS);
-        //check value is which short,long
         valueCount = 1;
         value = operand->dataSize.ms;
         //commarCheck
@@ -1208,6 +1321,7 @@ void test_comparingLastOperand_given_longptre_X_expect_pass(void) {
         //valueCount is long mem
         valueCount = 2;
         value = (operand->dataSize.ms << 8) | operand->dataSize.ls;
+        TEST_ASSERT_EQUAL_UINT16(0x0022, value);
         //commarCheck
         commarCheck(tokenizer);
         //compare the condition and return operand .valueCount 2 is for long
@@ -1227,24 +1341,7 @@ void test_comparingLastOperand_given_longptre_X_expect_pass(void) {
     freeTokenizer(tokenizer);
 }
 
-void test_createExtMemOperand_given_hash1FFFFFF_expect_exception(void) {
-    stm8Operand *operand = NULL;
-    Tokenizer *tokenizer = NULL;
-    IntegerToken *token ;
-    int a;
-
-    Try{
-        tokenizer = createTokenizer("$1ffffff");
-        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-        token = (IntegerToken *)getToken(tokenizer);
-        operand = createExtMemOperand(EXT_MEM_OPERAND, token->value,token);
-    } Catch(ex) {
-        dumpTokenErrorMessage(ex, __LINE__);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
-    }
-    freeTokenizer(tokenizer);
-}
-
+//operandHandleFirstSymbol function test/////////////////////////////////////////////////////////
 // this operandHandleFirstSymbol supports A ,XL ,YL ,X ,Y ,SP ,YH ,XH ,CC operand
 //which return stm8Operands
 void test_operandHandleFirstSymbol_given_X_expect_X_OPERAND(void) {
@@ -1311,7 +1408,9 @@ void test_operandHandleFirstSymbol_given_Z_expect_exception(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+//operandHandleHash function test/////////////////////////////////////////////////////////
+//operandHandleHash will handle and return hash operand eg BYTE_OPERAND , WORD_OPERAND
+//it will throw exception if unsupported flag, invalid value and etc
 void test_operandHandleHash_given_hashbyte_with_flag_support_expect_byte_OPERAND(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1451,6 +1550,10 @@ void test_operandHandleHash_given_hash_negative_word_expect_error(void) {
     }
     freeTokenizer(tokenizer);
 }
+//operandHandleValue function test/////////////////////////////////////////////////////////
+//operandHandleValue will handle value operand and return eg EXT_MEM_OPERAND , SHORT_MEM_OPERAND
+//and LONG_MEM_OPERAND
+//it will throw exception if unsupported flag, invalid value and etc
 void test_operandHandleValue_given_shortmem_with_flag_support_expect_shortmem_OPERAND(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1717,7 +1820,9 @@ void test_operandHandleValue_given_neg_shortmem_without_flag_support_expect_fail
     }
     freeTokenizer(tokenizer);
 }
-
+//operandHandleSquareBracket function test/////////////////////////////////////////////////////////
+//operandHandleSquareBracket will handle and return square bracket operand with value eg BRACKETED_SHORTPTR_DOT_W_OPERAND
+//it will throw exception if invalid syntax on square operand and etc
 void test_operandHandleSquareBracket_given_hex12_shortptrw_with_flag_support_expect_shortptrw_OPERAND(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1956,7 +2061,9 @@ void test_operandHandleSquareBracket_given_unsupportedflag_shortoff_dote_expect_
     }
     freeTokenizer(tokenizer);
 }
-
+//operandHandleRoundBracket function test/////////////////////////////////////////////////////////
+//operandHandleRoundBracket will handle and return round bracket operand with value eg BRACKETED_X_OPERAND
+//it will throw exception if invalid syntax on round operand such as closing bracket missing, commar ,etc
 void test_operandHandleRoundBracket_given_bracX_with_flag_support_expect_bracX_OPERAND(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;

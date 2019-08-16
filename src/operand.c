@@ -465,9 +465,12 @@ stm8Operand *operandHandleHash(Tokenizer* tokenizer ,uint64_t flags){
 stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags){
     stm8Operand *operand =malloc(sizeof(stm8Operand));
     IntegerToken * token;
+    IntegerToken * initToken;
+    IntegerToken * flagToken;
     int valueShortMem;
     int valueCount;
     token =(IntegerToken*)getToken(tokenizer);
+    initToken = token;
     valueCount = valueCheck(token);
     if(valueCount ==1 && isOperandNeeded(flags,SHORT_MEM_OPERAND)){
         operandFlagCheck(flags,token,SHORT_MEM_OPERAND);
@@ -488,9 +491,12 @@ stm8Operand *operandHandleValue(Tokenizer* tokenizer ,uint64_t flags){
           operand = createExtMemOperand(EXT_MEM_OPERAND,token->value,token);
     }
     else if(valueCount ==4){
-        operandFlagCheck(flags,token,SHORT_OFF_OPERAND);
         pushBackToken(tokenizer, (Token*)token);
         valueShortMem = signedIntCheck(tokenizer);
+        token =(IntegerToken*)getToken(tokenizer);
+        flagToken = extendTokenStr(initToken ,token);
+        operandFlagCheck(flags,flagToken,SHORT_OFF_OPERAND);
+        pushBackToken(tokenizer, (Token*)token);
         operand = createLsOperand(SHORT_OFF_OPERAND,valueShortMem,token);
     }
     else{
@@ -520,10 +526,12 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
             valueCount = valueCheck(token);
             valueBracToken = token;
         }
+        else if (token->str[0]=='-'){
+            throwException(ERR_INTEGER_NEGATIVE,token,"Expected only positive value eg [$77.w]");
+        }
         else{
             throwException(ERR_INVALID_SYNTAX,token,"Expected only value eg [$77.w]");
         }
-        freeToken(token);
         token = (IntegerToken *)getToken(tokenizer);
         nullCheck(ERR_INVALID_SYNTAX,token,"Expected . after value");
         if(strcmp(token->str,".")==0){
@@ -556,7 +564,6 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                 }
             }
             else if(strcasecmp(token->str,"e")==0){
-                freeToken(token);
                 token = (IntegerToken *)getToken(tokenizer);
                 nullCheck(ERR_INVALID_SYNTAX,token,"Expected ] closing squarebracket");
                 if(strcmp(token->str,"]")==0){
@@ -592,6 +599,9 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                 throwException(ERR_INTEGER_TOO_LARGE,valueBracToken,"value too large expected less than 65535");
             }
             else if(valueCount ==4){
+                throwException(ERR_INTEGER_TOO_SMALL,valueBracToken,"Expected value too small expected positive value ");
+            }
+            else{
                 throwException(ERR_INTEGER_TOO_SMALL,valueBracToken,"Expected value too small expected positive value ");
             }
         }
@@ -701,7 +711,7 @@ stm8Operand *getOperand(Tokenizer *tokenizer , uint64_t flags){
 
       token =(IntegerToken*)getToken(tokenizer);
       initToken = token;
-      nullCheck(ERR_DSTSRC_NULL,token,"The must include the source");
+      nullCheck(ERR_DSTSRC_NULL,token,"Source is NULL");
       pushBackToken(tokenizer, (Token*)token);
       if(isalpha(token->str[0])){
           operand = operandHandleFirstSymbol(tokenizer, flags);

@@ -38,7 +38,7 @@ void tearDown(void){}
 *can refer STM8 instruction set for more information
 **/
 
-//AND testing ////////////////////////////////////////////////////////////////////////////////////////////
+//AND instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_AND_byte_expect_0xa421(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -346,7 +346,7 @@ void test_assembleInstruction_given_and_A_longmem_OPERAND_expect_0xc45133(void) 
     freeTokenizer(tokenizer);
 }
 
-//OR testing ////////////////////////////////////////////////////////////////////////////////////////////
+//OR instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_or_BYTE_OPERAND_expect_0xaa44(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -661,7 +661,7 @@ void test_assembleInstruction_given_or_expect_exception(void) {
     freeTokenizer(tokenizer);
 }
 
-//xOR testing ////////////////////////////////////////////////////////////////////////////////////////////
+//xOR instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_xor_BYTE_OPERAND_expect_0xa844(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1011,7 +1011,7 @@ void test_assembleInstruction_given_xor_w_operand_expect_exception(void) {
     freeTokenizer(tokenizer);
 }
 
-//cPL test /////////////////////////////////////////////////////////////////////////////////
+//cPL instruction test /////////////////////////////////////////////////////////////////////////////////
 void test_assembleInstruction_given_cpl_A_OPERAND_expect_0x43(void) {
     MachineCode *mcode =NULL ;
     Tokenizer *tokenizer = NULL;
@@ -1338,7 +1338,7 @@ void test_assembleInstruction_given_cpl_extmemY_operand_expect_exception(void) {
     freeTokenizer(tokenizer);
 }
 
-///////////CPLW OPERAND////////////////////////////////////////////////////////////
+//CPLW instruction test////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_cplw_X_OPERAND_expect_0x53(void) {
     MachineCode *mcode =NULL ;

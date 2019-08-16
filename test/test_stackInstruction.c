@@ -37,7 +37,7 @@ void tearDown(void){}
 *can refer STM8 instruction set for more information
 **/
 
-//PUSH testing ////////////////////////////////////////////////////////////////////////////////////////////
+//PUSH instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_push_A_OPERAND_expect_0x88(void) {
     MachineCode *mcode =NULL ;
@@ -135,7 +135,7 @@ void test_assembleInstruction_given_push_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_DSTSRC_NULL, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -151,13 +151,13 @@ void test_assembleInstruction_given_push_X_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
 }
 
-//POP testing ////////////////////////////////////////////////////////////////////////////////////////////
+//POP instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_pop_A_OPERAND_expect_0x84(void) {
     MachineCode *mcode =NULL ;
@@ -219,13 +219,13 @@ void test_assembleInstruction_given_pop_extmem_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
 }
 
-//PUSHW testing ////////////////////////////////////////////////////////////////////////////////////////////
+//PUSHW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_pushw_x_OPERAND_expect_0x89(void) {
     MachineCode *mcode =NULL ;
@@ -273,7 +273,7 @@ void test_assembleInstruction_given_push_shortmem_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_UNSUPPORTED_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -289,13 +289,13 @@ void test_assembleInstruction_given_pushw_X_commar_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
 }
 
-//POPW testing ////////////////////////////////////////////////////////////////////////////////////////////
+//POPW instruction test ////////////////////////////////////////////////////////////////////////////////////////////
 
 void test_assembleInstruction_given_popw_x_OPERAND_expect_0x85(void) {
     MachineCode *mcode =NULL ;
@@ -341,7 +341,7 @@ void test_assembleInstruction_given_popw_X_commar_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
     }
     freeTokenizer(tokenizer);
@@ -357,7 +357,7 @@ void test_assembleInstruction_given_popw_f_expect_fail(void) {
         mcode = assembleInstruction(tokenizer);
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
-        dumpTokenErrorMessage(ex, 416);
+        dumpTokenErrorMessage(ex, __LINE__);
         TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode);
     }
     freeTokenizer(tokenizer);
