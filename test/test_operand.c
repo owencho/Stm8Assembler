@@ -16,8 +16,8 @@ void setUp(void) {}
 void tearDown(void) {}
 
 /*
-* This is assembleAllInstruction test file which test
-* all the assembleAllInstruction eg notNullCheck, getDataFlag,commarCheck
+* This is operand test file which test
+* all the operand function eg symbolOperandCheck
 * bitOperationCheck and more..
 *
 **/
