@@ -18,7 +18,7 @@ void tearDown(void) {}
 /*
 * This is operand test file which test
 * all the operand function eg symbolOperandCheck
-* bitOperationCheck and more..
+* 
 *
 **/
 
