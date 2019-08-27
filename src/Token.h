@@ -6,6 +6,11 @@
 #include "CException.h"
 #include "Exception.h"
 
+
+#define dumpErrorMessage(exception)                      \
+                          dumpTokenErrorMessage(exception, __LINE__)
+
+
 typedef enum {
   TOKEN_UNKNOWN_TYPE,
   TOKEN_NULL_TYPE,
@@ -89,4 +94,3 @@ void freeToken(void *token);
 void dumpTokenErrorMessage(CEXCEPTION_T ex, int lineNo);
 
 #endif // Token_H
-

@@ -1,7 +1,7 @@
 #ifndef CustomAssert_H
 #define CustomAssert_H
 #include "unity.h"
-#include "instruction.h"
+#include "Instruction.h"
 
 #define MAX_CODE_LENGTH  10
 
