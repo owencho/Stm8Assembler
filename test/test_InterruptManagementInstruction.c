@@ -31,7 +31,7 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is interruptManagementInstruction test file which test
+* This is InterruptManagementInstruction test file which test
 *  TRAP WFI HALT IRET  INT instruction
 * these instruction supports no operand except INT supports one operand
 * can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information

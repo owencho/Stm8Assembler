@@ -66,6 +66,7 @@ void test_customAssert_given_length5_machineCode_to_Compare_with_expectedMcode_e
     freeTokenizer(tokenizer);
     freeMachineCode(mcode);
 }
+
 void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_expect_pass(void) {
     MachineCode *mcode ;
     mcode=malloc(sizeof(MachineCode)+1+4);
@@ -164,6 +165,7 @@ void test_customAssert_given_length4_machineCode_to_Compare_with_expectedMcode_w
     Try{
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode); //Ceedling will generate error as length is 4
                                                             // but exist 5 expectedCode
+    }Catch(ex) {
         dumpErrorMessage(ex);
         TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
     }

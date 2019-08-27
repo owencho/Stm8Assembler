@@ -31,10 +31,9 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is conditionCodeFlagModificationInstruction test file which test
+* This is ConditionCodeFlagModificationInstruction test file which test
 *  SIM RIM SCF RCF CCF RVF
 * these instruction supports no operand
-*
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

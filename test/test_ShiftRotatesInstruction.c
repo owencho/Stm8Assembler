@@ -32,7 +32,7 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is shiftRotatesInstruction test file which test
+* This is ShiftRotatesInstruction test file which test
 * SLL SRL SRA RLC RRC SWAP SLLW SRLW SRAW RLCW RRCW
 * SLAW SWAPW RLWA RRWA instruction
 * these instruction supports one operand

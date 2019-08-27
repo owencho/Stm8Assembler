@@ -16,10 +16,12 @@ void setUp(void) {}
 void tearDown(void) {}
 
 /*
-* This is operand test file which test
-* all the operand function eg symbolOperandCheck
-*
-*
+* This is Operand.c test file which test all the operand function
+* symbolOperandCheck ,squareBracketFlagCheck
+* signedIntCheck, extendTokenStr, nullCheck ,operandFlagCheck ,operandCheck,
+* valueCheck,createOperand,createLsOperand,createMsOperand,createExtMemOperand,
+* comparingLastOperand, operandHandleFirstSymbol,operandHandleHash ,operandHandleValue
+* operandHandleSquareBracket ,operandHandleRoundBracket
 **/
 
 //symbolOperandCheck function test/////////////////////////////////////////////////////////
@@ -188,7 +190,7 @@ void test_symbolOperandCheck_given_z_expect_fail(void) {
 }
 //squareBracketFlagCheck function test/////////////////////////////////////////////////////////
 //squareBracketFlagCheck will check the flag and throw if flag is not Supported
-// only applicable on squareBracket
+// only applicable on squareBracket operand
 void test_squareBracketFlagCheck_given_shortptrw_expect_pass(void) {
     Tokenizer *tokenizer = NULL;
     IntegerToken * token;
@@ -198,6 +200,7 @@ void test_squareBracketFlagCheck_given_shortptrw_expect_pass(void) {
         tokenizer = createTokenizer("  [$22] ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
+         //getToken for "[" to be push back token for squareBracketFlagCheck
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
         pushBackToken(tokenizer,(Token*)token);
@@ -219,6 +222,7 @@ void test_squareBracketFlagCheck_given_longptrw_expect_pass(void) {
         tokenizer = createTokenizer("  [$2222] ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
+        //getToken for "[" to be push back token for squareBracketFlagCheck
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
         pushBackToken(tokenizer,(Token*)token);
@@ -240,6 +244,7 @@ void test_squareBracketFlagCheck_given_longptre_expect_pass(void) {
         tokenizer = createTokenizer("  [$2222.e] ");
         configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
         token = (IntegerToken *)getToken(tokenizer);
+        //getToken for "[" to be push back token for squareBracketFlagCheck
         pushBackToken(tokenizer,(Token*)token);
         operand = getOperand(tokenizer,ALL_OPERANDS);
         pushBackToken(tokenizer,(Token*)token);
@@ -340,7 +345,8 @@ void test_signedIntCheck_given_hash80_expect_fail(void) {
         value = signedIntCheck(tokenizer);
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode); // throw due to signed int is 0x7F to -0x80
+        TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode);
+        // throw exception due to signed int is 0x7F to -0x80
     }
     freeTokenizer(tokenizer);
 }
@@ -410,7 +416,8 @@ void test_signedIntCheck_given_hashneg81_expect_fail(void) {
         value = signedIntCheck(tokenizer);
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode); // throw due to signed int is 0x7F to -0x80
+        TEST_ASSERT_EQUAL(ERR_INVALID_SIGNEDINT_VALUE, ex->errorCode);
+        // throw exception due to signed int is only valid on (0x7F to -0x80)
     }
     freeTokenizer(tokenizer);
 }
@@ -907,7 +914,8 @@ void test_valueCheck_given_123456679_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode); //exception throw as value more than ext memory
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+         //exception throw as value more than ext memory
     }
     freeTokenizer(tokenizer);
 }
@@ -945,7 +953,8 @@ void test_valueCheck_given_z_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode); //throw as it is not a value
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        //throw as it is not a value
     }
     freeTokenizer(tokenizer);
 }
@@ -1206,7 +1215,7 @@ void test_createExtMemOperand_given_hash1FFFFFF_expect_exception(void) {
 // this comparingLastOperand is only used on operandHandleRoundBracket which handle (complex , symbol)
 //complex can be squarebracket type , memory type and symbol eg SHORTPTR_DOT_W_BRACKETEDX_OPERAND
 // LONGPTR_DOT_E_BRACKETEDX_OPERAND and etc
-// it will check the last operand and compare and return the relevant operand
+// it will check the last operand and compare and return the relevant operand and ms ls value
 void test_comparingLastOperand_given_shortoffX_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1278,7 +1287,7 @@ void test_comparingLastOperand_given_shortoffY21_expect_pass(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+// ($0,X) will return as BRACKETED_X_OPERAND instead of SHORTOFF_X_OPERAND
 void test_comparingLastOperand_given_shortmem0_bracX_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1302,7 +1311,7 @@ void test_comparingLastOperand_given_shortmem0_bracX_expect_pass(void) {
         //compare the condition and return operand .squareCount zero due to no squarebracket
         operand = comparingLastOperand(ALL_OPERANDS,token,tokenizer ,value,valueCount ,0);
         TEST_ASSERT_NOT_NULL(operand);
-        TEST_ASSERT_EQUAL_UINT16(BRACKETED_X_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(BRACKETED_X_OPERAND, operand->type); //expected BRACKETED_X_OPERAND
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
         TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
@@ -1314,7 +1323,7 @@ void test_comparingLastOperand_given_shortmem0_bracX_expect_pass(void) {
     }
     freeTokenizer(tokenizer);
 }
-
+// ($0,Y) will return as BRACKETED_Y_OPERAND instead of SHORTOFF_Y_OPERAND
 void test_comparingLastOperand_given_shortmem0_bracY_expect_pass(void) {
     stm8Operand *operand = NULL;
     Tokenizer *tokenizer = NULL;
@@ -1399,7 +1408,10 @@ void test_comparingLastOperand_given_longptrw_X_expect_pass(void) {
         //get operand for squarebracket
         operand=operandHandleSquareBracket(tokenizer,ALL_OPERANDS);
         valueCount = 2; //valueCount is long mem
-        value = (operand->dataSize.ms << 8) | operand->dataSize.ls;  //to combine and add both ms ls value together
+        value = (operand->dataSize.ms << 8) | operand->dataSize.ls;
+        TEST_ASSERT_EQUAL_UINT16(0x1212, value);
+        //to combine and add both ms ls value together as operandHandleSquareBracket
+        // will split 12 to ms and another 12 to ls
         //commarCheck
         commarCheck(tokenizer);
         //compare the condition and return operand .valueCount==2 is for longptr
@@ -1434,7 +1446,9 @@ void test_comparingLastOperand_given_longptre_X_expect_pass(void) {
         operand=operandHandleSquareBracket(tokenizer,ALL_OPERANDS);
         //valueCount is long mem
         valueCount = 2;
-        value = (operand->dataSize.ms << 8) | operand->dataSize.ls; //to combine and add both ms ls value together
+        value = (operand->dataSize.ms << 8) | operand->dataSize.ls;
+        //to combine and add both ms ls value together as operandHandleSquareBracket
+        // will split 00 to ms and another 22 to ls
         TEST_ASSERT_EQUAL_UINT16(0x0022, value);
         //commarCheck
         commarCheck(tokenizer);
@@ -2046,7 +2060,8 @@ void test_operandHandleSquareBracket_given_empty_square_brac_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode); // exception thrown due inside must have value or value.w /.e
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        // exception thrown due inside must have value or value.w /.e
     }
     freeTokenizer(tokenizer);
 }
@@ -2064,7 +2079,8 @@ void test_operandHandleSquareBracket_given_missing_we_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode); // exception thrown due to missing .w or .e
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        // exception thrown due to missing .w or .e
     }
     freeTokenizer(tokenizer);
 }
@@ -2082,7 +2098,8 @@ void test_operandHandleSquareBracket_given_missing_closing_bracket_expect_fail(v
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode); // exception thrown due to missing closing bracket
+        TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        // exception thrown due to missing closing bracket
     }
     freeTokenizer(tokenizer);
 }
@@ -2100,7 +2117,8 @@ void test_operandHandleSquareBracket_given_extmem_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode); //exception thrown due to it doesnt support extmem ptr
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+        //exception thrown due to it doesnt support extmem ptr
     }
     freeTokenizer(tokenizer);
 }
@@ -2117,7 +2135,8 @@ void test_operandHandleSquareBracket_given_extmem_dote_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);  //exception thrown due to it doesnt support extmem ptr
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+        //exception thrown due to it doesnt support extmem ptr on .e
     }
     freeTokenizer(tokenizer);
 }
@@ -2135,7 +2154,8 @@ void test_operandHandleSquareBracket_given_extmem_withoutdot_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);  //exception thrown due to it doesnt support extmem ptr
+        TEST_ASSERT_EQUAL(ERR_INTEGER_TOO_LARGE, ex->errorCode);
+        //exception thrown due to it doesnt support extmem ptr
     }
     freeTokenizer(tokenizer);
 }
@@ -2153,7 +2173,8 @@ void test_operandHandleSquareBracket_given_neg_shortoff_dote_expect_fail(void) {
         TEST_FAIL_MESSAGE("Expecting exeception to be thrown.");
     } Catch(ex) {
         dumpErrorMessage(ex);
-        TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode); //exception thrown due to it doesnt support negative value
+        TEST_ASSERT_EQUAL(ERR_INTEGER_NEGATIVE, ex->errorCode);
+        //exception thrown due to it doesnt support negative value
     }
     freeTokenizer(tokenizer);
 }
@@ -2282,6 +2303,53 @@ void test_operandHandleRoundBracket_given_bracketed_213b4e_X_expect_EXTOFF_X_OPE
     freeTokenizer(tokenizer);
 }
 
+void test_operandHandleRoundBracket_given_bracketed_0_X_expect_BRACKETED_X_OPERAND_(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+
+    Try {
+        tokenizer = createTokenizer("  ($0,X) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        operand = operandHandleRoundBracket(tokenizer,ALL_OPERANDS);
+        TEST_ASSERT_NOT_NULL(operand);
+        TEST_ASSERT_EQUAL_UINT16(BRACKETED_X_OPERAND, operand->type);
+        // ($0,X) will return as BRACKETED_X_OPERAND instead of SHORTOFF_X_OPERAND
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpErrorMessage(ex);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+void test_operandHandleRoundBracket_given_bracketed_0_Y_expect_BRACKETED_Y_OPERAND_(void) {
+    stm8Operand *operand = NULL;
+    Tokenizer *tokenizer = NULL;
+
+    Try {
+        tokenizer = createTokenizer("  ($0,Y) ");
+        configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+        operand = operandHandleRoundBracket(tokenizer,ALL_OPERANDS);
+        TEST_ASSERT_NOT_NULL(operand);
+        // ($0,Y) will return as BRACKETED_Y_OPERAND instead of SHORTOFF_Y_OPERAND
+        TEST_ASSERT_EQUAL_UINT16(BRACKETED_Y_OPERAND, operand->type);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extCode);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.code);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ms);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.ls);
+        TEST_ASSERT_EQUAL_UINT16(NA, operand->dataSize.extB);
+    } Catch(ex) {
+        dumpErrorMessage(ex);
+        TEST_FAIL_MESSAGE("Do not expect any exception to be thrown");
+    }
+    freeTokenizer(tokenizer);
+}
+
+
 void test_operandHandleRoundBracket_given_881_bracX_expect_error(void) {
     CEXCEPTION_T ex;
     stm8Operand *operand = NULL;
@@ -2398,6 +2466,7 @@ void test_operandHandleRoundBracket_given_bracZ_expect_invalid_OPERAND(void) {
     } Catch(ex) {
         dumpErrorMessage(ex);
         TEST_ASSERT_EQUAL(ERR_INVALID_SYNTAX, ex->errorCode);
+        //z is invalid operand which will throw Exception
     }
     freeTokenizer(tokenizer);
 }

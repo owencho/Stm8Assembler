@@ -19,8 +19,8 @@ void tearDown(void) {}
 * This is getOperand test file which test
 * getOperand function
 * this getOperand take the token and check the operand
-* it returns stm8Type , extCode, code,extB
-*  ms, ls ,extB
+* it returns stm8Type eg A_OPERAND and
+* extCode, code, ms, ls ,extB
 **/
 
 

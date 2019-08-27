@@ -32,9 +32,8 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is logicalOperationsInstruction test file which test
+* This is LogicalOperationsInstruction test file which test
 * AND OR XOR CPL CPLW instruction
-*
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

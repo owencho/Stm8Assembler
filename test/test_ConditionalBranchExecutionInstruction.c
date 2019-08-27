@@ -31,9 +31,9 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is conditionalBranchExecutionInstruction test file which test
+* This is ConditionalBranchExecutionInstruction test file which test
 * All JRxx instruction except JRF and JRT
-* this JRXX supports short_off operand which includes
+* this JRXX supports only short_off operand which includes
 * negative and positive value (-128 <= x <= 127)
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/

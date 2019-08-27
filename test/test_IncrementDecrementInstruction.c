@@ -32,7 +32,7 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is incrementDecrementInstruction test file which test
+* This is IncrementDecrementInstruction test file which test
 * INC DEC INCW DECW
 * these instruction supports one operand
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information

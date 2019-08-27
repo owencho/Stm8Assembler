@@ -31,7 +31,7 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 /*
-* This is stackInstruction test file which test
+* This is StackInstruction test file which test
 * PUSH POP PUSHW POPW
 * these instruction supports one operand
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information

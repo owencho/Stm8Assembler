@@ -33,9 +33,8 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is breakPointInstruction test file which test
+* This is BreakPointInstruction test file which test
 * break instruction
-*
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

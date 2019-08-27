@@ -32,9 +32,10 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is unconditionalJumpCallInstruction test file which test
+* This is UnconditionalJumpCallInstruction test file which test
 * JRA JRT JRF JP JPF CALL CALLR CALLF RET RETF NOP
 * these instruction supports one operand
+* JRA, JRT, JRF ,callr instruction supports SHORT_OFF_OPERAND (-128 <= x <= 127)
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

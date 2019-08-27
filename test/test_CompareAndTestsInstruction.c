@@ -32,9 +32,8 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is compareAndTestsInstruction test file which test
+* This is CompareAndTestsInstruction test file which test
 * CP , TNZ , BCP , CPW and TNZW instruction
-*
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

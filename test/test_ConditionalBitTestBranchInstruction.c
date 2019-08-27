@@ -32,10 +32,11 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is conditionalBitTestBranchInstruction test file which test
+* This is ConditionalBitTestBranchInstruction test file which test
 * BTJT and BTJF instruction
 * this both instruction support the third operand as short_off operand which supports
 * negative and positive value (-128 <= x <= 127)
+* (BTJF $6810,#7,loop) english like address for third operand are NOT SUPPORTED
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 

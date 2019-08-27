@@ -31,7 +31,7 @@ void setUp(void){}
 void tearDown(void){}
 
 /*
-* This is loadTransferInstruction test file which test
+* This is LoadTransferInstruction test file which test
 * LD LDF CLR MOV EXG LDW CLRW EXGW
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/

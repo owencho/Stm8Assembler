@@ -31,9 +31,9 @@ CEXCEPTION_T ex;
 void setUp(void){}
 void tearDown(void){}
 /*
-* This is bitOperationInstruction test file which test
+* This is BitOperationInstruction test file which test
 * BSET , BRES , BCPL , BCCM
-*
+* which all support two complex operand with longmem, byte operand
 *can refer STM8 instruction set (docs\PM0044Programmingmanual.pdf) for more information
 **/
 
