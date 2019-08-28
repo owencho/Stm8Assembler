@@ -906,6 +906,8 @@ void test_MachineCodeAllocateOutput_given_mov_expect_pass(void) {
         TEST_ASSERT_EQUAL_HEX8(0x13, operand->dataSize.ls); //ls will be ms bit of the dst value
         TEST_ASSERT_EQUAL_HEX8(0x10, operand->dataSize.extB); //extB will be ls bit of the dst value
         //expected LONG_MEM_OPERAND as dst and src both are LONG_MEM_OPERAND
+        // if both dst and src are LONG_MEM_OPERAND on mov instruction
+        // msb value of src will bringing in as a parameter movMs2ndOpValue into machineCodeAllocateOutput
         //get machine code with machineCodeAllocateOutput with movMs2ndOpValue
         mcode = machineCodeAllocateOutput(tokenizer,dataFlag ,operand, NA ,src->dataSize.ms);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode);  //expected 0x5512001310
@@ -947,8 +949,9 @@ void test_MachineCodeAllocateOutput_given_bset_longmem_hash_expect_pass(void) {
         commarCheck(tokenizer);
         // get nvalue on this second byte value
         nvalue = hashNValueReturn(tokenizer ,bitOpCheck);
-        TEST_ASSERT_EQUAL_INT(2,nvalue);  // expected 2 as 2*1
+        TEST_ASSERT_EQUAL_INT(2,nvalue);  // expected 2 as 2*n and n is 1
         // get MachineCode with bringing in the nvalue and operand
+        // movMs2ndOpValue will be NA when is not using for mov instruction
         mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,nvalue,NA);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode); //expected 0x72121000
     } Catch(ex) {
@@ -983,7 +986,8 @@ void test_MachineCodeAllocateOutput_given_jp_longmem_expect_pass(void) {
         // getDataFlag on this LONG_MEM_OPERAND
         dataFlag = getDataFlag(&jpCodeInfo,tokenizer,operand);
         TEST_ASSERT_EQUAL_UINT16(LONG_MEM_OPERAND, dataFlag.type);
-        // get MachineCode with bringing in the nvalue
+        // movMs2ndOpValue will be NA when is not using for mov instruction
+        // nvalue will be NA when is not using for special function with n value
         mcode=machineCodeAllocateOutput(tokenizer,dataFlag ,operand,NA,NA);
         TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode); //expected 0xCC1000
     } Catch(ex) {
