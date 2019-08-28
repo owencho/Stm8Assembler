@@ -38,7 +38,7 @@ ceedling                    # Build the STM8Assembler project
 
 ```
 ## STM8 Instruction set
-
+![instructionsettable](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/STM8InsSet.PNG)\
 
 Note: each different instruction group have different source file, header file and test file inside this repository.
 
