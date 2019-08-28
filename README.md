@@ -1,9 +1,9 @@
 # Stm8Assembler
 ## Introduction
 This is STM8Assembler which convert STM8 assembly language into STM8 machine code.
-The main function for this STM8Assmbler is getInstruction() function which return the machine mode when user pass in the assembly language code into the function.
+The main function for this STM8Assmbler is `getInstruction()` function which return the machine mode when user pass in the assembly language code into the function.
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
-The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all instruction details. 
+The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
 ## Requirement
 The following software need to be installed on your PC
@@ -35,20 +35,21 @@ Remember to **clobber and rebuild the project** by using the command below after
 ```
 ceedling clobber            # clobber / clean all generated file
 ceedling                    # Build the STM8Assembler project
-
 ```
-## STM8 Instruction set
-![instructionsettable](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/STM8InsSet.PNG)\
-
-Note: each different instruction group have different source file, header file and test file inside this repository.
-
 ## Testing the program
-You can test the program by issuing  `ceedling test:all ` command on Git Bash.
+You can test this STM8Assembler by issuing  `ceedling test:all ` command on Git Bash.
+
+
+## STM8 Instruction set
+![instructionsettable](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/STM8InsSet.PNG) 
+
+Note: each different instruction group have different source file, header file and test file in this repository.
+
 
 ## Note
 1. For instruction that is relative jump or relative call function
-  - It **doesnt support word jump** eg `BTJT $1000,#1,loop` , the word jump label are not supported \
-    and it **only support value jump** eg `BTJF $6810,#7,$11`
+  - It **DOES NOT support word jump** eg `BTJT $1000,#1,loop` , the word jump label are not supported \
+    and it **ONLY support value jump** eg `BTJF $6810,#7,$11`
     
   - The output machine code for the address will be value of`destination hex value + machine code length` \
     instead of `Program Counter + destination hex value` that stated inside the STM8 datasheet.
@@ -59,6 +60,7 @@ You can test the program by issuing  `ceedling test:all ` command on Git Bash.
 3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
 This function compares the difference between the expected machine code and the generated machine code which returned by the `getInstruction( ) `function. \
 This is CustomAssert test file is disabled default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
+
    
     
 
