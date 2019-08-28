@@ -51,8 +51,8 @@ Note: Each different instruction group have different source file, header file a
   - It **DOES NOT support word jump** eg `JRNE loop` , the word jump label are not supported \
     and it **ONLY support value jump** eg `JRNE $15`
     
-  - The output machine code for the address will be value of `destination hex value + machine code length` \
-    instead of `Program Counter + destination hex value` that stated inside the STM8 datasheet.
+  - The output machine code value for the address part will be value of `destination hex value + machine code length` \
+    instead of value with `Program Counter + destination hex value`.
 
 2. There is an extra instruction named *interrupt instruction* which does not belong to any instruction group are now placed under 
 **Interrupt Management** instruction group.
