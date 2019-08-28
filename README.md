@@ -15,11 +15,11 @@ The following software need to be installed on your PC
 
 
 ## How to clone the file from GitHUB
-The repository can be cloned by issuing the command below with GitBash.
+Stm8Assembler can be cloned by issuing the command below with GitBash.
 ```
 git clone https://github.com/owencho/Stm8Assembler
 ```
-Or you can download through STM8Assembler GitHUB repository webpage 
+Or you can download through STM8Assembler GitHub webpage 
 
 ![clonepic](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/cloneImage.PNG)
 
@@ -37,7 +37,7 @@ ceedling clobber          // clobber / clean all generated file
 ceedling                  // Build the STM8Assembler project
 ```
 ## Testing the program
-You can test this STM8Assembler by issuing  `ceedling test:all ` command on GitBash.
+You can test STM8Assembler by issuing  `ceedling test:all ` command on GitBash.
 
 
 ## STM8 Instruction set
