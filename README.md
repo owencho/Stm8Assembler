@@ -19,7 +19,9 @@ the repository can be cloned by issuing the command below with GitBash.
 ```
 git clone https://github.com/owencho/Stm8Assembler
 ```
-or you can download through STM8Assembler GitHUB repository webpage //add picture here
+or you can download through STM8Assembler GitHUB repository webpage 
+
+![clonepic](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/cloneImage.PNG)
 
 
 ## Updating the STM8Assembler
@@ -36,14 +38,14 @@ ceedling                    # Build the STM8Assembler project
 
 ```
 ## STM8 Instruction set
-//add picture here
+![instructionsettable](https://github.com/owencho/Stm8Assembler/blob/master/Resources/images/STM8InstructionSet.PNG)\
 Note: each different instruction group have different source file, header file and test file inside this repository.
 
 ## Testing the program
 You can test the program by issuing  `ceedling test:all ` command on Git Bash.
 
 ## Note
-1. For instruction that is relative jump or call function
+1. For instruction that is relative jump or relative call function
   - It **doesnt support word jump** eg `BTJT $1000,#1,loop` , the word jump label are not supported \
     and it **only support value jump** eg `BTJF $6810,#7,$11`
     
