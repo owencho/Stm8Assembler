@@ -1,44 +1,63 @@
 # Stm8Assembler
 ## Introduction
-This is STM 8 assembler function which convert STM 8 assembly code into STM8 machine code.
-The main function for this STM 8 assmbler is getInstruction() function which return the machine mode when user feed the assembly language code into the function.
-The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2] that created by [chaosAD](https://github.com/chaosAD).
-The format of the machine code is based on [1] which is PM0044.pdf file that has all instruction details. 
+This is STM8Assembler which convert STM8 assembly language into STM8 machine code.
+The main function for this STM8Assmbler is getInstruction() function which return the machine mode when user pass in the assembly language code into the function.
+The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
+The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all instruction details. 
 
-## Required software to execute this STM8Assembler
-1. Ceedling 
+## Requirement
+The following software need to be installed on your PC
+1. Ceedling (Ruby Gem)
 2. MSYS32/64
-3. Atom or other relevant editor **(For source code editing only)**
-4. Cosmic STM8 Software Development tools ([Software Link](https://www.cosmic-software.com/stm8.php))
-5. Git
-6. CodeLite **(For Debugging)**
-
+3. Ruby
+4. Git
+5. Cosmic STM8 Software Development tools ([Software Link](https://www.cosmic-software.com/stm8.php))
 
 
 ## How to clone the file from GitHUB
+the repository can be cloned by issuing the command below with GitBash.
 ```
 git clone https://github.com/owencho/Stm8Assembler
 ```
-or you can download from GitHUB webpage //add picture here
+or you can download through STM8Assembler GitHUB repository webpage //add picture here
 
 
 ## Updating the STM8Assembler
+If **STM8Assembler** has updates , the repository can be updated by issuing the command below with GitBash.
 ```
-cd Stm8Assembler  //if you are not inside the project folder
-git fetch         // to fetch the data from GitHUB
-git pull         // to pull the data and combine into the project folder
+cd Stm8Assembler  // if you are not inside the project folder
+git fetch         // to fetch the STM8Assembler update from the source 
+git pull          // to pull the update from the source
 ```
-**Recommended to update STM8Assembler to ensure best user experience and updated module**
+Remember to **clobber and rebuild the project** by using the command below after update.
+```
+ceedling clobber            # clobber / clean all generated file
+ceedling                    # Build the STM8Assembler project
 
+```
+## STM8 Instruction set
+//add picture here
+Note: each different instruction group have different source file, header file and test file inside this repository.
 
+## Testing the program
+You can test the program by issuing  `ceedling test:all ` command on Git Bash.
 
+## Note
+1. For instruction that is relative jump or call function
+  - It **doesnt support word jump** eg `BTJT $1000,#1,loop` , the word jump label are not supported \
+    and it **only support value jump** eg `BTJF $6810,#7,$11`
+    
+  - The output machine code for the address will be value of`destination hex value + machine code length` \
+    instead of `Program Counter + destination hex value` that stated inside the STM8 datasheet.
 
+2. There is an extra instruction named *interrupt instruction* which does not belong to any instruction group are now placed under 
+**Interrupt Management** instruction group.
 
-
-
-
-
-
+3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
+This function compares the difference between the expected machine code and the generated machine code which returned by the `getInstruction( ) `function. \
+This is CustomAssert test file is disabled default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
+   
+    
 
 
 
