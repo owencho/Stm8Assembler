@@ -161,7 +161,7 @@ For example error message generated on the Increment Decrement instruction group
 ## Note
 1. For instruction that is **relative jump or relative call function**
   - It **DOES NOT support word jump** eg `JRNE loop` , the word jump label are not supported \
-    and it **ONLY support value jump** eg `JRNE $15` \
+    and it **ONLY support value jump** eg `JRNE $21` \
 ![wordvaluejump](https://user-images.githubusercontent.com/51066670/63931591-2a90b380-ca88-11e9-8488-6179c65ec7df.PNG)    
   - The output machine code value for the address part will be value of `destination hex value + machine code length` \
     instead of value with `Program Counter + destination hex value`.
