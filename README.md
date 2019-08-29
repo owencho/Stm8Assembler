@@ -26,10 +26,11 @@ mcode = assembleInstruction(tokenizer);                    // run assembleInstru
 ## Requirement
 The following software need to be installed on your PC
 1. Ceedling 
-2. MSYS32/64
+2. MSYS2
 3. Ruby
 4. Git
 5. Cosmic STM8 Software Development tools 
+6. MINGW32/64
 
 
 ## How to clone the file from GitHUB
@@ -66,7 +67,24 @@ You can test STM8Assembler by issuing command below on GitBash.
 ```
 ceedling test:all 
 ```
-## Usage
+note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.
+
+If you are first time running this project test , please follow the instruction below to configure Project.yml before running it.
+1. ensure executable output `:executable: .exe` are remain as .exe ,so that it is easier to run the debugger by using IDE eg :CodeLite 
+2. You need to choose the library type depends on your gcc version for the tokenizer for test_linker \
+   remove the hash to choose the library and remember to add hash to other library version if not used.
+![lib](https://user-images.githubusercontent.com/51066670/63945479-f5935980-caa5-11e9-84e7-ddd99cc4fbc3.PNG)
+- -Llib/x86 is for user who are using x86 or 32bit PC
+- -Llib/x64_7_3_0 is for user who are using 64 bit PC with 7.3.0 gcc version installed
+- -Llib/x64_6_3_0 is for user who are using 64 bit PC with 6.3.0 gcc version installed
+- -Llib/x64_5_3_0 is for user who are using 64 bit PC with 5.3.0 gcc version installed
+- -Llib/x64_TDM_5_1_0 is for user who are using 64 bit PC \
+**Please use -Llib/x64_TDM_5_1_0 version if other version are not working**
+
+
+
+
+## Adding extra test
 By running the test, you can understand how this Stm8Assembler works \
 Here's a simple example code \
 For adding extra pass test,
@@ -150,6 +168,8 @@ _For all error code , please refer [here](https://github.com/owencho/Stm8Assembl
 3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
 This function compares the difference between the expected machine code and the generated machine code which returned by the **assembleInstruction** function. \
 This CustomAssert test file is disabled by default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
+This function will generate error message if detected difference between expected and generated machine code as shown below,
+![CustomAssert](https://user-images.githubusercontent.com/51066670/63946620-f75e1c80-caa7-11e9-986b-99bdf7d184a0.PNG)
 
 4. For the instruction at **Bit Operation and Conditional Bit Test Branch** instruction group  which required #pos value .
    #pos value only supports from 0 to 7 and it will throw exception and generate error message as below if value exceeded that range. \
