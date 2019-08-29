@@ -149,7 +149,7 @@ int hashNValueReturn(Tokenizer* tokenizer , int cmpType){
     if(!(operand->dataSize.ms >= 0 && operand->dataSize.ms <= 7)){
         pushBackToken(tokenizer,(Token*) token);
         token =(IntegerToken*)getToken(tokenizer);
-        throwException(ERR_INVALID_NVALUE,token,"Expected eg BCCM $1000,#n , n less than equal to 7 and positive");
+        throwException(ERR_INVALID_NVALUE,token,"expected #n, n less than equal to 7 and positive");
     }
     else if(cmpType ==2 ){
         nvalue = 1 + 2*operand->dataSize.ms;
