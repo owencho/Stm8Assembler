@@ -5,6 +5,18 @@ The main function for this STM8Assmbler is **getInstruction** function which ret
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
+## Objective
+- To read the STM 8 assembly language code and generate output with STM 8 machine code 
+
+## Important notes
+Before you implement this **getInstruction** function , tokenizer must be initialize with createTokenizer and configure the Tokenizer 
+to detect $12 as 0x12 value to ensure this function works properly
+```
+tokenizer = createTokenizer("  NEG A ");
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
+mcode = assembleInstruction(tokenizer);
+```
+
 ## Requirement
 The following software need to be installed on your PC
 1. Ceedling 
@@ -53,6 +65,8 @@ Note: Each different instruction group have different source file, header file a
     
   - The output machine code value for the address part will be value of `destination hex value + machine code length` \
     instead of value with `Program Counter + destination hex value`.
+    
+  - The address value are 8 bit signed integer which it only supports value from -128 to 127 (- $80 to $7F)
 
 2. There is an extra instruction named *interrupt instruction* which does not belong to any instruction group are now placed under 
 **Interrupt Management** instruction group.
@@ -60,6 +74,11 @@ Note: Each different instruction group have different source file, header file a
 3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
 This function compares the difference between the expected machine code and the generated machine code which returned by the **getInstruction** function. \
 This is CustomAssert test file is disabled default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
+
+4. For the instruction at Bit Operation and Conditional Bit Test Branch instruction group  which required #pos value .
+   #pos value only supports from 0 to 7 and it will throw exception and generate error message as below if value exceeded that range.
+   
+5. For LDW instruction , if the first operand of the code is a complex operand and second operand is a symbol operand which first operand and second operand is unsupported operand combination for this LDW instruction.This function will generate an exception which will highlight both of the operand and generate *Operand is unsupported!* message.
 
    
     
