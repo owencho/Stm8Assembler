@@ -12,17 +12,6 @@ The format of the machine code is based on [1] which is STM8 datasheet PM0044.pd
 - To read the STM 8 assembly language code and generate output with STM 8 machine code .
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
-## Getting Started
-Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
-Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
-
-The example code below shows how to create tokenizer and configure hex value for the tokenizer .
-```
-tokenizer = createTokenizer("  JRNC $31 ");                //create Tokenizer by passing in string with assembly code
-configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
-mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
-```
-
 ## Requirement
 The following software need to be installed on your PC
 1. Ceedling 
@@ -61,6 +50,16 @@ ceedling                  // Build the STM8Assembler project
 
 Note: Each different instruction group have different source file, header file and test file in this repository.
 
+## Important note
+Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
+Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
+
+The example code below shows how to create tokenizer and configure hex value for the tokenizer .
+```
+tokenizer = createTokenizer("  JRNC $31 ");                //create Tokenizer by passing in string with assembly code
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
+mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
+```
 
 ## Testing the function
 You can test STM8Assembler by issuing command below on GitBash.
