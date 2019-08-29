@@ -556,7 +556,8 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                         throwException(ERR_INTEGER_NEGATIVE,valueBracToken,"Expected value negative expected positive value ");
                     }
                     else{
-                        throwException(ERR_UNSUPPORTED_OPERAND,valueBracToken,"Expected longptr and shortptr is not supported");
+                        flagToken = extendTokenStr(initToken ,token);
+                        throwException(ERR_UNSUPPORTED_OPERAND,flagToken,"Operand is not supported");
                     }
                 }
                 else{
@@ -577,7 +578,8 @@ stm8Operand *operandHandleSquareBracket( Tokenizer *tokenizer ,uint64_t flags){
                         throwException(ERR_INTEGER_NEGATIVE,valueBracToken,"Expected value negative expected positive value ");
                     }
                     else{
-                        throwException(ERR_UNSUPPORTED_OPERAND,valueBracToken,"Expected longptr and shortptr is not supported");
+                        flagToken = extendTokenStr(initToken ,token);
+                        throwException(ERR_UNSUPPORTED_OPERAND,flagToken,"Operand is not supported");
                     }
                 }
                 else{
@@ -691,7 +693,7 @@ stm8Operand *operandHandleRoundBracket( Tokenizer *tokenizer , uint64_t flags){
         }
     }
     else
-        throwException(ERR_INVALID_SYNTAX,token,"Expected , and ) ");
+        throwException(ERR_INVALID_SYNTAX,token,"Expected , ");
 
     return operand;
 }
