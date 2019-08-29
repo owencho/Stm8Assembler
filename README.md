@@ -4,19 +4,19 @@
 This is STM8Assembler project which it perform assembler function that convert STM8 assembly code into STM8 machine code.
 This function will generate the machine code according to the instruction and operand of the assembly code.
 The main function for this STM8Assmbler is **assembleInstruction** function.
-This function which return the machine mode when user pass in the assembly language code into the function.
+This function will return the machine mode when user pass in the assembly language code into the function.
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
 ## Objective
-- To read the STM 8 assembly language code and generate output with STM 8 machine code 
+- To read the STM 8 assembly language code and generate output with STM 8 machine code .
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
 ## Getting Started
-Before you implement this **assembleInstruction** function , tokenizer must be initialize with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
+Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
 Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
 
-The example code below shows how to initialize and configure hex value the tokenizer .
+The example code below shows how to create tokenizer and configure hex value for the tokenizer .
 ```
 tokenizer = createTokenizer("  JRNC $31 ");                //create Tokenizer by passing in string with assembly code
 configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
@@ -38,7 +38,7 @@ Stm8Assembler can be cloned by issuing the command below with GitBash.
 ```
 git clone https://github.com/owencho/Stm8Assembler
 ```
-Or you can download through STM8Assembler GitHub webpage 
+Or you can download through STM8Assembler GitHub webpage. 
 
 ![cloneImage](https://user-images.githubusercontent.com/51066670/63933047-126e6380-ca8b-11e9-9d25-7a93737b99c6.PNG)
 
@@ -85,7 +85,7 @@ If you are first time running this project test , please follow the instruction 
 ## Adding extra test
 By running the test, you can understand how this Stm8Assembler works \
 Here's a simple example code \
-For adding extra pass test,
+For adding pass test,
 ```
 void test_assembleInstruction_given_neg_shortmem24_OPERAND_expect_0x3024(void) {
     MachineCode *mcode =NULL ;                     //declare machine code and tokenizer variable
@@ -106,7 +106,7 @@ void test_assembleInstruction_given_neg_shortmem24_OPERAND_expect_0x3024(void) {
     freeMachineCode(mcode);
 }
 ```
-For fail test, 
+For adding fail test, 
 ```
 void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
     MachineCode *mcode =NULL ;                     //declare machine code and tokenizer variable
