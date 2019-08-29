@@ -82,8 +82,8 @@ If you are first time running this project test , please follow the instruction 
 
 
 ## Adding extra test
-By running the test, you can understand how this Stm8Assembler works \
-Here's a simple example code \
+You add test by following the example code below,
+Here's a simple example code for testing\
 For adding pass test,
 ```
 void test_assembleInstruction_given_neg_shortmem24_OPERAND_expect_0x3024(void) {
