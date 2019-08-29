@@ -68,7 +68,7 @@ ceedling test:all
 ```
 note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.
 
-If you are first time running this project test , please follow the instruction below to configure Project.yml before running it.
+**If you are first time running this project test , please follow the instruction below to configure Project.yml before running it.**
 1. ensure executable output `:executable: .exe` are remain as .exe ,so that it is easier to run the debugger by using IDE eg :CodeLite 
 2. You need to choose the library type depends on your gcc version for the tokenizer for test_linker, \
    remove the hash to choose the library and remember to add hash to other library version if not used.
@@ -82,7 +82,7 @@ If you are first time running this project test , please follow the instruction 
 
 
 ## Adding extra test
-You add test by following the example code below,
+You add extra test by following the example code below,
 Here's a simple example code for testing\
 For adding pass test,
 ```
