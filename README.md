@@ -1,7 +1,7 @@
 # Stm8Assembler
 
 ## About This Project
-This is STM8Assembler project which it perform assembler function that convert STM8 assembly code into STM8 machine code.
+This is STM8Assembler project which it convert STM8 assembly code into STM8 machine code.
 This function will generate the machine code according to the instruction and operand of the assembly code.
 The main function for this STM8Assmbler is **assembleInstruction** function.
 This function will return the machine mode when user pass in the assembly language code into the function.
@@ -68,7 +68,7 @@ ceedling test:all
 ```
 note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.
 
-**If you are first time running this project test , please follow the instruction below to configure Project.yml before running it.**
+**If you are first time running this project, please follow the instruction below to configure Project.yml file before running it.**
 1. ensure executable output `:executable: .exe` are remain as .exe ,so that it is easier to run the debugger by using IDE eg :CodeLite 
 2. You need to choose the library type depends on your gcc version for the tokenizer for test_linker, \
    remove the hash to choose the library and remember to add hash to other library version if not used.
@@ -138,7 +138,7 @@ FAILED TEST SUMMARY
   At line (71): "Do not expect any exception to be thrown"
 ```
 which the exception thrown by the function but this test does not expect the function to throw it.
-It may caused by typo or bringing in wrong instruction and operand combination.You can refer to the line number for troubleshooting.
+It may caused by typo or bringing in wrong instruction and operand combination / syntax .You can refer to the line number for troubleshooting.
 
 _For more examples, please refer [here](https://github.com/owencho/Stm8Assembler/tree/master/test)_ \
 _For all error code , please refer [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Error.h)_ 
