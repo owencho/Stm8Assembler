@@ -121,7 +121,8 @@ void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
                                                                  //does not throw exception
     } Catch(ex) {
         dumpErrorMessage(ex);                                  //throw to ceedling for fail message 
-        TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode); // compare errorCode with expected 
+        TEST_ASSERT_EQUAL(ERR_INVALID_OPERAND, ex->errorCode); 
+        // compare generated errorCode with expected errorCode
     }
     freeTokenizer(tokenizer);  //remember to free Tokenizer and MachineCode after testing
     freeMachineCode(mcode);
