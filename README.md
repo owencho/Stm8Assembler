@@ -144,11 +144,16 @@ _For more examples, please refer [here](https://github.com/owencho/Stm8Assembler
 _For all error code , please refer [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Error.h)_ 
 
 ## Results
+When ceedling run the test , it passed all test in all test file excluding customAssert test file that is disabled by default. \
+![passedall](https://user-images.githubusercontent.com/51066670/63948601-86b8ff00-caab-11e9-8212-eea5374261f6.PNG)
 
+Ceedling will also will generate message throw by exception on the specific test that is expected to fail. \
+
+For example error message generated on the Increment Decrement instruction group test file, \
+![errMsg](https://user-images.githubusercontent.com/51066670/63949159-8705ca00-caac-11e9-92f8-ddd88784777b.PNG)
 
 
 ## Source file:
- -------------
 - For Source Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/src)
 - For Test Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/test)
 - The Source code for assembleInstruction [click here](https://github.com/owencho/Stm8Assembler/blob/master/src/Instruction.c)
