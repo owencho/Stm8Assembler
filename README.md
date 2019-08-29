@@ -9,7 +9,7 @@ The tokenizer that used inside this STM8 Assembler to retrieve the instruction a
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
 ## Objective
-- To read the STM 8 assembly language code and generate output with STM 8 machine code .
+- To read the STM 8 assembly code and generate output with STM 8 machine code .
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
 ## Requirement
