@@ -182,7 +182,7 @@ This function will generate error message if detected difference between expecte
    #pos value only supports from 0 to 7 and it will throw exception and generate error message as below if value exceeded that range. \
    ![hasherror](https://user-images.githubusercontent.com/51066670/63933109-2f0a9b80-ca8b-11e9-885e-0e2f01366502.PNG)
  
-5. For LDW instruction , if the first operand of the code is a complex operand and second operand is a symbol operand which first operand and second operand is unsupported operand combination for this LDW instruction.This function will generate an exception which will highlight both of the operand and generate *Operand is unsupported!* message. \
+5. For LDW instruction , if the first operand of the code is a complex operand and second operand is a symbol operand .If first operand and second operand is unsupported operand combination for this LDW instruction, it will generate an exception which will highlight both of the operand and generate *Operand is not supported!* message. \
 ![LDWunsupported](https://user-images.githubusercontent.com/51066670/63933375-b2c48800-ca8b-11e9-9962-5d3f4a8dda70.PNG)
 
    
