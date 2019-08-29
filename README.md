@@ -1,7 +1,7 @@
 # Stm8Assembler
 ## Introduction
 This is STM8Assembler which convert STM8 assembly language into STM8 machine code.
-The main function for this STM8Assmbler is `getInstruction()` function which return the machine mode when user pass in the assembly language code into the function.
+The main function for this STM8Assmbler is **getInstruction** function which return the machine mode when user pass in the assembly language code into the function.
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
@@ -58,7 +58,7 @@ Note: Each different instruction group have different source file, header file a
 **Interrupt Management** instruction group.
 
 3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
-This function compares the difference between the expected machine code and the generated machine code which returned by the `getInstruction( ) `function. \
+This function compares the difference between the expected machine code and the generated machine code which returned by the **getInstruction** function. \
 This is CustomAssert test file is disabled default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
 
    
