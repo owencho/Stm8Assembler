@@ -1,7 +1,7 @@
 # Stm8Assembler
 ## Introduction
 This is STM8Assembler which convert STM8 assembly language into STM8 machine code.
-The main function for this STM8Assmbler is **getInstruction** function which return the machine mode when user pass in the assembly language code into the function.
+The main function for this STM8Assmbler is **assembleInstruction** function which return the machine mode when user pass in the assembly language code into the function.
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
@@ -10,11 +10,13 @@ The format of the machine code is based on [1] which is STM8 datasheet PM0044.pd
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
 ## Important notes
-Before you implement this **getInstruction** function , tokenizer must be initialize with createTokenizer and configure the Tokenizer to detect $12 as 0x12 value to ensure this function works properly with the example code below.
+Before you implement this **assembleInstruction** function , tokenizer must be initialize with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
+Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly 
+The example code below shows how to initialize and configure hex value the tokenizer .
 ```
-tokenizer = createTokenizer("  NEG A ");
-configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);
-mcode = assembleInstruction(tokenizer);
+tokenizer = createTokenizer("  JRNC $31 ");                //create Tokenizer by passing in string with assembly code
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
+mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
 ```
 
 ## Requirement
@@ -49,8 +51,10 @@ ceedling clobber          // clobber / clean all generated file
 ceedling                  // Build the STM8Assembler project
 ```
 ## Testing the program
-You can test STM8Assembler by issuing  `ceedling test:all ` command on GitBash.
-
+You can test STM8Assembler by issuing command below on GitBash.
+```
+ceedling test:all 
+```
 
 ## STM8 Instruction set
 ![STM8InsSet](https://user-images.githubusercontent.com/51066670/63931590-2a90b380-ca88-11e9-9759-9aa32695b000.PNG)
@@ -73,7 +77,7 @@ Note: Each different instruction group have different source file, header file a
 **Interrupt Management** instruction group.
 
 3. There is an CustomAssert test file which test the `TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode)` function.
-This function compares the difference between the expected machine code and the generated machine code which returned by the **getInstruction** function. \
+This function compares the difference between the expected machine code and the generated machine code which returned by the **assembleInstruction** function. \
 This CustomAssert test file is disabled default during the test and it required to manually remove the x from this file name `test\xtest_CustomAssert.c` to conduct the test.
 
 4. For the instruction at Bit Operation and Conditional Bit Test Branch instruction group  which required #pos value .
