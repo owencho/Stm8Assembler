@@ -11,7 +11,7 @@ The following software need to be installed on your PC
 2. MSYS32/64
 3. Ruby
 4. Git
-5. Cosmic STM8 Software Development tools ([Software Link](https://www.cosmic-software.com/stm8.php))
+5. Cosmic STM8 Software Development tools 
 
 
 ## How to clone the file from GitHUB
