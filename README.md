@@ -1,20 +1,19 @@
 # Stm8Assembler
 
 ## 1.0 About This Project
-This is STM8Assembler project which it convert STM8 assembly code into STM8 machine code.
-This function will generate the machine code according to the instruction and operand of the assembly code.
-The main function for this STM8Assmbler is **assembleInstruction** function.
-This function will return the machine mode when user pass in the assembly language code into the function.
-The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
-The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
+This is STM8Assembler project which it convert STM8 assembly code into STM8 machine code. \
+This function will generate the machine code according to the instruction and operand of the assembly code. \
+The main function for this STM8Assmbler is **assembleInstruction** function. \
+The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token are based on the TokenizerSkeleton [2]. \
+The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the STM8 instruction details. 
 
 ## 1.1 Objective
-- To read the STM 8 assembly code and generate output with STM 8 machine code .
+- To read the STM 8 assembly code and generate / return output with STM 8 machine code .
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
 # 2.0 Getting Started
 ## 2.1 Requirement
-The following software need to be installed on your PC
+The following software need to be installed on your PC,
 1. Ceedling 
 2. MSYS2
 3. Ruby
@@ -59,13 +58,13 @@ ceedling                  // Build the STM8Assembler project
 **Please use -Llib/x64_TDM_5_1_0 version if you running on 64 bit PC and other version are not working**
 ## 2.5 Important note
 Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
-Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
+Configure the Tokenizer to detect dollar sign as hex value are also required to ensure this assembler works properly.
 
 The example code below shows how to create tokenizer and configure hex value for the tokenizer .
 ```
-tokenizer = createTokenizer("  JRNC $31 ");                //create Tokenizer by passing in string with assembly code
-configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
-mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
+tokenizer = createTokenizer("  your input string here "); //create Tokenizer by passing in string with assembly code
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);  // configure tokenizer to recognize dollar sign as hex value
+mcode = assembleInstruction(tokenizer);                   // run assembleInstruction to generate machine code
 ```
 
 # 3.0 STM8 Instruction set
@@ -80,9 +79,9 @@ You can implement the function by using the example code below
 MachineCode *mcode =NULL ;                     //declare machine code and tokenizer variable
 Tokenizer *tokenizer = NULL;
 
-tokenizer = createTokenizer("  JRNC $44 ");                //create Tokenizer by passing in string with assembly code
-configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
-mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
+tokenizer = createTokenizer("  JRNC $44 ");              //create Tokenizer by passing in string with assembly code
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX); // configure tokenizer to recognize dollar sign as hex value
+mcode = assembleInstruction(tokenizer);                  // run assembleInstruction to generate machine code
 ```
 The struct for Machine code can be found [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Mcode.h) \
 The struct and function for Tokenizer can be found [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Tokenizer.h)
@@ -125,6 +124,8 @@ void test_assembleInstruction_given_neg_shortmem24_OPERAND_expect_0x3024(void) {
     freeMachineCode(mcode);
 }
 ```
+note: TEST_ASSERT_EQUAL_MACHINECODE(expectedMcode,mcode) are custom test assert function which does not located at unity.h
+
 For adding fail test, 
 ```
 void test_assembleInstruction_given_subw_Z_BYTE_OPERAND_expect_fail(void) {
