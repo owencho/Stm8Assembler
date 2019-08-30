@@ -185,8 +185,13 @@ This function will generate error message if detected difference between expecte
 5. For LDW instruction , if the first operand of the code is a complex operand and second operand is a symbol operand .If first operand and second operand is unsupported operand combination for this LDW instruction, it will generate an exception which will highlight both of the operand and generate *Operand is not supported!* message. \
 ![LDWunsupported](https://user-images.githubusercontent.com/51066670/63933375-b2c48800-ca8b-11e9-9962-5d3f4a8dda70.PNG)
 
+6. If your operand is bracketed X or Y short ptr operand and the value is 0 hex value such as `($0,X)` or `($0,Y)`,
+   it will follow same machine code as bracketed X or Y operand is `(X) ` or `(Y)` in respective instruction that supports bracketed X or Y short ptr operand and bracketed X or Y operand .
+   ```
+   ($0,X) = (X) 
+   ($0,Y) = (Y)
    
-    
+   ```
 
 
 
