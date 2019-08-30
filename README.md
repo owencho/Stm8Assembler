@@ -98,7 +98,7 @@ You can test STM8Assembler by issuing command below on GitBash.
 ```
 ceedling test:all 
 ```
-note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.
+note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.If not, please refer back to [Configuring Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/README.md#24-configuring-projectyml)
 
 
 ## 5.2 Adding extra test
