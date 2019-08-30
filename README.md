@@ -45,8 +45,19 @@ Remember to **clobber and rebuild the project** by using the command below after
 ceedling clobber          // clobber / clean all generated file
 ceedling                  // Build the STM8Assembler project
 ```
-
-## 2.4 Important note
+## 2.4 Configuring Project.yml 
+**If you are first time running this project, please follow the instruction below to configure Project.yml file before running it.**
+1. ensure executable output `:executable: .exe` are remain as .exe ,so that it is easier to run the debugger by using IDE eg :CodeLite 
+2. You need to choose the library type depends on your gcc version for the tokenizer for test_linker, \
+   remove the hash to choose the library and remember to add hash to other library version if not used.
+![lib](https://user-images.githubusercontent.com/51066670/63945479-f5935980-caa5-11e9-84e7-ddd99cc4fbc3.PNG)
+- -Llib/x86 is for user who are using x86 or 32bit PC
+- -Llib/x64_7_3_0 is for user who are using 64 bit PC with 7.3.0 gcc version installed
+- -Llib/x64_6_3_0 is for user who are using 64 bit PC with 6.3.0 gcc version installed
+- -Llib/x64_5_3_0 is for user who are using 64 bit PC with 5.3.0 gcc version installed
+- -Llib/x64_TDM_5_1_0 is for user who are using 64 bit PC \
+**Please use -Llib/x64_TDM_5_1_0 version if you running on 64 bit PC and other version are not working**
+## 2.5 Important note
 Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
 Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
 
@@ -63,28 +74,34 @@ mcode = assembleInstruction(tokenizer);                    // run assembleInstru
 Note: Each different instruction group have different source file, header file and test file in this repository. \
       This is a modified STM8 instruction set as the instruction table in the PM0044.pdf datasheet did not include interrupt instruction inside any of them.
 
-# 4.0 Testing
-## 4.1 Testing the function
+# 4.0 Implementing the function
+You can implement the function by using the example code below
+  ```
+MachineCode *mcode =NULL ;                     //declare machine code and tokenizer variable
+Tokenizer *tokenizer = NULL;
+
+tokenizer = createTokenizer("  JRNC $44 ");                //create Tokenizer by passing in string with assembly code
+configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenizer to recognize dollar sign as hex value
+mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
+```
+The struct for Machine code can be found [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Mcode.h) \
+The struct and function for Tokenizer can be found [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Tokenizer.h)
+
+Remember to free the tokenizer and machine code with sample code below after the tokenizer and machine code does not used anymore.
+```
+freeTokenizer(tokenizer);             
+freeMachineCode(mcode);
+```    
+# 5.0 Testing
+## 5.1 Testing the function
 You can test STM8Assembler by issuing command below on GitBash.
 ```
 ceedling test:all 
 ```
 note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assembler/blob/master/project.yml) has been configured properly before running the test.
 
-**If you are first time running this project, please follow the instruction below to configure Project.yml file before running it.**
-1. ensure executable output `:executable: .exe` are remain as .exe ,so that it is easier to run the debugger by using IDE eg :CodeLite 
-2. You need to choose the library type depends on your gcc version for the tokenizer for test_linker, \
-   remove the hash to choose the library and remember to add hash to other library version if not used.
-![lib](https://user-images.githubusercontent.com/51066670/63945479-f5935980-caa5-11e9-84e7-ddd99cc4fbc3.PNG)
-- -Llib/x86 is for user who are using x86 or 32bit PC
-- -Llib/x64_7_3_0 is for user who are using 64 bit PC with 7.3.0 gcc version installed
-- -Llib/x64_6_3_0 is for user who are using 64 bit PC with 6.3.0 gcc version installed
-- -Llib/x64_5_3_0 is for user who are using 64 bit PC with 5.3.0 gcc version installed
-- -Llib/x64_TDM_5_1_0 is for user who are using 64 bit PC \
-**Please use -Llib/x64_TDM_5_1_0 version if you running on 64 bit PC and other version are not working**
 
-
-## 4.2 Adding extra test
+## 5.2 Adding extra test
 You add extra test by following the example code below,
 Here's a simple example code for testing\
 For adding pass test,
@@ -146,7 +163,7 @@ It may caused by typo or bringing in wrong instruction and operand combination /
 _For more examples, please refer [here](https://github.com/owencho/Stm8Assembler/tree/master/test)_ \
 _For all error code , please refer [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Error.h)_ 
 
-# 5.0 Results
+# 6.0 Results
 When ceedling run the test , it passed all test in all test file excluding customAssert test file that is disabled by default. \
 ![passedall](https://user-images.githubusercontent.com/51066670/63948601-86b8ff00-caab-11e9-8212-eea5374261f6.PNG)
 
@@ -156,12 +173,12 @@ For example error message generated on the Increment Decrement instruction group
 ![errMsg](https://user-images.githubusercontent.com/51066670/63949159-8705ca00-caac-11e9-92f8-ddd88784777b.PNG)
 
 
-# 6.0 Source file:
+# 7.0 Source file:
 - For Source Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/src)
 - For Test Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/test)
 - The Source code for assembleInstruction [click here](https://github.com/owencho/Stm8Assembler/blob/master/src/Instruction.c)
 
-# 7.0 Note
+# 8.0 Note
 1. For instruction that is **relative jump or relative call function**
   - It **DOES NOT support word jump** eg `JRNE loop` , the word jump label are not supported \
     and it **ONLY support value jump** eg `JRNE $21` \
