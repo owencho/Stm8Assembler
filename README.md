@@ -1,6 +1,6 @@
 # Stm8Assembler
 
-## About This Project
+## 1.0 About This Project
 This is STM8Assembler project which it convert STM8 assembly code into STM8 machine code.
 This function will generate the machine code according to the instruction and operand of the assembly code.
 The main function for this STM8Assmbler is **assembleInstruction** function.
@@ -8,11 +8,12 @@ This function will return the machine mode when user pass in the assembly langua
 The tokenizer that used inside this STM8 Assembler to retrieve the instruction and operand token is based on the TokenizerSkeleton [2].
 The format of the machine code is based on [1] which is STM8 datasheet PM0044.pdf file that has all the instruction details. 
 
-## Objective
+## 1.1 Objective
 - To read the STM 8 assembly code and generate output with STM 8 machine code .
 ![assemtoMcode](https://user-images.githubusercontent.com/51066670/63931584-295f8680-ca88-11e9-9a48-3b0fdc9e163b.PNG)
 
-## Requirement
+# 2.0 Getting Started
+## 2.1 Requirement
 The following software need to be installed on your PC
 1. Ceedling 
 2. MSYS2
@@ -22,7 +23,7 @@ The following software need to be installed on your PC
 6. MINGW32/64
 
 
-## How to clone the file from GitHUB
+## 2.2 How to clone the file from GitHUB
 Stm8Assembler can be cloned by issuing the command below with GitBash.
 ```
 git clone https://github.com/owencho/Stm8Assembler
@@ -32,7 +33,7 @@ Or you can download through STM8Assembler GitHub webpage.
 ![cloneImage](https://user-images.githubusercontent.com/51066670/63933047-126e6380-ca8b-11e9-9d25-7a93737b99c6.PNG)
 
 
-## Updating the STM8Assembler
+## 2.3 Updating the STM8Assembler
 If **STM8Assembler** has updates , the repository can be updated by issuing the command below with GitBash.
 ```
 cd Stm8Assembler  // if you are not inside the project folder
@@ -45,12 +46,7 @@ ceedling clobber          // clobber / clean all generated file
 ceedling                  // Build the STM8Assembler project
 ```
 
-## STM8 Instruction set
-![STM8InsSet](https://user-images.githubusercontent.com/51066670/63931590-2a90b380-ca88-11e9-9759-9aa32695b000.PNG)
-
-Note: Each different instruction group have different source file, header file and test file in this repository.
-
-## Important note
+## 2.4 Important note
 Before you implement this **assembleInstruction** function , tokenizer must be created with createTokenizer so that this function only able to tokenize the input string with STM8 assembly code .
 Configure the Tokenizer to detect $31 as hex value are also required to ensure this assembler works properly.
 
@@ -61,7 +57,14 @@ configureTokenizer(tokenizer,TOKENIZER_DOLLAR_SIGN_HEX);   // configure tokenize
 mcode = assembleInstruction(tokenizer);                    // run assembleInstruction to generate machine code
 ```
 
-## Testing the function
+# 3.0 STM8 Instruction set
+![STM8InsSet](https://user-images.githubusercontent.com/51066670/63931590-2a90b380-ca88-11e9-9759-9aa32695b000.PNG)
+
+Note: Each different instruction group have different source file, header file and test file in this repository. \
+      This is a modified STM8 instruction set as the instruction table in the PM0044.pdf datasheet did not include interrupt instruction inside any of them.
+
+# 4.0 Testing
+## 4.1 Testing the function
 You can test STM8Assembler by issuing command below on GitBash.
 ```
 ceedling test:all 
@@ -81,7 +84,7 @@ note: Please ensure the file [Project.yml](https://github.com/owencho/Stm8Assemb
 **Please use -Llib/x64_TDM_5_1_0 version if you running on 64 bit PC and other version are not working**
 
 
-## Adding extra test
+## 4.2 Adding extra test
 You add extra test by following the example code below,
 Here's a simple example code for testing\
 For adding pass test,
@@ -143,7 +146,7 @@ It may caused by typo or bringing in wrong instruction and operand combination /
 _For more examples, please refer [here](https://github.com/owencho/Stm8Assembler/tree/master/test)_ \
 _For all error code , please refer [here](https://github.com/owencho/Stm8Assembler/blob/master/src/Error.h)_ 
 
-## Results
+# 5.0 Results
 When ceedling run the test , it passed all test in all test file excluding customAssert test file that is disabled by default. \
 ![passedall](https://user-images.githubusercontent.com/51066670/63948601-86b8ff00-caab-11e9-8212-eea5374261f6.PNG)
 
@@ -153,12 +156,12 @@ For example error message generated on the Increment Decrement instruction group
 ![errMsg](https://user-images.githubusercontent.com/51066670/63949159-8705ca00-caac-11e9-92f8-ddd88784777b.PNG)
 
 
-## Source file:
+# 6.0 Source file:
 - For Source Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/src)
 - For Test Code details [click here](https://github.com/owencho/Stm8Assembler/tree/master/test)
 - The Source code for assembleInstruction [click here](https://github.com/owencho/Stm8Assembler/blob/master/src/Instruction.c)
 
-## Note
+# 7.0 Note
 1. For instruction that is **relative jump or relative call function**
   - It **DOES NOT support word jump** eg `JRNE loop` , the word jump label are not supported \
     and it **ONLY support value jump** eg `JRNE $21` \
@@ -186,7 +189,7 @@ This function will generate error message if detected difference between expecte
 ![LDWunsupported](https://user-images.githubusercontent.com/51066670/63933375-b2c48800-ca8b-11e9-9962-5d3f4a8dda70.PNG)
 
 6. If your operand is bracketed X or Y short ptr operand and the value is 0 hex value such as `($0,X)` or `($0,Y)`,
-   it will follow same machine code as bracketed X or Y operand is `(X) ` or `(Y)` in respective instruction that supports bracketed X or Y short ptr operand and bracketed X or Y operand .
+   it will **follow same machine code as bracketed X or Y operand** is `(X) ` or `(Y)` in respective instruction that supports bracketed X or Y short ptr operand and bracketed X or Y operand .
    ```
    ($0,X) = (X) 
    ($0,Y) = (Y)
