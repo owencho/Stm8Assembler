@@ -213,7 +213,17 @@ This function will generate error message if detected difference between expecte
    ($0,Y) = (Y)
    
    ```
+7. If this instruction does not support short addressing mode operand but it support longer addressing mode operand , this function will return a longer addressing mode operand instead of throw exception telling users operand is not supported. 
+This function will allow smaller value to be accepted on larger value type. \
+You can refer to the test [here](https://github.com/owencho/Stm8Assembler/blob/master/test/test_UnconditionalJumpCallInstruction.c#L495).\
+For example JPF instruction that only supports extmem and longptr.e operand. 
+   ```
+    JPF $1 ---> 0xAC000001
+    short mem on JPF will generate machine code above 
 
+    JPF $FFFF ---> 0xAC00FFFF
+    long mem on JPF will generate machine code above
+   ```
 
 
 
