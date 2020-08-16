@@ -1,4 +1,4 @@
-name: Ceedling test
+name: Ceedling test for stm8 assembler
 
 on:
   push:
